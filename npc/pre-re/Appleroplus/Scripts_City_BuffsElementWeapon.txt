@@ -1,0 +1,49 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,156,198,4	script	บัพธาตุใส่อาวุธ	714,{
+
+specialeffect 509;
+specialeffect2 509;
+	set .@price, 5000;
+	mes "ใส่ธาตุลงในอาวุธคุณต้องใช้เงินจำนวน "+ .@price +" Zeny?";
+	mes "สามารถอยู่ได้นาน 30 นาที";
+	next;
+	if(select("^FF0000•^000000 เลือกธาตุ:^FF0000•^000000 ยกเลิก") == 2) goto L_bye;
+	if( Zeny < .@price ) goto L_nozeny;
+	mes "เลือกธาตุที่คุณต้องการ";
+	next;
+	switch(select("^FF0000•^000000 ธาตุไฟ:^FF0000•^000000 ธาตุน้ำแข็ง:^FF0000•^000000 ธาตุดิน:^FF0000•^000000 ธาตุลม:^FF0000•^000000 ธาตุสักสิท:^FF0000•^000000 ธาตุมืด")) {
+		case 1: sc_start sc_fireweapon,1800000,1; break;
+		case 2: sc_start sc_waterweapon,1800000,1; break;
+		case 3: sc_start sc_earthweapon,1800000,1; break;
+		case 4: sc_start sc_windweapon,1800000,1; break;
+		case 5: sc_start sc_aspersio,1800000,1; break;
+		case 6: sc_start sc_shadowweapon,1800000,1; break;
+	}
+	specialeffect2 220;
+	set Zeny, Zeny - .@price;
+
+	goto L_bye;
+	close;
+L_bye:
+	mes "โชคดีนะ..";
+	close;
+L_nozeny:
+	mes "คุณมีเงินไม่พอ";
+	next;
+	goto L_bye;
+//	OnInit:
+//	Waitingroom "บัพธาตุใส่อาวุธ" , 0;
+	end;
+}

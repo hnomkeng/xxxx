@@ -1,0 +1,29 @@
+function	script	weaponbox	{
+	setarray .i1[1],1217,1220,1226,1253,1255,1361,1715,1716,1120,1127,1128,1158; // Common Items
+	set .i1rand,rand(1,12); // Randomize Common Items; just change max amount if you add items
+	setarray .i2[1],1172,1223,1256,1257,1258,1259,1266,1306,1532,1564,1560,1618,1620,1616,1822,1149,1162; // Rare Items
+	set .i2rand,rand(1,17); // Randomize Rare Items; just change max amount if you add items
+	setarray .i3[1],1224,1225,1231,1232,1234,1238,1371,1413,1414,1468,1472,1473,1734,1142,1143,1168; // Super Rare Items
+	set .i3rand,rand(1,16); //Randomize Super Rare Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		// Super Rare Item 5%
+		if (.chance == 10){
+		getitem .i3[.i3rand],1;
+		announce "ผู้เล่น"+strcharinfo(0)+" เปิดกล่อง Weapon Box และได้รับ "+getitemname(.i3[.i3rand])+"",0;
+		end;
+		} 
+
+		// Rare Item 20%
+		else if (.chance == 20){
+		getitem .i2[.i2rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" เปิดกล่อง Weapon Box และได้รับ "+getitemname(.i2[.i2rand])+"",0;
+		end;
+		} 
+
+		// Common Items
+		else {
+		getitem .i1[.i1rand],1;
+		end; 
+		}
+}

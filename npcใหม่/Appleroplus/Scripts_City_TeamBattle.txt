@@ -1,0 +1,611 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+function	script	CheckJobs	{
+	set .@pid, getarg(0,getcharid(1) );
+	if ( !.@pid ) { return -1; }
+	getpartymember .@pid,1;	getpartymember .@pid,2;
+	set .@attrid, playerattached();
+	for ( set .@i,0; .@i < $@partymembercount; set .@i, .@i+1 )
+	{
+		if ( isloggedin($@partymemberaid[.@i], $@partymembercid[.@i]) )
+		{
+			attachrid($@partymemberaid[.@i]);
+			if ( compare(.@ck_class$ +"|","|"+Class+"|") )
+			{
+				if ( .@attrid ) attachrid(.@attrid); else detachrid; return 1;
+			}
+			set .@ck_class$,.@ck_class$+"|"+ck_class;
+		}
+		else
+		{
+			set .@query_sql$,.@query_sql$ + ( .@j ?"OR " : "" ) +"`char_id` = '"+ $@partymembercid[.@i] +"'";
+			set .@j,.@j+1;
+		}
+	}
+	
+	if ( getstrlen(.@query_sql$) )
+	{
+		set .@c, query_sql("SELECT `class` FROM `char` WHERE " + .@query_sql$, .@class );
+		for ( set .@i, 0; .@i < .@c; set .@i, .@i+1 )
+		{
+			if ( compare(.@ck_class$ +"|","|"+ .@class[.@i] +"|") )
+			{
+                if ( .@attrid ) attachrid(.@attrid); else detachrid; return 1;
+			}
+			set .@ck_class$,.@ck_class$ +"|"+ .@class[.@i];
+		}
+	}
+	
+	if ( .@attrid ) attachrid(.@attrid); else detachrid; return 0;
+}
+
+prontera,149,306,4	script	ปาตี้ 7 VS 7	415,{
+
+	if ( ( $@Status && getcharid(1) == $@TeamOne ) || ( $@Status &&  getcharid(1) == $@TeamTwo ) )
+	{
+		mes "[ ปาตี้ 7 VS 7 ]";
+		mes "การต่อสู้ระหว่างปาร์ตี้ยังไม่จบลง";
+		close;
+	}
+
+	if ( $@Status || $@TeamCount >= 2 )
+	{
+		mes "[ ปาตี้ 7 VS 7 ]";
+		mes "การต่อสู้ระหว่างปาร์ตี้ในสนามกำลังดำเนินการอยู่";
+		mes "คุณจะยังไม่สามารถลงทะเบียนได้";
+		mes "คุณจะต้องรอหลังจากการต่อสู้จบลงแล้ว";
+		next;
+		switch(select("^FF0000•^000000ตรวจสอบข้อมูลการลงทะเบียน:^FF0000•^000000ยกเลิก"))
+		{
+			case 1:
+				if ( !$@Status )
+				{
+					mes "[ ปาตี้ 7 VS 7 ]";
+					mes "ยังไม่มีปาร์ตี้ใดๆ ลงทะเบียนต่อสู้";
+					close;
+				}
+				
+				set @wait_teamone,$@Member-$CheakTeamOne;
+				set @wait_teamtwo,$@Member-$CheakTeamTwo;
+				
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "ชื่อทีม : "+ getpartyname($@TeamOne) +"";
+				mes "สมาชิก : "+ @wait_teamone +" คน";
+				mes " ";
+				mes "ชื่อทีม : "+ getpartyname($@TeamTwo) +"";
+				mes "สมาชิก : "+ @wait_teamtwo +" คน";
+				close;
+				
+			default:
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "โชคดี !";
+				close;
+		}
+		end;
+	}
+
+
+	if ( getcharid(1) == 0 )
+	{
+		mes "[ ปาตี้ 7 VS 7 ]";
+		mes "ทำคุณไม่สร้างปาร์ตี้ก่อนเข้าร่วมล่ะ";
+		close;
+	}
+		
+	if( getcharid(1) == $@TeamOne || getcharid(1) == $@TeamTwo )
+	{
+		mes "[ ปาตี้ 7 VS 7 ]";
+		mes ""+ getpartyleader( getcharid(1) ) +"";
+		mes "หัวหน้าปาร์ตี้ของคุณได้ทำการลงทะเบียนเรียบร้อยแล้ว";
+		close;
+	}
+	
+	switch(select("^FF0000•^000000 ลงทะเบียนการต่อสู้:^FF0000•^000000 รายละเอียด:^FF0000•^000000 ยกเลิก"))
+	{
+		case 1:
+			if ( callfunc("CheckJobs") )
+			{
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "สมาชิกในปาร์ตี้จะไม่สามารถมีสายอาชีพที่ซ้ำกันได้";
+				close;
+			}
+			
+			if ( $@partymembercount != $@Member )
+			{
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "แต่ละทีมต้องมีสมาชิกไม่น้อยกว่า "+ $@Member +" คน หรือ มากกว่า "+ $@Member +" คนขึ้นไป";
+				close;
+			}
+			
+			if ( getcharid(1) == 0 )
+			{
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "ทำคุณไม่สร้างปาร์ตี้ก่อนเข้าร่วมล่ะ ?";
+				close;
+			}
+			
+			mes "[ ปาตี้ 7 VS 7 ]";
+			mes "ชื่อปาร์ตี้ : "+ strcharinfo(1);
+			mes "หัวหน้าปาร์ตี้ : "+ getpartyleader( getcharid(1) );
+			mes "จำนวนสมาชิก : "+ @count +" คน";
+			mes "รายชื่อสมาชิก :";
+			getpartymember( getcharid(1) );
+			set @count, $@partymembercount;
+			copyarray @name$[0],$@partymembername$[0],$@partymembercount;
+			for ( set .@i,0; .@i < @count; set .@i, .@i+1 )
+			{
+				mes ( .@i+1 ) +". "+ @name$[.@i] +"";
+			}
+			next;
+			
+			if ( $@Status || $@TeamCount >= 2 )
+			{
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "เสียใจด้วยในตอนนี้ปิดรับการสมัครลงทะเบียนต่อสู้แล้ว";
+				mes "หากต้องการลงทะเบียนกรุณารอจนกว่าการต่อสู้จะจบ";
+				close;
+			}
+			
+			if ( getpartyleader( getcharid(1),2 ) != getcharid(0) )
+			{
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "คุณไม่มีอำนาจในการลงทะเบียน";
+				mes "หัวหน้าปาร์ตี้ของคุณเท่านั้นที่จะสามารถลงทะเบียนได้";
+				close;
+			}
+			
+			if ( @count > $@Member )
+			{
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "จำนวนสมาชิกในปาร์ตี้ของคุณเกินกว่าที่กำหนด";
+				close;
+			}
+			
+			if ( @count < $@Member )
+			{
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "จำนวนสมาชิกในปาร์ตี้ของคุณน้อยกว่าที่กำหนด";
+				close;
+			}
+
+			if ( Zeny < 1000000 )
+			{
+				mes "[ ปาตี้ 7 VS 7 ]";
+				mes "คุณไม่มีเงินสำหรับการลงทะเบียน ?";
+				mes "ค่าธรรมเนียมการลงทะเบียนคือ 10MZ";
+				close;
+			}
+			set Zeny,Zeny - 1000000;
+			set $@TeamCount,$@TeamCount+1;
+			
+			if ( $@TeamCount == 1 )
+			{
+				set $@TeamOne,getcharid(1);
+				setarray $@TeamsFirst$[0],@name$[0],@name$[1],@name$[2],@name$[3],@name$[4];
+				announce "ปาร์ตี้ "+ getpartyname($@TeamOne) +" ได้ลงทะเบียนการต่อสู้เรียบร้อยแล้ว",bc_all;
+				donpcevent strnpcinfo(0) +"::OnCheck";
+			}
+			
+			if ( $@TeamCount == 2 )
+			{
+				set $@TeamTwo,getcharid(1);
+				setarray $@TeamsSecond$[0],@name$[0],@name$[1],@name$[2],@name$[3],@name$[4];
+				announce "ปาร์ตี้ "+ getpartyname($@TeamTwo) +" ได้ลงทะเบียนการต่อสู้เรียบร้อยแล้ว",bc_all;
+				donpcevent strnpcinfo(0) +"::OnCheck";
+			}
+			close;
+			
+		case 2:
+			mes "[ ปาตี้ 7 VS 7 ]";
+			mes "ผู้เล่นแต่ละทีมจะต้องลงทะเบียนการต่อสู้";
+			mes "ผู้เล่นแต่ละทีมจะต้องมีสมาชิก ไม่น้อย หรือ ไม่เกินกว่า "+ $@Member +" คน";
+			mes "และ จะต้องเสียค่าธรรมเนียมการลงทะเบียน 1000000 z";
+			close;
+			
+		case 3: 
+			mes "[ ปาตี้ 7 VS 7 ]";
+			mes "โชคดี...";
+			close;
+	}
+
+	
+OnCheck:
+	if ( $@TeamCount == 2 )
+	{
+		donpcevent "Joint_Battle::OnStart";
+	}
+	end;
+
+OnPCDieEvent:
+	getmapxy @Map$,@x,@y,BL_PC;
+	if ( $@Status && @Map$ == $@Maps$ && getcharid(1) == $@TeamOne )
+	{
+		set $CheakTeamTwo,$CheakTeamTwo+1;
+		warp "SavePoint",0,0;
+		if ( $CheakTeamTwo == $@Member )
+		{
+			setcell $@Maps$,80,55,80,44,cell_walkable,1;
+			setcell $@Maps$,19,55,19,44,cell_walkable,1;
+			donpcevent "Joint_Battle::OnTeamTwoWinner";
+		}
+		end;
+	}
+	
+	if ( $@Status && @Map$ == $@Maps$ && getcharid(1) == $@TeamTwo )
+	{
+		set $CheakTeamOne,$CheakTeamOne+1;
+		warp "SavePoint",0,0;
+		if ( $CheakTeamOne == $@Member )
+		{
+			setcell $@Maps$,80,55,80,44,cell_walkable,1;
+			setcell $@Maps$,19,55,19,44,cell_walkable,1;
+			donpcevent "Joint_Battle::OnTeamOneWinner";
+		}
+		end;
+	}
+	end;
+	
+OnPCLogoutEvent:
+	getmapxy @Map$,@x,@y,BL_PC;
+	if ( $@Status &&  @Map$ == $@Maps$ && getcharid(1) == $@TeamOne )
+	{
+		warp "SavePoint",0,0;
+		set $CheakTeamTwo,$CheakTeamTwo+1;
+		mapannounce $@Maps$,"ผู้เล่น "+ strcharinfo(0) +" สมาชิกของ ทีม "+ getpartyname($@TeamOne) +" ได้ออกจาเกมส์ !!",bc_all;
+		if ( $CheakTeamTwo == $@Member )
+		{
+			setcell $@Maps$,80,55,80,44,cell_walkable,1;
+			setcell $@Maps$,19,55,19,44,cell_walkable,1;
+			donpcevent "Joint_Battle::OnTeamTwoWinner";
+		}
+		end;
+	}
+	
+	if ( $@Status &&  @Map$ == $@Maps$ && getcharid(1) == $@TeamTwo )
+	{
+		warp "SavePoint",0,0;
+		set $CheakTeamOne,$CheakTeamOne+1;
+		mapannounce $@Maps$,"ผู้เล่น "+ strcharinfo(0) +" สมาชิกของ ทีม "+ getpartyname($@TeamTwo) +" ได้ออกจาเกมส์ !!",bc_all;
+		if ( $CheakTeamOne == $@Member )
+		{
+			setcell $@Maps$,80,55,80,44,cell_walkable,1;
+			setcell $@Maps$,19,55,19,44,cell_walkable,1;
+			donpcevent "Joint_Battle::OnTeamOneWinner";
+		}
+		end;
+	}
+	end;
+
+OnPCLoadMapEvent:
+	getmapxy @Map$,@x,@y,BL_PC;
+	if ( $@Status && @Map$ != $@Maps$ && getcharid(1) == $@TeamOne )
+	{
+		warp "SavePoint",0,0;
+		set $CheakTeamTwo,$CheakTeamTwo+1;
+		mapannounce $@Maps$,""+ strcharinfo(0) +" สมาชิกของ ทีม "+ getpartyname($@TeamOne) +" ได้ออกจากสนามประลอง.",bc_blue;
+		if ( $CheakTeamTwo == $@Member )
+		{
+			setcell $@Maps$,80,55,80,44,cell_walkable,1;
+			setcell $@Maps$,19,55,19,44,cell_walkable,1;
+			donpcevent "Joint_Battle::OnTeamTwoWinner";
+		}
+		end;
+	}
+	
+	if ( $@Status && @Map$ != $@Maps$ && getcharid(1) == $@TeamTwo )
+	{
+		warp "SavePoint",0,0;
+		set $CheakTeamOne,$CheakTeamOne+1;
+		mapannounce $@Maps$,""+strcharinfo(0)+" สมาชิกของ ทีม "+ getpartyname($@TeamTwo) +" ได้ออกจากสนามประลอง.",bc_blue;
+		if ( $CheakTeamOne == $@Member )
+		{
+			setcell $@Maps$,80,55,80,44,cell_walkable,1;
+			setcell $@Maps$,19,55,19,44,cell_walkable,1;
+			donpcevent "Joint_Battle::OnTeamOneWinner";
+		}
+		end;
+	}
+	end;
+
+OnInit:
+//	waitingroom "ปาตี้ 7 VS 7",0;
+	set $@Maps$,"guild_vs3";
+	set $@Member,7;
+	set $@Status,0;
+	set $@TeamCount,0;
+	set $@TeamOne,0;
+	set $@TeamTwo,0;
+	set $CheakTeamOne,0;
+	set $CheakTeamTwo,0;
+	set $OneCount,0;
+	set $TwoCount,0;
+
+	enablenpc "ประตูสนามประลอง#01";
+	enablenpc "ประตูสนามประลอง#02";
+	enablenpc "ประตูสนามประลอง#03";
+	enablenpc "ประตูสนามประลอง#04";
+	enablenpc "ประตูสนามประลอง#05";
+	enablenpc "ประตูสนามประลอง#06";
+	enablenpc "ประตูสนามประลอง#07";
+	enablenpc "ประตูสนามประลอง#08";
+	enablenpc "ประตูสนามประลอง#09";
+	enablenpc "ประตูสนามประลอง#10";
+	enablenpc "ประตูสนามประลอง#11";
+	enablenpc "ประตูสนามประลอง#12";
+	enablenpc "ประตูสนามประลอง#13";
+	enablenpc "ประตูสนามประลอง#14";
+	enablenpc "ประตูสนามประลอง#15";
+	enablenpc "ประตูสนามประลอง#16";
+	enablenpc "ประตูสนามประลอง#17";
+	enablenpc "ประตูสนามประลอง#18";
+	enablenpc "ประตูสนามประลอง#19";
+	enablenpc "ประตูสนามประลอง#20";
+	enablenpc "ประตูสนามประลอง#21";
+	enablenpc "ประตูสนามประลอง#22";
+	enablenpc "ประตูสนามประลอง#23";
+	enablenpc "ประตูสนามประลอง#24";
+	end;
+}
+
+-	script	Joint_Battle	FAKE_NPC,{
+OnStart:
+	initnpctimer;
+	set $@Status,1;
+	setcell $@Maps$,30,70,69,70,cell_walkable,0;
+	setcell $@Maps$,30,29,69,29,cell_walkable,0;
+	setcell $@Maps$,80,55,80,44,cell_walkable,0;
+	setcell $@Maps$,19,55,19,44,cell_walkable,0;
+	announce "การต่อสู้ระหว่างทีม  "+ getpartyname($@TeamOne) +" และ ทีม "+ getpartyname($@TeamTwo) +" กำลังจะเริ่มต้นขึ้นแล้ว ผู้เล่นทั้งสองทีมจะถูกวาร์ปเข้าสู่สนามประลองเร็วๆนี้.",bc_all;
+	gvgoff $@Maps$;
+	setnpctimer 0;
+	startnpctimer;
+	end;
+
+OnTimer10000:
+	warpparty $@Maps$,15,49,$@TeamOne;
+	warpparty $@Maps$,85,49,$@TeamTwo;
+	end;
+	
+OnTimer30000:
+	mapannounce $@Maps$,"ผู้เล่นจะมีเวลาเตรียมตัว 30 วินาที ก่อนที่การประลองจะเริ่มต้นขึ้น.",bc_all;
+	end;
+	
+OnTimer50000:
+	mapannounce $@Maps$,"การประลองจะเรื่มขึ้นใน 5 วินาที.",bc_all;
+	end;
+	
+OnTimer51000:
+	mapannounce $@Maps$,"การประลองจะเรื่มขึ้นใน 4 วินาที.",bc_all;
+	end;
+	
+OnTimer52000:
+	mapannounce $@Maps$,"การประลองจะเรื่มขึ้นใน 3 วินาที.",bc_all;
+	end;
+	
+OnTimer53000:
+	mapannounce $@Maps$,"การประลองจะเรื่มขึ้นใน 2 วินาที.",bc_all;
+	end;
+
+OnTimer54000:
+	mapannounce $@Maps$,"การประลองจะเรื่มขึ้นใน 1 วินาที.",bc_all;
+	end;
+	
+OnTimer55000:
+	gvgon $@Maps$;
+	setcell $@Maps$,80,55,80,44,cell_walkable,1;
+	setcell $@Maps$,19,55,19,44,cell_walkable,1;
+	disablenpc "ประตูสนามประลอง#01";
+	disablenpc "ประตูสนามประลอง#02";
+	disablenpc "ประตูสนามประลอง#03";
+	disablenpc "ประตูสนามประลอง#04";
+	disablenpc "ประตูสนามประลอง#05";
+	disablenpc "ประตูสนามประลอง#06";
+	disablenpc "ประตูสนามประลอง#07";
+	disablenpc "ประตูสนามประลอง#08";
+	disablenpc "ประตูสนามประลอง#09";
+	disablenpc "ประตูสนามประลอง#10";
+	disablenpc "ประตูสนามประลอง#11";
+	disablenpc "ประตูสนามประลอง#12";
+	disablenpc "ประตูสนามประลอง#13";
+	disablenpc "ประตูสนามประลอง#14";
+	disablenpc "ประตูสนามประลอง#15";
+	disablenpc "ประตูสนามประลอง#16";
+	disablenpc "ประตูสนามประลอง#17";
+	disablenpc "ประตูสนามประลอง#18";
+	disablenpc "ประตูสนามประลอง#19";
+	disablenpc "ประตูสนามประลอง#20";
+	disablenpc "ประตูสนามประลอง#21";
+	disablenpc "ประตูสนามประลอง#22";
+	disablenpc "ประตูสนามประลอง#23";
+	disablenpc "ประตูสนามประลอง#24";
+	announce "ทีม "+ getpartyname($@TeamOne) +" พบกับ ทีม "+ getpartyname($@TeamTwo) +" การต่อสู้ได้เริ่มต้นขึ้นแล้ว !",bc_all;
+	end;
+
+OnTeamOneWinner:
+	set $OneCount,$OneCount+1;
+	set $CheakTeamOne,0;
+	set $CheakTeamTwo,0;
+	stopnpctimer;
+	enablenpc "ประตูสนามประลอง#01";
+	enablenpc "ประตูสนามประลอง#02";
+	enablenpc "ประตูสนามประลอง#03";
+	enablenpc "ประตูสนามประลอง#04";
+	enablenpc "ประตูสนามประลอง#05";
+	enablenpc "ประตูสนามประลอง#06";
+	enablenpc "ประตูสนามประลอง#07";
+	enablenpc "ประตูสนามประลอง#08";
+	enablenpc "ประตูสนามประลอง#09";
+	enablenpc "ประตูสนามประลอง#10";
+	enablenpc "ประตูสนามประลอง#11";
+	enablenpc "ประตูสนามประลอง#12";
+	enablenpc "ประตูสนามประลอง#13";
+	enablenpc "ประตูสนามประลอง#14";
+	enablenpc "ประตูสนามประลอง#15";
+	enablenpc "ประตูสนามประลอง#16";
+	enablenpc "ประตูสนามประลอง#17";
+	enablenpc "ประตูสนามประลอง#18";
+	enablenpc "ประตูสนามประลอง#19";
+	enablenpc "ประตูสนามประลอง#20";
+	enablenpc "ประตูสนามประลอง#21";
+	enablenpc "ประตูสนามประลอง#22";
+	enablenpc "ประตูสนามประลอง#23";
+	enablenpc "ประตูสนามประลอง#24";
+	donpcevent "Joint_Battle::OnStart";
+	if ( $OneCount >= 2 )
+	{
+		announce "จบการแข่งขันทีม "+ getpartyname($@TeamTwo) +" เป็นฝ่ายพ่ายแพ้ ให้กับทีม "+ getpartyname($@TeamOne) +" !!",bc_all;
+		set $@Status,0;
+		set $@TeamCount,0;
+		set $@TeamOne,0;
+		set $@TeamTwo,0;
+		set $CheakTeamOne,0;
+		set $CheakTeamTwo,0;
+		set $OneCount,0;
+		set $TwoCount,0;
+		gvgoff $@Maps$;
+		setcell "guild_vs3",19,55,19,44,cell_walkable,0;
+		setcell "guild_vs3",80,55,80,44,cell_walkable,0;
+		enablenpc "ประตูสนามประลอง#01";
+		enablenpc "ประตูสนามประลอง#02";
+		enablenpc "ประตูสนามประลอง#03";
+		enablenpc "ประตูสนามประลอง#04";
+		enablenpc "ประตูสนามประลอง#05";
+		enablenpc "ประตูสนามประลอง#06";
+		enablenpc "ประตูสนามประลอง#07";
+		enablenpc "ประตูสนามประลอง#08";
+		enablenpc "ประตูสนามประลอง#09";
+		enablenpc "ประตูสนามประลอง#10";
+		enablenpc "ประตูสนามประลอง#11";
+		enablenpc "ประตูสนามประลอง#12";
+		enablenpc "ประตูสนามประลอง#13";
+		enablenpc "ประตูสนามประลอง#14";
+		enablenpc "ประตูสนามประลอง#15";
+		enablenpc "ประตูสนามประลอง#16";
+		enablenpc "ประตูสนามประลอง#17";
+		enablenpc "ประตูสนามประลอง#18";
+		enablenpc "ประตูสนามประลอง#19";
+		enablenpc "ประตูสนามประลอง#20";
+		enablenpc "ประตูสนามประลอง#21";
+		enablenpc "ประตูสนามประลอง#22";
+		enablenpc "ประตูสนามประลอง#23";
+		enablenpc "ประตูสนามประลอง#24";
+		stopnpctimer;
+		sleep 3000;
+		areawarp $@Maps$,12,87,87,12,"morocc",159,92;
+		end;
+	}
+	end;
+
+OnTeamTwoWinner:
+	set $TwoCount,$TwoCount+1;
+	set $CheakTeamOne,0;
+	set $CheakTeamTwo,0;
+	stopnpctimer;
+	enablenpc "ประตูสนามประลอง#01";
+	enablenpc "ประตูสนามประลอง#02";
+	enablenpc "ประตูสนามประลอง#03";
+	enablenpc "ประตูสนามประลอง#04";
+	enablenpc "ประตูสนามประลอง#05";
+	enablenpc "ประตูสนามประลอง#06";
+	enablenpc "ประตูสนามประลอง#07";
+	enablenpc "ประตูสนามประลอง#08";
+	enablenpc "ประตูสนามประลอง#09";
+	enablenpc "ประตูสนามประลอง#10";
+	enablenpc "ประตูสนามประลอง#11";
+	enablenpc "ประตูสนามประลอง#12";
+	enablenpc "ประตูสนามประลอง#13";
+	enablenpc "ประตูสนามประลอง#14";
+	enablenpc "ประตูสนามประลอง#15";
+	enablenpc "ประตูสนามประลอง#16";
+	enablenpc "ประตูสนามประลอง#17";
+	enablenpc "ประตูสนามประลอง#18";
+	enablenpc "ประตูสนามประลอง#19";
+	enablenpc "ประตูสนามประลอง#20";
+	enablenpc "ประตูสนามประลอง#21";
+	enablenpc "ประตูสนามประลอง#22";
+	enablenpc "ประตูสนามประลอง#23";
+	enablenpc "ประตูสนามประลอง#24";
+	donpcevent "Joint_Battle::OnStart";
+	if ( $TwoCount >= 2 )
+	{
+		announce "จบการแข่งขันทีม "+ getpartyname($@TeamOne) +" เป็นฝ่ายพ่ายแพ้ ให้กับทีม "+ getpartyname($@TeamTwo) +" !!",bc_all;
+		set $@Status,0;
+		set $@TeamCount,0;
+		set $@TeamOne,0;
+		set $@TeamTwo,0;
+		set $CheakTeamOne,0;
+		set $CheakTeamTwo,0;
+		set $OneCount,0;
+		set $TwoCount,0;
+		gvgoff $@Maps$;
+		setcell "guild_vs3",19,55,19,44,cell_walkable,0;
+		setcell "guild_vs3",80,55,80,44,cell_walkable,0;
+		enablenpc "ประตูสนามประลอง#01";
+		enablenpc "ประตูสนามประลอง#02";
+		enablenpc "ประตูสนามประลอง#03";
+		enablenpc "ประตูสนามประลอง#04";
+		enablenpc "ประตูสนามประลอง#05";
+		enablenpc "ประตูสนามประลอง#06";
+		enablenpc "ประตูสนามประลอง#07";
+		enablenpc "ประตูสนามประลอง#08";
+		enablenpc "ประตูสนามประลอง#09";
+		enablenpc "ประตูสนามประลอง#10";
+		enablenpc "ประตูสนามประลอง#11";
+		enablenpc "ประตูสนามประลอง#12";
+		enablenpc "ประตูสนามประลอง#13";
+		enablenpc "ประตูสนามประลอง#14";
+		enablenpc "ประตูสนามประลอง#15";
+		enablenpc "ประตูสนามประลอง#16";
+		enablenpc "ประตูสนามประลอง#17";
+		enablenpc "ประตูสนามประลอง#18";
+		enablenpc "ประตูสนามประลอง#19";
+		enablenpc "ประตูสนามประลอง#20";
+		enablenpc "ประตูสนามประลอง#21";
+		enablenpc "ประตูสนามประลอง#22";
+		enablenpc "ประตูสนามประลอง#23";
+		enablenpc "ประตูสนามประลอง#24";
+		stopnpctimer;
+		sleep 3000;
+		areawarp $@Maps$,12,87,87,12,"morocc",159,92;
+		end;
+	}
+
+	end;
+}
+
+
+guild_vs3,19,55,0	script	ประตูสนามประลอง#01	1905,{ end; }
+guild_vs3,19,54,0	script	ประตูสนามประลอง#02	1905,{ end; }
+guild_vs3,19,53,0	script	ประตูสนามประลอง#03	1905,{ end; }
+guild_vs3,19,52,0	script	ประตูสนามประลอง#04	1905,{ end; }
+guild_vs3,19,51,0	script	ประตูสนามประลอง#05	1905,{ end; }
+guild_vs3,19,50,0	script	ประตูสนามประลอง#06	1905,{ end; }
+guild_vs3,19,49,0	script	ประตูสนามประลอง#07	1905,{ end; }
+guild_vs3,19,48,0	script	ประตูสนามประลอง#08	1905,{ end; }
+guild_vs3,19,47,0	script	ประตูสนามประลอง#09	1905,{ end; }
+guild_vs3,19,46,0	script	ประตูสนามประลอง#10	1905,{ end; }
+guild_vs3,19,45,0	script	ประตูสนามประลอง#11	1905,{ end; }
+guild_vs3,19,44,0	script	ประตูสนามประลอง#12	1905,{ end; }
+guild_vs3,80,55,0	script	ประตูสนามประลอง#13	1905,{ end; }
+guild_vs3,80,54,0	script	ประตูสนามประลอง#14	1905,{ end; }
+guild_vs3,80,53,0	script	ประตูสนามประลอง#15	1905,{ end; }
+guild_vs3,80,52,0	script	ประตูสนามประลอง#16	1905,{ end; }
+guild_vs3,80,51,0	script	ประตูสนามประลอง#17	1905,{ end; }
+guild_vs3,80,50,0	script	ประตูสนามประลอง#18	1905,{ end; }
+guild_vs3,80,49,0	script	ประตูสนามประลอง#19	1905,{ end; }
+guild_vs3,80,48,0	script	ประตูสนามประลอง#20	1905,{ end; }
+guild_vs3,80,47,0	script	ประตูสนามประลอง#21	1905,{ end; }
+guild_vs3,80,46,0	script	ประตูสนามประลอง#22	1905,{ end; }
+guild_vs3,80,45,0	script	ประตูสนามประลอง#23	1905,{ end; }
+guild_vs3,80,44,0	script	ประตูสนามประลอง#24	1905,{ end; }

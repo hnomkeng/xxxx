@@ -1,0 +1,145 @@
+morocc,179,139,4	script	Phoenix	753,{
+if (BaseJob != Novice) {
+			mes "[  Phoenix ]";
+			mes "ข้าเสียใจด้วย..ท่านไม่ใช่ Novice";
+			close;
+		}
+if(BaseLevel < 19) {
+				mes "[  Phoenix ]";
+				mes "เอิ่มมมมม...";
+				mes "ในการเปลี่ยนอาชีพ Teakwon นั้น.";
+				mes "เจ้าต้องมี Base Lv.20 ขึ้นไปนะ.";
+				next;
+				mes "[  Phoenix ]";
+				mes "ไว้พบกันใหม่นะ";
+				close;
+			}
+if (getskilllv("NV_BASIC") < 9) {
+				mes "[  Phoenix ]";
+				mes "เอิ่มมมมม...";
+				mes "เจ้าควรจะเรียนรู้ Basic Skills ทั้งหมดก่อน.";
+				next;
+				mes "[  Phoenix ]";
+				mes "ไว้พบกันใหม่";
+				close;
+			}
+mes "[ Phoenix ]";
+mes "สวัสดีคุณ ^FF0000"+strcharinfo(0)+",^000000";
+mes "ร่างกายของท่านดูแข็งแรงดีนะ";
+mes "คุณสมบัติท่านก็พร้อมซะด้วย";
+mes "สนใจสมัครเข้าร่วมชมรมกับข้ามั้ยล่ะ ?";
+next;
+menu
+"ใช่แล้ว..ข้าอยากเป็น Taekwon.",goteak,
+"ไม่ล่ะ..ข้าไม่ชอบการเตะต่อย.",noteak;
+
+goteak:
+mes "[ Phoenix ]";
+mes "เอาล่ะ..";
+mes "ข้าอยากจะได้ ^0033FFGuard^000000 สักอัน";
+mes "ถือว่าเป็นค่าสมัครแล้วกันนะ";
+next;
+menu
+"ข้านำมันมาให้ท่านแล้ว..",goteak2,
+"ไม่มี..ข้าจะไปหามาก่อนแล้วกัน",noteak;
+
+goteak2:
+if (countitem(2101)<1) {
+				mes "[ Phoenix ]";
+				mes "ท่านไม่มี Guard มาให้ข้า";
+				mes "อย่ามาหลอกข้า!! จงออกไปซะ.";
+				close;
+				}
+mes "[ Phoenix ]";
+mes "พร้อมแล้วใช่มั้ยล่ะ ?";
+mes "ข้าจะมอบชุดชมรมให้ท่านเดี๋ยวนี้";
+next;
+mes "[ Phoenix ]";
+mes "ฮ่าๆๆ. ยินดีต้อนรับเข้าสู่ชมรม Teakwon";
+mes "หวังว่าท่านจะเรียนรู้มันเพิ่มเติม";
+mes "และสุดท้าย ขอให้ท่านโชคดีแล้วกัน";
+jobchange 4046;
+delitem 2101,1;
+close;
+				
+noteak:
+mes "[ Phoenix ]";
+mes "หากท่านเปลี่ยนใจ ไว้กลับมาหาข้าใหม่นะ";
+close;
+
+OnInit:
+waitingroom "Taekwon Job", 0;
+end;
+}
+
+
+morocc,179,142,4	script	Kid#001	716,{
+if (BaseJob != 4046) {
+			mes "[  Kid ]";
+			mes "ข้าเสียใจด้วย..ท่านไม่ใช่ Taekwon";
+			close;
+			}
+if(JobLevel != 50){
+				mes "[  Kid ]";
+				mes "เอิ่มมมมม...";
+				mes "ในการเปลี่ยนอาชีพ Soulinker นั้น.";
+				mes "เจ้าต้องมี Job Lv.50 เท่านั้น.";
+				next;
+				mes "[  Kid ]";
+				mes "ไว้พบกันใหม่นะ";
+				close;
+				}
+if(SkillPoint >0) {
+				mes "[ Kid ]";
+				mes "ท่านยังใช้ Skill Point ไม่หมด";
+				close;
+				}
+mes "[ Kid ]";
+mes "สวัสดีคุณ ^FF0000"+strcharinfo(0)+",^000000";
+mes "ท่านอยากเป็น Soulinker แล้วสินะ";
+next;
+menu
+"ใช่แล้ว..ข้าอยากเป็น Soulinker.",gosoul,
+"ไม่ล่ะ..ข้ายังไม่พร้อม.",nosoul;
+
+gosoul:
+mes "[ Kid ]";
+mes "เอาล่ะ..";
+mes "ข้าอยากจะได้ ^0033FFWitherless Rose^000000 1 ea";
+mes "^0033FF3carat Diamond^000000 1 ea";
+mes "^0033FFImmortal Heart^000000 1 ea";
+mes "ในการเปลี่ยนอาชีพ";
+next;
+menu
+"ข้านำมันมาให้ท่านแล้ว..",gosoul2,
+"ไม่มี..ข้าจะไปหามาก่อนแล้วกัน",nosoul;
+
+gosoul2:
+if (countitem(748)<1 & countitem(732)<1 & countitem(929)<1) {
+				mes "[ Kid ]";
+				mes "เหมือนท่านมีของมาไม่ครบนะ";
+				mes "โปรดตรวจสอบให้ดีอีกครั้ง.";
+				close;
+				}
+mes "[ Kid ]";
+mes "พร้อมแล้วใช่มั้ยล่ะ ?";
+next;
+mes "[ Kid ]";
+mes "ฮ่าๆๆ. ยินดีด้วยนะ";
+mes "ท่านมาถึงระดับสูงสุดของสายอาชีพแล้ว";
+mes "และสุดท้าย ขอให้ท่านโชคดี";
+jobchange 4049;
+delitem 748,1;
+delitem 732,1;
+delitem 929,1;
+close;
+				
+nosoul:
+mes "[ Kid ]";
+mes "หากท่านเปลี่ยนใจ ไว้กลับมาหาข้าใหม่นะ";
+close;
+
+OnInit:
+waitingroom "Soulinker Job", 0;
+end;
+}

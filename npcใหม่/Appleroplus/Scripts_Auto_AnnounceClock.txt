@@ -1,0 +1,33 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Auto_AnnounceClock	-1,{
+end;
+OnMinute00:
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+set $anno,rand(1,9);
+if($anno == 1){	Announce "[ ติดต่อ GM ผ่านทาง Facebook หรือ Line ได้เลย ]",0x00FFFF;	end;	}
+if($anno == 2){	Announce "[ GM จะไม่ขอ ID Password ผู้เล่นเป็นอัดขาด โปรดระวัง ผู้เล่นไม่หวังดีด้วย ]",0x00FFFF;	end;	}
+if($anno == 3){	Announce "[ หากพบการขายของ เป็นเงินจริง บทลงโทษคือ แบน ID ถาวร ]",0x00FFFF;	end;	}
+if($anno == 4){	Announce "[ พบปัญหาการเข้าเล่น หรือ การใช้งานสามารถ แจ้ง  GM ได้ที่ Facebook หรือ Line ได้เลย ]",0x00FFFF;	end;	}
+if($anno == 5){	Announce "[ หากพบผู้ที่ทำผิดกฏระเบียบ ของเกม สามารถ แจ้ง  GM ได้ที่ Facebook หรือ Line ได้เลย ]",0x00FFFF;	end;	}
+if($anno == 6){	Announce "[ GM ทำงานบางครั้งต้องทำงานหลักด้วย อาจจะมีตอบช้าบ้าง แก้ไขปัญหาช้าบ้าง แต่จะทำให้แน่นอน ]",0x00FFFF;	end;	}
+if($anno == 7){	Announce "[ GM ตัวจริงจะมีชื่อ @@@ อยู่ในชื่อ ผู้เล่น ทั่วไป จะไม่สามารถตั้งได้ ]",0x00FFFF;	end;	}
+if($anno == 8){	Announce "[ อย่าทำการตั้ง ID Password เหมือน Server อื่นที่เคยเล่นมา หากของหายโดนโกงโดนลบ จะไม่รับผิดชอบใดๆ ]",0x00FFFF;	end;	}
+if($anno == 9){	Announce "[ หากพบการใช้โปรแกรมช่วยเล่น หรือ โปรแกรมโกงเกม หรือ แก้ไขดัดแปลงตัวเกมผิดแปลกไปจากเดิม บทลงโทษคือ แบน ID ถาวร ]",0x00FFFF;	end;	}
+end;
+}

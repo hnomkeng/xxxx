@@ -1,0 +1,189 @@
+-	shop	QQ_Exlimited	-1,60009:-1,18713:-1,18639:-1,5411:-1,19083:-1,5548:-1
+
+-	script	ex_limited	-1,{
+mes "[ Quest Limited ]";
+mes "-----------------------------------";
+mes "Item : ^CC6600Quest Limited^000000";
+mes "-----------------------------------";
+mes "^FF0000หมดเขต 10 กุมภาพันธ์ นี้เท่านั้น^000000";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 ดูตัวอย่างไอเทม",exlimit,
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCWeapon Random Box^000000",ex01,
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCMonkey Fur Hat^000000",ex02,
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCCaptain Officer Hat^000000",ex03,
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCWhite Snake Hat^000000",ex04,
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCMask of Hero^000000",ex05,
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCScarlet Rose^000000",ex06,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+ex01:
+next;
+mes "[ Quest Limited ]";
+mes "Item : ^6666CCWeapon Random Box^000000";
+mes "-----------------------------------";
+mes "Item ที่ใช้ในการแลก";
+mes "^FF0000Cash Coin^000000 : 50 ea";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 ใช่..ข้าต้องการแลก Weapon Random Box",ex011;
+
+ex011: 
+//if (zeny<1000000) goto nohave;
+if (countitem(671)<50) goto nohave;
+mes "[ Quest Limited ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 671,50;
+getitem 60009,1;
+//announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Zeny Egg V.1 1 ฟอง สำเร็จ",0;
+end;
+
+ex02:
+next;
+mes "[ Quest Limited ]";
+mes "Item : ^6666CCMonkey Fur Hat^000000";
+mes "-----------------------------------";
+mes "Item ที่ใช้ในการแลก";
+mes "^FF0000Crown of Deceit [1]^000000 : 2 ea";
+mes "^FF0000Zeny^000000 : 4,000,000";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 ใช่..ข้าต้องการแลก Monkey Fur Hat",ex022;
+
+ex022: 
+if (zeny<4000000) goto nohave;
+if (countitem(5564)<2) goto nohave;
+mes "[ Quest Limited ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 5564,2;
+set zeny,zeny -4000000;
+getitem 18713,1;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Monkey Fur Hat สำเร็จ",0;
+end;
+
+ex03:
+next;
+mes "[ Quest Limited ]";
+mes "Item : ^6666CCCaptain Officer Hat^000000";
+mes "-----------------------------------";
+mes "Item ที่ใช้ในการแลก";
+mes "^FF0000Ship Captain Hat [1]^000000 : 2 ea";
+mes "^FF0000Zeny^000000 : 4,000,000";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 ใช่..ข้าต้องการแลก Captain Officer Hat",ex033;
+
+ex033: 
+if (zeny<4000000) goto nohave;
+if (countitem(5359)<2) goto nohave;
+mes "[ Quest Limited ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 5359,2;
+set zeny,zeny -4000000;
+getitem 18639,1;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Captain Officer Hat สำเร็จ",0;
+end;
+
+ex04:
+next;
+mes "[ Quest Limited ]";
+mes "Item : ^6666CCWhite Snake Hat^000000";
+mes "-----------------------------------";
+mes "Item ที่ใช้ในการแลก";
+mes "^FF0000Ship Captain Hat [1]^000000 : 2 ea";
+mes "^FF0000Zeny^000000 : 4,000,000";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 ใช่..ข้าต้องการแลก White Snake Hat",ex044;
+
+ex044: 
+if (zeny<4000000) goto nohave;
+if (countitem(5388)<2) goto nohave;
+mes "[ Quest Limited ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 5388,2;
+set zeny,zeny -4000000;
+getitem 5411,1;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม White Snake Hat สำเร็จ",0;
+end;
+
+ex05:
+next;
+mes "[ Quest Limited ]";
+mes "Item : ^6666CCMask of Hero^000000";
+mes "-----------------------------------";
+mes "Item ที่ใช้ในการแลก";
+mes "^FF0000Angel Spirit^000000 : 1 ea";
+mes "^FF0000Hydra Card^000000 : 1 ea";
+mes "^FF0000Thara Frog Card^000000 : 1 ea";
+mes "^FF0000Zeny^000000 : 2,000,000";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 ใช่..ข้าต้องการแลก Mask of Hero",ex055;
+
+ex055: 
+if (zeny<2000000) goto nohave;
+if (countitem(5389)<1) goto nohave;
+if (countitem(4035)<1) goto nohave;
+if (countitem(4058)<1) goto nohave;
+mes "[ Quest Limited ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 5389,1;
+delitem 4035,1;
+delitem 4058,1;
+set zeny,zeny -2000000;
+getitem 19083,1;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Mask of Hero สำเร็จ",0;
+end;
+
+ex06:
+next;
+mes "[ Quest Limited ]";
+mes "Item : ^6666CCScarlet Rose^000000";
+mes "-----------------------------------";
+mes "Item ที่ใช้ในการแลก";
+mes "^FF0000Witherless Ross^000000 : 100 ea";
+mes "^FF0000Infiltrator^000000 : 5 ea";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 ใช่..ข้าต้องการแลก Scarlet Rose",ex066;
+
+ex066: 
+if (countitem(748)<100) goto nohave;
+if (countitem(1261)<5) goto nohave;
+mes "[ Quest Limited ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 748,100;
+delitem 1261,5;
+getitem 5548,1;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Scarlet Rose สำเร็จ",0;
+end;
+
+exlimit:
+callfunc "Shop_QQ","QQ_Exlimited",1;
+end;
+
+nogo:
+end;
+
+nohave:
+mes "[ Quest Limited ]";
+mes "เหมือนว่าท่านมีของมาไม่ครบนะ.";  
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "Quest Limited", 0;
+end;
+}
+
+morocc,165,137,4	duplicate(ex_limited)	Quest Limited#03	570

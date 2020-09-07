@@ -1,0 +1,60 @@
+/*
+=================== TERMS OF SERVICES. ===================
+1. ALL RIGHT RESERVED RE-SELLER OR SHARE SCRIPT TO PUBLISH.
+2. BUT YOU RE-SELLER OR SHARE SCRIPT WITH OUT UNAUTHORIZRD
+   I WILL ALL CANCEL MY SUPPORT FOR YOU.
+3. MAINTENANCE SCRIPTS WILL BE FREE SERVICES.
+4. I WILL NOT KEEP ANY INFORMATIONS FROMS YOU SERVER THAT
+   YOU SEND FOR ME.
+5. I HOPE YOU WILL ALL ACCEPT TERMS OF SERVICES.
+==========================================================
+Script. Professor Ingredients																					 
+Create By. Athena Studio
+Bug Report. Kittisak Sarounram [ FB ]																					 
+Contact Us. Kittisak Sarounram [ FB ]																					 
+TEL. 0909183008 [ TRUE MOVE H ]																					 
+==========================================================
+*/
+-	shop	professor	-1,12114:-1,12115:-1,12116:-1,12117:-1
+-	shop	professor_2	-1,7433:-1,1025:-1,904:-1,946:-1,947:-1,1013:-1
+
+prontera,148,173,4	script	ส่วนผสมทำใบธาตุ	804,{
+	switch(select("~ ส่วนผสมสำเร็จรูป:~ ส่วนผสมแยก"))
+	{
+		case 1:
+			callshop "professor",1;
+			npcshopattach "professor";
+			end;
+			
+		case 2:
+			callshop "professor_2",1;
+			end;
+	}
+	end;
+	
+OnBuyItem:
+	mes "[ Ingredients Professor ]";
+	mes "Name : "+ getitemname(@bought_nameid[.@i]) +"";
+	input .@Amount;
+	for ( set .@i, 0; .@i < getarraysize(@bought_nameid); set .@i, .@i+1 )
+	{
+		if ( getitemname(@bought_nameid[.@i]) == getitemname(12114) ) {
+			getitem 7433,.@Amount; getitem 904,.@Amount*3;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(12115) ) {
+			getitem 7433,.@Amount; getitem 946,.@Amount*3;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(12116) ) {
+			getitem 7433,.@Amount; getitem 947,.@Amount*3;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(12117) ) {
+			getitem 7433,.@Amount; getitem 1013,.@Amount*3;
+		}
+		else
+			getitem @bought_nameid[.@i],.@Amount;
+	}
+	deletearray @bought_nameid, getarraysize(@bought_nameid);
+OnInit: 
+waitingroom "ส่วนผสมทำใบธาตุ",0; 
+end;
+}

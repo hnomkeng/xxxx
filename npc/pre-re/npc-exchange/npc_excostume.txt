@@ -1,0 +1,29 @@
+-	script	exchange_costume	-1,{
+mes "[ แลกไอเทมคอสตูม ]";
+mes "ข้ามีไอเทมให้ท่านแลก 2 แบบ คือ";
+mes "-----------------------------------";
+mes "Item : ^CC6600Costume TRO^000000";
+mes "-----------------------------------";
+mes "Item : ^CC6600Costume MvP^000000";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 แลกไอเทม (กดซื้อเพื่อเช็คและแลกเปลี่ยน)",exstraw,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+exstraw:
+callfunc "Shop_QQ","QQ_Excostume",1;
+end;
+
+nogo:
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "แลกไอเทมคอสตูม", 0;
+end;
+}
+
+morocc,154,121,5	duplicate(exchange_costume)	แลกไอเทมคอสตูม#02	626

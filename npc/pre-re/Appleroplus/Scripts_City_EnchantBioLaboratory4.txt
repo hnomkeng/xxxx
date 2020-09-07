@@ -1,0 +1,519 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,141,249,4	script	เพิ่มออฟชั่น Bio Laboratory 4#1	637,{
+
+
+	if ((MaxWeight - Weight) < 1200 || !checkweight(1201, 1)) {
+		mes "^FF0000 โปรดตรวจสอบน้ำหนักของคุณได้. ^000000";
+		close;
+	}
+	disable_items;
+	mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+	mes "โปรดเลือกเมนูที่คุณต้องการ";
+	next;
+	switch(select("^FF0000•^000000 ปิด:^FF0000•^000000 เพิ่มออฟชั่น:^FF0000•^000000 รายละเอียด")) {
+	case 1:
+		mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+		mes "แล้วแจกัน";
+		close;
+	case 2:
+		emotion ET_SPARK;
+
+		break;
+	case 3:
+mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+mes "-- ออฟชั่นที่จะได้รับ  [อาวุธ] --";
+mes "STR,AGI,VIT,INT,DEX,LUK +1~3";
+mes "Fighting Spirit level 1 ~ 3";
+mes "Sharp level 1 ~ 3";
+mes "Expert Archer level 1 ~ 3";
+mes "Spell level 1 ~ 3";
+mes "ASPD + 1";
+next;
+mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+mes "-- ออฟชั่นที่จะได้รับ  [ชุดเกราะ] --";
+mes "STR,AGI,VIT,INT,DEX,LUK +1~3";
+mes "DEF +3, 6, 9, 12";
+mes "HP +100, 200, 300";
+mes "MDEF +2, 4, 6, 8, 10";
+mes "SP +50";
+mes "Flee +1, 3, 6";
+next;
+mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+mes "อุปกรณ์ที่สามารถออฟได้[อาวุธ]";
+mes "Agent Katar [1]";
+mes "Guillotine Katar [1]";
+mes "Ignus Stale [1]";
+mes "End Sektura [1]";
+mes "Cannon Spear [1]";
+mes "Gigantic Lance";
+mes "Freezing Book of Magic [2]";
+mes "Recovery Light [1]";
+mes "Az-toenail";
+mes "Scarlet-toenail";
+mes "Bloody Cross";
+mes "Repeater Crossbow[2]";
+mes "Giant Crossbow [2]";
+mes "Creeper Bow[2]";
+next;
+mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+mes "อุปกรณ์ที่สามารถออฟได้[ชุดเกราะ]";
+mes "Gigantic Shield [1]";
+mes "Geffenia Report (water) [1]";
+mes "Bible of Promise vol.2 [1]";
+mes "Salvage Cape, Assassin's Gauntlet[1]";
+mes "Green Surgical Suit [1]";
+mes "Ancient Golden Ornament [1]";
+close;
+//-------------------------------------------
+		close;
+	}
+	mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+	mes "ตกลง! ไอเท็มไหนที่เจ้าต้องการเพิ่มพลัง?";
+	next;
+	setarray .@parts[0], EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_TOP;
+	for(.@i = 0; .@i < 7; .@i++) {
+		if (!getequipisequiped(.@parts[.@i])) {
+			switch(.@i) {
+				case 0:
+					.@equipped$[.@i] = "^FF0000•^000000 ^999999Armor-[ไม่ได้ติดตั้ง]^000000";
+					break;
+				case 1:
+					.@equipped$[.@i] = "^FF0000•^000000 ^999999Left Hand-[ไม่ได้ติดตั้ง]^000000";
+					break;
+				case 2:
+					.@equipped$[.@i] = "^FF0000•^000000 ^999999Right Hand-[ไม่ได้ติดตั้ง]^000000";
+					break;
+				case 3:
+					.@equipped$[.@i] = "^FF0000•^000000 ^999999Garment-[ไม่ได้ติดตั้ง]^000000";
+					break;
+				case 4:
+					.@equipped$[.@i] = "^FF0000•^000000 ^999999Accessory-[ไม่ได้ติดตั้ง]^000000";
+					break;
+				case 5:
+					.@equipped$[.@i] = "^FF0000•^000000 ^999999Accessory-[ไม่ได้ติดตั้ง]^000000";
+					break;
+				case 6:
+					.@equipped$[.@i] = "^FF0000•^000000 ^999999Helm-[ไม่ได้ติดตั้ง]^000000";
+					break;
+			}
+		} else {
+			.@equipped$[.@i] = getequipname(.@parts[.@i]);
+		}
+	}
+	switch(select("^FF0000•^000000 ยกเลิก.", .@equipped$[0], .@equipped$[1], .@equipped$[2], .@equipped$[3], .@equipped$[4], 
+	.@equipped$[5], .@equipped$[6])) {
+	case 1:
+		mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+		mes "ดีฉันรอคอยที่จะทำมัน แต่ฉันไม่สามารถช่วยได้.";
+		close;
+	case 2:
+		if (!getequipisequiped(EQI_ARMOR)) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "เฮ้ .. เกราะอยู่ตรงไหน?";
+			close;
+		}
+		.@part = EQI_ARMOR;
+		break;
+	case 3:
+		if (!getequipisequiped(EQI_HAND_L)) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "คุณไม่ได้เตรียมอะไรไว้ทางซ้ายมือ.";
+			close;
+		}
+		.@part = EQI_HAND_L;
+		break;
+	case 4:
+		if (!getequipisequiped(EQI_HAND_R)) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "คุณไม่ได้เตรียมอะไรไว้ทางขวามือ.";
+			close;
+		}
+		.@part = EQI_HAND_R;
+		break;
+	case 5:
+		if (!getequipisequiped(EQI_GARMENT)) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "อืม .... เสื้อคลุมของคุณอยู่ที่ไหน?";
+			close;
+		}
+		.@part = EQI_GARMENT;
+		break;
+	case 6:
+		if (!getequipisequiped(EQI_ACC_L)) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "ที่ไหนเป็นอุปกรณ์เสริม?";
+			close;
+		}
+		.@part = EQI_ACC_L;
+		break;
+	case 7:
+		if (!getequipisequiped(EQI_ACC_R)) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "ที่ไหนเป็นอุปกรณ์เสริม?";
+			close;
+		}
+		.@part = EQI_ACC_R;
+		break;
+	case 8:
+		if (!getequipisequiped(EQI_HEAD_TOP)) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "เฮ้ .. คุณไม่ได้สวมหมวกไหม?";
+			close;
+		}
+		.@part = EQI_HEAD_TOP;
+		break;
+	}
+	.@refine_count = getequiprefinerycnt(.@part);
+	.@equip_item = getequipid(.@part);
+	.@lhz_max_num = 4000;
+	if (.@equip_item == 13069 || .@equip_item == 1291 || .@equip_item == 1392 || 
+	    .@equip_item == 1393 || .@equip_item == 1435 || .@equip_item == 1490 || 
+	    .@equip_item == 13069 || .@equip_item == 13070 || .@equip_item == 16017) {
+		.@type = 1;
+		if (.@equip_item == 1490)
+			.@lhz_max_num = 4200;
+	} else if (.@equip_item == 18109 || .@equip_item == 18110 || .@equip_item == 18111) {
+		.@type = 2;
+	} else if (.@equip_item == 1584 || .@equip_item == 1659) {
+		.@type = 3;
+	} else if (.@equip_item == 2160 || .@equip_item == 2161 || .@equip_item == 2162 ||
+	           .@equip_item == 2582 || .@equip_item == 2892 || .@equip_item == 15044 || 
+	           .@equip_item == 18570) {
+		.@type = 4;
+		if (.@equip_item == 2582 || .@equip_item == 18570)
+			.@lhz_max_num = 4200;
+	} else {
+		mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+		mes "ก่อน! ฉันต้องตรวจสอบว่าอุปกรณ์นี้สามารถรับพลังงานได้หรือไม่.";
+		next;
+		specialeffect2 EF_SPHERE;
+		progressbar "ffff00", 1;
+		specialeffect2 EF_SUI_EXPLOSION;
+		emotion ET_CRY;
+		mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+		mes "ไอเท็มนี้ต้องใช้ '^F2766EWill of Warrior^000000' หรือ '^952420Thirst for Blood^000000'.";
+		close;
+	}
+	emotion ET_DELIGHT;
+	mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+	mes "ไอเท็มนี้ต้องใช้ '^F2766EWill of Warrior^000000' หรือ '^952420Thirst for Blood^000000'.";
+	next;
+	if (countitem(6469) >= 10)
+		.@menu_in$[1] = "- เพิ่มออฟชั่น ช่องแรก '^F2766EWill of Warrior^000000'";
+	else
+		.@menu_in$[1] = " ^999999คุณไม่มี 'Will of Warrior'^000000";
+
+	if (countitem(6470) >= 10)
+		.@menu_in$[2] = "- เพิ่มออฟชั่น ช่องสอง '^952420Thirst for Blood^000000'";
+	else
+		.@menu_in$[2] = " ^999999คุณไม่มี 'Thirst for Blood'^000000";
+
+	if (countitem(6471) >= 10)
+		.@menu_in$[3] = "ลบ เพิ่มออฟชั่น '^88C6F7Chill of the Dead^000000'";
+	else
+		.@menu_in$[3] = " ^999999คุณไม่มี 'Chill of the Dead'^000000";
+	mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+	mes "OK! ตอนนี้เจ้าอยากจะใช้อะไรเพิ่มพลังล่ะ?";
+	next;
+	switch(select("^FF0000•^000000 ไม่เอาแล้ววว", .@menu_in$[1], .@menu_in$[2], .@menu_in$[3])) {
+	case 1:
+		mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+		mes "Ohhh .. ฉันรอคอยที่จะทำมัน แต่มันก็ขึ้นอยู่กับคุณ......";
+		close;
+	case 2:
+		if (countitem(6469) < 10) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "มี Item ไม่พอ '^F2766EWill of Warrior^000000', คุณต้องนำ 10 '^F2766EWill of Warrior^000000'";
+			close;
+		}
+		else if (getequipcardid(.@part, 3) > 0) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "อุปกรณ์นี้มีการ เพิ่มออฟชั่น อยู่แล้ว'^F2766EWill of Warrior^000000'.";
+			close;
+		} else {
+			.@socket_type = 4;
+		}
+		break;
+	case 3:
+		if (countitem(6470) < 10) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "มี Item ไม่พอ '^952420Thirst for Blood^000000', คุณต้องนำ 10 '^952420Thirst for Blood^000000'";
+			close;
+		}
+		else if (getequipcardid(.@part, 2) > 0) {
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "อุปกรณ์นี้มีการ เพิ่มออฟชั่น อยู่แล้ว '^952420Thirst for Blood^000000'.";
+			close;
+		} else {
+			.@socket_type = 3;
+		}
+		break;
+	case 4:
+		// Enchant Removal
+		if (countitem(6471) < 10) {
+			.@menu_clear$[1] = "^999999มี Item ไม่พอ 'Chill of the Dead'^000000";
+			.@menu_clear$[2] = "^999999มี Item ไม่พอ 'Chill of the Dead'^000000";
+			.@4thzptsodyd = 1;
+			.@3thzptsodyd = 1;
+		} else {
+			if (getequipcardid(.@part, 3) > 0) {
+				.@menu_clear$[1] = "- ลบช่องแรก '^F2766EWill of Warrior^000000'";
+			} else {
+				.@menu_clear$[1] = "^999999ไม่มีอำนาจในการลบ^000000";
+				.@4thzptsodyd = 1;
+			}
+			if (getequipcardid(.@part, 2) > 0) {
+				.@menu_clear$[2] = "- ลบช่องช่องสอง '^952420Thirst for Blood^000000'";
+			} else {
+				.@menu_clear$[2] = "^999999ไม่มีอำนาจในการลบ^000000";
+				.@3thzptsodyd = 1;
+			}
+		}
+		mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+		mes "Alright, which power do you want to remove?";
+		next;
+		.@menu = select("^FF0000•^000000 ไม่เอาแล้ว...", .@menu_clear$[1], .@menu_clear$[2]);
+		switch(.@menu){
+		case 1:
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "Really? Ok. I got it..";
+			close;
+		case 2:
+		case 3:
+			if (countitem(6471) < 10) {
+				mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+				mes "มี Item ไม่พอ '^88C6F7Chill of the Dead^000000', คุณต้องนำ 10 '^88C6F7Chill of the Dead^000000'";
+				close;
+			}
+			if ( (.@menu==3 && .@3thzptsodyd == 1) || (.@menu==2 && .@4thzptsodyd == 1) ) {
+				mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+				mes "อุปกรณ์นี้ไม่ได้รับพลังพิเศษใด ๆ.";
+				close;
+			}
+			setarray .@equip_card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+			if (.@menu == 2)
+				.@equip_card[3] = 0;
+			else
+				.@equip_card[2] = 0;
+			.@equip_item = getequipid(.@part);
+			specialeffect EF_BEGINSPELL2, AREA, "Sorcerer#Bio4Reward";
+			progressbar "ffff00", 1;
+			specialeffect2 EF_FROSTWEAPON;
+			delitem 6471, 10; //Goast_Chill
+			delequip .@part;
+			getitem2 .@equip_item, 1, 1, .@refine_count, 0, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3];
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			if (.@menu == 3)
+				mes "พลังแห่ง '^952420Thirst for Blood^000000' ถูกลบไปอย่างสมบูรณ์แบบแล้ว.";
+			else
+				mes "พลังแห่ง '^F2766EWill of Warrior^000000' ถูกลบไปอย่างสมบูรณ์แบบแล้ว.";
+			close;
+		}
+	}
+
+	mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+	mes "^9D2628มีโอกาสเล็กน้อยที่ไอเท็มจะถูกทำลาย^000000";
+	next;
+	if (select("^FF0000•^000000 เดี๋ยว.. ขอคิดดูใหม่", "^FF0000•^000000 ชัวร์ข้ามั่นใจ") == 1) {
+		mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+		mes "ตกลง. ฉันจะหวังที่จะพบคุณอีกครั้ง.";
+		close;
+	}
+	mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+	mes "ขอให้เจ้าโชคดี...";
+	next;
+	if (.@socket_type >= 3) {
+		switch(.@type){
+			case 1:	// Short Distance
+				.@r = rand(1, .@lhz_max_num);
+				if      (.@r < 401)  .@enchant = 4700; //Strength1
+				else if (.@r < 441)  .@enchant = 4701; //Strength2
+				else if (.@r < 445)  .@enchant = 4702; //Strength3
+				else if (.@r < 845)  .@enchant = 4730; //Agility1
+				else if (.@r < 885)  .@enchant = 4731; //Agility2
+				else if (.@r < 889)  .@enchant = 4732; //Agility3
+				else if (.@r < 1289) .@enchant = 4740; //Vitality1
+				else if (.@r < 1329) .@enchant = 4741; //Vitality2
+				else if (.@r < 1333) .@enchant = 4742; //Vitality3
+				else if (.@r < 1523) .@enchant = 4710; //Inteligence1
+				else if (.@r < 1542) .@enchant = 4711; //Inteligence2
+				else if (.@r < 1544) .@enchant = 4712; //Inteligence3
+				else if (.@r < 1844) .@enchant = 4720; //Dexterity1
+				else if (.@r < 1874) .@enchant = 4721; //Dexterity2
+				else if (.@r < 1877) .@enchant = 4722; //Dexterity3
+				else if (.@r < 2067) .@enchant = 4750; //Luck1
+				else if (.@r < 2086) .@enchant = 4751; //Luck2
+				else if (.@r < 2088) .@enchant = 4752; //Luck3
+				else if (.@r < 2491) .@enchant = 0;
+				else if (.@r < 2891) .@enchant = 4811; //Fighting_Spirit1
+				else if (.@r < 2931) .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 2935) .@enchant = 4809; //Fighting_Spirit3
+				else if (.@r < 3125) .@enchant = 4815; //Spell1
+				else if (.@r < 3144) .@enchant = 4814; //Spell2
+				else if (.@r < 3146) .@enchant = 4813; //Spell3
+				else if (.@r < 3148) .@enchant = 4807; //Atk_Speed1
+				else if (.@r < 3348) .@enchant = 4818; //Sharp1
+				else if (.@r < 3368) .@enchant = 4817; //Sharp2
+				else if (.@r < 3370) .@enchant = 4816; //Sharp3
+				else if (.@r < 3560) .@enchant = 4832; //Expert_Archer1
+				else if (.@r < 3579) .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 3581) .@enchant = 4834; //Expert_Archer3
+				else                 .@enchant = 0;
+				break;
+			case 2:	// Long Distance
+				.@r = rand(1, .@lhz_max_num);
+				if      (.@r < 191)  .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 210)  .@enchant = 4701; //Strength2
+				else if (.@r < 212)  .@enchant = 4702; //Strength3
+				else if (.@r < 612)  .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 652)  .@enchant = 4731; //Agility2
+				else if (.@r < 656)  .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 846)  .@enchant = 4740; //Vitality1
+				else if (.@r < 865)  .@enchant = 4741; //Vitality2
+				else if (.@r < 867)  .@enchant = 4742; //Vitality3
+				else if (.@r < 1167) .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 1197) .@enchant = 4711; //Inteligence2
+				else if (.@r < 1200) .@enchant = 4712; //Inteligence3
+				else if (.@r < 1600) .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 1640) .@enchant = 4721; //Dexterity2
+				else if (.@r < 1644) .@enchant = 4722; //Dexterity3
+				else if (.@r < 1834) .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 1853) .@enchant = 4751; //Luck2
+				else if (.@r < 1855) .@enchant = 4752; //Luck3
+				else if (.@r < 2258) .@enchant = 0;
+				else if (.@r < 2448) .@enchant = 4811; //Fighting_Spirit1
+				else if (.@r < 2467) .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 2469) .@enchant = 4809; //Fighting_Spirit3
+				else if (.@r < 2669) .@enchant = 4815; //Spell1
+				else if (.@r < 2689) .@enchant = 4814; //Spell2
+				else if (.@r < 2691) .@enchant = 4813; //Spell3
+				else if (.@r < 2693) .@enchant = 4807; //Atk_Speed1
+				else if (.@r < 3093) .@enchant = 4818; //Sharp1
+				else if (.@r < 3133) .@enchant = 4817; //Sharp2
+				else if (.@r < 3137) .@enchant = 4816; //Sharp3
+				else if (.@r < 3537) .@enchant = 4832; //Expert_Archer1
+				else if (.@r < 3577) .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 3581) .@enchant = 4834; //Expert_Archer3
+				else                 .@enchant = 0;
+				break;
+			case 3:
+				.@r = rand(1, .@lhz_max_num);
+				if      (.@r < 301)  .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 331)  .@enchant = 4701; //Strength2
+				else if (.@r < 334)  .@enchant = 4702; //Strength3
+				else if (.@r < 534)  .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 554)  .@enchant = 4731; //Agility2
+				else if (.@r < 556)  .@enchant = 4732; //Agility3
+				else if (.@r < 956)  .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 996)  .@enchant = 4741; //Vitality2
+				else if (.@r < 1000) .@enchant = 4742; //Vitality3
+				else if (.@r < 1400) .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 1440) .@enchant = 4711; //Inteligence2
+				else if (.@r < 1444) .@enchant = 4712; //Inteligence3
+				else if (.@r < 1844) .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 1884) .@enchant = 4721; //Dexterity2
+				else if (.@r < 1888) .@enchant = 4722; //Dexterity3
+				else if (.@r < 2078) .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 2097) .@enchant = 4751; //Luck2
+				else if (.@r < 2099) .@enchant = 4752; //Luck3
+				else if (.@r < 2502) .@enchant = 0;
+				else if (.@r < 2692) .@enchant = 4811; //Fighting_Spirit1
+				else if (.@r < 2711) .@enchant = 4810; //Fighting_Spirit2
+				else if (.@r < 2713) .@enchant = 4809; //Fighting_Spirit3
+				else if (.@r < 3113) .@enchant = 4815; //Spell1
+				else if (.@r < 3153) .@enchant = 4814; //Spell2
+				else if (.@r < 3157) .@enchant = 4813; //Spell3
+				else if (.@r < 3159) .@enchant = 4807; //Atk_Speed1
+				else if (.@r < 3349) .@enchant = 4818; //Sharp1
+				else if (.@r < 3368) .@enchant = 4817; //Sharp2
+				else if (.@r < 3370) .@enchant = 4816; //Sharp3
+				else if (.@r < 3560) .@enchant = 4832; //Expert_Archer1
+				else if (.@r < 3579) .@enchant = 4833; //Expert_Archer2
+				else if (.@r < 3581) .@enchant = 4834; //Expert_Archer3
+				else                 .@enchant = 0;
+				break;
+			case 4:	// Armor
+				.@r = rand(1, .@lhz_max_num);
+				if      (.@r < 301)  .@enchant = 4700; //Strength1
+				else if (.@r < 331)  .@enchant = 4701; //Strength2
+				else if (.@r < 334)  .@enchant = 4702; //Strength3
+				else if (.@r < 634)  .@enchant = 4730; //Agility1
+				else if (.@r < 664)  .@enchant = 4731; //Agility2
+				else if (.@r < 667)  .@enchant = 4732; //Agility3
+				else if (.@r < 967)  .@enchant = 4740; //Vitality1
+				else if (.@r < 997)  .@enchant = 4741; //Vitality2
+				else if (.@r < 1000) .@enchant = 4742; //Vitality3
+				else if (.@r < 1300) .@enchant = 4710; //Inteligence1
+				else if (.@r < 1330) .@enchant = 4711; //Inteligence2
+				else if (.@r < 1333) .@enchant = 4712; //Inteligence3
+				else if (.@r < 1633) .@enchant = 4720; //Dexterity1
+				else if (.@r < 1663) .@enchant = 4721; //Dexterity2
+				else if (.@r < 1666) .@enchant = 4722; //Dexterity3
+				else if (.@r < 1966) .@enchant = 4750; //Luck1
+				else if (.@r < 1996) .@enchant = 4751; //Luck2
+				else if (.@r < 1999) .@enchant = 4752; //Luck3
+				else if (.@r < 2399) .@enchant = 0;
+				else if (.@r < 2549) .@enchant = 4786; //Mdef2
+				else if (.@r < 2599) .@enchant = 4787; //Mdef4
+				else if (.@r < 2609) .@enchant = 4788; //Mdef6
+				else if (.@r < 2614) .@enchant = 4789; //Mdef8
+				else if (.@r < 2616) .@enchant = 4790; //Mdef10
+				else if (.@r < 2766) .@enchant = 4791; //Def3
+				else if (.@r < 2866) .@enchant = 4792; //Def6
+				else if (.@r < 2876) .@enchant = 4793; //Def9
+				else if (.@r < 2878) .@enchant = 4794; //Def12
+				else if (.@r < 3278) .@enchant = 0;
+				else if (.@r < 3428) .@enchant = 4859; //Evasion1
+				else if (.@r < 3478) .@enchant = 4860; //Evasion3
+				else if (.@r < 3488) .@enchant = 4762; //Evasion6
+				else if (.@r < 3498) .@enchant = 4800; //SP50
+				else if (.@r < 3734) .@enchant = 4795; //HP100
+				else if (.@r < 3834) .@enchant = 4796; //HP200
+				else if (.@r < 3884) .@enchant = 4797; //HP300
+				else                 .@enchant = 0;
+			break;
+		}
+		setarray .@equip_card[0], getequipcardid(.@part,0),getequipcardid(.@part,1),getequipcardid(.@part,2),getequipcardid(.@part,3);
+		.@equip_card[(.@socket_type-1)] = .@enchant;
+		.@equip_item = getequipid(.@part);
+		specialeffect EF_BEGINSPELL3, AREA, "Sorcerer#Bio4Reward";
+		progressbar "ffff00", 1;
+		if (.@socket_type == 3)
+			delitem 6470, 10; //Blood_Thirst
+		else
+			delitem 6469, 10; //Will_Of_Warrior
+		delequip .@part;
+		if (.@enchant == 0){
+			specialeffect2 EF_SUI_EXPLOSION;
+			getitem2 .@equip_item, 1, 1, .@refine_count, 0, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3];
+			emotion ET_OTL;
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "อืม .... อุปกรณ์ไม่สามารถยอมรับพลังของ "+((.@socket_type==3)?"'^952420Thirst for Blood^000000'":"'^F2766EWill of Warrior^000000'")+" และมันก็ถูกทำลาย.";
+			close;
+		} else {
+			specialeffect2 EF_FIREHIT;
+			getitem2 .@equip_item, 1, 1, .@refine_count, 0, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3];
+			emotion ET_DELIGHT;
+			mes "[เพิ่มออฟชั่น Bio Laboratory 4]";
+			mes "โชคดีที่พลังของ "+((.@socket_type==3)?"'^952420Thirst for Blood^000000'":"'^F2766EWill of Warrior^000000'")+" อุปกรณ์ของคุณใช้งานได้ดี...";
+			close;
+		}
+	}
+	end;
+
+//oninit:
+//waitingroom "เพิ่มออฟชั่น Bio Laboratory 4",0;
+//end;
+}

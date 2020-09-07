@@ -1,0 +1,104 @@
+function	script	beginnerbox	{
+mes "[ Beginer Support ]";
+mes "สวัสดี คุณ ^FF0000"+strcharinfo(0)+"^000000";
+mes "ยินดีต้อนรับเข้าสู่เซิฟเวอร์ของเรา";
+mes "ในการผจญภัยเราจะซัพพอร์ตให้ท่าน จนมั่นใจแล้วว่าท่านแข็งแกร่งมากพอ";
+mes "ท่านต้องการ Support แบบไหนล่ะ ?";
+mes "^FF00001 ตัวละคร รับได้ 1 ครั้ง^000000";
+next;
+menu
+"^339900->^000000 สายอาชีพ Swordman",job1,
+"^339900->^000000 สายอาชีพ Thief",job2,
+"^339900->^000000 สายอาชีพ Merchant",job3,
+"^339900->^000000 สายอาชีพ Acolyte",job4,
+"^339900->^000000 สายอาชีพ Mage",job5,
+"^339900->^000000 สายอาชีพ Archer",job6;
+
+job1:
+mes "[ Beginer Support ]";
+mes "ท่านต้องการรับ Support";
+mes "สายอาชีพ ^FF0000Swordman^000000 ใช่หรือไม่ ?";
+next;
+menu
+"^339900->^000000 ใช่แล้วล่ะ.",job11,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+job11:
+delitem 60006,1;
+rentitem 1109,259200;
+end;
+
+job2:
+mes "[ Beginer Support ]";
+mes "ท่านต้องการรับ Support";
+mes "สายอาชีพ ^FF0000Thief^000000 ใช่หรือไม่ ?";
+next;
+menu
+"^339900->^000000 ใช่แล้วล่ะ.",job22,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+job22:
+delitem 60006,1;
+rentitem 1209,259200;
+end;
+
+job3:
+mes "[ Beginer Support ]";
+mes "ท่านต้องการรับ Support";
+mes "สายอาชีพ ^FF0000Merchant^000000 ใช่หรือไม่ ?";
+next;
+menu
+"^339900->^000000 ใช่แล้วล่ะ.",job33,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+job33:
+delitem 60006,1;
+rentitem 1303,259200;
+end;
+
+job4:
+mes "[ Beginer Support ]";
+mes "ท่านต้องการรับ Support";
+mes "สายอาชีพ ^FF0000Acolyte^000000 ใช่หรือไม่ ?";
+next;
+menu
+"^339900->^000000 ใช่แล้วล่ะ.",job44,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+job44:
+delitem 60006,1;
+rentitem 1506,259200;
+end;
+
+job5:
+mes "[ Beginer Support ]";
+mes "ท่านต้องการรับ Support";
+mes "สายอาชีพ ^FF0000Mage^000000 ใช่หรือไม่ ?";
+next;
+menu
+"^339900->^000000 ใช่แล้วล่ะ.",job55,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+job55:
+delitem 60006,1;
+rentitem 1609,259200;
+end;
+
+job6:
+mes "[ Beginer Support ]";
+mes "ท่านต้องการรับ Support";
+mes "สายอาชีพ ^FF0000Archer^000000 ใช่หรือไม่ ?";
+next;
+menu
+"^339900->^000000 ใช่แล้วล่ะ.",job66,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+job66:
+delitem 60006,1;
+rentitem 1706,259200;
+end;
+
+nogo:
+end;
+
+}

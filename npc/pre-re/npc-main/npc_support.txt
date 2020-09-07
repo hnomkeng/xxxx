@@ -1,0 +1,290 @@
+morocc,150,111,5	script	Support Player	47,{
+mes "[ Support Player ]";
+mes "สวัสดีจ้า ท่านคือ ^FF0000"+strcharinfo(0)+",^000000";
+mes "ท่านต้องการให้ข้าช่วยอะไรล่ะ ?";
+next;
+menu
+//"^339900->^000000 บริการ Reset Skil , Status",sp00,
+"^339900->^000000 บริการ Skill เสริมทุกอาชีพ",sp01,
+//"^339900->^000000 บริการสกิลโฮมุน",sp02,
+"^339900->^000000 บริการ เช่า Peco,Falcon,Cart",sp03;
+
+sp00:
+callfunc "resetskill";
+end;
+
+sp01:
+callfunc "newskilltree";
+end;
+
+sp02:
+callfunc "homunculus";
+end;
+
+sp03:
+callfunc "rental";
+end;
+
+OnInit:
+waitingroom "สกิลเสริม", 0;
+end;
+}
+
+function	script	homunculus	{
+
+menu "^339900->^000000 รับสกิล Homun",homunculus1;
+
+homunculus1:
+if (BaseJob != Job_Alchemist) end;
+if (getskilllv(238) > 0 || getskilllv(243) > 0 || getskilllv(244) > 0 || getskilllv(247) > 0) end;
+skill 238,1,0;
+skill 243,1,0;
+skill 244,1,0;
+skill 247,1,0;
+end; 
+}
+
+function	script	rental	{
+callfunc "rentvehicle";
+end;
+}
+
+function	script	rentvehicle	{
+
+menu 
+"^339900->^000000 เช่า Cart ( 1000z )",Recart,
+"^339900->^000000 เช่า Falcon ( 2000z )",Refal,
+"^339900->^000000 เช่า Pecopeco ( 2000z )",Repeco;
+
+
+Repeco:
+if(Zeny < 2000) {mes "[ Support Player ]"; mes "ต้องการ เงิน 2,000 Zeny ค่ะ";  end; }
+set zeny,zeny -2000;
+if ((Class == 7) || (Class == 14) || (Class == 4008) || (Class == 4015) || (Class == 4030) || (Class == 4037)) { setriding; end; }
+end;
+
+Refal:
+if(Zeny < 2000) {mes "[ Support Player ]"; mes "ต้องการ เงิน 2,000 Zeny ค่ะ";  end; }
+set zeny,zeny -2000;
+if (Class == 11) { setfalcon; end; }
+end;
+
+Recart:
+if(Zeny < 1000) {mes "[ Support Player ]"; mes "ต้องการ เงิน 1,000 Zeny ค่ะ";  end; }
+set zeny,zeny -1000;
+if((Class == 5) || (Class == 10) || (Class == 23) || (Class == 18) || (Class == 4006) || (Class == 4011) || (Class == 4019) || (Class == 4028) || (Class == 4033) || (Class == 4041) || (Class == 4045)) { setcart; end; }
+end;
+}
+
+function	script	newskilltree	{
+mes "[ Support Player ]";
+mes "หากท่านต้องการสกิลเสริม";
+mes "ท่านต้องจ่ายข้ามา ^FF000010,00 zeny^000000";
+mes "แล้วข้าจะมอบสกิลเสริมให้กับอาชีพของท่าน";
+next;
+menu "^339900->^000000 มอบมันให้กับข้า.!! ข้านำเงินมาให้เจ้าแล้ว",Lgetskills,"^339900->^000000 ไม่ดีกว่า. ข้ายังไม่มีเงินขนาดนั้น",Lnogetskills;
+
+Lgetskills:
+		if (zeny < 99999 ) {mes "[ Support Player ]"; mes "เสียใจด้วย. ^FF0000ท่านน่าจะมีเงินไม่เพียงพอ^000000";  end; }
+		if (Class==Job_Knight) || (Class==Job_Lord_Knight) goto L_sKnight;
+		if (Class==Job_Assassin) || (Class==Job_Assassin_Cross) goto L_sAssassin;
+		if (Class==Job_Bard) || (Class==Job_Clown) goto L_sBard;
+		if (Class==Job_Dancer) || (Class==Job_Gypsy) goto L_sDancer;
+		if (Class==Job_Blacksmith) || (Class==Job_Whitesmith) goto L_sBlacksmithf;
+		if (Class==Job_Crusader) || (Class==Job_Paladin) goto L_sCrusader;
+		if (Class==Job_Hunter) || (Class==Job_Sniper) goto L_sHunter;
+		if (Class==Job_Monk) || (Class==Job_Champion) goto L_sMonk;
+		if (Class==Job_Priest) || (Class==Job_High_Priest) goto L_sPriest;
+		if (Class==Job_Rogue) || (Class==Job_Stalker) goto L_sRogue;
+		if (Class==Job_Sage) || (Class==Job_Professor) goto L_sSage;
+		if (Class==Job_Wizard) || (Class==Job_High_Wizard) goto L_sWizard;
+
+		if (BaseClass==Job_Novice) goto L_sSuperN;
+		if (BaseClass==Job_Swordman) goto L_sSword;
+		if (BaseClass==Job_Mage) goto L_sMage;
+		if (BaseClass==Job_Archer) goto L_sArcher;
+		if (BaseClass==Job_Acolyte) goto L_sAcolyte;
+		if (BaseClass==Job_Merchant) goto L_sMerchant;
+		if (BaseClass==Job_Thief) goto L_sThief;
+		close;
+
+L_sKnight:
+			skill 157,0,0;
+			skill 142,1,0;
+			skill 144,1,0;
+			skill 145,1,0;
+			skill 146,1,0;
+			skill 1001,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sAssassin:
+			skill 142,1,0;
+			skill 149,1,0;
+			skill 150,1,0;
+			skill 151,1,0;
+			skill 152,1,0;
+			skill 1003,1,0;
+			skill 1004,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sBard:
+			skill 142,1,0;
+			skill 147,1,0;
+			skill 148,1,0;
+			skill 1010,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sDancer:
+			skill 142,1,0;
+			skill 147,1,0;
+			skill 148,1,0;
+			skill 1011,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sBlacksmithf:
+			skill 142,1,0;
+			skill 153,1,0;
+			skill 154,1,0;
+			skill 155,1,0;
+			skill 1013,1,0;
+			skill 1012,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sCrusader:
+			skill 142,1,0;
+			skill 144,1,0;
+			skill 145,1,0;
+			skill 146,1,0;
+			skill 1002,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sHunter:
+			skill 142,1,0;
+			skill 147,1,0;
+			skill 148,1,0;
+			skill 1009,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sMonk:
+			skill 142,1,0;
+			skill 156,1,0;
+			skill 1015,1,0;
+			skill 1016,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sPriest:
+			skill 142,1,0;
+			skill 156,1,0;
+			skill 1014,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sRogue:
+			skill 142,1,0;
+			skill 149,1,0;
+			skill 150,1,0;
+			skill 151,1,0;
+			skill 152,1,0;
+			skill 1005,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sSage:
+			skill 142,1,0;
+			skill 157,1,0;
+			skill 1007,1,0;
+			skill 1008,1,0;
+			skill 1017,1,0;
+			skill 1018,1,0;
+			skill 1019,1,0;
+			set zeny,zeny -10000;
+			close;
+L_sWizard:
+			skill 142,1,0;
+			skill 157,1,0;
+			skill 1006,1,0;
+			set zeny,zeny -10000;
+			close;
+
+
+		L_sSuperN:
+			skill 142,1,0;
+			if(BaseJob==0) skill 143,1,0;
+			set zeny,zeny -10000;
+			close;
+		L_sSword:
+			skill 142,1,0;
+			skill 144,1,0;
+			skill 145,1,0;
+			skill 146,1,0;
+			set zeny,zeny -10000;
+			close;
+		L_sMage:
+			skill 142,1,0;
+			skill 157,1,0;
+			set zeny,zeny -10000;
+			close;
+		L_sArcher:
+			skill 142,1,0;
+			skill 147,1,0;
+			skill 148,1,0;
+			set zeny,zeny -10000;
+			close;
+		L_sAcolyte:
+			skill 142,1,0;
+			skill 156,1,0;
+			set zeny,zeny -10000;
+			close;
+		L_sMerchant:
+			skill 142,1,0;
+			skill 153,1,0;
+			skill 154,1,0;
+			skill 155,1,0;
+			set zeny,zeny -10000;
+			close;
+		L_sThief:
+			skill 142,1,0;
+			skill 149,1,0;
+			skill 150,1,0;
+			skill 151,1,0;
+			skill 152,1,0;
+			set zeny,zeny -10000;
+			close;
+Lnogetskills:
+mes "[ Support Player ]";
+mes "ไว้โอกาสหน้า. ท่านพร้อมเมื่อไหร่ กลับมาหาข้าได้ทันที";
+close;
+
+}
+
+function	script	resetskill	{
+
+switch(select("^339900->^000000 Reset Skill (300cc):^339900->^000000 Reset Status (300cc):^339900->^000000 Reset Skill & Status (500cc)")) {
+
+case 1:
+if (countitem(671)<299) {mes "[ Support Player ]"; mes "ท่านมี CC ไม่เพียงพอ โปรดตรวจสอบอีกครั้ง";  end; }
+mes "[ Support Player ]";
+mes "ท่านทำรายการสำเร็จแล้ว.";
+mes "Skill ของท่านได้ถูกรีเซ็ตแล้ว.";
+delitem 671,300;
+ResetSkill;
+end;
+
+case 2:
+if (countitem(671)<299) {mes "[ Support Player ]"; mes "ท่านมี CC ไม่เพียงพอ โปรดตรวจสอบอีกครั้ง";  end; }
+mes "[ Support Player ]";
+mes "ท่านทำรายการสำเร็จแล้ว.";
+mes "Status ของท่านได้ถูกรีเซ็ตแล้ว.";
+delitem 671,300;
+ResetStatus;
+end;
+		
+case 3:
+if (countitem(671)<499) {mes "[ Support Player ]"; mes "ท่านมี CC ไม่เพียงพอ โปรดตรวจสอบอีกครั้ง";  end; }
+mes "[ Support Player ]";
+mes "ท่านทำรายการสำเร็จแล้ว.";
+mes "Skill & Status ของท่านได้ถูกรีเซ็ตแล้ว.";
+delitem 671,500;
+ResetSkill;
+ResetStatus;
+end;
+}
+}

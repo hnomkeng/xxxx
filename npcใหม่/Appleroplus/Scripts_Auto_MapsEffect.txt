@@ -1,0 +1,132 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera	mapflag	snow	// มีหิมะตก (ยกเลิกได้ด้วยคำสั่ง GM @clearweather)
+//prontera	mapflag	clouds	// มีเมฆ (ยกเลิกได้ด้วยคำสั่ง GM @clearweather)
+//prontera	mapflag	clouds2	// มีเมฆมาก (ยกเลิกได้ด้วยคำสั่ง GM @clearweather)
+//prontera	mapflag	fog	// มีฝุ่นหมอก (ฝุ่น PM 2.5) (ยกเลิกได้ด้วยคำสั่ง GM @clearweather)
+prontera	mapflag	fireworks	// มีงานเทศกาลดอกไม้ไฟ (ยกเลิกได้ด้วยคำสั่ง GM @clearweather)
+//prontera	mapflag	sakura	// มีซากุระร่วง (ยกเลิกได้ด้วยคำสั่ง GM @clearweather)
+prontera	mapflag	leaves	// มีใบไม้ร่วง (ยกเลิกได้ด้วยคำสั่ง GM @clearweather)
+
+
+
+prontera,183,220,4	script	#effect0001	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect 410;
+		sleep 5000;
+	}
+}
+prontera,146,263,4	script	#effect0002	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect 410;
+		sleep 5000;
+	}
+}
+prontera,165,263,4	script	#effect0003	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect 410;
+		sleep 5000;
+	}
+}
+prontera,146,231,4	script	#effect0004	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect 410;
+		sleep 5000;
+	}
+}
+prontera,165,231,4	script	#effect0005	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect 410;
+		sleep 5000;
+	}
+}
+prontera,124,213,4	script	#effect0006	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect 410;
+		sleep 5000;
+	}
+}
+prontera,145,173,4	script	#effect0007	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect 410;
+		sleep 5000;
+	}
+}
+prontera,165,173,4	script	#effect0008	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect 410;
+		sleep 5000;
+	}
+}
+prontera,148,196,4	script	#effect0009	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect EF_SANCTUARY;
+		specialeffect 410;
+		specialeffect 709;
+		specialeffect 509;
+		sleep 5000;
+	}
+}
+prontera,156,199,4	script	#effect0010	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect EF_SANCTUARY;
+		specialeffect 410;
+		specialeffect 709;
+		specialeffect 509;
+		sleep 5000;
+	}
+}
+prontera,164,196,4	script	#effect0011	111,{
+end;
+
+Oninit:
+	while(1){
+		specialeffect EF_SANCTUARY;
+		specialeffect 410;
+		specialeffect 709;
+		specialeffect 509;
+		sleep 5000;
+	}
+}
+

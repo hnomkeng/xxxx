@@ -1,0 +1,127 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+//= 1.1
+//==============================================
+-	script	bg_pvp#control	-1,{
+OnInit:
+	.minplayer2start = 5;      // ผู้เล่นขั้นต่ำที่จะเริ่มต้น (เช่น. ถ้า 3vs3, ให้เซ็ทค่าเป็น 3)
+	.eventlasting    = 20*60;  // ระยะเวลา อีเว้นท์ ก่อนที่จะตั้งค่าอัตโนมัติ (20  นาที * วินาที)
+	setarray .rewarditem[0],   // รางวัลสำหรับทีมที่ชนะการแข่งขัน: <ไอเทม ไอดี>,<จำนวน>,...
+		61001, 30;
+	end;
+OnStart:
+	if ( getwaitingroomstate( 0, .rednpcname$ ) < .minplayer2start || getwaitingroomstate( 0, .bluenpcname$ ) < .minplayer2start )
+		end;
+
+	// สร้าง สนามรบสมรภูมิ Battleground และ ทีม
+	.red = waitingroom2bg( "guild_vs3", 13,50, strnpcinfo(0)+"::OnRedQuit", strnpcinfo(0)+"::OnRedDead", .rednpcname$ );
+	.blue = waitingroom2bg( "guild_vs3", 86,50, strnpcinfo(0)+"::OnBlueQuit", strnpcinfo(0)+"::OnBlueDead", .bluenpcname$ );
+	delwaitingroom .rednpcname$;
+	delwaitingroom .bluenpcname$;
+	bg_warp .red, "guild_vs3", 13,50;
+	bg_warp .blue, "guild_vs3", 86,50;
+	.red_score = .blue_score = .minplayer2start;
+	bg_updatescore "guild_vs3", .red_score, .blue_score;
+
+	// ระยะเวลาการแข่งขัน
+	sleep .eventlasting * 1000;
+
+	// สิ้นสุดการแข่งขัน, สมรภูมิ Battleground, รีเซ็ท NPCs
+	if ( .red_score > .blue_score ) {
+		mapannounce "guild_vs3", "- Red Team เป็นผู้ชนะ! -", bc_map;
+		callsub L_Reward, .red;
+	}
+	else if ( .blue_score > .red_score ) {
+		mapannounce "guild_vs3", "- Blue Team เป็นผู้ชนะ! -", bc_map;
+		callsub L_Reward, .blue;
+	}
+	else
+		mapannounce "guild_vs3", "- การแข่งขันได้สิ้นสุดลงด้วยการเสมอกัน! -", bc_map;
+	bg_warp .red, "prontera",152,178;
+	bg_warp .blue, "prontera",154,178;
+	bg_destroy .red;
+	bg_destroy .blue;
+	donpcevent .rednpcname$ +"::OnStart";
+	donpcevent .bluenpcname$ +"::OnStart";
+	end;
+
+L_Reward:
+	bg_get_data getarg(0), 1;
+	for ( .@i = 0; .@i < $@arenamemberscount; ++.@i )
+		getitem .rewarditem[0], .rewarditem[1], $@arenamembers[.@i];
+	return;
+
+// "OnDeath" เหตุการณ์ กรณีตายในระหว่างสมรภูมิ
+OnRedDead:  callsub L_Dead, .red_score;
+OnBlueDead: callsub L_Dead, .blue_score;
+L_Dead:
+	set getarg(0), getarg(0) -1;
+	bg_updatescore "guild_vs3", .red_score, .blue_score;
+	bg_leave;
+	if ( !getarg(0) )
+		awake strnpcinfo(0);
+	sleep2 1250;
+	percentheal 100,100;
+	end;
+
+// "OnQuit" เหตุการณ์ กรณีออกการแข่งขัน
+OnRedQuit:  callsub L_Quit, .red_score;
+OnBlueQuit: callsub L_Quit, .blue_score;
+L_Quit:
+	set getarg(0), getarg(0) -1;
+	bg_updatescore "guild_vs3", .red_score, .blue_score;
+	percentheal 100, 100;
+	if ( !getarg(0) )
+		awake strnpcinfo(0);
+	end;
+}
+
+prontera,152,296,3	script	Red Team PVP#bg_pvp	733,{
+	end;
+OnInit:
+	sleep 1;
+	set getvariableofnpc( .rednpcname$, "bg_pvp#control" ), strnpcinfo(0);
+OnStart:
+	waitingroom "ทีมสีแดง PVP", getvariableofnpc( .minplayer2start, "bg_pvp#control" ) +1, "bg_pvp#control::OnStart", getvariableofnpc( .minplayer2start, "bg_pvp#control" );
+	end;
+}
+
+prontera,152,302,3	script	Blue Team PVP#bg_pvp	734,{
+	end;
+OnInit:
+	sleep 1;
+	set getvariableofnpc( .bluenpcname$, "bg_pvp#control" ), strnpcinfo(0);
+OnStart:
+	waitingroom "ทีมสีน้ำเงิน PVP", getvariableofnpc( .minplayer2start, "bg_pvp#control" ) +1, "bg_pvp#control::OnStart", getvariableofnpc( .minplayer2start, "bg_pvp#control" );
+	end;
+}
+prontera,155,299,3	script	ศึกตีหินยุทธภพ PVP	974,{
+end;
+//OnInit: 
+//	waitingroom "   ศึกตีหินยุทธภพ PVP",0; 
+//	end;
+
+}
+
+guild_vs3	mapflag	gvg	off
+guild_vs3	mapflag	battleground	2
+guild_vs3	mapflag	nosave	SavePoint
+guild_vs3	mapflag	nowarp
+guild_vs3	mapflag	nowarpto
+guild_vs3	mapflag	noteleport
+guild_vs3	mapflag	nomemo
+guild_vs3	mapflag	nopenalty
+guild_vs3	mapflag	nobranch
+guild_vs3	mapflag	noicewall
+guild_vs3	mapflag	hidemobhpbar

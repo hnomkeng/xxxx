@@ -1,0 +1,345 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : ·¡Ë¡¥πÈÕ¬ ®Õ¡ªË«π
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,162,212,8	script	‡ª≈’Ë¬π ™ÿ¥Õ“™’æµ—«≈–§√	10057,{
+
+mes "‚ª√¥‡≈◊Õ°√“¬°“√";
+mes "®“°‡¡πŸ¥È“π≈Ë“ß§Ë–";
+mes "∑Ë“πµÈÕß°“√ ™ÿ¥Õ“™’æ‰Àπ≈Ë–";
+next;
+menu 
+"^FF0000ï^000000 1st Class",1stClass,
+"^FF0000ï^000000 2nd Class",2ndClass,
+"^FF0000ï^000000 High 1st Class",High1stClass,
+"^FF0000ï^000000 2nd Class",T2ndClass,
+"^FF0000ï^000000 3rd Class",3rdClass,
+"^FF0000ï^000000 Expanded Class",ExpandedClass,
+"^FF0000ï^000000 Baby 1st Class",Baby1stClass,
+"^FF0000ï^000000 Baby 2nd Class",Baby2ndClass,
+"^FF0000ï^000000 Baby 3rd Class",Baby3rdClass,
+"^FF0000ï^000000 Expanded Baby Class",ExpandedBabyClass,
+"^FF0000ï^000000 Modes And Others",ModesAndOthers,
+"^FF0000ï^000000 ¬°‡≈‘° ‡ª≈’Ë¬π™ÿ¥Õ“™’æµ—«≈–§√",CancelClass,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//1st Class
+1stClass:
+menu 
+"^FF0000ï^000000 Novice",L0,
+"^FF0000ï^000000 Swordman",L1,
+"^FF0000ï^000000 Magician",L2,
+"^FF0000ï^000000 Archer",L3,
+"^FF0000ï^000000 Acolyte",L4,
+"^FF0000ï^000000 Merchant",L5,
+"^FF0000ï^000000 Thief",L6,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//2nd Class
+2ndClass:
+menu 
+"^FF0000ï^000000 Knight",L7,
+"^FF0000ï^000000 Priest",L8,
+"^FF0000ï^000000 Wizard",L9,
+"^FF0000ï^000000 Blacksmith",L10,
+"^FF0000ï^000000 Hunter",L11,
+"^FF0000ï^000000 Assassin",L12,
+"^FF0000ï^000000 Crusader",L14,
+"^FF0000ï^000000 Monk",L15,
+"^FF0000ï^000000 Sage",L16,
+"^FF0000ï^000000 Rogue",L17,
+"^FF0000ï^000000 Alchemist",L18,
+"^FF0000ï^000000 Bard",L19,
+"^FF0000ï^000000 Dancer",L20,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//High 1st Class
+High1stClass:
+menu 
+"^FF0000ï^000000 Novice High",L4001,
+"^FF0000ï^000000 Swordman High",L4002,
+"^FF0000ï^000000 Magician High",L4003,
+"^FF0000ï^000000 Archer High",L4004,
+"^FF0000ï^000000 Acolyte High",L4005,
+"^FF0000ï^000000 Merchant High",L4006,
+"^FF0000ï^000000 Thief High",L4007,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//T2nd Class
+T2ndClass:
+menu 
+"^FF0000ï^000000 Lord Knight",L4008,
+"^FF0000ï^000000 High Priest",L4009,
+"^FF0000ï^000000 High Wizard",L4010,
+"^FF0000ï^000000 Whitesmith",L4011,
+"^FF0000ï^000000 Sniper",L4012,
+"^FF0000ï^000000 Assasin Cross",L4013,
+"^FF0000ï^000000 Paladin",L4015,
+"^FF0000ï^000000 Champion",L4016,
+"^FF0000ï^000000 Professor",L4017,
+"^FF0000ï^000000 Stalker",L4018,
+"^FF0000ï^000000 Biochemist",L4019,
+"^FF0000ï^000000 Clown",L4020,
+"^FF0000ï^000000 Gypsy",L4021,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//3rd Class
+3rdClass:
+menu 
+"^FF0000ï^000000 Rune Knight",L4060,
+"^FF0000ï^000000 Warlock",L4061,
+"^FF0000ï^000000 Ranger",L4062,
+"^FF0000ï^000000 Arch Bishop",L4063,
+"^FF0000ï^000000 Mechanic",L4064,
+"^FF0000ï^000000 Guillotine Cross",L4065,
+"^FF0000ï^000000 Royal Guard",L4073,
+"^FF0000ï^000000 Sorcerer",L4074,
+"^FF0000ï^000000 Minstrel",L4075,
+"^FF0000ï^000000 Wanderer",L4076,
+"^FF0000ï^000000 Sura",L4077,
+"^FF0000ï^000000 Genetic",L4078,
+"^FF0000ï^000000 Shadow Chaser",L4079,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//Expanded Class
+ExpandedClass:
+menu 
+"^FF0000ï^000000 SuperNovice",L23,
+"^FF0000ï^000000 Gunslinger",L24,
+"^FF0000ï^000000 Ninja",L25,
+"^FF0000ï^000000 Super Baby",L4045,
+"^FF0000ï^000000 Taekwon",L4046,
+"^FF0000ï^000000 Star Gladiator",L4047,
+"^FF0000ï^000000 Soul Linker",L4049,
+"^FF0000ï^000000 Gangsi",L4050,
+"^FF0000ï^000000 Death Knight",L4051,
+"^FF0000ï^000000 Dark Collector",L4052,
+"^FF0000ï^000000 Ex. Super Novice",L4190,
+"^FF0000ï^000000 Ex. Super Baby",L4191,
+"^FF0000ï^000000 Kagerou",L4211,
+"^FF0000ï^000000 Oboro",L4212,
+"^FF0000ï^000000 Rebellion",L4215,
+"^FF0000ï^000000 Summoner",L4218,
+"^FF0000ï^000000 Star Emperor",L4239,
+"^FF0000ï^000000 Soul Reaper",L4240,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//Baby 1st Class
+Baby1stClass:
+menu 
+"^FF0000ï^000000 Baby Novice",L4023,
+"^FF0000ï^000000 Baby Swordman",L4024,
+"^FF0000ï^000000 Baby Magician",L4025,
+"^FF0000ï^000000 Baby Archer",L4026,
+"^FF0000ï^000000 Baby Acolyte",L4027,
+"^FF0000ï^000000 Baby Merchant",L4028,
+"^FF0000ï^000000 Baby Thief",L4029,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//Baby 2nd Class
+Baby2ndClass:
+menu 
+"^FF0000ï^000000 Baby Knight",L4030,
+"^FF0000ï^000000 Baby Priest",L4031,
+"^FF0000ï^000000 Baby Wizard",L4032,
+"^FF0000ï^000000 Baby Blacksmith",L4033,
+"^FF0000ï^000000 Baby Hunter",L4034,
+"^FF0000ï^000000 Baby Assassin",L4035,
+"^FF0000ï^000000 Baby Crusader",L4037,
+"^FF0000ï^000000 Baby Monk",L4038,
+"^FF0000ï^000000 Baby Sage",L4039,
+"^FF0000ï^000000 Baby Rogue",L4040,
+"^FF0000ï^000000 Baby Alchemist",L4041,
+"^FF0000ï^000000 Baby Bard",L4042,
+"^FF0000ï^000000 Baby Dancer",L4043,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//Baby 3rd Class
+Baby3rdClass:
+menu 
+"^FF0000ï^000000 Baby Rune Knight",L4096,
+"^FF0000ï^000000 Baby Warlock",L4097,
+"^FF0000ï^000000 Baby Ranger",L4098,
+"^FF0000ï^000000 Baby Arch Bishop",L4099,
+"^FF0000ï^000000 Baby Mechanic",L4100,
+"^FF0000ï^000000 Baby Guillotine Cross",L4101,
+"^FF0000ï^000000 Baby Royal Guard",L4102,
+"^FF0000ï^000000 Baby Sorcerer",L4103,
+"^FF0000ï^000000 Baby Minstrel",L4104,
+"^FF0000ï^000000 Baby Wanderer",L4105,
+"^FF0000ï^000000 Baby Sura",L4106,
+"^FF0000ï^000000 Baby Genetic",L4107,
+"^FF0000ï^000000 Baby Shadow Chaser",L4108,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//Expanded Baby Class
+ExpandedBabyClass:
+menu 
+"^FF0000ï^000000 Summoner",L4220,
+"^FF0000ï^000000 Ninja",L4222,
+"^FF0000ï^000000 Kagerou",L4223,
+"^FF0000ï^000000 Oboro",L4224,
+"^FF0000ï^000000 Taekwon",L4225,
+"^FF0000ï^000000 Star Gladiator",L4226,
+"^FF0000ï^000000 Soul Linker",L4227,
+"^FF0000ï^000000 Gunslinger",L4228,
+"^FF0000ï^000000 Rebellion",L4229,
+"^FF0000ï^000000 Star Emperor",L4241,
+"^FF0000ï^000000 Soul Reaper",L4242,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//Modes And Others
+ModesAndOthers:
+menu 
+"^FF0000ï^000000 Wedding",L22,
+"^FF0000ï^000000 Christmas",L26,
+"^FF0000ï^000000 Summer",L27,
+"^FF0000ï^000000 Hanbok",L28,
+"^FF0000ï^000000 Oktoberfest",L29,
+"^FF0000ï^000000 Summer 2",L30,
+"^FF0000ï^000000 Star Gladiator",L4048,
+"^FF0000ï^000000 Baby Star Glad",L4238,
+"^FF0000ï^000000 ¬°‡≈‘°",Cancel;
+//1st Class
+L0:changebase 0;close;
+L1:changebase 1;close;
+L2:changebase 2;close;
+L3:changebase 3;close;
+L4:changebase 4;close;
+L5:changebase 5;close;
+L6:changebase 6;close;
+//2nd Class
+L7:changebase 7;close;
+L8:changebase 8;close;
+L9:changebase 9;close;
+L10:changebase 10;close;
+L11:changebase 11;close;
+L12:changebase 12;close;
+L14:changebase 14;close;
+L15:changebase 15;close;
+L16:changebase 16;close;
+L17:changebase 17;close;
+L18:changebase 18;close;
+L19:changebase 19;close;
+L20:changebase 20;close;
+//High 1st Class
+L4001:changebase 4001;close;
+L4002:changebase 4002;close;
+L4003:changebase 4003;close;
+L4004:changebase 4004;close;
+L4005:changebase 4005;close;
+L4006:changebase 4006;close;
+L4007:changebase 4007;close;
+//T2nd Class
+L4008:changebase 4008;close;
+L4009:changebase 4009;close;
+L4010:changebase 4010;close;
+L4011:changebase 4011;close;
+L4012:changebase 4012;close;
+L4013:changebase 4013;close;
+L4015:changebase 4015;close;
+L4016:changebase 4016;close;
+L4017:changebase 4017;close;
+L4018:changebase 4018;close;
+L4019:changebase 4019;close;
+L4020:changebase 4020;close;
+L4021:changebase 4021;close;
+//3rd Class
+L4060:changebase 4060;close;
+L4061:changebase 4061;close;
+L4062:changebase 4062;close;
+L4063:changebase 4063;close;
+L4064:changebase 4064;close;
+L4065:changebase 4065;close;
+L4073:changebase 4073;close;
+L4074:changebase 4074;close;
+L4075:changebase 4075;close;
+L4076:changebase 4076;close;
+L4077:changebase 4077;close;
+L4078:changebase 4078;close;
+L4079:changebase 4079;close;
+//Expanded Class
+L23:changebase 23;close;
+L24:changebase 24;close;
+L25:changebase 25;close;
+L4045:changebase 4045;close;
+L4046:changebase 4046;close;
+L4047:changebase 4047;close;
+L4049:changebase 4049;close;
+L4050:changebase 4050;close;
+L4051:changebase 4051;close;
+L4052:changebase 4052;close;
+L4190:changebase 4190;close;
+L4191:changebase 4191;close;
+L4211:changebase 4211;close;
+L4212:changebase 4212;close;
+L4215:changebase 4215;close;
+L4218:changebase 4218;close;
+L4239:changebase 4239;close;
+L4240:changebase 4240;close;
+//Baby 1st Class
+L4023:changebase 4023;close;
+L4024:changebase 4024;close;
+L4025:changebase 4025;close;
+L4026:changebase 4026;close;
+L4027:changebase 4027;close;
+L4028:changebase 4028;close;
+L4029:changebase 4029;close;
+//Baby 2nd Class
+L4030:changebase 4030;close;
+L4031:changebase 4031;close;
+L4032:changebase 4032;close;
+L4033:changebase 4033;close;
+L4034:changebase 4034;close;
+L4035:changebase 4035;close;
+L4037:changebase 4037;close;
+L4038:changebase 4038;close;
+L4039:changebase 4039;close;
+L4040:changebase 4040;close;
+L4041:changebase 4041;close;
+L4042:changebase 4042;close;
+L4043:changebase 4043;close;
+//Baby 3rd Class
+L4096:changebase 4096;close;
+L4097:changebase 4097;close;
+L4098:changebase 4098;close;
+L4099:changebase 4099;close;
+L4100:changebase 4100;close;
+L4101:changebase 4101;close;
+L4102:changebase 4102;close;
+L4103:changebase 4103;close;
+L4104:changebase 4104;close;
+L4105:changebase 4105;close;
+L4106:changebase 4106;close;
+L4107:changebase 4107;close;
+L4108:changebase 4108;close;
+//Expanded Baby Class
+L4220:changebase 4220;close;
+L4222:changebase 4222;close;
+L4223:changebase 4223;close;
+L4224:changebase 4224;close;
+L4225:changebase 4225;close;
+L4226:changebase 4226;close;
+L4227:changebase 4227;close;
+L4228:changebase 4228;close;
+L4229:changebase 4229;close;
+L4241:changebase 4241;close;
+L4242:changebase 4242;close;
+//Modes And Others
+L22:changebase 22;close;
+L26:changebase 26;close;
+L27:changebase 27;close;
+L28:changebase 28;close;
+L29:changebase 29;close;
+L30:changebase 30;close;
+L4048:changebase 4048;close;
+L4238:changebase 4238;close;
+//¬°‡≈‘° ‡ª≈’Ë¬π™ÿ¥Õ“™’æµ—«≈–§√
+CancelClass:changebase Class;close;
+//¬°‡≈‘°‡¡πŸ
+Cancel:
+mes "·≈È«æ∫°—π„À¡Ë";
+close;
+end; 
+//OnInit: 
+//waitingroom "‡ª≈’Ë¬π ™ÿ¥Õ“™’æµ—«≈–§√",0; 
+//end; 
+}

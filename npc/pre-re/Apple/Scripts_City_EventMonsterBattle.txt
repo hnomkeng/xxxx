@@ -1,0 +1,375 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+//start_a01,49,47,4	script	BetSystem	407,{
+end;
+	
+	OnMainSystem:
+			if ( $RedSide != $BlueSide ) { 
+			
+				set .Stop, 1;
+			end; 
+			
+			}
+			set .Stop, 0;
+			.Start = 1;
+			set .RedMobs,3;
+			set .BlueMobs,3;
+			set $@redteam, .RndMonster1[rand(getarraysize(.RndMonster1))];
+			set $@blueteam, .RndMonster2[rand(getarraysize(.RndMonster2))];
+			setnpcdisplay "Monster Game",$@redteam;
+			setnpcdisplay "Monster Game",$@blueteam;
+			//mapannounce "start_a01",""+ strnpcinfo(0) +" ได้เริ่มต้นขึ้นแล้ว มีเวลาลงพนัน เพียง 20 นาที ก่อนที่จะจัดเตรียมมอนสเตอร์เข้าสู่การประลอง",bc_map,"0xFFCE00";
+			//npctalk "[ มวยไทย 8 สี ] : ท่านมีเวลาลงเดิมพัน เพียง 20 วินาที";
+			sleep 6000;
+			killmonsterall "start_a01";
+			npctalk "[ มวยไทย 8 สี ] : พบกับการประลอง ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" (ทีมฝั่งซ้าย) vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" (ทีมฝั่งขวา)";
+			//mapannounce "start_a01",""+ strnpcinfo(0) +" การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +"",bc_map,"0xFFCE00";
+			sleep 6000;
+			donpcevent strnpcinfo(0) +"::OnPlayed";
+			end;
+
+OnPlayed:
+	npctalk "[ มวยไทย 8 สี ] : จะเริ่มในอีก 20 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 15000;
+	if ( .Stop == 1 ) {	end; }
+	npctalk "[ มวยไทย 8 สี ] : จะเริ่มในอีก 5 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	if ( .Stop == 1 ) {	end; }
+	npctalk "[ มวยไทย 8 สี ] : จะเริ่มในอีก 4 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	if ( .Stop == 1 ) {	end; }
+	npctalk "[ มวยไทย 8 สี ] : จะเริ่มในอีก 3 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	npctalk "[ มวยไทย 8 สี ] : จะเริ่มในอีก 2 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	if ( .Stop == 1 ) {	end; }
+	npctalk "[ มวยไทย 8 สี ] : จะเริ่มในอีก 1 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	if ( .Stop == 1 ) {	end; }
+	set .Stop, 0;
+	npctalk "[ มวยไทย 8 สี ] : ศึกการประลอง ได้เริ่มขึ้นแล้ว ฝ่ายใดจะเป็นฝ่ายชนะ" ;
+	set $@Running,1;
+	set $@Check,0;
+	set $Round,$Round+1;
+	monster "start_a01",44,41,getmonsterinfo($@redteam,MOB_NAME) +"",$@redteam,3,strnpcinfo(0) +"::Onreddie",0,1;
+	monster "start_a01",55,41,getmonsterinfo($@blueteam,MOB_NAME) +"",$@blueteam,3,strnpcinfo(0) +"::Onbluedie",0,0;
+	setmapflag "start_a01", mf_monster_noteleport;
+	setmapflag "start_a01", mf_nomobloot;
+	end;
+	
+Onreddie:
+	set .RedMobs,.RedMobs-1;
+	if ( .RedMobs == 0 )
+	{
+		set $@Check,2;
+		//mapannounce "prontera",""+ strnpcinfo(0) +" การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" ฝ่าย "+ getmonsterinfo($@blueteam,MOB_NAME) +" เป็นฝ่ายชนะ",bc_map,"0x00FF00";
+		npctalk "[ มวยไทย 8 สี ] : การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" เป็น [ "+ getmonsterinfo($@blueteam,MOB_NAME) +" ] ฝ่ายชนะ";
+		sleep 2000;
+		donpcevent "Monster Game#0"+$@Check+"::OnEffect";
+		donpcevent strnpcinfo(0) +"::OnEnd";
+		end;
+	}
+	end;
+
+Onbluedie:
+	set .BlueMobs,.BlueMobs-1;
+	if ( .BlueMobs == 0 )
+	{
+		set $@Check,1;
+		//mapannounce "prontera",""+ strnpcinfo(0) +" การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" ฝ่าย "+ getmonsterinfo($@redteam,MOB_NAME) +" เป็นฝ่ายชนะ",bc_map,"0x00FF00";
+		npctalk "[ มวยไทย 8 สี ] : การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" เป็น [ "+ getmonsterinfo($@redteam,MOB_NAME) +" ] ฝ่ายชนะ";
+		sleep 2000;
+		donpcevent "Monster Game#0"+$@Check+"::OnEffect";
+		donpcevent strnpcinfo(0) +"::OnEnd";
+		end;
+	}
+	end;
+
+OnEnd:
+	set $@Running,0;
+	.Start = 0;
+	set $RedSide, 0;
+	set $BlueSide, 0;
+	donpcevent "Monster Game#01::OnReset";
+	donpcevent "Monster Game#02::OnReset";
+	end;
+
+OnInit:
+	set $@Fee,2000000;
+	set $@Running,0;
+	set $@Check,0;
+	set $Counter1,0;
+	set $Counter2,0;
+	set $Played1,0;
+	set $Played2,0;
+	setarray .RndMonster1[0],3577,3577;
+	setarray .RndMonster2[0],3578,3578;
+//waitingroom "เจ้ามือมวยไทย 8 สี",0;
+end;
+}
+
+function	script	BetMonster	{
+	
+	if ( $@Running != 0 ) { mes "[ มวยไทย 8 สี ]"; mes "กิจกรรมกำลังจะเตรียม โปรดรอสักครู่..."; close; }
+	
+	set .@bet,getarg(0);
+	set .@recieve,getarg(1);
+	
+	if ( .@bet == 1 ) {
+	
+		if ( $RedSide == 2 ) {
+			
+			mes "[ มวยไทย 8 สี ]";
+			mes "ฝั่ง Munak มีจำนวนคนแทงสูงสุดแล้ว";
+			close;
+		}
+	
+	}
+	
+	if ( .@bet == 2 ) {
+	
+		if ( $BlueSide == 2 ) {
+			
+			mes "[ มวยไทย 8 สี ]";
+			mes "ฝั่ง Bongun มีจำนวนคนแทงสูงสุดแล้ว";
+			close;
+		}
+	
+	}
+	
+	if ( getd("Cost"+.@bet) > 0 )
+	{
+		if ( getd("Round"+.@bet) == $Round -1 && .@bet == $@Check )
+		{
+			set .@i,(getd("Cost"+.@bet)*.@recieve)-100000;
+			set Zeny,Zeny + .@i;
+			setd "Cost"+.@bet,0;
+			mes "[ มวยไทย 8 สี ]";
+			mes "นี่คือยอดเงินรวมหักภาษี";
+			mes ""+ callfunc("F_InsertComma",.@i) +" Zeny";
+			close;
+		}
+	}
+	
+	if ( getd("Cost"+.@bet) != 0 && getd("Round"+.@bet) == $Round )
+	{
+		mes "[ มวยไทย 8 สี ]";
+		mes "ไม่สามารถลงเดิมพันได้";
+		mes	"คุณได้ลงเดิมพันมอนสเตอร์ตัวนี้";
+		mes "เรียบร้อยแล้ว";
+		close;
+	}
+	
+	mes "[ มวยไทย 8 สี ]";
+	mes "ค่าธรรมเนียมต่อรอบ";
+	mes ""+ callfunc("F_InsertComma",$@Fee ) +" Zeny";
+	mes "หากมอนสเตอร์ที่ท่านลงชนะ";
+	mes "ท่านจะได้รับค่าตอบแทนเป็น^FF0000สองเท่า^000000";
+	mes "แต่... ท่านจะต้องเสียภาษีค่าใช้จ่าย 5%";
+	next;
+	
+	if(select("^FF0000•^000000 ยืนยันการลงพนัน:^FF0000•^000000 ยกเลิก") == 2 ) close;
+	
+	if ( Zeny < $@Fee ) { mes "[ มวยไทย 8 สี ]"; mes "นี่... คิดจะโกงหรือยังไง !"; close; }
+	
+	set Zeny,Zeny - $@Fee;
+	setd "Cost"+.@bet,$@Fee;
+	delwaitingroom "Monster Game#0"+.@bet;
+	setd "$Counter"+.@bet,getd("$Counter"+.@bet)+$@Fee;
+	setd "$Played"+.@bet,getd("$Played"+.@bet)+1;
+	waitingroom "ลงเดิมพัน [ "+ getd("$Played"+.@bet) +" ] คน",0;
+	setd "Round"+.@bet,$Round;
+	
+	if ( .@bet == 1 ) {
+	
+		set $RedSide, $RedSide + 1;
+	
+	} else {
+	
+		set $BlueSide, $BlueSide + 1;
+	
+	}
+	
+	mes "[ มวยไทย 8 สี ]";
+	mes "คุณได้ลงเดิมพัน";
+	mes "มอนสเตอร์หมายเลข "+.@bet+" เรียบร้อยแล้ว";
+	donpcevent "BetSystem::OnMainSystem";
+	close;
+	
+	return;
+
+}
+
+start_a01,44,47,4	script	Monster Game#01	3577,{
+	callfunc ("BetMonster",1,2);
+end;
+
+OnEffect:
+	for(set .@i,1; .@i < 5; set .@i,.@i+1){
+		specialeffect 183;
+		sleep 500;
+	}
+	specialeffect 68;
+end;
+
+OnReset:
+	delwaitingroom "Monster Game#01";
+	set $Counter1,0;
+	set $Played1,0;
+	setnpcdisplay "Monster Game",$@redteam;
+	waitingroom "Munak [ 0 ] คน",0;
+	end;
+	
+OnInit:
+	waitingroom "Munak [ 0 ] คน",0;
+	end;
+}
+
+start_a01,55,47,4	script	Monster Game#02	3578,{
+	callfunc ("BetMonster",2,2);
+end;
+
+OnEffect:
+	for(set .@i,1; .@i < 5; set .@i,.@i+1){
+		specialeffect 183;
+		sleep 500;
+	}
+	specialeffect 68;
+end;
+
+OnReset:
+	delwaitingroom "Monster Game#02";
+	set $Counter2,0;
+	set $Played2,0;
+	setnpcdisplay "Monster Game",$@blueteam;
+	waitingroom "Bongun [ 0 ] คน",0;
+	end;
+
+OnInit:
+	waitingroom "Bongun [ 0 ] คน",0;
+	end;
+}
+
+-	script	กรงไก่ชนer	FAKE_NPC,{
+	end;
+	
+OnInit:
+	setwall "start_a01",42,45,1,1,0,"เวที#1";
+	setwall "start_a01",43,45,1,1,0,"เวที#2";
+	setwall "start_a01",44,45,1,1,0,"เวที#3";
+	setwall "start_a01",45,45,1,1,0,"เวที#4";
+	setwall "start_a01",46,45,1,1,0,"เวที#5";
+	setwall "start_a01",47,45,1,1,0,"เวที#6";
+	setwall "start_a01",48,45,1,1,0,"เวที#7";
+	setwall "start_a01",49,45,1,1,0,"เวที#8";
+	setwall "start_a01",50,45,1,1,0,"เวที#9";
+	setwall "start_a01",51,45,1,1,0,"เวที#10";
+	setwall "start_a01",52,45,1,1,0,"เวที#11";
+	setwall "start_a01",53,45,1,1,0,"เวที#12";
+	setwall "start_a01",54,45,1,1,0,"เวที#13";
+	setwall "start_a01",55,45,1,1,0,"เวที#14";
+	setwall "start_a01",56,45,1,1,0,"เวที#15";
+	setwall "start_a01",57,45,1,1,0,"เวที#16";
+	
+	setwall "start_a01",42,44,1,1,0,"เวที#17";
+	setwall "start_a01",42,43,1,1,0,"เวที#18";
+	setwall "start_a01",42,42,1,1,0,"เวที#19";
+	setwall "start_a01",42,41,1,1,0,"เวที#20";
+	setwall "start_a01",42,40,1,1,0,"เวที#21";
+	setwall "start_a01",42,39,1,1,0,"เวที#22";
+	setwall "start_a01",42,38,1,1,0,"เวที#23";
+	setwall "start_a01",42,37,1,1,0,"เวที#24";
+	
+	setwall "start_a01",43,37,1,1,0,"เวที#25";
+	setwall "start_a01",44,37,1,1,0,"เวที#26";
+	setwall "start_a01",45,37,1,1,0,"เวที#27";
+	setwall "start_a01",46,37,1,1,0,"เวที#28";
+	setwall "start_a01",47,37,1,1,0,"เวที#29";
+	setwall "start_a01",48,37,1,1,0,"เวที#30";
+	setwall "start_a01",49,37,1,1,0,"เวที#31";
+	setwall "start_a01",50,37,1,1,0,"เวที#32";
+	setwall "start_a01",51,37,1,1,0,"เวที#33";
+	setwall "start_a01",52,37,1,1,0,"เวที#34";
+	setwall "start_a01",53,37,1,1,0,"เวที#35";
+	setwall "start_a01",54,37,1,1,0,"เวที#36";
+	setwall "start_a01",55,37,1,1,0,"เวที#37";
+	setwall "start_a01",56,37,1,1,0,"เวที#38";
+	setwall "start_a01",57,37,1,1,0,"เวที#39";
+	
+	setwall "start_a01",57,44,1,1,0,"เวที#40";
+	setwall "start_a01",57,43,1,1,0,"เวที#41";
+	setwall "start_a01",57,42,1,1,0,"เวที#42";
+	setwall "start_a01",57,41,1,1,0,"เวที#43";
+	setwall "start_a01",57,40,1,1,0,"เวที#44";
+	setwall "start_a01",57,39,1,1,0,"เวที#45";
+	setwall "start_a01",57,38,1,1,0,"เวที#46";
+	
+	setcell "start_a01",41,46,58,36,cell_landprotector,1;
+	setcell "start_a01",41,46,58,36,cell_basilica,1;
+	end;
+	 
+}
+
+start_a01,42,45,4	script	เวที#1	858,{}
+start_a01,43,45,4	script	เวที#2	858,{}
+start_a01,44,45,4	script	เวที#3	858,{}
+start_a01,45,45,4	script	เวที#4	858,{}
+start_a01,46,45,4	script	เวที#5	858,{}
+start_a01,47,45,4	script	เวที#6	858,{}
+start_a01,48,45,4	script	เวที#7	858,{}
+start_a01,49,45,4	script	เวที#8	858,{}
+start_a01,50,45,4	script	เวที#9	858,{}
+start_a01,51,45,4	script	เวที#10	858,{}
+start_a01,52,45,4	script	เวที#11	858,{}
+start_a01,53,45,4	script	เวที#12	858,{}
+start_a01,54,45,4	script	เวที#13	858,{}
+start_a01,55,45,4	script	เวที#14	858,{}
+start_a01,56,45,4	script	เวที#15	858,{}
+start_a01,57,45,4	script	เวที#16	858,{}
+
+
+start_a01,42,44,4	script	เวที#17	858,{}
+start_a01,42,43,4	script	เวที#18	858,{}
+start_a01,42,42,4	script	เวที#19	858,{}
+start_a01,42,41,4	script	เวที#20	858,{}
+start_a01,42,40,4	script	เวที#21	858,{}
+start_a01,42,39,4	script	เวที#22	858,{}
+start_a01,42,38,4	script	เวที#23	858,{}
+start_a01,42,37,4	script	เวที#24	858,{}
+
+
+
+start_a01,43,37,4	script	เวที#25	858,{}
+start_a01,44,37,4	script	เวที#26	858,{}
+start_a01,45,37,4	script	เวที#27	858,{}
+start_a01,46,37,4	script	เวที#28	858,{}
+start_a01,47,37,4	script	เวที#29	858,{}
+start_a01,48,37,4	script	เวที#30	858,{}
+start_a01,49,37,4	script	เวที#31	858,{}
+start_a01,50,37,4	script	เวที#32	858,{}
+start_a01,51,37,4	script	เวที#33	858,{}
+start_a01,52,37,4	script	เวที#34	858,{}
+start_a01,53,37,4	script	เวที#35	858,{}
+start_a01,54,37,4	script	เวที#36	858,{}
+start_a01,55,37,4	script	เวที#37	858,{}
+start_a01,56,37,4	script	เวที#38	858,{}
+start_a01,57,37,4	script	เวที#39	858,{}
+
+start_a01,57,44,4	script	เวที#40	858,{}
+start_a01,57,43,4	script	เวที#41	858,{}
+start_a01,57,42,4	script	เวที#42	858,{}
+start_a01,57,41,4	script	เวที#43	858,{}
+start_a01,57,40,4	script	เวที#44	858,{}
+start_a01,57,39,4	script	เวที#45	858,{}
+start_a01,57,38,4	script	เวที#46	858,{}

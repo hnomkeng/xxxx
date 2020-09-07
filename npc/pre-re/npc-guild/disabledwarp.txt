@@ -1,0 +1,23 @@
+aldeg_cas02,206,196,0	warp	aldg206	1,1,aldeg_cas02,197,13
+payg_cas04,28,31,0	warp	payg405	1,1,payg_cas04,251,42
+payg_cas03,29,269,0	warp	payg307	1,1,payg_cas03,269,287
+gefg_cas04,178,57,0	warp	gefg407	1,1,gefg_cas04,143,166
+prtg_cas02,184,44,0	warp	prtg206	1,1,prtg_cas02,157,140
+
+-	script	gvgclock	-1,{
+end;
+OnClock2000:
+disablenpc "aldg206";
+disablenpc "payg405";
+disablenpc "payg307";
+disablenpc "gefg407";
+disablenpc "prtg206";
+end;
+OnClock2130:
+enablenpc "aldg206";
+enablenpc "payg405";
+enablenpc "payg307";
+enablenpc "gefg407";
+enablenpc "prtg206";
+end;
+}

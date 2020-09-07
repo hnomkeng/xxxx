@@ -1,0 +1,167 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	COSTUME_V3	FAKE_NPC,{
+	end;
+	
+OnInit:
+//	set $@LS_req_itemV3,673;
+//	set $@LS_req_itemV3_amount,1;
+
+	set $@COSTUME_V3_default_filename$,"rul_v3_01";
+	setarray $@COSTUME_V3_filename$[0],
+		"rul_v3_01", "rul_v3_02", "rul_v3_03", "rul_v3_04", "rul_v3_05", "rul_v3_06", 
+		"rul_v3_07", "rul_v3_08", "rul_v3_09", "rul_v3_10", "rul_v3_11", "rul_v3_12", 
+		"rul_v3_13", "rul_v3_14", "rul_v3_15", "rul_v3_16", "rul_v3_17", "rul_v3_18",
+		"rul_v3_19", "rul_v3_20", "rul_v3_21", "rul_v3_22", "rul_v3_23", "rul_v3_24";
+		
+	setarray $@COSTUME_V3_item[0],
+		603, 617, 644, 2513, 12208, 12209,
+		12210, 12211, 12212, 5596, 7619, 7620,
+		607, 608, 12215, 12216, 5597, 12221,
+		14527, 14537, 14542, 14544, 14536, 2828;
+	
+	setarray $@COSTUME_V3_item_rate[0],
+		100,100,100,100,100,100,
+		100,100,100,100,100,100,
+		100,100,100,100,100,100,
+		100,100,100,100,100,30;
+
+	// system
+	setarray $@COSTUME_V3_size_db[0],
+		getarraysize($@COSTUME_V3_filename$);
+	end;
+}
+function	script	Rouletter_V3_NextSlot	{
+	set .@img,getarg(0) + 1;
+	
+	if (.@img >= $@COSTUME_V3_size_db[0])
+		set .@img,0;
+		
+	cutin $@COSTUME_V3_filename$[.@img], 4;
+	sleep2 getarg(1);
+	
+	return .@img;
+}
+
+morocc,143,148,5	script	Roulette 2M#NPC	506,{
+goto OnPlay;
+end;
+
+OnPCLogoutEvent:
+	set Roulette_V3_Playing,0;
+	end;
+
+OnPlay:
+	cutin $@COSTUME_V3_filename$[.@img], 4;
+	mes "[ ยินดีต้อนรับสู่ Roulette ]";
+	mes "-----------------------------------";
+	mes "ท่านต้องจำเป็นต้องมี";
+//	mes "Item : ^FF0000"+getitemname($@LS_req_itemV3)+"^000000 1 เหรียญ";
+	mes "^FF00002,000,000^000000 Zeny";
+	mes "-----------------------------------";
+	mes "ท่านต้องการจะเล่นเลยมั้ยล่ะ ?";
+	next;
+	menu
+	"^339900->^000000 ตกลง..ข้าจะเล่น.",Rolplay,
+	"^339900->^000000 จัดอันดับ.",Rolrank,
+	"^339900->^000000 ยกเลิก.",L_Cancel;
+//	if (select("^339900->^000000 ตกลง", "^FF0000->^000000 ยกเลิก") == 2) goto L_Cancel;
+Rolplay:
+//	if (countitem($@LS_req_itemV3) < $@LS_req_itemV3_amount)
+	if (zeny<2000000) 
+	{
+		mes "[ ยินดีต้อนรับสู่ Roulette ]";
+//		mes "ท่านมี "+getitemname($@LS_req_itemV3)+" ไม่พอ";
+		mes "ท่านมีเงินไม่เพียงพอนะ โปรดตรวจสอบเสียก่อน.";
+		next;
+		goto L_Cancel;
+	}
+//	delitem $@LS_req_itemV3, $@LS_req_itemV3_amount;
+	set zeny,zeny -2000000;
+	if(Roulette_V3_Playing != 0){
+		end;
+	}
+
+	pcblockmove getcharid(3),1;
+	set Roulette_V3_Playing,1;
+	set .@img,0;
+	set .@round,rand(10,15);
+	set .@speed,10;
+	for (set .@i,0; .@i < .@round; set .@i,.@i+1)
+	{
+		set .@mini_round,rand($@COSTUME_V3_size_db[0]/2, $@COSTUME_V3_size_db[0]);
+		for (set .@j,0; .@j < .@mini_round; set .@j,.@j+1)
+		set .@img,callfunc("Rouletter_V3_NextSlot", .@img, .@speed);
+		set .@speed,.@speed+5;
+	}
+	
+	set .@round,rand($@COSTUME_V3_size_db[0]/2, $@COSTUME_V3_size_db[0]);
+	
+	for (set .@i,0; .@i < .@round; set .@i,.@i+1)
+	{
+		set .@img,callfunc("Rouletter_V3_NextSlot", .@img, .@speed);
+		set .@speed,.@speed+5;
+	}
+	set .@min,($@COSTUME_V3_size_db[0]/2)/2;
+	set .@round,rand(.@min, $@COSTUME_V3_size_db[0]/2);
+	set .@round_per_50,.@round/2;
+	set .@round_per_25,.@round_per_50/2;
+
+	for (set .@i,0; .@i < .@round; set .@i,.@i+1)
+	{
+		set .@img,callfunc("Rouletter_V3_NextSlot", .@img, .@speed);
+
+		if (.@i < .@round_per_25)
+			set .@speed,.@speed+15;
+		else if (.@i < .@round_per_50)
+			set .@speed,.@speed+50;
+		else
+			set .@speed,.@speed+75;
+			
+		if(.@i == .@round-1 && $@COSTUME_V3_item_rate[.@img] < rand(100)){
+			set .@i,.@i-1;
+		}
+	}
+	
+	pcblockmove getcharid(3),0;
+	set .@prize,$@COSTUME_V3_item[.@img];
+	set Roulette_V3_Playing,0;
+	
+	announce "Roulette 2M : ผู้เล่น "+strcharinfo(0)+" ได้รับไอเท็ม "+getitemname(.@prize)+"",bc_all,0xfcff00;
+	getitem .@prize, 1;
+	query_sql "SELECT `char_id`,`roulette_score` FROM `char_rank` WHERE `char_id` = "+ getcharid(0) +" LIMIT 1", .@char_id, .@point;
+			if (!(.@point || .@char_id) )
+				query_sql "INSERT INTO `char_rank` (`char_id`,`roulette_score`) VALUES ('"+ getcharid(0) +"', '1')";
+			 else
+				query_sql "UPDATE `char_rank` SET `roulette_score` = `roulette_score`+4 WHERE `char_id` = "+ getcharid(0) +" LIMIT 1";
+
+		dispbottom "คุณได้ทำการหมุน Roulette 2M และได้รับ 4 Point แต้มทั้งหมดของคุณคือ "+ (.@point +4) +" Point";
+		goto OnPlay;
+
+Rolrank:
+cutin "", 255;
+callfunc "rouletterank";
+end;
+
+L_Cancel:
+	mes "[ ยินดีต้อนรับสู่ Roulette ]";
+	mes "โอกาสหน้าเชิญใหม่";
+	close2;
+	cutin "", 255;
+end;
+
+OnInit:
+waitingroom "Roulette 2M", 0;
+end;
+}

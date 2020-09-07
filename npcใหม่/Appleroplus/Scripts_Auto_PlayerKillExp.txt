@@ -1,0 +1,29 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+//เมื่อฆ่าผู้เล่นแล้วจะได้รับค่าประสบการณ์
+-	script	Auto_PlayerKillExp	-1,{
+OnPCKillEvent:
+	set .@rate, 1;	// Exp ที่ได้ (%)
+	
+	set .@baseexp, (NextBaseExp/100)*.@rate;
+	set .@jobexp, (NextJobExp/100)*.@rate;
+	if ( .@baseexp || .@jobexp ) {
+		getexp .@baseexp, .@jobexp;
+		if ( .@baseexp )
+			dispbottom "[ระบบ] ได้รับค่าประสบการณ์ จากการสังหาร BaseExp: "+.@baseexp+"  ( "+.@rate+"% )";
+		if ( .@jobexp )
+			dispbottom "[ระบบ] ได้รับค่าประสบการณ์ จากการสังหาร JobExp: "+.@jobexp+"  ( "+.@rate+"% )";
+	}
+
+}

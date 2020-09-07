@@ -1,0 +1,28 @@
+-	script	RankingPVP	-1,{
+	end;
+
+OnPCKillEvent:
+	getmapxy .@map$,.@x,.@y,0,strcharinfo(0);
+	if ( !getmapflag(.@map$, mf_pvp)) end;
+		
+	query_sql "SELECT `char_id`,`pvp_kill_score` FROM `char_rank` WHERE `char_id`="+ getcharid(0) +" LIMIT 1", .@char_id, .@point;
+	if (!(.@point || .@char_id) )
+		query_sql "INSERT INTO `char_rank` (`char_id`,`pvp_kill_score`) VALUES ('"+ getcharid(0) +"', '1')";
+	else
+		query_sql "UPDATE `char_rank` SET `pvp_kill_score` = `pvp_kill_score` +1 WHERE `char_id`= "+ getcharid(0) +" LIMIT 1";
+
+	dispbottom "[D]eath [M]atch [K]illing คุณได้รับ 1 Point พ้อยทั้งหมดของคุณคือ  "+ (.@pvp_kill_score+1) +" Point";
+	end;
+
+OnPCDieEvent:
+	getmapxy .@map$,.@x,.@y,0,strcharinfo(0);
+	if ( !getmapflag(.@map$, mf_pvp)) end;
+
+	query_sql "SELECT `char_id`,`pvp_die_score` FROM `char_rank` WHERE `char_id`="+ getcharid(0) +" LIMIT 1", .@char_id, .@point;
+	if (!(.@point || .@char_id) )
+		query_sql "INSERT INTO `char_rank` (`char_id`,`pvp_die_score`) VALUES ('"+ getcharid(0) +"', '1')";
+	else
+		query_sql "UPDATE `char_rank` SET `pvp_die_score` = `pvp_die_score` +1 WHERE `char_id` = "+ getcharid(0) +" LIMIT 1";
+	end;
+}
+

@@ -1,0 +1,74 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+//= 3.6a
+//==============================================
+prontera,147,284,4	script	กิจกรรมค้นหาเห็ด	892,{
+	mes "[ กิจกรรมค้นหาเห็ด ]";
+	if (.status == 1) {
+		.@count = mobcount( .event_map$, strnpcinfo(0) + "::OnMobKilled" );
+		if (.@count > 0) {
+			mes "มี " + .@count + " เห็ดที่เหลืออยู่ " + .event_map$ + "!";
+			mes "ค้นหาและฆ่าเห็ดเพื่อให้ได้ " + getitemname(.prize) + "!";
+			close;
+		}
+		.event_map$ = "";
+		.status = 0;
+		mes "เห็ดทั้งหมดถูกฆ่าตาย?";
+	}
+	mes "ไม่มีกิจกรรมในขณะนี้!";
+	if (.status || getgmlevel() < .GM) close;
+	mes "เริ่มกิจกรรม?";
+	next;
+	if (select("^FF0000•^000000  ยกเลิก:^FF0000•^000000  ตกลง") == 1) close;
+	donpcevent strnpcinfo(0) + "::OnMinute10";
+	mes "[ กิจกรรมค้นหาเห็ด ]";
+	mes "เหตุการณ์เริ่มต้นขึ้น!";
+	close;
+
+OnInit:
+//	Waitingroom "ตามล่าหาเห็ด" , 0;
+	.prize = 61001;	// รหัสรายการรางวัล
+	.amount = 5;	// จำนวนรายการรางวัล
+	.GM = 90;		// ระดับ GM จำเป็นต้องมีเพื่อเข้าถึง NPC
+	setarray .maps_list$[0],"prontera"; // แผนที่ที่เป็นไปได้
+//	setarray .maps_list$[0],"izlude","geffen","morocc","prontera"; // แผนที่ที่เป็นไปได้
+	end;
+
+OnMinute10:	// เวลาเริ่มต้น (ทุกชั่วโมง)
+	if (.status) end;
+	.status = 1;
+	.@spawn = rand(1,20);	// ควรมีเห็ดกี่ตัว?
+	.event_map$ = .maps_list$[ rand(getarraysize(.maps_list$)) ];
+	.@label$ = strnpcinfo(0) + "::OnMobKilled";
+	killmonster .event_map$, .@label$;
+	monster .event_map$,0,0,"ได้โปรดอย่าฆ่าฉัน!",1084,.@spawn, .@label$;
+	announce "กิจกรรมค้นหาเห็ด : เริ่ม " + .@spawn + " เห็ดเริ่มเกิดแล้ว " + .event_map$ + "!",0;
+	sleep 2500;
+	announce "กิจกรรมค้นหาเห็ด : เห็ดทุกตัวที่คุณฆ่าจะให้คุณ " + getitemname(.prize) + "!",0;
+	end;
+
+OnMobKilled:
+	if (playerattached() == 0)
+		end;
+	getitem .prize, .amount;
+	.@spawn = mobcount( .event_map$, strnpcinfo(0) + "::OnMobKilled" );
+	if (.@spawn > 0)
+		announce "[ " + strcharinfo(0) + " ] ฆ่าเห็ดแล้ว ตอนนี้มี " + .@spawn + " Mushroom(s) สุดท้าย.",bc_map;
+	else {
+		announce "กิจกรรมค้นหาเห็ด : สิ้นสุดลงแล้ว เห็ดทั้งหมดถูกฆ่าตาย.",0;
+		.status = 0;
+		.event_map$ = "";
+	}
+	end;
+}

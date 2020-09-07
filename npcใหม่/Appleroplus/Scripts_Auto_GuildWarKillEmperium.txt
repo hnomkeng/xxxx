@@ -1,0 +1,32 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Auto_GuildWarKillEmperium	-1,{
+OnNPCKillEvent:
+setarray .mobid[0],
+1288;
+for (set .@c, 0; .@c < getarraysize(.mobid); set .@c, .@c + 1){
+if (killedrid == .mobid[.@c]){
+set .@raterditem,rand(1,100);
+if (.@raterditem < 5)
+
+{
+getitem 61001,10;
+soundeffect "rareitemshop.wav",0;
+announce "[ระบบ] : ยินดีด้วย คุณ [ "+strcharinfo(0)+" ] โชคดีจริงๆ ทำลาย Emperium ได้รับ Cash Coin 10 ea.",0,0xFF3399;
+}
+
+}
+}
+end;
+}

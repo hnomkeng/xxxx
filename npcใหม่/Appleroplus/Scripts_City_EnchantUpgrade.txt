@@ -1,0 +1,270 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,141,252,4	script	เพิ่มออฟชั่น Item Upgrade#1	626,{
+
+
+	disable_items;
+	if (checkweight(1201,1) == 0) {
+		mes "คุณมีไอเทมมากเกินไป เอาไปเก็บก่อน!";
+		close;
+	}
+	if (MaxWeight - Weight < 10000) {
+		mes "คุณมีน้ำหนักมากเกินไป!";
+		close;
+	}
+	mes "[เพิ่มออฟชั่น Item Upgrade]";
+	mes "Yes?";
+	mes "มาที่นี่มาธุระอะไร?";
+	next;
+	switch(select("ห้ะ ฉันเพิ่งเห็นคุณครั้งแรก!:เสริมพลังจ้าาา !!:รีเซ็ท ออฟชั่น.")) {
+	case 1:
+		mes "[เพิ่มออฟชั่น Item Upgrade]";
+		mes "ฮ่าๆ ไปอยู่ไหนมาล่ะเอ็ง....";
+		close;
+	case 2:
+		if (!countitem(6484)) {
+			mes "[เพิ่มออฟชั่น Item Upgrade]";
+			mes "ต้องการไอเท็ม Heroic Desocketing Book!";
+			close;
+		}
+		set .@select,1;
+		break;
+	case 3:
+		mes "[เพิ่มออฟชั่น Item Upgrade]";
+		if (Zeny < 100000) {
+			mes "ต้องใช้เงิน 100,000 zeny.";
+			close;
+		}
+		mes "ค่าบริการ 100,000 zeny ";
+		next;
+		if (select("ขอไปคิดแปป.:จัดการเลย!") == 1) {
+			mes "[เพิ่มออฟชั่น Item Upgrade]";
+			mes "กลับมาหลังจากที่คุณได้รับการยืนยัน!";
+			close;
+		}
+		set .@select,2;
+		break;
+	}
+	set .@part, EQI_HAND_R;
+
+	mes "[เพิ่มออฟชั่น Item Upgrade]";
+	if (!getequipisequiped(.@part)) {
+		mes "คุณไม่ได้ใส่มันหรอกเหรอ?";
+		close;
+	}
+	setarray .@equip_card[0], getequipcardid(.@part,0), getequipcardid(.@part,1), getequipcardid(.@part,2), getequipcardid(.@part,3);
+	if (!getequipisequiped(.@part)) {
+		mes "สำเร็จแล้วสินะ!";
+		close;
+	}
+	set .@equip_id, getequipid(.@part);
+	set .@item$, "|1292|1394|1491|1585|2015|13071|13115|16019|18112|21000|";
+	if (!compare(.@item$,"|"+.@equip_id+"|")) {
+		mes "ฉันไม่ต้องการสัมผัสอุปกรณ์ของคุณตอนนี้!";
+		close;
+	}
+
+	if (.@select == 1) {
+		if (!countitem(6484)) {
+			mes "คุณฟังฉันไหม ฉันจะทำเพื่อคุณถ้าคุณนำ Heroic Desocketing Book";
+			close;
+		}
+		mes "เลือกประเภททีคุณต้องการเลย?";
+		next;
+		switch(select("ขอกลับไปคิดก่อน.:การโจมตีปกติ:กระโจมตีเวทย์มนต์")) {
+		case 1:
+			mes "[เพิ่มออฟชั่น Item Upgrade]";
+			mes "รีบกลับมาล่ะ!";
+			close;
+		case 2:
+			set .@enc_type,1;
+			break;
+		case 3:
+			set .@enc_type,2;
+			break;
+		}
+		mes "[เพิ่มออฟชั่น Item Upgrade]";
+		if (.@equip_card[3]) {
+			mes "คุณเสริมพลังไปแล้วนิ ไปลบก่อน";
+			close;
+		}
+		mes " มีโอกาสที่มันจะถูกทำลายนะ แน่ใจเหรอ";
+		next;
+		if (select("ยกเลิก:เอาเลย!") == 1) {
+			mes "[เพิ่มออฟชั่น Item Upgrade]";
+			mes "กลับมาอีกครั้งหลังจากที่คุณตัดสินใจ!";
+			close;
+		}
+		if (.@equip_card[3]) {
+			mes "[เพิ่มออฟชั่น Item Upgrade]";
+			mes "ดูเหมือนว่ามีปัญหาให้ฉันดู.";
+			close;
+		}
+
+		if (.@enc_type == 1) { // Physical Series
+			set .@i, rand(1,1300);
+			     if (.@i < 51)    set .@enchant,4734; //Agility5
+			else if (.@i < 76)    set .@enchant,4735; //Agility6
+			else if (.@i < 88)    set .@enchant,4736; //Agility7
+			else if (.@i < 93)    set .@enchant,4737; //Agility8
+			else if (.@i < 95)    set .@enchant,4738; //Agility9
+			else if (.@i < 96)    set .@enchant,4739; //Agility10
+			else if (.@i < 146)   set .@enchant,4724; //Dexterity5
+			else if (.@i < 171)   set .@enchant,4725; //Dexterity6
+			else if (.@i < 183)   set .@enchant,4726; //Dexterity7
+			else if (.@i < 188)   set .@enchant,4727; //Dexterity8
+			else if (.@i < 190)   set .@enchant,4728; //Dexterity9
+			else if (.@i < 191)   set .@enchant,4729; //Dexterity10
+			else if (.@i < 291)   set .@enchant,4704; //Strength5
+			else if (.@i < 341)   set .@enchant,4705; //Strength6
+			else if (.@i < 366)   set .@enchant,4706; //Strength7
+			else if (.@i < 378)   set .@enchant,4707; //Strength8
+			else if (.@i < 383)   set .@enchant,4708; //Strength9
+			else if (.@i < 384)   set .@enchant,4709; //Strength10
+			else if (.@i < 434)   set .@enchant,4754; //Luck5
+			else if (.@i < 459)   set .@enchant,4755; //Luck6
+			else if (.@i < 471)   set .@enchant,4756; //Luck7
+			else if (.@i < 476)   set .@enchant,4757; //Luck8
+			else if (.@i < 478)   set .@enchant,4758; //Luck9
+			else if (.@i < 479)   set .@enchant,4759; //Luck10
+			else if (.@i < 679)   set .@enchant,4744; //Vitality5
+			else if (.@i < 779)   set .@enchant,4745; //Vitality6
+			else if (.@i < 829)   set .@enchant,4746; //Vitality7
+			else if (.@i < 854)   set .@enchant,4747; //Vitality8
+			else if (.@i < 866)   set .@enchant,4748; //Vitality9
+			else if (.@i < 867)   set .@enchant,4749; //Vitality10
+			else if (.@i < 967)   set .@enchant,4808; //Fighting_Spirit4
+			else if (.@i < 992)   set .@enchant,4820; //Fighting_Spirit5
+			else if (.@i < 1092)  set .@enchant,4835; //Expert_Archer4
+			else if (.@i < 1117)  set .@enchant,4836; //Expert_Archer5
+			else if (.@i < 1217)  set .@enchant,4835; //Expert_Archer4
+			else if (.@i < 1242)  set .@enchant,4836; //Expert_Archer5
+			else set .@enchant,0;
+		} else if (.@enc_type == 2) { // Magical Series
+			set .@i, rand(1,1200);
+			     if (.@i < 51)    set .@enchant,4714; //Inteligence5
+			else if (.@i < 76)    set .@enchant,4715; //Inteligence6
+			else if (.@i < 88)    set .@enchant,4716; //Inteligence7
+			else if (.@i < 93)    set .@enchant,4717; //Inteligence8
+			else if (.@i < 95)    set .@enchant,4718; //Inteligence9
+			else if (.@i < 96)    set .@enchant,4719; //Inteligence10
+			else if (.@i < 146)   set .@enchant,4724; //Dexterity5
+			else if (.@i < 171)   set .@enchant,4725; //Dexterity6
+			else if (.@i < 183)   set .@enchant,4726; //Dexterity7
+			else if (.@i < 188)   set .@enchant,4727; //Dexterity8
+			else if (.@i < 190)   set .@enchant,4728; //Dexterity9
+			else if (.@i < 191)   set .@enchant,4729; //Dexterity10
+			else if (.@i < 291)   set .@enchant,4734; //Agility5
+			else if (.@i < 341)   set .@enchant,4735; //Agility6
+			else if (.@i < 366)   set .@enchant,4736; //Agility7
+			else if (.@i < 378)   set .@enchant,4737; //Agility8
+			else if (.@i < 383)   set .@enchant,4738; //Agility9
+			else if (.@i < 384)   set .@enchant,4739; //Agility10
+			else if (.@i < 484)   set .@enchant,4754; //Luck5
+			else if (.@i < 534)   set .@enchant,4755; //Luck6
+			else if (.@i < 559)   set .@enchant,4756; //Luck7
+			else if (.@i < 571)   set .@enchant,4757; //Luck8
+			else if (.@i < 576)   set .@enchant,4758; //Luck9
+			else if (.@i < 577)   set .@enchant,4759; //Luck10
+			else if (.@i < 777)   set .@enchant,4744; //Vitality5
+			else if (.@i < 877)   set .@enchant,4745; //Vitality6
+			else if (.@i < 927)   set .@enchant,4746; //Vitality7
+			else if (.@i < 952)   set .@enchant,4747; //Vitality8
+			else if (.@i < 964)   set .@enchant,4748; //Vitality9
+			else if (.@i < 969)   set .@enchant,4749; //Vitality10
+			else if (.@i < 1069)  set .@enchant,4812; //Spell4
+			else if (.@i < 1094)  set .@enchant,4826; //Spell5
+			else if (.@i < 1119)  set .@enchant,4761; //Matk2
+			else if (.@i < 1124)  set .@enchant,4806; //Matk3
+			else set .@enchant,0;
+		} else {
+			mes "[เพิ่มออฟชั่น Item Upgrade]";
+			mes "อืม! รายการนี้มีปัญหาโปรดตรวจสอบอีกครั้ง!";
+			close;
+		}
+		mes "[เพิ่มออฟชั่น Item Upgrade]";
+		if (.@equip_card[3]) {
+			mes "รายการนี้ได้รับการ เพิ่มออฟชั่น!";
+			close;
+		}
+		if (!countitem(6484)) {
+			mes "คุณฟังฉันไหม ฉันจะทำเพื่อคุณถ้าคุณนำ Heroic Desocketing Book!";
+			close;
+		}
+		set .@equip_refine, getequiprefinerycnt(.@part);
+		if (.@enchant == 0) {
+			specialeffect EF_SHIELDCHARGE;
+			mes "Oh! Unbelievable!! It failed!! Please come again!";
+			set .@lost_refine, rand(0,.@equip_refine);
+			set .@equip_refine, .@equip_refine - .@lost_refine;
+		} else {
+			specialeffect EF_REPAIRWEAPON;
+			mes "เสร็จเรียบร้อย!";
+		}
+		delitem 6484,1; //Enchant_Book
+
+		// anti-hack
+		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) ||
+		    callfunc("F_IsEquipCardHack", .@part, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+			close;
+
+		delequip .@part;
+
+//		GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] .@enchant
+		getitem2 .@equip_id,1,1,.@equip_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],.@enchant;
+
+		if (.@lost_refine) {
+			next;
+			mes "[เพิ่มออฟชั่น Item Upgrade]";
+			mes "ความล้มเหลวได้ลดการปรับแต่งโดย "+callfunc("F_InsertPlural",.@lost_refine,"level")+"! อย่ากดดัน!";
+		}
+		close;
+	} else if (.@select == 2) {
+		if (Zeny < 100000) {
+			mes "คุณต้องนำเงินมาเริ่มต้น!!";
+			close;
+		}
+		if (.@equip_card[3] < 4700) { // Armor Enchant System
+			mes "รายการนี้ไม่ได้หลงเสน่ห์!";
+			close;
+		}
+		if (!getequipisequiped(.@part)) {
+			mes "ตอนนี้คุณกำลังคลายความกังวล?";
+			close;
+		}
+		specialeffect EF_REPAIRWEAPON;
+		mes "ฉันเริ่มต้นเอฟเฟกต์ร่ายมนต์.";
+		set Zeny, Zeny - 100000;
+
+		// anti-hack
+		if (callfunc("F_IsEquipIDHack", .@part, .@equip_id) ||
+		    callfunc("F_IsEquipCardHack", .@part, .@equip_card[0], .@equip_card[1], .@equip_card[2], .@equip_card[3]))
+			close;
+
+		set .@equip_refine, getequiprefinerycnt(.@part);
+		delequip .@part;
+
+//		GetNonSlotItemSock2 .@equip_refine .@equip_id .@equip_card[0] .@equip_card[1] .@equip_card[2] 0
+		getitem2 .@equip_id,1,1,.@equip_refine,0,.@equip_card[0],.@equip_card[1],.@equip_card[2],0;
+
+		close;
+	} else {
+		mes "ดูเหมือนว่าคุณจะเลือกงานที่ผิด??";
+		close;
+	}
+end;
+//oninit:
+//waitingroom "เพิ่มออฟชั่น Item Upgrade",0;
+//end;
+}

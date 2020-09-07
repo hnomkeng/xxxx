@@ -1,0 +1,40 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,156,195,4	script	ไปหาเงิน Zeny	828,{
+
+mes "เราจะพาท่านไปหาเงิน Zeny";
+mes "โปรดเลือกสถานที่ต่างๆที่จะไป";
+next;
+menu 
+"^FF0000•^000000 หาเงิน Zeny 1 [ "+getmapusers("tha_t10")+" ]",zenyy,
+"^FF0000•^000000 หาเงิน Zeny 2 [ "+getmapusers("tha_t12")+" ]",zenyyyy,
+"^FF0000•^000000 ยกเลิก",cancel;
+
+zenyy:
+warp "tha_t10",0,0;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าสู่  ห้อง หาเงิน Zeny 1 แล้วจ้า ขณะนี้มีผู้เล่นทั้งหมด [ "+getmapusers("tha_t10")+" ] คน",0,0x66FF00;
+close;
+
+zenyyyy:
+warp "tha_t12",0,0;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าสู่  ห้อง หาเงิน Zeny 2 แล้วจ้า ขณะนี้มีผู้เล่นทั้งหมด [ "+getmapusers("tha_t12")+" ] คน",0,0x66FF00;
+close;
+
+cancel:
+close;
+
+//OnInit:
+//waitingroom "วาปหาเงิน Zeny",0;
+end; 
+}

@@ -1,0 +1,57 @@
+morocc,196,96,4	script	Roulette Exchange	563,{
+mes "[ Roulette Exchange ]";
+mes "สวัสดีจ้า ท่านคือ ^FF0000"+strcharinfo(0)+",^000000";
+mes "ถ้าท่านต้องการเสี่ยงโชค";
+mes "ท่านสามารถแลกซื้อเหรียญกับข้าได้";
+mes "ท่านสนใจมั้ยล่ะ ?";
+next;
+menu
+"^339900->^000000 แลกซื้อ Roulette Coin ^FF0000500K^000000 ^009933( ทีละชิ้น )^000000",rol01;
+//"^339900->^000000 แลกซื้อ Roulette Coin ^FF00001M^000000 ( รออัพเดท )",rol02,
+//"^339900->^000000 แลกซื้อ Roulette Coin ^FF00002M^000000 ( รออัพเดท )",rol03,
+//"^339900->^000000 แลกซื้อ Roulette Coin ^FF00003M^000000 ( รออัพเดท )",rol04,
+//"^339900->^000000 แลกซื้อ Roulette Coin ^FF00005M^000000 ( รออัพเดท )",rol05,
+//"^339900->^000000 แลกซื้อ Roulette Coin ^FF000010M^000000 ( รออัพเดท )",rol06;
+
+rol01:
+if (zeny<500000) goto rolno;
+mes "[ Roulette Exchange ]";
+mes "ทำรายการสำเร็จแล้ว.";
+set zeny,zeny -500000;
+getitem 673,1;
+end;
+
+rol02:
+mes "[ Roulette Exchange ]";
+mes "รายการ..อยู่ในช่วงรออัพเดท";
+end;
+
+rol03:
+mes "[ Roulette Exchange ]";
+mes "รายการ..อยู่ในช่วงรออัพเดท";
+end;
+
+rol04:
+mes "[ Roulette Exchange ]";
+mes "รายการ..อยู่ในช่วงรออัพเดท";
+end;
+
+rol05:
+mes "[ Roulette Exchange ]";
+mes "รายการ..อยู่ในช่วงรออัพเดท";
+end;
+
+rol06:
+mes "[ Roulette Exchange ]";
+mes "รายการ..อยู่ในช่วงรออัพเดท";
+end;
+
+rolno:
+mes "[ Roulette Exchange ]";
+mes "เหมือนว่า..ท่านจะมีเงินไม่เพียงพอนะ";
+end;
+
+OnInit:
+waitingroom "Roulette Exchange", 0;
+end;
+}

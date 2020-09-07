@@ -1,0 +1,154 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Lock	-1,{
+OnPCLoginEvent:
+		setoption 0x40,0;
+		setoption 0x2000,0;
+if(#SLS_OFF){
+	message strcharinfo(0), "[ระบบ] ระบบรักษาความปลอดภัย ถูกปิดการใช้งาน !!";
+	end;
+}
+if(#SLS)
+{
+		//================================
+		//sc_start 47,30000000,1;		// Trick Dead
+		sc_start SC_FREEZE,30000000,10;	// Freeze
+		//setoption 0x40;		// Perfect Hide
+		//================================
+		message strcharinfo(0), "[ระบบ] กรุณาใส่รหัส ระบบรักษาความปลอดภัย เพื่อทำการปลดล็อคตัวละครของท่าน !!";
+		input @SLS;
+		if(#SLS == @SLS) {
+			//================================
+			//if (checkoption(0x40)) setoption 0x40,0; // Remove Perfect Hide
+			sc_end SC_FREEZE;	// Remove Freeze
+			//sc_end 47;		// Remove Trick Dead
+			//================================
+			message strcharinfo(0), "[ระบบ] คุณได้ปลดล็อค ระบบรักษาความปลอดภัย เรียบร้อยแล้ว !!";
+		} else {
+			dispbottom "[ระบบ] : คุณใส่ รหัส ระบบรักษาความปลอดภัย ผิดพลาด คุณจะถูกเตะออกจากเกม";
+			atcommand "@kick " + strcharinfo(0);
+			set @SLS,0;
+			end;
+		}
+} else {
+	set @npc$,"[^0000FF ระบบรักษาความปลอดภัย ^000000]";
+	mes @npc$;
+	mes "ยินดีต้อนรับผู้เล่นใหม่ เข้าสู่โลก Ragnarok Online ค่ะ";
+	next;
+	mes @npc$;
+	mes "นี่คือระบบที่เรียกว่า";
+	mes "^0000FF' ระบบรักษาความปลอดภัย '^000000";
+	mes "มีวัตถุประสงค์เพื่อ ป้องกันผู้เล่นมิจฉาชีพ";
+	mes "Hack ID ของเราไปได้";
+	next;
+	if(select("^FF0000•^000000 ติดตั้ง ระบบรักษาความปลอดภัย","^FF0000•^000000 ยกเลิก") == 2) close;
+	LSetSLS:
+	mes @npc$;
+	mes "กรุณาตั้ง Password";
+	mes "ของท่านเป็นตัวเลข 4 หลัก";
+	mes "^FF0000( 1000 - 9999 )^000000";
+	mes "(ใส่เลข 0 เพื่อเป็นการยกเลิก)";
+	next;
+	input @SLS;
+	if(@SLS)
+	{
+		if(@SLS > 9999)
+		{
+				mes @npc$;
+				mes "รหัสผ่าน ระบบรักษาความปลอดภัย ของท่านมากกว่า 4 หลัก";
+				next;
+				goto LSetSLS;
+		}
+		if(@SLS < 1000)
+		{
+				mes @npc$;
+				mes "รหัสผ่าน ระบบรักษาความปลอดภัย ของท่านน้อยกว่า 4 หลัก";
+				next;
+				goto LSetSLS;
+		}
+		mes @npc$;
+		mes "รหัสผ่าน ระบบรักษาความปลอดภัย ของท่าน คือ [^FF0000 "+@SLS+" ^000000]";
+		mes "กรุณาใส่ตัวเลข 4 หลักอีกครั้ง !! เพื่อเป็นการยืนยัน";
+		next;
+		input @ReSLS;
+		if(@SLS == @ReSLS)
+		{
+			set #SLS,@SLS;
+			mes @npc$;
+			mes "ขอบคุณที่ใช้บริการ ";
+			mes "^0000FF' ระบบรักษาความปลอดภัย '^000000";
+			mes "รหัสผ่าน ระบบรักษาความปลอดภัย ของท่านคือ [^FF0000 "+#SLS+" ^000000]";
+			specialeffect2(18);
+		} else {
+			mes @npc$;
+			mes "รหัสผ่าน ระบบรักษาความปลอดภัย ของท่านไม่ถูกต้อง !!";
+			next;
+			goto LSetSLS;
+		}
+	} 
+	close2;
+	set @SLS,0;
+	end;
+}
+end;
+
+	// **** OnWhisperGlobal : ระบบรักษาความปลอดภัย **** \\
+	OnWhisperGlobal:
+	set @npc$,"[^0000FF ระบบรักษาความปลอดภัย ^000000]";
+	if(@whispervar0$ == "lock"){
+		if(#SLS_OFF)	set #SLS_OFF,0;	else		set #SLS_OFF,1;
+		if(#SLS_OFF)	set @Switch$,"OFF";	else	set @Switch$,"ON";
+		message strcharinfo(0), "ระบบรักษาความปลอดภัย [ "+@Switch$+" ]";
+		end;
+	}
+	
+	if(@whispervar0$ == "reset"){
+				if(!#SLS)
+				{
+						message strcharinfo(0), "[ระบบ] ไม่สามารถดำเนินการได้ เนื่องจากคุณยังไม่ได้ติดตั้งรหัสผ่าน ระบบรักษาความปลอดภัย";
+						end;
+				}
+				mes @npc$;
+				mes "ยินดีต้อนรับเข้าสู่บริการ";
+				mes "^FF0000' ระบบรักษาความปลอดภัย Reset Password '^000000";
+				mes "กรุณาใส่รหัสผ่าน ระบบรักษาความปลอดภัย ของท่าน เพื่อเป็นการยืนยัน";
+				mes "(ใส่เลข 0 เพื่อเป็นการยกเลิก)";
+				LResetAgain:
+				next;
+				input @SLS;
+				if(@SLS)
+				{
+					if(#SLS != @SLS)
+					{
+						mes @npc$;
+						mes "รหัสผ่าน ระบบรักษาความปลอดภัย ของท่านไม่ถูกต้อง !!";
+						close;
+					}
+					specialeffect2(18);
+					set #SLS,0;
+					set #SLS_OFF,0;
+					mes @npc$;
+					mes "ระบบได้ทำการยกเลิก !!";
+					mes "รหัสผ่าน ระบบรักษาความปลอดภัย ของท่านแล้ว";
+				}
+				close2;
+				set @SLS,0;
+				end;
+	}
+	message strcharinfo(0), "[ระบบ] คำสั่งทั้งหมดในระบบ ระบบรักษาความปลอดภัย";
+	message strcharinfo(0), "[ระบบ] ล็อก - เปิด ปิด การใช้งานระบบ ระบบรักษาความปลอดภัย";
+	message strcharinfo(0), "[ระบบ] รีเซ็ต - ยกเลิก การใช้งานระบบ ระบบรักษาความปลอดภัย";
+	end;
+	
+}

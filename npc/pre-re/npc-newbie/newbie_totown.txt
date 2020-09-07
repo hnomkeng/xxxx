@@ -1,0 +1,29 @@
+new_1-3,95,174,4	script	Town Service	416,{
+mes "[ Town Service ]";
+mes "สวัสดีผู้เล่นที่น่ารักของข้า..!!";
+mes "ท่านคงพร้อมที่จะเดินทางแล้วสินะ..?";
+next;
+menu 
+"^339900->^000000 ใช้..ข้าต้องการไปเมืองหลวง",ts01,
+"^FF0000->^000000 ยกเลิก",ts02;
+
+ts01:
+delitem 1243,1;
+delitem 2112,1;
+delitem 2510,1;
+delitem 2414,1;
+//delitem 5055,1;
+delitem 2352,1;
+savepoint "morocc",159,40;
+warp "morocc",159,40;
+end;
+
+ts02:
+mes "[ Town Service ]";
+mes "ไว้พร้อมแล้วท่านมาใหม่นะ.";
+close;
+
+OnInit:
+waitingroom "-> ไปเมืองหลวง", 0;
+end;
+}

@@ -1,0 +1,225 @@
+///////////////////////////////////////////////
+//                                          //
+//                                          //
+//Tharakan Khumtong                         //
+//////////////////////////////////////////////
+-	script	casinimafia_seting#1	-1,{
+OnInit:
+//////////////กิล//////////////////
+set $@casinimafiamap$,"payg_cas04"; //MAP บ้านกิล
+set $casinimafiamapx,252;set $casinimafiamapy,266; //พิกัดหิน
+set $casinimafiawarpx,252;set $casinimafiawarpy,271; //พิกัดวาปเข้าบ้าน
+/////////////////////////////
+set $@casinimafiamap2$,"morocc"; //MAP คาสิโน
+set $casinimafiamap2x,252;set $casinimafiamap2y,266; //พิกัดเกิด
+////////////////////////////////
+disablenpc "วาป#g1-3";
+end;
+}
+
+/////////////////////////////////////////
+morocc,243,69,5	script	วาป#g1-1	723,1,1,{
+mes "^FF0000ค่าบริการ^000000 : 3,000 zeny";	
+mes "ต้องการเข้าไปหรือไม่?";
+menu 
+"พร้อมลุย",go,
+"ยกเลิก",no;
+go:
+if(zeny < 3000){mes "^FF0000ค่าบริการแค่ 3,000 zeny ยังไม่มี เจ้าจะเข้าไปทำอะไรได้?^000000";	end;}
+set zeny,zeny - 3000;
+setd "$casinobosszeny",getd("$casinobosszeny")+1000;
+warp $@casinimafiamap2$,$casinimafiamap2x,$casinimafiamap2y;
+end;
+no:
+end;
+	
+}
+morocc,243,73,5	script	วาป#g1-2	723,1,1,{
+mes "^FF0000ท่านต้องการออกจากที่นี่หรือไม่?^000000";	
+next;
+menu 
+"พาข้าออกจากที่นี่",go,
+"ยกเลิก",no;
+go:
+warp "SavePoint",0,0;
+end;
+no:
+end;
+
+}
+//////////////////////////////////////////////////////
+morocc,248,69,1	script	วาป#g1-3	45,1,1,{ ///วาปไปตีกิล
+OnTouch:
+warp $@casinimafiamap$,252,271;
+	end;
+}
+
+////////////////////////////////////////////////////
+morocc,236,70,5	script	ผู้ดูแลตลาดมืด	899,{
+	if(getgmlevel()){	
+mes "^FF0000---GM MODE---^000000";	
+if($bosschw == 0){mes "สถาณะ : ^FF0000ปิด^000000";}
+if($bosschw == 1){mes "สถาณะ : ^00CC00เปิด^000000";}
+next;
+if($bosschw == 0){
+	menu 
+"^009933•^000000 [ ^00CC00เปิดบ้านตลาดมืด^000000 ]",open,
+"^009933•^000000 [ ^FF0000เมนูปกติ^000000 ]",nomal;
+}else{
+	menu 
+"^009933•^000000 [ ^FF0000ปิดบ้านคาสิโน^000000 ]",off,
+"^009933•^000000 [ ^FF0000เมนูปกติ^000000 ]",nomal;	
+}
+	
+open:
+donpcevent "ธง สงคราม ตลาดมืด#1::OnRecvCastleN01";
+set $bosschw,1;
+	GvgOn $@casinimafiamap$;
+	donpcevent strnpcinfo(0) +"::OnPlayed";
+end;
+	
+off:
+donpcevent "ธง สงคราม ตลาดมืด#1::OnRecvCastleN01";
+disablenpc "วาป#g1-3";
+setd "$casinobossnum",0;
+Announce "สงคราม ตลาดมืด : สิ้นสุดการยึดครอง สงคราม ตลาดมืด",bc_all;
+set $bosschw,0;
+killmonster $@casinimafiamap$, strnpcinfo(0) +"::OnAgitBreak";
+end;	
+	}		
+nomal:
+set @GID,getcastledata($@casinimafiamap$,1);
+if (strcharinfo(0) == getguildmaster(@GID)) goto Lpass;
+if (getcharid(2) == @GID) goto Lnotpass;
+mes "วันนี้อากาศดีนะ ท่านเตรียมเงินมาเยอะไหมละ เหอะๆ....";
+end;
+
+Lpass:
+mes "^FF0000ทุกอย่างสงบดี ท่านต้องการให้ข้าช่วยอะไร?^000000";	
+next;
+menu 
+"เก็บค่าดูแล",intro1,
+"ยกเลิก",no;
+intro1:
+mes "ยอดเงินทั้งหมด : ^FF0000"+getd("$casinobosszeny")+"^000000";	
+mes "^FF0000รับเงินเลยไหม?^000000";	
+next;
+menu 
+"รีบส่งเงินมา",intro2,
+"ยกเลิก",no;
+
+no:
+end;
+Lnotpass:
+mes "ข้ารอ หัวหน้ากิวล์ของเจ้า ที่ชื่อ ^5533FF[ "+ getguildmaster(@GID)+" ]^000000";
+mes "เจ้าไม่ใช้หัวหน้ากิวล์ ไปสะ";
+end;
+
+intro2:
+if(#casinobosstime > gettimetick(2)) { next;mes "^FF0000กรุณารอการรวบรวมเงินใหม่ในอีก 1 ชั่วโมง^000000"; end;}
+set #casinobosstime,gettimetick(2) + 3600;
+setd "$casinobosszeny",0;
+set zeny,zeny + getd("$casinobosszeny");
+end;
+
+OnAgitBreak:
+sleep2 1000;
+disablenpc "วาป#g1-3";
+sleep2 1000;
+	set .@GID,getcharid(2);
+	set $GID2,getcharid(2);
+	if (.@GID <= 0) return;
+	set .@Economy,GetCastleData($@casinimafiamap$,2) - 5;
+	if (.@Economy < 0) set .@Economy, 0;
+	SetCastleData $@casinimafiamap$, 2, .@Economy;
+	set .@Defence,GetCastleData($@casinimafiamap$,3) - 5;
+	if (.@Defence < 0) set .@Defence, 0;
+	SetCastleData $@casinimafiamap$, 3, .@Defence;
+	SetCastleData $@casinimafiamap$,1, .@GID;
+	MapAnnounce $@casinimafiamap$,"หินกิลถูกทำลายลงแล้ว..........!!",bc_map,0x00CCFF;
+maprespawnguildid $@casinimafiamap$,.@GID,2;
+setd "$casinobossnum",getd("$casinobossnum")+1;
+donpcevent "ธง สงคราม ตลาดมืด#1::OnRecvCastleN01";
+donpcevent strnpcinfo(0) +"::OnPlayed";
+		end;
+OnPlayed:
+if(getd("$casinobossnum") > 0){
+Announce "สงคราม ตลาดมืด : ยังไม่จบ!! เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด รอบที่ ["+(getd("$casinobossnum")+1)+"] ในอีก 2 นาที ข้างหน้า....",bc_all;}else{
+Announce "สงคราม ตลาดมืด : เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด ในอีก 2 นาที ข้างหน้า....",bc_all;	
+}
+sleep 100000;
+Announce "สงคราม ตลาดมืด : เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด ในอีก 20 วินาที ข้างหน้า....",bc_all;
+sleep 10000;
+Announce "สงคราม ตลาดมืด : เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด ในอีก 10 วินาที ข้างหน้า....",bc_all;
+sleep 5000;
+Announce "สงคราม ตลาดมืด : เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด ในอีก 5 วินาที ข้างหน้า....",bc_all;
+sleep 1000;
+Announce "สงคราม ตลาดมืด : เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด ในอีก 4 วินาที ข้างหน้า....",bc_all;
+sleep 1000;
+Announce "สงคราม ตลาดมืด : เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด ในอีก 3 วินาที ข้างหน้า....",bc_all;
+sleep 1000;
+Announce "สงคราม ตลาดมืด : เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด ในอีก 2 วินาที ข้างหน้า....",bc_all;
+sleep 1000;
+Announce "สงคราม ตลาดมืด : เตรียมตัวให้พร้อมกับการชิง สงคราม ตลาดมืด ในอีก 1 วินาที ข้างหน้า....",bc_all;
+sleep 1000;
+gvgon $@casinimafiamap$;	
+maprespawnguildid $@casinimafiamap$,$GID2,2;
+	RequestGuildInfo GetCastleData($@casinimafiamap$,1);
+	monster $@casinimafiamap$,$casinimafiamapx,$casinimafiamapy,"Mafia Emperium",1288,1, strnpcinfo(0) +"::OnAgitBreak";
+	if (GetCastleData($@casinimafiamap$,1) != 0)	
+	enablenpc "วาป#g1-3";
+end;
+		
+//////////////////////////////////////////////////
+OnClock: ///เวลาเริ่ม
+donpcevent strnpcinfo(0) +"::OnPlayed";
+end;
+OnClock2040: ///เวลาจบ
+setd "$casinobossnum",0;
+Announce "สงคราม ตลาดมืด : สิ้นสุดการยึดครอง สงคราม ตลาดมืด",bc_all;
+killmonster $@casinimafiamap$, strnpcinfo(0) +"::OnAgitBreak";
+gvgon $@casinimafiamap$;
+donpcevent "ธง สงคราม ตลาดมืด#1::OnRecvCastleN01";
+disablenpc "วาป#g1-3";	
+end;
+OnClock2035: ///เวลาเดือนจบ
+Announce "สงคราม ตลาดมืด : จะสิ้นสุดการยึดครอง สงคราม ตลาดมืด ในอีก 5 นาที ใครจะแข็งแกร่งที่สุด!!",bc_all;
+end;
+
+}
+
+function	script	CasinoM_Flags	{
+	set .@GID, GetCastleData(getarg(1),1);
+	if (getarg(5) == 0) return;
+	if (.@GID == 0) {
+		mes "ยังไม่มีใครยึดครองที่แห่งนี้ มีเพียง NPC ธรรมดาๆ";
+		return;
+	}
+	else {
+		if (getcharid(2) == .@GID && getarg(4) == 1) {
+			if (select("เข้าบ้านกิล:ยกเลิก.") == 1) {
+				if (getcharid(2) == GetCastleData(getarg(1),1))
+					warp getarg(1),getarg(2),getarg(3);
+			}
+			return;
+		}
+		mes "กิล ^ff0000" + GetGuildName(.@GID) + "^000000 ได้คุมยึดครองที่แห่งนี้อยู่.....";
+
+		return;
+	}
+}
+
+morocc,239,70,4	script	ธง สงคราม ตลาดมืด#1	722,{
+	callfunc "CasinoM_Flags","บ่อนคาสิโน",$@casinimafiamap$,$casinimafiawarpx,$casinimafiawarpy,1,1;
+	end;
+OnRecvCastleN01:
+	FlagEmblem GetCastleData($@casinimafiamap$,1);
+	end;
+}
+
+/////////////เปลี่ยนแมพ Morocc///////////////////
+nemesis	mapflag	noteleport	//ห้ามเทเลพอต
+nemesis	mapflag	nomemo	//ห้ามเซฟวาป
+nemesis	mapflag	nobranch	//ห้ามหักไม่ผี
+nemesis	mapflag	noreturn	//ออกจากเกมเข้าใหม่กลับจุดเซฟ
+nemesis	mapflag	nosave	SavePoint	//ห้ามเซฟแมพ

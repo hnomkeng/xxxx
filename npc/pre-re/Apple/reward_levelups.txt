@@ -1,0 +1,273 @@
+/**
+ *	========================================= TERMS OF SERVICES =========================================
+ *	1. ALL RIGHT RESERVED RE-SELLER OR SHARE SCRIPT TO PUBLISH.
+ *	2. BUT YOU RE-SELLER OR SHARE SCRIPT WITH OUT UNAUTHORIZRD I WILL ALL CANCEL MY SUPPORT FOR YOU.
+ *	3. MAINTENANCE SCRIPTS WILL BE FREE SERVICES.
+ *	4. I WILL NOT KEEP ANY INFORMATIONS FROMS YOU SERVER THAT YOU SEND FOR ME.
+ *	5. I HOPE YOU WILL ALL ACCEPT TERMS OF SERVICES.
+ *	=====================================================================================================
+ *	Script. Reward Level
+ *	Create By. Athena Studio
+ *	Bug Report. Kittisak Sarounram [ FB ]
+ *	Contact Us. Kittisak Sarounram [ FB ]
+ *	=====================================================================================================
+ **/
+
+morocc,154,137,5	script	Reward Level	4_F_PINKWOMAN,{
+	
+	mes "[ Reward Level ]";
+	mes "สวัสดีนักผจญภัยทั้งหลาย";
+	mes "สำหรับนักผจญภัยหน้าใหม่ในช่วงแรกเริ่มนั้น";
+	mes "การเก็บเลเวลค่อนข้างจะยากลำบาก";
+	mes "แต่นั่นก็คือกฏแห่งสังคมที่จะต้องมีการแข่งขันที่สูงตาม.";
+	next;
+	mes "[ Reward Level ]";
+	mes "ข้าจึงมีข้อเสนอที่แสนจะง่ายดาย";
+	mes "เพียงแค่นักผจญภัยพยายามเก็บเลเวลแข่งขันกับผู้อื่น";
+	mes "ในแต่ละสายอาชีพของตนเอง.";
+	next;
+	mes "[ Reward Level ]";
+	mes "เมื่อนักผจญภัยรู้ตัวว่าตัวเองนั้นได้เก็บเลเวลจนถึงที่สุดในคลาสนั้น";
+	mes "โปรดจำไว้ให้ดีว่าอย่าลืมมารับรางวัลที่ข้าโดยเร็ว.";
+	next;
+	mes "[ Reward Level ]";
+	mes "^FF0000รางวัลมีจำนวนจำกัด.^000000";
+	next;
+	switch(select("~ รับของรางวัล:~ อันดับผู้เล่นรับรางวัล:~ ตรวจสอบจำนวนผู้รับรางวัล:~ ยกเลิกการสนทนา"))
+	{
+		case 1:
+			query_sql("SELECT `char_id`, `claim_timestamp`, `status` FROM `class_reward_logs` WHERE `account_id` = '"+ getcharid(3) +"' AND `char_id` = '"+ getcharid(0) +"' AND `status` = '1' "),.@cid, .@date$, .@status;
+			if ( .@cid && .@status >= 1 )
+			{
+				mes "[ Reward Level ]";
+				mes "คุณได้รับรางวัลเรียบร้อยแล้ว.";
+				mes "คุณรับเมื่อเวลา : ";
+				mes .@date$;
+				break;
+			}
+			
+			query_sql( "SELECT `id`, `job_id`, `item_id`, `amount`, `min`, `max` FROM `class_reward`", .@id, .@job_id, .@item_id$, .@amount$, .@min, .@max);
+			.@i = select(.menu$)-1; set .save_id,.@job_id[.@i];
+			
+			if ( .@min[.@i] >= .@max[.@i] )
+			{
+				mes "[ Reward Level ]";
+				mes "มีผู้เล่นรับรางวัลครบจำนวนลิมิตเรียบร้อยแล้ว";
+				break;
+			}
+			
+			if ( Class != .@job_id[.@i] )
+			{
+				mes "[ Reward Level ]";
+				mes "สายอาชีพที่คุณเลือกไม่ตรงกับอาชีพในปัจจุบันของคุณ";
+				break;
+			}
+			
+			if ( BaseLevel != .BaseLevel )
+			{
+				mes "[ Reward Level ]";
+				mes "จำนวนเลเวล หรือ จ็อบเลเวล ของคุณไม่เพียงพอต่อเงื่อนใขที่ต้องการ";
+				break;
+			}
+			
+			.@reward = callsub( RewardSize,.@item_id$[.@i],.@itemid,0 );
+			if ( .@reward )
+					callsub( RewardSize,.@amount$[.@i],.@amounts,0 );
+				
+			if ( Job_Novice == .@job_id[.@i] && BaseLevel == .BaseLevel )
+			{
+				if(  .@reward )
+					query_sql( "UPDATE `class_reward` SET `min` = `min` + '1' WHERE `job_id` = '"+ .save_id +"'" );
+					query_sql( "INSERT INTO `class_reward_logs` ( `id`, `name`, `job_id`, `char_id`, `account_id`, `claim_timestamp`, `ip_address`, `status` ) VALUES ( '', '"+ strcharinfo(0) +"', '"+ jobname(.@job_id[.@i]) +"', '"+ getcharid(0) +"', '"+ getcharid(3) +"', '"+ gettimestr("%Y-%m-%d %H:%M:%S",21) +"', '"+ getcharip() +"', '1' )" );
+					for ( .@i = 0; .@i < .@reward; .@i++ )
+						getitem .@itemid[.@i],.@amounts[.@i];
+					query_sql( "SELECT `min`, `max` FROM `class_reward` WHERE `job_id` = '"+ .save_id +"'", .@min, .@max);
+					announce ""+ strcharinfo(0) +" ได้รับของรางวัลจากสายอาชีพ "+ jobname(.save_id) +" [ "+ .@min +" | "+ .@max +" ] !",bc_blue|bc_all;
+					break;
+			}
+			
+			if(  .@reward )
+				query_sql( "UPDATE `class_reward` SET `min` = `min` + '1' WHERE `job_id` = '"+ .save_id +"'" );
+				query_sql( "INSERT INTO `class_reward_logs` ( `id`, `name`, `job_id`, `char_id`, `account_id`, `claim_timestamp`, `ip_address`, `status` ) VALUES ( '', '"+ strcharinfo(0) +"', '"+ jobname(.@job_id[.@i]) +"', '"+ getcharid(0) +"', '"+ getcharid(3) +"', '"+ gettimestr("%Y-%m-%d %H:%M:%S",21) +"', '"+ getcharip() +"', '1' )" );
+				for ( .@i = 0; .@i < .@reward; .@i++ )
+					getitem .@itemid[.@i],.@amounts[.@i];
+				query_sql( "SELECT `min`, `max` FROM `class_reward` WHERE `job_id` = '"+ .save_id +"'", .@min, .@max);
+				announce ""+ strcharinfo(0) +" ได้รับของรางวัลจากสายอาชีพ "+ jobname(.save_id) +" [ "+ .@min +" | "+ .@max +" ] !",bc_blue|bc_all;
+				break;
+			
+		case 2:
+			switch(select("~ 2-1 Class:~ 2-2 Class:~ ยกเลิกการสนทนา"))
+			{
+				case 1:
+					switch(select("~ Knight Ranking:~ Priest Ranking:~ Wizard Ranking:~ Hunter Ranking:~ Blacksmith Ranking:~ Assassin Ranking:~ ยกเลิกการสนทนา"))
+					{
+						case 1:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Knight' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+					
+						case 2:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Priest' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+							
+						case 3:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Wizard' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+							
+						case 4:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Hunter' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+							
+						case 5:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Blacksmith' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+							
+						case 6:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Assassin' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+							
+						default:
+							break;
+					}
+					break;
+					
+				case 2:
+					switch(select("~ Crusader Ranking:~ Monk Ranking:~ Sage Ranking:~ Rogue Ranking:~ ยกเลิกการสนทนา"))
+					{
+						case 1:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Crusader' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+					
+						case 2:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Monk' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+							
+						case 3:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Sage' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+																
+						case 4:
+							query_sql("SELECT `id`, `name`, `claim_timestamp` FROM `class_reward_logs` WHERE `job_id` = 'Rogue' ORDER BY `id` DESC LIMIT 1"), .@id, .@name$, .@date$;
+							mes "[ Reward Level ]";
+							for ( set .@i, 0; .@i < getarraysize(.@id); set .@i, .@i+1 )
+								mes (.@i+1) +". ^F90097"+ .@name$[.@i] +"^000000 : [ ^FF0000"+ .@date$[.@i] +"^000000 ]";
+							break;
+												
+						default:
+							break;
+					}
+					break;
+			}
+			break;
+			
+		case 3:
+			query_sql( "SELECT `job_id`, `min`, `max` FROM `class_reward`", .@job_id, .@min, .@max);
+			mes "[ Reward Level ]";
+			for ( set .@i, 0; .@i < getarraysize(.@job_id); set .@i, .@i+1 )
+				mes "~ ^F90097"+ jobname(.@job_id[.@i]) +"^000000 [^FF0000"+ .@min[.@i] +"|"+ .@max[.@i] +"^000000]";
+			break;
+			
+		default:
+			break;
+	}
+	end;
+	
+RewardSize:
+	.@arg = getarg(2); explode( getarg(0),getarg(0),"|" ); .@val = getarraysize( getarg(0) );
+	if ( !.@val )
+		return 0;
+	while( .@i < .@val )
+	{
+		if( !.@arg )
+		{
+			.@value = atoi( getelementofarray( getarg(0),.@i ) );
+			if( .@value )
+			{
+				set getelementofarray( getarg(1),.@size ),.@value;
+				.@size++;
+			}
+		}
+		else
+		{
+			set getelementofarray( getarg(1),.@size ),getelementofarray( getarg(0),.@i );
+			.@size++;
+		}
+		.@i++;
+	}
+	return .@size;
+
+OnInit:
+	waitingroom "รับรางวัลอันดับอาชีพ",0;
+	setarray .Jobs[0],7,8,9,10,11,12,14,15,16,17;
+	.BaseLevel = 99;
+	.JobNovice = 10;
+	.@job_size = getarraysize(.Jobs);
+	for ( .@i = 0; .@i < .@job_size; .@i++ )
+		.menu$ = .menu$ +"~ "+ jobname(.Jobs[.@i]) +":";
+	end;
+}
+
+/**
+
+	CREATE TABLE IF NOT EXISTS `class_reward` (
+		`id` INT(11) NOT NULL AUTO_INCREMENT,
+		`job_id` VARCHAR(155) DEFAULT NULL,
+		`item_id` VARCHAR(155) DEFAULT NULL,
+		`amount` VARCHAR(155) DEFAULT NULL,
+		`min` int(11) DEFAULT '0',
+		`max` int(11) DEFAULT '1',
+		PRIMARY KEY (`id`)
+	) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+	
+	INSERT INTO `class_reward` (`id`, `job_id`, `item_id`, `amount`, `min`, `max`) VALUES
+	(1, 7, '|501|', '|1|', 0, 1),
+	(2, 8, '|501|', '|2|', 0, 1),
+	(3, 9, '|501|', '|3|', 0, 1),
+	(4, 10, '|501|', '|4|', 0, 1),
+	(5, 11, '|501|', '|5|', 0, 1),
+	(6, 12, '|501|', '|6|', 0, 1),
+	(7, 14, '|501|', '|7|', 0, 1),
+	(8, 15, '|501|', '|8|', 0, 1),
+	(9, 16, '|501|', '|9|', 0, 1),
+	(10, 17, '|501|', '|10|', 0, 1),
+	
+
+	CREATE TABLE IF NOT EXISTS `class_reward_logs` (
+		`id` INT(11) NOT NULL AUTO_INCREMENT,
+		`name` VARCHAR(55) DEFAULT NULL,
+		`job_id` VARCHAR(145) DEFAULT NULL,
+		`char_id` INT(11) DEFAULT NULL,
+		`account_id` INT( 11 ) UNSIGNED NOT NULL,
+		`claim_timestamp` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+		`ip_address` VARCHAR(145) DEFAULT NULL,
+		`status` INT(11) DEFAULT NULL,
+		PRIMARY KEY (`id`)
+	) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+**/

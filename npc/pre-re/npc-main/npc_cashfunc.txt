@@ -1,0 +1,9 @@
+function	script	Cash_Item	{
+set .cashitem, 671;	//- กำหนดรหัส Cash Item
+set .itemamount,countitem(.cashitem);
+delitem .cashitem,.itemamount;
+set #CASHPOINTS,#CASHPOINTS+.itemamount+1;
+set .totalcash,.itemamount+1;
+dispbottom "คุณได้รับ "+.totalcash+" Cash Points รวมทั้งหมด "+#CASHPOINTS+" points";
+end;
+}

@@ -1,0 +1,34 @@
+/*
+=================== TERMS OF SERVICES. ===================
+1. ALL RIGHT RESERVED RE-SELLER OR SHARE SCRIPT TO PUBLISH.
+2. BUT YOU RE-SELLER OR SHARE SCRIPT WITH OUT UNAUTHORIZRD
+   I WILL ALL CANCEL MY SUPPORT FOR YOU.
+3. MAINTENANCE SCRIPTS WILL BE FREE SERVICES.
+4. I WILL NOT KEEP ANY INFORMATIONS FROMS YOU SERVER THAT
+   YOU SEND FOR ME.
+5. I HOPE YOU WILL ALL ACCEPT TERMS OF SERVICES.
+==========================================================
+Script. Blacksmith Ingredients																				 
+Create By. Athena Studio
+Bug Report. Kittisak Sarounram [ FB ]																					 
+Contact Us. Kittisak Sarounram [ FB ]																					 
+TEL. 0909183008 [ TRUE MOVE H ]																					 
+==========================================================
+*/
+-	shop	blacksmith	-1,612:-1,613:-1,615:-1,614:-1,986:-1,987:-1,988:-1,989:-1,1010:-1,1011:-1,998:-1,1002:-1,999:-1,1003:-1,994:-1,990:-1,995:-1,991:-1,996:-1,992:-1,997:-1,993:-1,1000:-1,1001:-1,726:-1,729:-1,728:-1,718:-1,724:-1,727:-1,719:-1,733:-1,722:-1,720:-1,909:-1,913:-1,920:-1,958:-1,957:-1,922:-1,963:-1,923:-1								
+
+morocc,119,96,4	script	ส่วนผสมทำอาวุธธาตุ	659,{
+	callshop "blacksmith",1;	
+end;	
+OnInit: 
+waitingroom "ส่วนผสมทำอาวุธธาตุ",0; 
+end;
+}
+
+
+prontera,134,201,0	monster	มหาสงครามศักดิ์สิทธิ์	3300,1,0,0,1
+prontera,137,207,0	monster	มอนเตอร์ทั่วไป	3301,1,0,0,1
+prontera,141,212,0	monster	มอนเตอร์ธาตุ	3302,1,0,0,1
+prontera,145,218,0	monster	มอนเตอร์กึ่งมนุษย์	3303,1,0,0,1
+prontera,148,222,0	monster	มอนเตอร์มินิบอส	3304,1,0,0,1
+prontera,155,226,0	monster	มอนเตอร์บอส	3305,1,0,0,1

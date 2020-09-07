@@ -1,0 +1,308 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,88,252,4	script	ไก่ชนจอมซน	407,{
+	
+	switch(select("^FF0000•^000000 เริ่มกิจกรรม:^FF0000•^000000 ยกเลิกการสนทนา"))
+	{
+		case 1:
+			if ( Zeny < $@Fee2 ) { mes "[ ไก่ชนจอมซน ]"; mes "นี่... ฉันต้องการค่าธรรมเนียม 300,000 Zeny"; close; }
+			if ( $@Running != 0 ) { mes "[ ไก่ชนจอมซน ]"; mes "กิจกรรมกำลังจะเตรียม โปรดรอสักครู่..."; close; }
+			if ( .Start != 0 ) { mes "[ ไก่ชนจอมซน ]"; mes "กิจกรรมกำลังจะเริ่มต้นขึ้น โปรดลงพนันมอนสเตอร์ก่อนที่มอนสเตอร์จะเข้าสู่สนาม..."; close; }
+				mes "[ ไก่ชนจอมซน ]";	mes "อย่าลืมลงพนันก่อนเวลาหมดซะก่อนล่ะ...";	close2;
+			.Start = 1;
+			set Zeny,Zeny - $@Fee2;
+			set .Mobs,2;
+			set $@redteam, .RndMonster1[rand(getarraysize(.RndMonster1))];
+			set $@blueteam, .RndMonster2[rand(getarraysize(.RndMonster2))];
+			setnpcdisplay "Monster Game",$@redteam;
+			setnpcdisplay "Monster Game",$@blueteam;
+			//mapannounce "prontera",""+ strnpcinfo(0) +" ได้เริ่มต้นขึ้นแล้ว มีเวลาลงพนัน เพียง 1 นาที ก่อนที่จะจัดเตรียมมอนสเตอร์เข้าสู่การประลอง",bc_map,"0xFFCE00";
+			npctalk "[ ไก่ชนจอมซน ] : ท่านมีเวลาลงเดิมพัน เพียง 1นาที";
+			sleep 6000;
+			npctalk "[ ไก่ชนจอมซน ] : พบกับการประลอง ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" (ทีมฝั่งซ้าย) vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" (ทีมฝั่งขวา)";
+			//mapannounce "prontera",""+ strnpcinfo(0) +" การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +"",bc_map,"0xFFCE00";
+			sleep 6000;
+			donpcevent strnpcinfo(0) +"::OnPlayed";
+			end;
+			
+		case 2:
+		end;
+	}
+	end;
+	
+OnPlayed:
+	npctalk "[ ไก่ชนจอมซน ] : จะเริ่มในอีก 1นาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 30000;
+	npctalk "[ ไก่ชนจอมซน ] : จะเริ่มในอีก 30 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 25000;
+	npctalk "[ ไก่ชนจอมซน ] : จะเริ่มในอีก 5 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	npctalk "[ ไก่ชนจอมซน ] : จะเริ่มในอีก 4 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	npctalk "[ ไก่ชนจอมซน ] : จะเริ่มในอีก 3 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	npctalk "[ ไก่ชนจอมซน ] : จะเริ่มในอีก 2 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	npctalk "[ ไก่ชนจอมซน ] : จะเริ่มในอีก 1 วินาที ใครที่ยังไม่มารับรางวัล โปรดรีบมารับด้วย !";
+	sleep 1000;
+	npctalk "[ ไก่ชนจอมซน ] : ศึกการประลอง ได้เริ่มขึ้นแล้ว ฝ่ายใดจะเป็นฝ่ายชนะ" ;
+	set $@Running,1;
+	set $@Check,0;
+	set $Round,$Round+1;
+	monster "prontera",87,246,getmonsterinfo($@redteam,MOB_NAME) +"",$@redteam,1,strnpcinfo(0) +"::Onreddie",0,1;
+	monster "prontera",92,246,getmonsterinfo($@blueteam,MOB_NAME) +"",$@blueteam,1,strnpcinfo(0) +"::Onbluedie",0,0;
+	setmapflag "prontera", mf_monster_noteleport;
+	setmapflag "prontera", mf_nomobloot;
+	end;
+	
+Onreddie:
+	set .Mobs,.Mobs-1;
+	if ( .Mobs == 1 )
+	{
+		set $@Check,2;
+		//mapannounce "prontera",""+ strnpcinfo(0) +" การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" ฝ่าย "+ getmonsterinfo($@blueteam,MOB_NAME) +" เป็นฝ่ายชนะ",bc_map,"0x00FF00";
+		npctalk "[ ไก่ชนจอมซน ] : การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" เป็น [ "+ getmonsterinfo($@blueteam,MOB_NAME) +" ] ฝ่ายชนะ";
+		sleep 2000;
+		donpcevent "Monster Game#0"+$@Check+"::OnEffect";
+		donpcevent strnpcinfo(0) +"::OnEnd";
+		end;
+	}
+	end;
+
+Onbluedie:
+	set .Mobs,.Mobs-1;
+	if ( .Mobs == 1 )
+	{
+		set $@Check,1;
+		//mapannounce "prontera",""+ strnpcinfo(0) +" การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" ฝ่าย "+ getmonsterinfo($@redteam,MOB_NAME) +" เป็นฝ่ายชนะ",bc_map,"0x00FF00";
+		npctalk "[ ไก่ชนจอมซน ] : การต่อสู้ระหว่าง "+ getmonsterinfo($@redteam,MOB_NAME) +" vs "+ getmonsterinfo($@blueteam,MOB_NAME) +" เป็น [ "+ getmonsterinfo($@redteam,MOB_NAME) +" ] ฝ่ายชนะ";
+		sleep 2000;
+		donpcevent "Monster Game#0"+$@Check+"::OnEffect";
+		donpcevent strnpcinfo(0) +"::OnEnd";
+		end;
+	}
+	end;
+
+OnEnd:
+	set $@Running,0;
+	.Start = 0;
+	killmonsterall "prontera";
+	donpcevent "Monster Game#01::OnReset";
+	donpcevent "Monster Game#02::OnReset";
+	end;
+
+OnInit:
+	set $@Fee2,300000;
+	set $@Fee,2000000;
+	set $@Running,0;
+	set $@Check,0;
+	set $Counter1,0;
+	set $Counter2,0;
+	set $Played1,0;
+	set $Played2,0;
+	setarray .RndMonster1[0],3577,3577;
+	setarray .RndMonster2[0],3578,3578;
+//waitingroom "เจ้ามือไก่ชนจอมซน",0;
+end;
+}
+
+function	script	BetMonster	{
+	
+	if ( $@Running != 0 ) { mes "[ ไก่ชนจอมซน ]"; mes "กิจกรรมกำลังจะเตรียม โปรดรอสักครู่..."; close; }
+	
+	set .@bet,getarg(0);
+	set .@recieve,getarg(1);
+	
+	if ( getd("Cost"+.@bet) > 0 )
+	{
+		if ( getd("Round"+.@bet) == $Round -1 && .@bet == $@Check )
+		{
+			set .@i,(getd("Cost"+.@bet)*.@recieve)-100000;
+			set Zeny,Zeny + .@i;
+			setd "Cost"+.@bet,0;
+			mes "[ ไก่ชนจอมซน ]";
+			mes "นี่คือยอดเงินรวมหักภาษี";
+			mes ""+ callfunc("F_InsertComma",.@i) +" Zeny";
+			close;
+		}
+	}
+	
+	if ( getd("Cost"+.@bet) != 0 && getd("Round"+.@bet) == $Round )
+	{
+		mes "[ ไก่ชนจอมซน ]";
+		mes "ไม่สามารถลงเดิมพันได้";
+		mes	"คุณได้ลงเดิมพันมอนสเตอร์ตัวนี้";
+		mes "เรียบร้อยแล้ว";
+		close;
+	}
+	
+	mes "[ ไก่ชนจอมซน ]";
+	mes "ค่าธรรมเนียมต่อรอบ";
+	mes ""+ callfunc("F_InsertComma",$@Fee ) +" Zeny";
+	mes "หากมอนสเตอร์ที่ท่านลงชนะ";
+	mes "ท่านจะได้รับค่าตอบแทนเป็น^FF0000สองเท่า^000000";
+	mes "แต่... ท่านจะต้องเสียภาษีค่าใช้จ่าย 5%";
+	next;
+	
+	if(select("^FF0000•^000000 ยืนยันการลงพนัน:^FF0000•^000000 ยกเลิก") == 2 ) close;
+	
+	if ( Zeny < $@Fee ) { mes "[ ไก่ชนจอมซน ]"; mes "นี่... คิดจะโกงหรือยังไง !"; close; }
+	
+	set Zeny,Zeny - $@Fee;
+	setd "Cost"+.@bet,$@Fee;
+	delwaitingroom "Monster Game#0"+.@bet;
+	setd "$Counter"+.@bet,getd("$Counter"+.@bet)+$@Fee;
+	setd "$Played"+.@bet,getd("$Played"+.@bet)+1;
+	waitingroom "ลงเดิมพัน [ "+ getd("$Played"+.@bet) +" ] คน",0;
+	setd "Round"+.@bet,$Round;
+	
+	mes "[ ไก่ชนจอมซน ]";
+	mes "คุณได้ลงเดิมพัน";
+	mes "มอนสเตอร์หมายเลข "+.@bet+" เรียบร้อยแล้ว";
+	close;
+	
+	return;
+}
+
+prontera,88,256,4	script	Monster Game#01	3577,{
+	callfunc ("BetMonster",1,2);
+end;
+OnEffect:
+	for(set .@i,1; .@i < 5; set .@i,.@i+1){
+		specialeffect 183;
+		sleep 500;
+	}
+	specialeffect 68;
+end;
+OnReset:
+	delwaitingroom "Monster Game#01";
+	set $Counter1,0;
+	set $Played1,0;
+	setnpcdisplay "Monster Game",$@redteam;
+	waitingroom "ไก่ชนพม่า [ 0 ] คน",0;
+	end;
+	
+OnInit:
+	waitingroom "ไก่ชนพม่า [ 0 ] คน",0;
+	end;
+}
+
+prontera,93,252,4	script	Monster Game#02	3578,{
+	callfunc ("BetMonster",2,2);
+end;
+OnEffect:
+	for(set .@i,1; .@i < 5; set .@i,.@i+1){
+		specialeffect 183;
+		sleep 500;
+	}
+	specialeffect 68;
+end;
+OnReset:
+	delwaitingroom "Monster Game#02";
+	set $Counter2,0;
+	set $Played2,0;
+	setnpcdisplay "Monster Game",$@blueteam;
+	waitingroom "ไก่ชนไทย [ 0 ] คน",0;
+	end;
+
+OnInit:
+	waitingroom "ไก่ชนไทย [ 0 ] คน",0;
+	end;
+}
+
+-	script	กรงไก่ชนer	FAKE_NPC,{
+	end;
+	
+OnInit:
+	setwall "prontera",84,249,1,1,0,"กรงไก่ชน#1";
+	setwall "prontera",85,249,1,1,0,"กรงไก่ชน#2";
+	setwall "prontera",86,249,1,1,0,"กรงไก่ชน#3";
+	setwall "prontera",87,249,1,1,0,"กรงไก่ชน#4";
+	setwall "prontera",88,249,1,1,0,"กรงไก่ชน#5";
+	setwall "prontera",89,249,1,1,0,"กรงไก่ชน#6";
+	setwall "prontera",90,249,1,1,0,"กรงไก่ชน#7";
+	setwall "prontera",91,249,1,1,0,"กรงไก่ชน#8";
+	setwall "prontera",92,249,1,1,0,"กรงไก่ชน#9";
+	setwall "prontera",93,249,1,1,0,"กรงไก่ชน#10";
+	setwall "prontera",94,249,1,1,0,"กรงไก่ชน#11";
+	setwall "prontera",95,249,1,1,0,"กรงไก่ชน#12";
+	
+	setwall "prontera",95,248,1,1,0,"กรงไก่ชน#13";
+	setwall "prontera",95,247,1,1,0,"กรงไก่ชน#14";
+	setwall "prontera",95,246,1,1,0,"กรงไก่ชน#15";
+	setwall "prontera",95,245,1,1,0,"กรงไก่ชน#16";
+	setwall "prontera",95,244,1,1,0,"กรงไก่ชน#17";
+	
+	setwall "prontera",95,243,1,1,0,"กรงไก่ชน#18";
+	setwall "prontera",94,243,1,1,0,"กรงไก่ชน#19";
+	setwall "prontera",93,243,1,1,0,"กรงไก่ชน#20";
+	setwall "prontera",92,243,1,1,0,"กรงไก่ชน#21";
+	setwall "prontera",91,243,1,1,0,"กรงไก่ชน#22";
+	setwall "prontera",90,243,1,1,0,"กรงไก่ชน#23";
+	setwall "prontera",89,243,1,1,0,"กรงไก่ชน#24";
+	setwall "prontera",88,243,1,1,0,"กรงไก่ชน#25";
+	setwall "prontera",87,243,1,1,0,"กรงไก่ชน#26";
+	setwall "prontera",86,243,1,1,0,"กรงไก่ชน#27";
+	setwall "prontera",85,243,1,1,0,"กรงไก่ชน#28";
+	setwall "prontera",84,243,1,1,0,"กรงไก่ชน#29";
+	
+	setwall "prontera",84,244,1,1,0,"กรงไก่ชน#30";
+	setwall "prontera",84,245,1,1,0,"กรงไก่ชน#31";
+	setwall "prontera",84,246,1,1,0,"กรงไก่ชน#32";
+	setwall "prontera",84,247,1,1,0,"กรงไก่ชน#33";
+	setwall "prontera",84,248,1,1,0,"กรงไก่ชน#34";
+	
+	setcell "prontera",84,250,95,242,cell_landprotector,1;
+	setcell "prontera",84,250,95,242,cell_basilica,1;
+	end;
+	
+}
+
+prontera,84,249,4	script	กรงไก่ชน#1	11118,{}
+prontera,85,249,4	script	กรงไก่ชน#2	11118,{}
+prontera,86,249,4	script	กรงไก่ชน#3	11118,{}
+prontera,87,249,4	script	กรงไก่ชน#4	11118,{}
+prontera,88,249,4	script	กรงไก่ชน#5	11118,{}
+prontera,89,249,4	script	กรงไก่ชน#6	11118,{}
+prontera,90,249,4	script	กรงไก่ชน#7	11118,{}
+prontera,91,249,4	script	กรงไก่ชน#8	11118,{}
+prontera,92,249,4	script	กรงไก่ชน#9	11118,{}
+prontera,93,249,4	script	กรงไก่ชน#10	11118,{}
+prontera,94,249,4	script	กรงไก่ชน#11	11118,{}
+prontera,95,249,4	script	กรงไก่ชน#12	11118,{}
+
+prontera,95,248,4	script	กรงไก่ชน#13	11118,{}
+prontera,95,247,4	script	กรงไก่ชน#14	11118,{}
+prontera,95,246,4	script	กรงไก่ชน#15	11118,{}
+prontera,95,245,4	script	กรงไก่ชน#16	11118,{}
+prontera,95,244,4	script	กรงไก่ชน#17	11118,{}
+
+prontera,95,243,4	script	กรงไก่ชน#18	11118,{}
+prontera,94,243,4	script	กรงไก่ชน#19	11118,{}
+prontera,93,243,4	script	กรงไก่ชน#20	11118,{}
+prontera,92,243,4	script	กรงไก่ชน#21	11118,{}
+prontera,91,243,4	script	กรงไก่ชน#22	11118,{}
+prontera,90,243,4	script	กรงไก่ชน#23	11118,{}
+prontera,89,243,4	script	กรงไก่ชน#24	11118,{}
+prontera,88,243,4	script	กรงไก่ชน#25	11118,{}
+prontera,87,243,4	script	กรงไก่ชน#26	11118,{}
+prontera,86,243,4	script	กรงไก่ชน#27	11118,{}
+prontera,85,243,4	script	กรงไก่ชน#28	11118,{}
+prontera,84,243,4	script	กรงไก่ชน#29	11118,{}
+
+prontera,84,244,4	script	กรงไก่ชน#30	11118,{}
+prontera,84,245,4	script	กรงไก่ชน#31	11118,{}
+prontera,84,246,4	script	กรงไก่ชน#32	11118,{}
+prontera,84,247,4	script	กรงไก่ชน#33	11118,{}
+prontera,84,248,4	script	กรงไก่ชน#34	11118,{}

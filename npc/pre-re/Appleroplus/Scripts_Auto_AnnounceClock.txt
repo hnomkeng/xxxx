@@ -1,0 +1,33 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Auto_AnnounceClock	-1,{
+end;
+OnMinute00:
+OnMinute10:
+OnMinute20:
+OnMinute30:
+OnMinute40:
+OnMinute50:
+set $anno,rand(1,9);
+if($anno == 1){	Announce "[ เพื่อนๆสามารถติดต่อ ทีมงานได้ที่ www.denied-ro.com ได้ตามเวลาทำการ ]",0xFFFF00;	end;	}
+if($anno == 2){	Announce "[ GM จะไม่ขอ ID Password ผู้เล่นเป็นอัดขาด โปรดระวัง มิจฉาชีพ ]",0xFFFF00;	end;	}
+if($anno == 3){	Announce "[ หากพบการขายของ เป็นเงินจริง หากพบเห็นจะถูกลงโทษ แบน ID ถาวร ]",0x00FFFF;	end;	}
+if($anno == 4){	Announce "[ พบปัญหาการเข้าเล่น หรือ การใช้งานสามารถ แจ้งทีมงาน ได้ที่ www.denied-ro.com ]",0xFFFF00;	end;	}
+if($anno == 5){	Announce "[ หากพบผู้ที่ทำผิดกฏระเบียบ ของเกม สามารถ แจ้งทีมงาน ได้ที่ www.denied-ro.com ]",0xFFFF00;	end;	}
+if($anno == 6){	Announce "[ เนื่องจากมีผู้เล่นจำนวนมาก อาจจะทำให้มีการล่าช้าในการตอบปัญหา รบกวนเพื่อนๆอดใจรอกันหน่อยนะคะ]",0xFFFF00;	end;	}
+if($anno == 7){	Announce "[ พบกับโปรโมชั่นใหม่สุดแรร์  ไม่มีไม่ได้แล้ว ของดีมันต้องมี !!!]",0x00FFFF;	end;	}
+if($anno == 8){	Announce "[ อย่าทำการตั้ง ID Password เหมือน Server อื่นที่เคยเล่นมา เผื่อความปลอดภัย ทีมงานจะไม่รับผิดชอบใดๆ ]",0xFFFF00;	end;	}
+if($anno == 9){	Announce "[ หากพบการใช้โปรแกรมช่วยเล่น หรือ โปรแกรมโกงเกม หรือ แก้ไขดัดแปลงตัวเกมผิดแปลกไปจากเดิม บทลงโทษคือ แบน ID ถาวร ]",0xFFFF00;	end;	}
+end;
+}

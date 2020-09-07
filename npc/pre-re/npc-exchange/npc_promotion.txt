@@ -1,0 +1,29 @@
+function	script	promotion01	{
+	setarray .i1[1],12208,12209,12210,12211,12212,12215,12216,14527,12221,607,608,14536,14537,14542,14544,984,985,603,617,644; // Common Items
+	set .i1rand,rand(1,20); // Randomize Common Items; just change max amount if you add items
+	setarray .i2[1],7776,5506,5507,7619,7620; // Rare Items
+	set .i2rand,rand(1,5); // Randomize Rare Items; just change max amount if you add items
+	setarray .i3[1],41001,41002; // Super Rare Items
+	set .i3rand,rand(1,2); //Randomize Super Rare Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		// Super Rare Item 5%
+		if (.chance == 5){
+		getitem .i3[.i3rand],1;
+		announce "ผู้เล่น"+strcharinfo(0)+" เปิดกล่อง Promotion Box V.1 และได้รับ "+getitemname(.i3[.i3rand])+"",0;
+		end;
+		} 
+
+		// Rare Item 20%
+		else if (.chance == 20){
+		getitem .i2[.i2rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" เปิดกล่อง Promotion Box V.1 และได้รับ "+getitemname(.i2[.i2rand])+"",0;
+		end;
+		} 
+
+		// Common Items
+		else {
+		getitem .i1[.i1rand],1;
+		end; 
+		}
+}

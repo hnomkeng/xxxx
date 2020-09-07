@@ -1,0 +1,153 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+/*
+CREATE TABLE `promotiontm` (
+  `user_id` int(11) UNSIGNED NOT NULL,
+  `password` varchar(14) NOT NULL
+) DEFAULT CHARSET=utf8;
+*/
+
+prontera,181,213,4	script	ทรูมันนี่ใจดีให้เพิ่ม	11104,{
+// ราคาบัตรเรียงตาม 		    50,	90,	150,	300,	500,	1000
+setarray .@tmcard[1],	50,	90,	150,	300,	500,	1000;	// ราคาบัตร
+setarray .@tmpoint[1],	50,	90,	150,    300,	500,	1000;	// พ้อยที่ได้รับเมื่อลุ้นสำเร็จของแต่ละบัตร
+setarray .@tmper[1],	80,	80,	80,	    80,	    80,	    80;	// โอกาศที่จะได้รับของแต่ละบัตร
+set .@tmcardnum,0;	// 1 ไอดี เติมบัตรที่ตัวเองเติมสำเร็จ ได้กี่ครั้ง 0 = ไม่จำกัด
+set .@tmcardrand,100;	// โอกาศสุ่มเต็ม 100 (ไม่แก้ไขดีกว่า)
+// สำคัญ : โปรดให้ตรงกับราคาบัตร
+PT_main:
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "^FF00001 ไอดี";
+mes "ลุ้นรับได้เฉพาะบัตร";
+mes "ที่ตัวเองเติมเท่านั้น";
+mes "1 บัตรมีค่า 1 สิทธิ์^000000";
+if (.@tmcardnum != 0) mes "คุณสามาถเติมได้อีก : "+TMPro+"/"+.@tmcardnum+"";
+if (.@tmcardnum > 0) mes "คุณสามารถลุ้นรับพ้อยได้ไม่อั้น"; 
+mes "โปรดเลือกเมนู";
+next;
+switch(select("^FF0000•^000000 รับสิทธิ์ทรูมันนี่","^FF0000•^000000 ข้อมูลเพิ่มเติม","^FF0000•^000000 ยกเลิก")){
+Case 1:
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+if (.@tmcardnum != 0 && TMPro >= .@tmcardnum) {
+mes "^FF0000คุณเติมมาครบจำนวนครั้งแล้ว^000000";
+close;
+}
+mes "โปรดใส่รหัสบัตร Truemoney 14 หลัก";
+mes "^FF0000มั่วมากระวังโดนแบนไอพี^000000";
+mes "ใส่ 0 = ยกเลิก";
+input .@truemoney$;
+if (.@truemoney$ == "0") close;
+query_sql "SELECT `password` FROM `truemoney` WHERE `password`='"+.@truemoney$+"'",.@truemoneya$;
+if (.@truemoney$ != .@truemoneya$) {
+mes "^FF0000รหัสบัตร Truemoney ผิดพลาด^000000";
+close;
+}
+query_sql "SELECT `status` FROM `truemoney` WHERE `password`='"+.@truemoneya$+"'",.@statustm;
+if (.@statustm != 2) {
+mes "^FF0000บัตรนี้ถูกเติมไม่สมบูรณ์^000000";
+close;
+}
+query_sql "SELECT `user_id` FROM `truemoney` WHERE `user_id`='"+getcharid(3)+"'",.@truemoneyb;
+query_sql "SELECT `user_id` FROM `truemoney` WHERE `password`='"+.@truemoneya$+"'",.@truemoneyc;
+if (.@truemoneyb != .@truemoneyc) {
+mes "^FF0000คุณไม่ใช่เจ้าของบัตรใบนี้^000000";
+close;
+}
+query_sql "SELECT `password` FROM `promotiontm` WHERE `password`='"+.@truemoneya$+"'",.@truemoneyd$;
+if (.@truemoneya$ == .@truemoneyd$) {
+mes "^FF0000บัตรนี้ถูกใช้งานไปแล้ว^000000";
+close;
+}
+query_sql "SELECT `user_id` FROM `promotiontm` WHERE `user_id`='"+getcharid(3)+"'",.@truemoneye;
+if (.@tmcardnum != 0 && .@tmcardnum == TMPro && .@truemoneye == getcharid(3)) {
+mes "^FF0000ไอดีคุณเคยร่วมโปรโมชั่นนี้ไปแล้ว^000000";
+close;
+}
+next;
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "ไอดีคุณเติมบัตรใบนี้";
+mes "คุณตกลงจะลุ้นรับโปรโมชั่นนี้ใช่ไหม ?";
+next;
+if (select("- ลุ้นรับโปรโมชั่น","- ยกเลิก")==2) close;
+query_sql "SELECT `amount` FROM `truemoney` WHERE `password`='"+.@truemoneya$+"'",.@truemoneyf;
+set .@tmrandom,rand(.@tmcardrand);
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+sleep2 300;
+mes "จะออกไรดีนะ ได้หรือไม่ได้";
+sleep2 500;
+mes "ลุ้นนนนนนน !!";
+sleep2 1500;
+mes "กด ถัดไป เพื่อรับรู้ผล";
+next;
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+//mes "card percent "+.@tmper[.@truemoneyf];
+//mes "rnd percnet "+.@tmrandom;
+if (.@tmper[.@truemoneyf] >= .@tmrandom) {
+mes "ยินดีด้วย, คุณได้โปรโมชั่น";
+mes "ราคาบัตร : "+.@tmcard[.@truemoneyf]+"";
+mes "ได้รับ Cashpoint : "+.@tmpoint[.@truemoneyf]+" Cashpoint.";
+set #CASHPOINTS,#CASHPOINTS+.@tmpoint[.@truemoneyf];
+mes "รวมเป็น : "+#CASHPOINTS+" Cashpoint.";
+} else if (.@tmper[.@truemoneyf] <= .@tmrandom) {
+mes "เสียใจด้วย, คุณไม่ได้โปรโมชั่น";
+}
+if (.@tmcardnum != 0) set TMPro,TMPro+1;
+query_sql "INSERT INTO `promotiontm` VALUES ('"+getcharid(3)+"','"+.@truemoneya$+"')";
+mes "โอกาศหน้ามาร่วมสนุกกันใหม่ได้นะ ^^";
+close;
+Case 2:
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "ฉันจะอธิบาย Cashpoint ที่จะได้รับเพิ่มและโอกาศได้รับของแต่ละราคาบัตร";
+next;
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "ราคาบัตร : "+.@tmcard[1]+" บาท";
+mes "ได้รับ Cashpoint : "+.@tmpoint[1]+" Cashpoint.";
+mes "โอกาศได้รับ : "+.@tmper[1]+" %";
+next;
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "ราคาบัตร : "+.@tmcard[2]+" บาท";
+mes "ได้รับ Cashpoint : "+.@tmpoint[2]+" Cashpoint.";
+mes "โอกาศได้รับ : "+.@tmper[2]+" %";
+next;
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "ราคาบัตร : "+.@tmcard[3]+" บาท";
+mes "ได้รับ Cashpoint : "+.@tmpoint[3]+" Cashpoint.";
+mes "โอกาศได้รับ : "+.@tmper[3]+" %";
+next;
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "ราคาบัตร : "+.@tmcard[4]+" บาท";
+mes "ได้รับ Cashpoint : "+.@tmpoint[4]+" Cashpoint.";
+mes "โอกาศได้รับ : "+.@tmper[4]+" %";
+next;
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "ราคาบัตร : "+.@tmcard[5]+" บาท";
+mes "ได้รับ Cashpoint : "+.@tmpoint[5]+" Cashpoint.";
+mes "โอกาศได้รับ : "+.@tmper[5]+" %";
+next;
+mes "[ ทรูมันนี่ใจดีให้เพิ่ม ]";
+mes "ราคาบัตร : "+.@tmcard[6]+" บาท";
+mes "ได้รับ Cashpoint : "+.@tmpoint[6]+" Cashpoint.";
+mes "โอกาศได้รับ : "+.@tmper[6]+" %";
+next;
+goto PT_main;
+Case 3:
+close;
+}
+close;
+end;
+
+//OnInit:
+//waitingroom "ทรูมันนี่ใจดีให้เพิ่ม",0;
+//end;
+}

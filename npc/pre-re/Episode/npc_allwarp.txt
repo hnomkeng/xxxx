@@ -1,0 +1,19 @@
+-	script	Town_Teleport	-1,{
+mes "[ Town Teleport ]";
+mes "ท่านต้องการไปที่ใดล่ะ ?";
+next;
+menu
+"^339900->^000000 Tutle Island ( 10,000z )",warp01,
+"^339900->^000000 Amatsu Town ( 10,000z )",warp02,
+"^339900->^000000 Gonryun Town ( 10,000z )",warp03;
+
+warp01: if(Zeny < 10000) { mes "[ Town Teleport ]"; mes "ท่านมีเงินไม่เพียงพอนะ..";  end; } set zeny,zeny -10000; warp "tur_dun01",154,237; end;
+warp02: if(Zeny < 10000) { mes "[ Town Teleport ]"; mes "ท่านมีเงินไม่เพียงพอนะ..";  end; } set zeny,zeny -10000; warp "amatsu",247,282; end;
+warp03: if(Zeny < 10000) { mes "[ Town Teleport ]"; mes "ท่านมีเงินไม่เพียงพอนะ..";  end; } set zeny,zeny -10000; warp "gonryun",159,65; end;
+
+OnInit:
+waitingroom "Teleporter", 0;
+end;
+}
+
+//morocc,159,143,4	duplicate(Town_Teleport)	Town Teleport#morroc001	435

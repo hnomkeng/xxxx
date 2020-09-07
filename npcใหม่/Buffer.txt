@@ -1,0 +1,254 @@
+-	script	Healer	-1,{
+
+menu 
+"Buff Normal",he,
+"Buff VIP",he02,
+"Repair > ซ่อมอุปกรณ์",re,
+"ยกเลิก",can;
+
+
+he:
+if (Baselevel>=70) goto he01;
+if (getgroupid()<4) goto he02;
+mes "[ Healer ]";
+mes "ท่าน ^FF0000"+strcharinfo(0)+",^000000";
+mes "เลเวล ^FF0000น้อยกว่า^000000 70 ได้รับ";
+mes "- HP [40 %]";
+mes "- AGI & Blessing Lv 5 [15 min]";
+callfunc "freebuff";
+end;
+
+he01:
+mes "[ Healer ]";
+mes "ท่าน ^FF0000"+strcharinfo(0)+",^000000";
+mes "เลเวล ^FF0000มากกว่า^000000 70 ได้รับ";
+mes "- AGI & Blessing Lv 3 [15 min]";
+mes "** เสียค่าบริการ ^FF00001000 Zeny^000000 **";
+next;
+menu
+"ตกลง (^FF00001000 Zeny^000000)",ok,
+"ยกเลิก",ca;
+
+
+ok:
+if (zeny<1000) goto nomoney;
+set zeny,zeny-1000;
+callfunc "paybuff";
+end;
+
+
+ca:
+mes "[ Healer ]";
+mes "ท่านยกเลิกการทำรายการเรียบร้อย";
+end;
+
+he02:
+mes "[ Healer ]";
+mes "ท่าน ^FF0000"+strcharinfo(0)+",^000000";
+mes "มีบัตร ^FF0000Buffer VIP Card^000000 ได้รับ";
+mes "- HP [50 %]";
+mes "- AGI & Blessing Lv 5 [15 min]";
+mes "- Magnificat Lv 3 [15 min]";
+mes "- Gloria Lv 1 [15 min]";
+mes "- All Status Lv 3 [15 min]";
+callfunc "vipbuff";
+end;
+
+
+nomoney:
+mes "[ Healer ]";
+mes "เสียใจด้วย! ^FF0000ท่านมีเงินไม่เพียงพอ^000000";
+end;
+
+re:
+mes "[ Repair ]";
+mes "ซ่อมอาวุธ และ เกาะ";
+mes "** เสียค่าบริการ ^FF00005,000 Zeny^000000 **";
+next;
+menu
+"ตกลง (^FF00005,000 Zeny^000000)",ok01,
+"ยกเลิก",ca01;
+
+ok01:
+if (zeny<5000) goto nohave;
+if (getbrokenid(1)<=0) goto noitem;
+if (getbrokenid(1)>0) { atcommand "@repairall"; }
+set zeny,zeny-5000;
+mes "[ Repair ]";
+mes "ข้าซ่อมมันให้เจ้าเรียบร้อยแล้วล่ะ.";
+end;
+
+ca01:
+mes "[ Repair ]";
+mes "ท่านยกเลิกการทำรายการเรียบร้อย";
+end;
+
+noitem:
+mes "[ Repair ]";
+mes "ท่านไม่มีไอเทมใดเสียหาย.";
+end;
+
+nohave:
+mes "[ Repair ]";
+mes "เสียใจด้วย! ^FF0000ท่านมีเงินไม่เพียงพอ^000000";
+end;
+
+can:
+mes "[ Buffer ]";
+mes "ท่านยกเลิกการทำรายการเรียบร้อย";
+end;
+
+end;
+}
+
+function	script	freebuff	{
+set .@delay, 0;	// ดีเลย์การใช้งาน (วินาที)
+set .@cast, 0;	// ระยะเวลาร่าย (วินาที)
+if ( gettimetick(2)-@delay_heal < .@delay )
+dispbottom "[ System ] โปรดรออีก "+(.@delay-(gettimetick(2)-@delay_heal))+" วินาทีถึงจะใช้งานได้อีกครั้ง";
+else {
+progressbar "0x007000", .@cast;
+soundeffect "buff.wav",0;
+set @delay_heal, gettimetick(2);
+sc_end SC_POISON;
+sc_end SC_FREEZE;
+sc_end SC_SLEEP;
+sc_end SC_STAN;
+sc_end SC_STUN;
+sc_end SC_STONE;
+sc_end SC_SILENCE;
+sc_end SC_BLIND;
+sc_end SC_Bleeding;
+sc_end SC_CONFUSION;
+sc_end SC_CURSE;
+sc_end SC_HALLUCINATION;
+sc_end SC_ORCISH;
+sc_start SC_BLESSING,900000,3;
+sc_start SC_INCREASEAGI,900000,3;
+percentheal 40,0; 
+specialeffect2 37;
+specialeffect2 42;
+dispbottom "[ Buff Normal ] คุณได้รับ AB Lv.3, นาน 15 นาที";
+end;
+}
+}
+
+function	script	paybuff	{
+set .@delay, 0;	// ดีเลย์การใช้งาน (วินาที)
+set .@cast, 0;	// ระยะเวลาร่าย (วินาที)
+if ( gettimetick(2)-@delay_heal < .@delay )
+dispbottom "[ System ] โปรดรออีก "+(.@delay-(gettimetick(2)-@delay_heal))+" วินาทีถึงจะใช้งานได้อีกครั้ง";
+else {
+progressbar "0x007000", .@cast;
+soundeffect "buff.wav",0;
+set @delay_heal, gettimetick(2);
+sc_end SC_POISON;
+sc_end SC_FREEZE;
+sc_end SC_SLEEP;
+sc_end SC_STAN;
+sc_end SC_STUN;
+sc_end SC_STONE;
+sc_end SC_SILENCE;
+sc_end SC_BLIND;
+sc_end SC_Bleeding;
+sc_end SC_CONFUSION;
+sc_end SC_CURSE;
+sc_end SC_HALLUCINATION;
+sc_end SC_ORCISH;
+sc_start SC_BLESSING,900000,3;
+sc_start SC_INCREASEAGI,900000,3;
+specialeffect2 37;
+specialeffect2 42;
+dispbottom "[ Buff Normal ] คุณได้รับ AB Lv.3, นาน 15 นาที";
+end;
+}
+}
+
+function	script	vipbuff	{
+set .@delay, 0;	// ดีเลย์การใช้งาน (วินาที)
+set .@cast, 0;	// ระยะเวลาร่าย (วินาที)
+if ( gettimetick(2)-@delay_heal < .@delay )
+dispbottom "[ System ] โปรดรออีก "+(.@delay-(gettimetick(2)-@delay_heal))+" วินาทีถึงจะใช้งานได้อีกครั้ง";
+else {
+progressbar "0x007000", .@cast;
+soundeffect "buff.wav",0;
+set @delay_heal, gettimetick(2);
+sc_end SC_POISON;
+sc_end SC_FREEZE;
+sc_end SC_SLEEP;
+sc_end SC_STAN;
+sc_end SC_STUN;
+sc_end SC_STONE;
+sc_end SC_SILENCE;
+sc_end SC_BLIND;
+sc_end SC_Bleeding;
+sc_end SC_CONFUSION;
+sc_end SC_CURSE;
+sc_end SC_HALLUCINATION;
+sc_end SC_ORCISH;
+sc_start SC_BLESSING,900000,5;
+sc_start SC_INCREASEAGI,900000,5;
+sc_start SC_MAGNIFICAT,300000,3;
+sc_start SC_GLORIA,300000,1;
+sc_start SC_STRFood,900000,3;
+sc_start SC_AGIFood,900000,3;
+sc_start SC_VITFood,900000,3;
+sc_start SC_INTFood,900000,3;
+sc_start SC_DEXFood,900000,3;
+sc_start SC_LUKFood,900000,3;
+percentheal 0,0; 
+specialeffect2 37;
+specialeffect2 42;
+dispbottom "[ Buff VIP ] คุณได้รับ AB Lv.5, All Status +3,MagnificatLv.3,GloriaLv.1 นาน 15 นาที";
+end;
+}
+}
+
+morocc,156,97,4	duplicate(Healer)	Heal AB#01	569
+morocc,242,44,4	duplicate(Healer)	Heal AB#01	569
+morocc,265,211,4	duplicate(Healer)	Heal AB#01	569
+morocc,159,261,4	duplicate(Healer)	Heal AB#111	569
+morocc,38,175,4	duplicate(Healer)	Heal AB#111	569
+moc_ruins,68,167,4	duplicate(Healer)	Heal AB#118	569
+
+alberta,117,59,4	duplicate(Healer)	Heal AB#09	569
+alberta,46,245,4	duplicate(Healer)	Heal AB#10	569
+alberta,189,142,4	duplicate(Healer)	Heal AB#11	569
+aldebaran,143,116,4	duplicate(Healer)	Heal AB#12	569
+amatsu,199,104,4	duplicate(Healer)	Heal AB#13	569
+ayothaya,70,148,4	duplicate(Healer)	Heal AB#14	569
+comodo,209,149,4	duplicate(Healer)	Heal AB#15	569
+einbech,75,118,4	duplicate(Healer)	Heal AB#16	569
+einbroch,62,203,4	duplicate(Healer)	Heal AB#17	569
+geffen,120,64,4	duplicate(Healer)	Heal AB#18	569
+gonryun,159,121,4	duplicate(Healer)	Heal AB#19	569
+hugel,96,150,4	duplicate(Healer)	Heal AB#20	569
+izlude,136,90,4	duplicate(Healer)	Heal AB#21	569
+jawaii,176,173,4	duplicate(Healer)	Heal AB#22	569
+lighthalzen,159,99,4	duplicate(Healer)	Heal AB#23	569
+louyang,217,117,4	duplicate(Healer)	Heal AB#24	569
+xmas,148,133,4	duplicate(Healer)	Heal AB#25	569
+manuk,279,139,4	duplicate(Healer)	Heal AB#26	569
+mid_camp,209,287,4	duplicate(Healer)	Heal AB#27	569
+moscovia,223,191,4	duplicate(Healer)	Heal AB#28	569
+payon,82,117,5	duplicate(Healer)	Heal AB#29	569
+pay_arche,55,126,4	duplicate(Healer)	Heal AB#29	569
+prontera,155,187,4	duplicate(Healer)	Heal AB#30	569
+prontera,146,95,5	duplicate(Healer)	Heal AB#30	569
+prontera,32,210,5	duplicate(Healer)	Heal AB#30	569
+prontera,266,212,5	duplicate(Healer)	Heal AB#30	569
+prontera,145,328,5	duplicate(Healer)	Heal AB#30	569
+rachel,129,144,4	duplicate(Healer)	Heal AB#31	569
+splendide,211,168,4	duplicate(Healer)	Heal AB#32	569
+thor_camp,238,99,4	duplicate(Healer)	Heal AB#33	569
+umbala,143,164,4	duplicate(Healer)	Heal AB#34	569
+veins,215,129,4	duplicate(Healer)	Heal AB#35	569
+yuno,158,89,4	duplicate(Healer)	Heal AB#36	569
+
+
+new_1-3,90,32,5	duplicate(Healer)	Heal AB#38	569
+new_1-1,63,114,3	duplicate(Healer)	Heal AB#39	569
+new_1-3,98,132,5	duplicate(Healer)	Heal AB#390	569
+new_2-3,91,31,5	duplicate(Healer)	Heal AB#390	569
+
+yuno_in02,42,72,4	duplicate(Healer)	Heal AB#46	569

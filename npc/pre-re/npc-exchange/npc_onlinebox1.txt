@@ -1,0 +1,27 @@
+-	script	ex_online	-1,{
+mes "[ Online Bonus ]";
+mes "Item : ^CC6600Online Bonus Box^000000";
+mes "ทุกๆการออนไลน์ครบ 60 นาที จะได้รับ ^FF0000Online Bonus Box^000000 : 1 กล่อง";
+mes "^FF0000หากไม่ขยับตัว เวลาจะหยัดพักไว้^000000";
+mes "มีโอกาสได้แรร์ไอเทมมากมาย";
+next;
+menu
+"^339900->^000000 ดูตัวอย่างของรางวัล (เฉพาะแรร์)",reward,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+reward:
+callfunc "Shop_QQ","QQ_Online",1;
+end;
+
+nogo:
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "รางวัลออนไลน์โบนัส", 0;
+end;
+}
+
+morocc,130,92,5	duplicate(ex_online)	ออนไลน์โบนัส#01	611

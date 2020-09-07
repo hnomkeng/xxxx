@@ -1,0 +1,318 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : ·¡Ë¡¥πÈÕ¬ ®Õ¡ªË«π
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,160,195,4	script	‰ª≈Ë“∫Õ ª√–®”·ºπ∑’Ë	11114,{
+
+mes "‡√“®–æ“∑Ë“π‰ª≈Ë“∫Õ ª√–®”·ºπ∑’Ë";
+mes "‚ª√¥‡≈◊Õ° ∂“π∑’ËµË“ßÊ∑’Ë®–‰ª";
+next;
+menu 
+"^FF0000ï^000000 Amonra",Amonra,
+"^FF0000ï^000000 Assassin Cross Eremes",AssassinCrossEremes,
+"^FF0000ï^000000 Atroce",Atroce,
+"^FF0000ï^000000 White Lady",Bacsojin,
+"^FF0000ï^000000 Baphomet",Baphomet,
+"^FF0000ï^000000 Beelzebub",Beelzebub,
+"^FF0000ï^000000 Boitata",Boitata,
+"^FF0000ï^000000 Champion Chen",ChampionChen,
+"^FF0000ï^000000 Clown Alphoccio",ClownAlphoccio,
+"^FF0000ï^000000 Creator Flamel",CreatorFlamel,
+"^FF0000ï^000000 Dark Lord",DarkLord,
+"^FF0000ï^000000 Dark Snake Lord",DarkSnakeLord,
+"^FF0000ï^000000 Detardeurus",Detardeurus,
+"^FF0000ï^000000 Doppelganger",Doppelganger,
+"^FF0000ï^000000 Dracula",Dracula,
+"^FF0000ï^000000 Drake",Drake,
+"^FF0000ï^000000 Eddga",Eddga,
+"^FF0000ï^000000 Fallen Bishop",FallenBishop,
+"^FF0000ï^000000 Garm",Garm,
+"^FF0000ï^000000 Gloom Under Night",GloomUnderNight,
+"^FF0000ï^000000 Gold Queen Scaraba",GoldQueenScaraba,
+"^FF0000ï^000000 Golden Thief Bug",GoldenThiefBug,
+"^FF0000ï^000000 Gopinich",Gopinich,
+"^FF0000ï^000000 Gypsy Trentini",GypsyTrentini,
+"^FF0000ï^000000 High Priest Magaleta",HighPriestMagaleta,
+"^FF0000ï^000000 High Wizard Katrinn",HighWizardKatrinn,
+"^FF0000ï^000000 Ifrit",Ifrit,
+"^FF0000ï^000000 Incantation Samurai",IncantationSamurai,
+"^FF0000ï^000000 Kiel D-01",KielD01,
+"^FF0000ï^000000 Knight of Windstorm",KnightofWindstorm,
+"^FF0000ï^000000 Kraken",Kraken,
+"^FF0000ï^000000 Lady Tanee",LadyTanee,
+"^FF0000ï^000000 Leak",Leak,
+"^FF0000ï^000000 Lord Knight Seyren",LordKnightSeyren,
+"^FF0000ï^000000 Lord of Death",LordofDeath,
+"^FF0000ï^000000 Maya",Maya,
+"^FF0000ï^000000 Mistress",Mistress,
+"^FF0000ï^000000 Moonlight Flower",MoonlightFlower,
+"^FF0000ï^000000 Nightmare Amon Ra",NightmareAmonRa,
+"^FF0000ï^000000 Orc Hero",OrcHero,
+"^FF0000ï^000000 Orc Lord",OrcLord,
+"^FF0000ï^000000 Osiris",Osiris,
+"^FF0000ï^000000 Paladin Randel",PaladinRandel,
+"^FF0000ï^000000 Pharaoh",Pharaoh,
+"^FF0000ï^000000 Phreeoni",Phreeoni,
+"^FF0000ï^000000 Professor Celia",ProfessorCelia,
+"^FF0000ï^000000 Queen Scaraba",QueenScaraba,
+"^FF0000ï^000000 RSX-0806",RSX0806,
+"^FF0000ï^000000 Sniper Shecil",SniperShecil,
+"^FF0000ï^000000 Stalker Gertie",StalkerGertie,
+"^FF0000ï^000000 Tao Gunka",TaoGunka,
+"^FF0000ï^000000 Time Holder",TimeHolder,
+"^FF0000ï^000000 Turtle General",TurtleGeneral,
+"^FF0000ï^000000 Valkyrie Randgris",ValkyrieRandgris,
+"^FF0000ï^000000 Vesper",Vesper,
+"^FF0000ï^000000 Whitesmith Harword",WhitesmithHarword,
+"^FF0000ï^000000 Wounded Morroc",WoundedMorroc,
+"^FF0000ï^000000 Egnigem Cenia",EgnigemCenia,
+"^FF0000ï^000000 ¬°‡≈‘°",cancel;
+
+Amonra:
+warp "moc_pryd06",0,0;
+close;
+
+AssassinCrossEremes:
+warp "lhz_dun03",0,0;
+close;
+
+Atroce:
+warp "ra_fild03",0,0;
+close;
+
+Bacsojin:
+warp "lou_dun03",0,0;
+close;
+
+Baphomet:
+warp "prt_maze03",0,0;
+close;
+
+Beelzebub:
+warp "abbey03",0,0;
+close;
+
+Boitata:
+warp "bra_dun02",0,0;
+close;
+
+ChampionChen:
+warp "lhz_dun04",0,0;
+close;
+
+ClownAlphoccio:
+warp "lhz_dun04",0,0;
+close;
+
+CreatorFlamel:
+warp "lhz_dun04",0,0;
+close;
+
+DarkLord:
+warp "gl_chyard",0,0;
+close;
+
+DarkSnakeLord:
+warp "gon_dun03",0,0;
+close;
+
+Detardeurus:
+warp "abyss_03",0,0;
+close;
+
+Doppelganger:
+warp "gef_dun02",0,0;
+close;
+
+Dracula:
+warp "gef_dun01",0,0;
+close;
+
+Drake:
+warp "treasure02",0,0;
+close;
+
+Eddga:
+warp "pay_fild10",0,0;
+close;
+
+FallenBishop:
+warp "abbey02",0,0;
+close;
+
+Garm:
+warp "xmas_fild01",0,0;
+close;
+
+GloomUnderNight:
+warp "ra_san05",0,0;
+close;
+
+GoldQueenScaraba:
+warp "dic_dun03",0,0;
+close;
+
+GoldenThiefBug:
+warp "prt_sewb4",0,0;
+close;
+
+Gopinich:
+warp "mosk_dun03",0,0;
+close;
+
+GypsyTrentini:
+warp "lhz_dun04",0,0;
+close;
+
+HighPriestMagaleta:
+warp "lhz_dun03",0,0;
+close;
+
+HighWizardKatrinn:
+warp "lhz_dun03",0,0;
+close;
+
+Ifrit:
+warp "thor_v03",0,0;
+close;
+
+IncantationSamurai:
+warp "ama_dun03",0,0;
+close;
+
+KielD01:
+warp "kh_dun02",0,0;
+close;
+
+KnightofWindstorm:
+warp "xmas_dun02",0,0;
+close;
+
+Kraken:
+warp "iz_dun05",0,0;
+close;
+
+LadyTanee:
+warp "ayo_dun02",0,0;
+close;
+
+Leak:
+warp "dew_dun01",0,0;
+close;
+
+LordKnightSeyren:
+warp "lhz_dun03",0,0;
+close;
+
+LordofDeath:
+warp "niflheim",0,0;
+close;
+
+Maya:
+warp "anthell02",0,0;
+close;
+
+Mistress:
+warp "mjolnir_04",0,0;
+close;
+
+MoonlightFlower:
+warp "pay_dun04",0,0;
+close;
+
+NightmareAmonRa:
+warp "moc_prydn2",0,0;
+close;
+
+OrcHero:
+warp "gef_fild03",0,0;
+close;
+
+OrcLord:
+warp "gef_fild10",0,0;
+close;
+
+Osiris:
+warp "moc_pryd04",0,0;
+close;
+
+PaladinRandel:
+warp "lhz_dun04",0,0;
+close;
+
+Pharaoh:
+warp "in_sphinx5",0,0;
+close;
+
+Phreeoni:
+warp "moc_fild17",0,0;
+close;
+
+ProfessorCelia:
+warp "lhz_dun04",0,0;
+close;
+
+QueenScaraba:
+warp "dic_dun02",0,0;
+close;
+
+RSX0806:
+warp "ein_dun02",0,0;
+close;
+
+SniperShecil:
+warp "lhz_dun03",0,0;
+close;
+
+StalkerGertie:
+warp "lhz_dun04",0,0;
+close;
+
+TaoGunka:
+warp "beach_dun",0,0;
+close;
+
+TimeHolder:
+warp "c_tower3_",0,0;
+close;
+
+TurtleGeneral:
+warp "tur_dun04",0,0;
+close;
+
+ValkyrieRandgris:
+warp "odin_tem03",0,0;
+close;
+
+Vesper:
+warp "jupe_core",0,0;
+close;
+
+WhitesmithHarword:
+warp "lhz_dun03",0,0;
+close;
+
+WoundedMorroc:
+warp "moc_fild22",0,0;
+close;
+
+EgnigemCenia:
+warp "lhz_dun02",0,0;
+close;
+
+cancel:
+close;
+
+//OnInit:
+//waitingroom "‰ª≈Ë“∫Õ ª√–®”·ºπ∑’Ë",0;
+end; 
+}

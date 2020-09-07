@@ -1,0 +1,105 @@
+//===== Developers Script ===================================
+//= 2009rwc_03 Vs 2009rwc_03 1-1
+//===== Current Version =====================================
+//= 1.0
+//===== Description ========================================= 
+//= 2009rwc_03 Vs 2009rwc_03 1-1
+//===== Additional Comments ================================= 
+//= 1.0 Start Version
+//= 1.1 Edit By Xtrap-COLO
+//===========================================================
+
+-	script	SAMPLENPC1	-1,{
+
+OnGVGSTART:
+enablenpc "WALL#1";
+enablenpc "WALL#2";
+enablenpc "WALL#3";
+enablenpc "WALL#4";
+enablenpc "WALL#5";
+enablenpc "WALL#6";
+enablenpc "WALL#7";
+enablenpc "WALL#8";
+enablenpc "WALL#9";
+enablenpc "WALL#10";
+enablenpc "WALL#11";
+enablenpc "WALL#12";
+enablenpc "WALL#13";
+enablenpc "WALL#14";
+enablenpc "WALL#15";
+enablenpc "WALL#16";
+enablenpc "Recall Guild#zone01";
+enablenpc "Recall Guild#zone02";
+setcell "2009rwc_03",20,79,79,20,cell_walkable,0;
+announce "กิจกรรม Zone vs Zone อยู่ในช่วงเตรียมความพร้อม ผู้เข้าแข่งแข่งโปรดเตรียมตัวภายใน 1 นาที",0;
+end;
+}
+
+-	script	zone0	-1,{
+OnWhisperGlobal:
+if(getgmlevel() < 99) end;
+if(@whispervar0$ == "1")
+donpcevent "SAMPLENPC1::OnGVGSTART";
+end;
+}
+
+-	script	zone1	-1,{
+OnWhisperGlobal:
+if(getgmlevel() < 99) end;
+if(@whispervar0$ == "1")
+donpcevent "SAMPLENPC2::OnGVGSTART";
+end;
+}
+
+-	script	zone2	-1,{
+OnWhisperGlobal:
+if(getgmlevel() < 99) end;
+if(@whispervar0$ == "1")
+warp "2009rwc_03",87,50;
+if(@whispervar0$ == "2")
+warp "2009rwc_03",11,50;
+end;
+}
+
+-	script	recallzone	-1,{
+if(getgmlevel() >= 99) goto switch;
+mes "[ Recall System ]";
+mes "ท่านต้องการให้ข้าช่วยอะไรล่ะ ?";
+menu
+"^339900->^000000 เรียกรวมกิลด์",S1;
+
+S1:
+set @nguild,getcharid(2);
+if (strcharinfo(0) == getguildmaster(@nguild)) goto Gmaster;
+if (getcharid(2) == @nguild) goto Mmaster;
+
+Gmaster:
+next;
+mes "[ Recall System ]";
+mes "เรียกรวมกิลด์สำเร็จ.";
+atcommand "@guildrecall "+ getcharid(2) +"";
+end;
+
+Mmaster:
+next;
+mes "[ Recall System ]";
+mes "ต้องหัวหน้ากิลด์เท่านั้นค่ะ";
+dispbottom "[ Recall System ] : ต้องหัวหน้ากิลด์เท่านั้นค่ะ";
+end;
+
+switch:
+menu
+"- ไปฝั่งซ้าย",left,
+"- ไปฝั่งขวา",right;
+
+left:
+warp "2009rwc_03",11,50;
+end;
+
+right:
+warp "2009rwc_03",87,50;
+end;
+} 
+
+2009rwc_03,6,46,5	duplicate(recallzone)	Recall Guild#zone01	836
+2009rwc_03,93,46,4	duplicate(recallzone)	Recall Guild#zone02	836

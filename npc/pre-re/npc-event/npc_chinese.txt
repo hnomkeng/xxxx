@@ -1,0 +1,66 @@
+-	script	ex_chinese	-1,{
+mes "[ วันตรุษจีน ]";
+mes "-----------------------------------";
+mes "^CC6600...ซินเจียยู่อี่ ซินนี้ฮวดไช้...^000000";
+mes "-----------------------------------";
+mes "";
+mes "เทศกาล : ^FF0000วันตรุษจีน^000000";
+next;
+mes "[ วันตรุษจีน ]";
+mes "เจ้าคงอยากได้อั่งเปาสินะ..!!";
+mes "มีของมาแลกเปลี่ยนกับข้าไหมล่ะ..?";
+mes "^6666CCApple^000000 : จำนวน 5 ea";
+mes "^6666CCBanana^000000 : จำนวน 5 ea";
+mes "^6666CCOrange^000000 : จำนวน 5 ea";
+mes "^6666CCGrape^000000 : จำนวน 5 ea";
+mes "^6666CCMeat^000000 : จำนวน 5 ea";
+next;
+menu
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCChunjie Hat^000000 7 วัน",straw01,
+"^339900->^000000 ดูตัวอย่างไอเทม",exstraw,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+straw01: 
+if (countitem(5609)>0) goto havehat;
+if (countitem(512)<5) goto nohave;
+if (countitem(513)<5) goto nohave;
+if (countitem(582)<5) goto nohave;
+if (countitem(514)<5) goto nohave;
+if (countitem(517)<5) goto nohave;
+mes "[ วันตรุษจีน ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 512,5;
+delitem 513,5;
+delitem 514,5;
+delitem 517,5;
+delitem 582,5;
+rentitem 5609,604800;
+announce "วันตรุษจีน "+strcharinfo(0)+" ได้ทำการแลกไอเทม Chunjie Hat สำเร็จ",0;
+end;
+
+exstraw:
+callfunc "Shop_QQ","QQ_China",1;
+end;
+
+nogo:
+end;
+
+nohave:
+mes "[ วันตรุษจีน ]";
+mes "เหมือนว่าท่านมีของมาไม่ครบนะ.";  
+end;
+
+havehat:
+mes "[ วันตรุษจีน ]";
+mes "ท่านรับสิทธิ์เล่นกิจกรรมไปแล้ว.";  
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "วันตรุษจีน", 0;
+end;
+}
+
+morocc,159,118,4	duplicate(ex_chinese)	กิจกรรมวันตรุษจีน#02	817

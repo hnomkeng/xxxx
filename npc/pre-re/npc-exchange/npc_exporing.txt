@@ -1,0 +1,28 @@
+-	script	ex_poring	-1,{
+mes "[ Poring Shop ]";
+mes "-----------------------------------";
+mes "Shop : ^FF0000Poring Shop^000000";
+mes "-----------------------------------";
+mes "Poring Coin 1 เหรียญแลกได้ 1 แต้ม";
+mes "สะสมสูงสุดภายในตัว 30,000 ชิ้น";
+next;
+menu
+"^339900->^000000 ร้านค้า Poring Shop",egg1,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+egg1:
+callfunc "Shop_QQ","QQ_Poring",1;
+end;
+
+nogo:
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "Poring Shop", 0;
+end;
+}
+
+turbo_room,119,107,4	duplicate(ex_poring)	Poring Shop#01	562

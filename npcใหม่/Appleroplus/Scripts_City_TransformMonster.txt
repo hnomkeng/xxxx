@@ -1,0 +1,101 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,160,212,8	script	แปลงร่างเป็นมอนเตอร์	571,{
+
+mes "โปรดเลือกรายการ";
+mes "จากเมนูด้านล่างค่ะ";
+next;
+menu 
+"^FF0000•^000000 แปลงร่างเป็นมอนเตอร์",ChangeM,
+"^FF0000•^000000 คืนร่างเดิม",Rollback,
+"^FF0000•^000000 ยกเลิก",Cancel; 
+
+ChangeM: 
+set .@disguise,1000;
+mes "โปรดเลือกแบบ ในการเลือกแบบมอนเตอร์";
+next;
+menu 
+"^FF0000•^000000 เลือกแบบ ดูมอนเตอร์ไปเรื่อยๆ",ChooseM,
+"^FF0000•^000000 เลือกแบบ ใส่รหัสมอนเตอร์",PutCode,
+"^FF0000•^000000 ยกเลิก",Cancel; 
+
+ChooseM:
+mes "นี่คือมอนเตอร์รหัสที่ ^FF0000"+.@disguise+"^000000";
+next;
+switch(select("^FF0000•^000000 ต่อไป","^FF0000•^000000 ย้อนกลับ","^FF0000•^000000 หยุด","^FF0000•^000000 เลือกแบบ ใส่รหัสมอนเตอร์","^FF0000•^000000 ยกเลิก")) {
+
+case 1:
+set .@disguise,.@disguise+1;
+goto CMA;
+close;
+
+CMA:
+disguise .@disguise;
+goto ChooseM;
+close;
+
+case 2:
+if(.@disguise <= 1001) goto Depleted;
+set .@disguise,.@disguise-1;
+goto CMA2;
+close;
+
+CMA2:
+disguise .@disguise;
+goto ChooseM;
+close;
+
+case 3:
+mes "คุณได้เปลี่ยนเป็นมอนเตอร์";
+mes "รหัสที่ ^FF0000"+.@disguise+"^000000 เสร็จสมบูรณ์";
+mes "แล้วพบกันใหม่";
+close;
+
+case 4:
+goto PutCode;
+close;
+
+case 5:
+mes "แล้วพบกันใหม่";
+close;
+}
+
+PutCode:
+mes "โปรดใส่รหัสมอนเตอร์"; 
+mes "หรือ ชื่อของมอนเตอร์"; 
+mes "หรือใส่ 0 เพื่อยกเลิก ใส่ 1";
+mes "เพื่อเลือกแบบเรื่อยๆค่ะ";
+next;
+input mc$;
+if( mc$ == "0") goto Cancel;
+if( mc$ == "1") goto CMA;
+mes "คุณได้เปลี่ยนเป็นมอนเตอร์";
+mes "รหัสที่ ^FF0000"+mc$+"^000000 เสร็จสมบูรณ์";
+mes "แล้วพบกันใหม่";
+atcommand "@disguise "+mc$+"";
+close;
+
+Rollback:
+mes "การคืนร่างเสร็จสมบูรณ์"; 
+atcommand "@undisguise";
+close;
+
+Cancel:
+mes "แล้วพบกันใหม่";
+close;
+end; 
+//OnInit: 
+//waitingroom "แปลงร่างเป็นมอนเตอร์",0; 
+//end; 
+}

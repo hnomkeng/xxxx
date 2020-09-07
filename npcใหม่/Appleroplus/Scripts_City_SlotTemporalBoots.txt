@@ -1,0 +1,110 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,145,252,4	script	เจาะรู Temporal Boots	709,{
+		disable_items;
+        if (MaxWeight - Weight < 1000) {
+                mes "น้ำหนักคุณมีมากเกินไป ไปลดซะแล้วกลับมาหาฉันอีกครั้ง";
+                close;
+        }
+        mes "[เจาะรู Temporal Boots]";
+        mes "That Magic Master นั้นบอกว่าการเพิ่มออฟชั่น Temporal Boots ที่มีเสน่ห์เป็นสิ่งที่ดีที่สุด";
+        next;
+        mes "[เจาะรู Temporal Boots]";
+        mes "ฉันคิดว่าการเจาะรูลงใน Temporal Boots จะดีที่สุด แม้จะมีความเสี่ยงที่จะล้มเหลวก็ตาม.";
+        next;
+        mes "[เจาะรู Temporal Boots]";
+        mes "นำ ^0000FF5 Temporal Crystals^000000, มาให้ฉันจะพยายามเพิ่มออฟชั่น Temporal Boots ขั้นสูงของคุณ.แต่ก็เป็นไปได้ ^FF0000ที่มันจะหายหรือแตก^000000 โอเครนะ?";
+        next;
+        if (select("^FF0000•^000000 ยกเลิก","^FF0000•^000000 ต้องการเพิ่มออฟชั่น Temporal Boots") == 1) {
+                mes "[เจาะรู Temporal Boots]";
+                mes "โอเคร, กลับมาตอนที่คุณพร้อม.";
+                close;
+        }
+        set .@part,EQI_SHOES;
+        if (!getequipisequiped(.@part)) {
+                mes "[เจาะรู Temporal Boots]";
+                mes "คุณแน่ใจหรือไม่ว่าคุณกำลังสวมใส่ไอเท็ม";
+                close;
+        }
+        set .@equip_id,getequipid(.@part);
+        switch (.@equip_id) {
+        case 22000: //Temporal_Str_Boots
+        case 22001: //Temporal_Int_Boots
+        case 22002: //Temporal_Agi_Boots
+        case 22003: //Temporal_Vit_Boots
+        case 22004: //Temporal_Dex_Boots
+        case 22005: //Temporal_Luk_Boots
+                mes "[เจาะรู Temporal Boots]";
+                mes "และ ^FF0000อัตราการเสริมพลัง ทั้งหมดหรือปรับแต่งจะหายไปหากคุณทำเช่นนี้.^000000";
+                mes "คุณต้องการที่จะเจาะจริงหรือไม่?";
+                next;
+                if (select("^FF0000•^000000 ยกเลิก","^FF0000•^000000 ฉันโอเคร!") == 1) {
+                        mes "[เจาะรู Temporal Boots]";
+                        mes "โอเคร, กลับมาตอนที่คุณพร้อม.";
+                        close;
+                }
+                mes "[เจาะรู Temporal Boots]";
+                mes "อีกครั้ง, ^FF0000That Magic Master นั้นจะไม่ทำให้ทุกรายการมีช่อง^000000";
+                mes "ยังต้องการดำเนินการต่อหรือไม่";
+                next;
+                if (select("^FF0000•^000000 ยกเลิก","^FF0000•^000000 ฉันต้องการที่จะเพิ่มออฟชั่น Temporal Boots") == 1) {
+                        mes "[เจาะรู Temporal Boots]";
+                        mes "โอเคร, กลับมาตอนที่คุณพร้อม.";
+                        close;
+                }
+                if (countitem(6607) < 5) {
+                        mes "[เจาะรู Temporal Boots]";
+                        mes "คุณต้องนำ ^0000FF5 Temporal Crystal^000000";
+                        close;
+                }
+                set .@random,rand(1,100);
+                if (.@random <= 80) { //Custom rates
+                        mes "[เจาะรู Temporal Boots]";
+                        mes "แกร๊กกก, เราทำการเจาะรูล้มเหลว มาใหม่ในครั้งต่อไปนะค่ะ.";
+                        specialeffect2 EF_PHARMACY_FAIL;
+                        delitem 6607,5; //Temporal_Crystal
+                        delequip .@part;
+                        close;
+                }
+                mes "[เจาะรู Temporal Boots]"; //Custom text
+                mes "ว้าวววว~เราเจาะรูสำร็จ ขอให้โชคดีนะค่ะ";
+                mes "ช่อง Slot ถูกเพิ่มลงในรองเท้าบ Temporal Boots แล้ว.";
+                mes "ขอบคุณนะค่ะ.";
+                specialeffect2 EF_PHARMACY_OK;
+                delitem 6607,5; //Temporal_Crystal
+                delequip .@part;
+                if (.@equip_id == 22000) {
+                        getitem 22006,1; //Temporal_Str_Boots_
+                } else if (.@equip_id == 22001) {
+                        getitem 22009,1; //Temporal_Int_Boots_
+                } else if (.@equip_id == 22002) {
+                        getitem 22010,1; //Temporal_Agi_Boots_
+                } else if (.@equip_id == 22003) {
+                        getitem 22007,1; //Temporal_Vit_Boots_
+                } else if (.@equip_id == 22004) {
+                        getitem 22008,1; //Temporal_Dex_Boots_
+                } else if (.@equip_id == 22005) {
+                        getitem 22011,1; //Temporal_Luk_Boots_
+                }
+                close;
+        default:
+                mes "[เจาะรู Temporal Boots]";
+                mes "นี่ไม่ใช่! พวกเราต้องการ ^0000FFAdvanced Temporal Boots^000000 ! รายการ ^0000FFมีผล stat และไม่มี slot^000000!";
+                close;
+        }
+end;
+//oninit:
+//waitingroom "เจาะรู Temporal Boots",0;
+//end;
+}

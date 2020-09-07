@@ -1,0 +1,56 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,150,212,8	script	ตรวจสอบข้อมูล Item Monster	770,{
+mes"โปรดเลือกรายการตรวจสอบ";
+mes"จากเมนูด้านล่างค่ะ";
+next;
+menu
+"^FF0000•^000000 ตรวจสอบข้อมูล Item",c6,
+"^FF0000•^000000 ตรวจสอบข้อมูล Monster",c7,
+"^FF0000•^000000 ยกเลิก",Cancel;
+
+c6:
+mes"โปรดใส่ชื่อหรือรหัสไอเท็ม";
+mes"ที่ท่านต้องการตรวจสอบ ลงในช่องว่างค่ะ";
+mes"หรือใส่ 0 เพื่อยกเลิก";
+next;
+input $ItemCode$;
+if($ItemCode$ == "0") goto Cancel;
+sleep2 500;
+mes"ตรวจสอบได้สำเร็จ...";
+mes"สามารถดูข้อมูลไอเท็มได้จากด้านล่างค่ะ";
+atcommand "@iteminfo "+$ItemCode$+"";
+close;
+
+c7:
+mes"โปรดใส่ชื่อหรือรหัสมอนเตอร์";
+mes"ที่ท่านต้องการตรวจสอบ ลงในช่องว่างค่ะ";
+mes"หรือใส่ 0 เพื่อยกเลิก";
+next;
+input $MonCode$;
+if($MonCode$ == "0") goto Cancel;
+sleep2 500;
+mes"ตรวจสอบได้สำเร็จ...";
+mes"สามารถดูข้อมูลมอนเตอร์ ได้จากด้านล่างค่ะ";
+atcommand "@mobinfo "+$MonCode$+"";
+close;
+
+Cancel:
+mes"แล้วพบกันใหม่";
+close;
+end;
+//OnInit:
+//Waitingroom "ตรวจสอบข้อมูล Item Monster",0;
+//end;
+}

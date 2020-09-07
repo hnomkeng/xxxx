@@ -1,0 +1,120 @@
+///////////////////////////////////////////////
+//                                          //
+//                                          //
+//Tharakan Khumtong                         //
+//////////////////////////////////////////////
+
+-	script	atcmd_example	FAKE_NPC,{
+	OnInit:
+		bindatcmd("autotrade", strnpcinfo(3)+"::OnAutotrade");
+		bindatcmd("at", strnpcinfo(3)+"::OnAutotrade");
+		end;
+		
+	OnAutotrade:
+	if(class ==5)+
+	(class ==10)+
+	(class ==18)+
+	(class ==4011)+
+	(class ==4019){
+if(checkvending() == 0) {mes "^FF0000กรุณาตั่งร้านก่อน^000000";end;}
+mes "^3399FFAutoTrade System^000000";
+	mes "เลือกระยะเวลา ค่าบริการตามที่กำหนด";
+	menu 
+	"10,000z ตั่งได้ 6 ชั่วโมง",set1,
+	"30,000z ตั่งได้ 12 ชั่วโมง",set2,
+	"50,000z ตั่งได้ 1 วัน",set3,
+	"ยกเลิก",no;
+	}else{mes "^FF0000คุณไม่ใช่อาชีพสายพ่อค้า^000000";end;}
+	
+	set1:
+		if(Zeny < 10000){next; mes "^3399FFAutoTrade System^000000";
+	mes "เสียใจด้วย! ^FF0000ท่านมีเงินไม่เพียงพอ^000000"; end;}
+mes "^FF0000คำเตือน^000000 : การเข้าเกมส์ก่อนเวลาจะเป็นการยกเลิกและไม่สามารถคืนเงินได้";
+setbattleflag "at_timeout",(6*60);
+set Zeny,Zeny - 10000;
+dispbottom "-----------------------ระบบตั่งร้าน Offline----------------------";
+dispbottom "เวลา Logout : 6ชม.";
+dispbottom "ราคา : 10000  Zeny";
+dispbottom "---------------------------------------------";
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 5 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 4 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 3 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 2 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 1 วินาที";
+sleep2 1000;
+goto start;
+	end;
+	
+	set2:
+	if(Zeny < 30000){next; mes "^3399FFAutoTrade System^000000";
+	mes "เสียใจด้วย! ^FF0000ท่านมีเงินไม่เพียงพอ^000000"; end;}
+mes "^FF0000คำเตือน^000000 : การเข้าเกมส์ก่อนเวลาจะเป็นการยกเลิกและไม่สามารถคืนเงินได้";
+setbattleflag "at_timeout",(12*60);
+set Zeny,Zeny - 30000;
+dispbottom "-----------------------ระบบตั่งร้าน Offline----------------------";
+dispbottom "เวลา Logout : 6ชม.";
+dispbottom "ราคา : 30000  Zeny";
+dispbottom "---------------------------------------------";
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 5 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 4 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 3 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 2 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 1 วินาที";
+sleep2 1000;
+goto start;
+	end;
+	
+	set3:
+	if(Zeny < 50000){next; mes "^3399FFAutoTrade System^000000";
+	mes "เสียใจด้วย! ^FF0000ท่านมีเงินไม่เพียงพอ^000000"; end;}
+mes "^FF0000คำเตือน^000000 : การเข้าเกมส์ก่อนเวลาจะเป็นการยกเลิกและไม่สามารถคืนเงินได้";
+setbattleflag "at_timeout",(24*60);
+set Zeny,Zeny - 50000;
+dispbottom "-----------------------ระบบตั่งร้าน Offline----------------------";
+dispbottom "เวลา Logout : 6ชม.";
+dispbottom "ราคา : 50000  Zeny";
+dispbottom "---------------------------------------------";
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 5 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 4 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 3 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 2 วินาที";
+sleep2 1000;
+dispbottom "ตั่งร้าน Offline : คุณจะหลุดออกจาเกมส์ในอีก 1 วินาที";
+sleep2 1000;
+goto start;
+	end;
+	
+	start:
+
+		query_sql( "SELECT COUNT(`char_id`) FROM `vendings` WHERE `autotrade` > 0",.@count );
+		if ( .@count >= 50 ) {
+			dispbottom "ไม่สารมารถตั่งร้านแบบ Offline ได้";
+		}
+		else {
+			atcommand "@autotrade";
+		}
+		end;
+
+	OnAgitStart:
+	OnAgitStart2:
+		addrid(0);
+		if ( checkvending() & 2 ) {
+			atcommand "@kick "+strcharinfo(0);
+		}
+		end;
+		
+		no:
+		end;
+}
+

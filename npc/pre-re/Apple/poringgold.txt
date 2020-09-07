@@ -1,0 +1,101 @@
+///////////////////////////////////////////////
+//                                          //
+//                                          //
+//Tharakan Khumtong                         //
+//////////////////////////////////////////////
+-	script	poringgold_game_setting#1	-1,{
+OnInit:
+set $poringgoldid,2248; //ID Monter
+set $poringgolditem,65013; //ของที่ดรอป
+set $poringgoldrate,1; //โอกาสดอป
+set $poringgoldratedouble,100; //สมดุ
+/////////////////////////////////
+end;
+}
+morocc,165,137,4	script	Gold Poring	2248 ,{
+	
+	
+			if(getgmlevel()){
+		mes "^FF0000---GM MODE---^000000";
+		menu "^FF0000รีเซ็ตค่าทั้งหมด^000000",gm01,"เมนูปกติ",gm02;
+		
+		gm01:
+		menu "^FF0000ยกเลิก^000000",no,"ยืนยัน",gmok;
+		gmok:
+set #poringgoldcheck,0;
+setd "$poringgoldnumcard",0;
+		end;
+		gm02:
+			}
+
+if(#poringgoldcheck > 0){
+mes "คุณรับรางวัลไปแล้ว : ^FF0000"+#poringgoldcheck+"^000000 ครั้ง";
+mes "รับแล้ว : ^FF0000"+getd("$poringgoldnumcard")+"^000000 คน";
+next;
+menu 
+"^FF0000•^000000 เช็ครางวัล",check,
+"^FF0000•^000000 ^009900แลกรางวัล^000000",okcheck,
+"^FF0000•^000000 ยกเลิก",no;
+}else{goto okcheck;}
+
+	
+okcheck:
+if (countitem($poringgolditem) < 1){
+	mes "คุณต้องหา ^FF0000"+getitemname($poringgolditem)+"^000000 มาก่อน";
+	end;
+}
+query_sql("SELECT cardid FROM `tharakan_Gold_card` WHERE num = '"+(#poringgoldcheck+1)+"'",.@cardidy$);
+if( getarraysize( .@cardidy$ ) ){
+	goto okcheck2;
+}else{
+	mes "^FF0000ยังไม่มีของรางวัลในระบบ...^000000";
+end;	
+}
+
+okcheck2:
+mes "เยี่ยมมาก!";
+set #poringgoldcheck,#poringgoldcheck+1;
+setd "$poringgoldnumcard",getd("$poringgoldnumcard")+1;
+delitem $poringgolditem,1;
+specialeffect2 10;
+query_sql("SELECT cardid FROM `tharakan_Gold_card` WHERE num = '"+getd("$poringgoldnumcard")+"'",.@cardidy$);
+query_sql( "INSERT INTO `tharakan_Gold` SET `char_id`='"+getcharid(0)+"',`name`='"+strcharinfo(0)+"',`cardid`='"+.@cardidy$+"',`time`='"+gettimestr("%Y-%m/%d %H:%M:%S",21)+"'" );
+query_sql("DELETE FROM `tharakan_gold_card` WHERE `num` = '"+getd("$poringgoldnumcard")+"'");
+next;
+mes "^FF0000ท่านสามารถนำมาส่งได้เลื่อยๆ^000000";
+goto check;
+end;
+
+check:
+query_sql("SELECT name,cardid,time FROM `tharakan_Gold` WHERE char_id = '"+getcharid(0)+"'", .@nameg$,.@cardid$,.@time$);
+if( getarraysize( .@nameg$ ) ){
+	for( set .@b,0; .@b < getarraysize( .@nameg$ ); set .@b,.@b + 1 ){
+		mes "" +(.@b + 1) +" : ^3399FFเลขบัตร^000000 : ^CC6600"+.@cardid$[.@b]+"^000000 เวลา "+.@time$[.@b]+"";
+	mes "^FF0000---------------------------^000000";}
+}else{
+		mes "ไม่มีข้อมูล";
+
+}
+end;
+no:
+end;
+
+OnInit:
+end;
+}
+
+
+
+
+-	script	poringgold_game_kill#1	-1,{
+OnNPCKillEvent:
+if($poringgoldid == killedrid){
+if(rand($poringgoldratedouble) <= $poringgoldrate)
+{
+getitem $poringgolditem,1;	
+announce "Gold Poring : ยินดีด้วย "+strcharinfo(0)+" ได้รับ... "+getitemname($poringgolditem)+"",bc_all,0xfcff00;	
+}
+	
+}
+end;
+}

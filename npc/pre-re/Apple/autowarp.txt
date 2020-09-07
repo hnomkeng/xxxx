@@ -1,0 +1,587 @@
+//////////////////////////////////////////////
+//                                          //
+//                                          //
+//Tharakan Khumtong                         //
+//////////////////////////////////////////////	
+
+-	script	WarpGuildWars_seting	-1,{
+OnInit:
+set $@gwname1$,"new_1-1";  //ชื่อแมพ 1
+set $@gwname2$,"morocc";  //ชื่อแมพ 2
+set $@gwname3$,"morocc";  //ชื่อแมพ 3
+set $@gwname4$,"morocc";  //ชื่อแมพ 4
+set $@gwname5$,"morocc";  //ชื่อแมพ 5
+set $@gwname6$,"morocc";  //ชื่อแมพ 6
+set $@gwname7$,"morocc";  //ชื่อแมพ 7
+set $@gwname8$,"morocc";  //ชื่อแมพ 8
+set $@gwname9$,"morocc";  //ชื่อแมพ 9
+set $@gwname10$,"morocc";  //ชื่อแมพ 10
+set $@gwname11$,"morocc";  //ชื่อแมพ 11
+set $@gwname12$,"morocc";  //ชื่อแมพ 12
+set $@gwname13$,"morocc";  //ชื่อแมพ 13
+set $@gwname14$,"morocc";  //ชื่อแมพ 14
+set $@gwname15$,"morocc";  //ชื่อแมพ 15
+set $@gwname16$,"morocc";  //ชื่อแมพ 16
+set $@gwname17$,"morocc";  //ชื่อแมพ 17
+set $@gwname18$,"morocc";  //ชื่อแมพ 18
+set $@gwname19$,"morocc";  //ชื่อแมพ 19
+set $@gwname20$,"morocc";  //ชื่อแมพ 20
+set $@gwname21$,"morocc";  //ชื่อแมพ 21
+}
+-	script	WarpGuildwars_seting_npchide	-1,{
+OnInit:
+disablenpc "วาปไป#1";disablenpc "วาปกลับ#1";
+disablenpc "วาปไป#2";disablenpc "วาปกลับ#2";
+disablenpc "วาปไป#3";disablenpc "วาปกลับ#3";
+disablenpc "วาปไป#4";disablenpc "วาปกลับ#4";
+disablenpc "วาปไป#5";disablenpc "วาปกลับ#5";
+disablenpc "วาปไป#6";disablenpc "วาปกลับ#6";
+disablenpc "วาปไป#7";disablenpc "วาปกลับ#7";
+disablenpc "วาปไป#8";disablenpc "วาปกลับ#8";
+disablenpc "วาปไป#9";disablenpc "วาปกลับ#9";
+disablenpc "วาปไป#10";disablenpc "วาปกลับ#10";
+disablenpc "วาปไป#11";disablenpc "วาปกลับ#11";
+disablenpc "วาปไป#12";disablenpc "วาปกลับ#12";
+disablenpc "วาปไป#13";disablenpc "วาปกลับ#13";
+disablenpc "วาปไป#14";disablenpc "วาปกลับ#14";
+disablenpc "วาปไป#15";disablenpc "วาปกลับ#15";
+disablenpc "วาปไป#16";disablenpc "วาปกลับ#16";
+disablenpc "วาปไป#17";disablenpc "วาปกลับ#17";
+disablenpc "วาปไป#18";disablenpc "วาปกลับ#18";
+disablenpc "วาปไป#19";disablenpc "วาปกลับ#19";
+disablenpc "วาปไป#20";disablenpc "วาปกลับ#20";
+disablenpc "วาปไป#21";disablenpc "วาปกลับ#21";
+end;
+}
+
+-	script	AutoWarpGuildWarsOn#1	-1,{
+	OnClock2239:  ///ตั่งเวลาเปิดวาป ตัวอย่า 2000 = 20.00น.
+	announce " [Guild Wars]Warp เปิดขึ้นแล้ว.....",bc_all;
+	if(getd("$ghome1") == 1){enablenpc "วาปไป#1";enablenpc "วาปกลับ#1";}
+	if(getd("$ghome2") == 1){enablenpc "วาปไป#2";enablenpc "วาปกลับ#2";}
+	if(getd("$ghome3") == 1){enablenpc "วาปไป#3";enablenpc "วาปกลับ#3";}
+	if(getd("$ghome4") == 1){enablenpc "วาปไป#4";enablenpc "วาปกลับ#4";}
+	if(getd("$ghome5") == 1){enablenpc "วาปไป#5";enablenpc "วาปกลับ#5";}
+	if(getd("$ghome6") == 1){enablenpc "วาปไป#6";enablenpc "วาปกลับ#6";}
+	if(getd("$ghome7") == 1){enablenpc "วาปไป#7";enablenpc "วาปกลับ#7";}
+	if(getd("$ghome8") == 1){enablenpc "วาปไป#8";enablenpc "วาปกลับ#8";}
+	if(getd("$ghome9") == 1){enablenpc "วาปไป#9";enablenpc "วาปกลับ#9";}
+	if(getd("$ghome10") == 1){enablenpc "วาปไป#10";enablenpc "วาปกลับ#10";}
+	if(getd("$ghome11") == 1){enablenpc "วาปไป#11";enablenpc "วาปกลับ#11";}
+	if(getd("$ghome12") == 1){enablenpc "วาปไป#12";enablenpc "วาปกลับ#12";}
+	if(getd("$ghome13") == 1){enablenpc "วาปไป#13";enablenpc "วาปกลับ#13";}
+	if(getd("$ghome14") == 1){enablenpc "วาปไป#14";enablenpc "วาปกลับ#14";}
+	if(getd("$ghome15") == 1){enablenpc "วาปไป#15";enablenpc "วาปกลับ#15";}
+	if(getd("$ghome16") == 1){enablenpc "วาปไป#16";enablenpc "วาปกลับ#16";}
+	if(getd("$ghome17") == 1){enablenpc "วาปไป#17";enablenpc "วาปกลับ#17";}
+	if(getd("$ghome18") == 1){enablenpc "วาปไป#18";enablenpc "วาปกลับ#18";}
+	if(getd("$ghome19") == 1){enablenpc "วาปไป#19";enablenpc "วาปกลับ#19";}
+	if(getd("$ghome20") == 1){enablenpc "วาปไป#20";enablenpc "วาปกลับ#20";}
+	if(getd("$ghome21") == 1){enablenpc "วาปไป#21";enablenpc "วาปกลับ#21";}
+	 end;
+}
+-	script	AutoWarpGuildWarsOff#1	-1,{ 
+	OnClock2242: ///ตั่งเวลาปิดวาป ตัวอย่า 2200 = 22.00น.
+	announce " [Guild Wars]Warp ถูกปิดลงแล้ว.....",bc_all;
+	if(getd("$ghome1") == 1){disablenpc "วาปไป#1";disablenpc "วาปกลับ#1";}
+	if(getd("$ghome2") == 1){disablenpc "วาปไป#2";disablenpc "วาปกลับ#2";}
+	if(getd("$ghome3") == 1){disablenpc "วาปไป#3";disablenpc "วาปกลับ#3";}
+	if(getd("$ghome4") == 1){disablenpc "วาปไป#4";disablenpc "วาปกลับ#4";}
+	if(getd("$ghome5") == 1){disablenpc "วาปไป#5";disablenpc "วาปกลับ#5";}
+	if(getd("$ghome6") == 1){disablenpc "วาปไป#6";disablenpc "วาปกลับ#6";}
+	if(getd("$ghome7") == 1){disablenpc "วาปไป#7";disablenpc "วาปกลับ#7";}
+	if(getd("$ghome8") == 1){disablenpc "วาปไป#8";disablenpc "วาปกลับ#8";}
+	if(getd("$ghome9") == 1){disablenpc "วาปไป#9";disablenpc "วาปกลับ#9";}
+	if(getd("$ghome10") == 1){disablenpc "วาปไป#10";disablenpc "วาปกลับ#10";}
+	if(getd("$ghome11") == 1){disablenpc "วาปไป#11";disablenpc "วาปกลับ#11";}
+	if(getd("$ghome12") == 1){disablenpc "วาปไป#12";disablenpc "วาปกลับ#12";}
+	if(getd("$ghome13") == 1){disablenpc "วาปไป#13";disablenpc "วาปกลับ#13";}
+	if(getd("$ghome14") == 1){disablenpc "วาปไป#14";disablenpc "วาปกลับ#14";}
+	if(getd("$ghome15") == 1){disablenpc "วาปไป#15";disablenpc "วาปกลับ#15";}
+	if(getd("$ghome16") == 1){disablenpc "วาปไป#16";disablenpc "วาปกลับ#16";}
+	if(getd("$ghome17") == 1){disablenpc "วาปไป#17";disablenpc "วาปกลับ#17";}
+	if(getd("$ghome18") == 1){disablenpc "วาปไป#18";disablenpc "วาปกลับ#18";}
+	if(getd("$ghome19") == 1){disablenpc "วาปไป#19";disablenpc "วาปกลับ#19";}
+	if(getd("$ghome20") == 1){disablenpc "วาปไป#20";disablenpc "วาปกลับ#20";}
+	if(getd("$ghome21") == 1){disablenpc "วาปไป#21";disablenpc "วาปกลับ#21";}
+	 end;
+}
+
+home01,166,50,4	script	ตั่งค่าวาป	866,{
+if(getgmlevel()){	
+mes "^FF0000---GM MODE---^000000";	
+mes "เลือกเมนูที่ต้องการตั่งค่า";
+next;
+menu "^FF0000•^000000 [ ^009933ตั่งค่าเปิดวาป^000000 ]",gmwarpgw1,"^009933•^000000 [ ^FF0000ตั่งค่าปิดวาป^000000 ]",gmwarpgw2,"^FF6600•^000000 [ ^3366FFเช็คสถานะตั่งค่า^000000 ]",gmwarpgw3;	
+
+gmwarpgw1:
+mes "^FF0000---GM MODE---^000000";	
+mes "เลือกเมืองที่ต้องการเปิด";
+menu ""+$@gwname1$+"",oghome1,""+$@gwname2$+"",oghome2,""+$@gwname3$+"",oghome3,""+$@gwname4$+"",oghome4,""+$@gwname5$+"",oghome5,""+$@gwname6$+"",oghome6,""+$@gwname7$+"",oghome7,""+$@gwname8$+"",oghome8,""+$@gwname9$+"",oghome9,""+$@gwname10$+"",oghome10,""+$@gwname11$+"",oghome11,""+$@gwname12$+"",oghome12,""+$@gwname13$+"",oghome13,""+$@gwname14$+"",oghome14,""+$@gwname15$+"",oghome15,""+$@gwname16$+"",oghome16,""+$@gwname17$+"",oghome17,""+$@gwname18$+"",oghome18,""+$@gwname19$+"",oghome19,""+$@gwname20$+"",oghome20,""+$@gwname21$+"",oghome21;
+end;
+
+gmwarpgw2:
+mes "^FF0000---GM MODE---^000000";	
+mes "เลือกเมองที่ต้องการปิด";
+menu ""+$@gwname1$+"",fghome1,""+$@gwname2$+"",fghome2,""+$@gwname3$+"",fghome3,""+$@gwname4$+"",fghome4,""+$@gwname5$+"",fghome5,""+$@gwname6$+"",fghome6,""+$@gwname7$+"",fghome7,""+$@gwname8$+"",fghome8,""+$@gwname9$+"",fghome9,""+$@gwname10$+"",fghome10,""+$@gwname11$+"",fghome11,""+$@gwname12$+"",fghome12,""+$@gwname13$+"",fghome13,""+$@gwname14$+"",fghome14,""+$@gwname15$+"",fghome15,""+$@gwname16$+"",fghome16,""+$@gwname17$+"",fghome17,""+$@gwname18$+"",fghome18,""+$@gwname19$+"",fghome19,""+$@gwname20$+"",fghome20,""+$@gwname21$+"",fghome21;
+
+end;
+
+gmwarpgw3:
+mes "^FF0000--รายการสถานะที่จะเปิดตามเวลา--^000000";
+if(getd("$ghome1") == 1){mes "1.^009933เปิด^000000 "+$@gwname1$+"";}
+if(getd("$ghome1") == 0){mes "1.^FF0000ปิด^000000 "+$@gwname1$+"";}
+if(getd("$ghome2") == 1){mes "2.^009933เปิด^000000 "+$@gwname2$+"";}
+if(getd("$ghome2") == 0){mes "2.^FF0000ปิด^000000 "+$@gwname2$+"";}
+if(getd("$ghome3") == 1){mes "3.^009933เปิด^000000 "+$@gwname3$+"";}
+if(getd("$ghome3") == 0){mes "3.^FF0000ปิด^000000 "+$@gwname3$+"";}
+if(getd("$ghome4") == 1){mes "4.^009933เปิด^000000 "+$@gwname4$+"";}
+if(getd("$ghome4") == 0){mes "4.^FF0000ปิด^000000 "+$@gwname4$+"";}
+if(getd("$ghome5") == 1){mes "5.^009933เปิด^000000 "+$@gwname5$+"";}
+if(getd("$ghome5") == 0){mes "5.^FF0000ปิด^000000 "+$@gwname5$+"";}
+if(getd("$ghome6") == 1){mes "6.^009933เปิด^000000 "+$@gwname6$+"";}
+if(getd("$ghome6") == 0){mes "6.^FF0000ปิด^000000 "+$@gwname6$+"";}
+if(getd("$ghome7") == 1){mes "7.^009933เปิด^000000 "+$@gwname7$+"";}
+if(getd("$ghome7") == 0){mes "7.^FF0000ปิด^000000 "+$@gwname7$+"";}
+if(getd("$ghome8") == 1){mes "8.^009933เปิด^000000 "+$@gwname8$+"";}
+if(getd("$ghome8") == 0){mes "8.^FF0000ปิด^000000 "+$@gwname8$+"";}
+if(getd("$ghome9") == 1){mes "9.^009933เปิด^000000 "+$@gwname9$+"";}
+if(getd("$ghome9") == 0){mes "9.^FF0000ปิด^000000 "+$@gwname9$+"";}
+if(getd("$ghome10") == 1){mes "10.^009933เปิด^000000 "+$@gwname10$+"";}
+if(getd("$ghome10") == 0){mes "10.^FF0000ปิด^000000 "+$@gwname10$+"";}
+if(getd("$ghome11") == 1){mes "11.^009933เปิด^000000 "+$@gwname11$+"";}
+if(getd("$ghome11") == 0){mes "11.^FF0000ปิด^000000 "+$@gwname11$+"";}
+if(getd("$ghome12") == 1){mes "12.^009933เปิด^000000 "+$@gwname12$+"";}
+if(getd("$ghome12") == 0){mes "12.^FF0000ปิด^000000 "+$@gwname12$+"";}
+if(getd("$ghome13") == 1){mes "13.^009933เปิด^000000 "+$@gwname13$+"";}
+if(getd("$ghome13") == 0){mes "13.^FF0000ปิด^000000 "+$@gwname13$+"";}
+if(getd("$ghome14") == 1){mes "14.^009933เปิด^000000 "+$@gwname14$+"";}
+if(getd("$ghome14") == 0){mes "14.^FF0000ปิด^000000 "+$@gwname14$+"";}
+if(getd("$ghome15") == 1){mes "15.^009933เปิด^000000 "+$@gwname15$+"";}
+if(getd("$ghome15") == 0){mes "15.^FF0000ปิด^000000 "+$@gwname15$+"";}
+if(getd("$ghome16") == 1){mes "16.^009933เปิด^000000 "+$@gwname16$+"";}
+if(getd("$ghome16") == 0){mes "16.^FF0000ปิด^000000 "+$@gwname16$+"";}
+if(getd("$ghome17") == 1){mes "17.^009933เปิด^000000 "+$@gwname17$+"";}
+if(getd("$ghome17") == 0){mes "17.^FF0000ปิด^000000 "+$@gwname17$+"";}
+if(getd("$ghome18") == 1){mes "18.^009933เปิด^000000 "+$@gwname18$+"";}
+if(getd("$ghome18") == 0){mes "18.^FF0000ปิด^000000 "+$@gwname18$+"";}
+if(getd("$ghome19") == 1){mes "19.^009933เปิด^000000 "+$@gwname19$+"";}
+if(getd("$ghome19") == 0){mes "19.^FF0000ปิด^000000 "+$@gwname19$+"";}
+if(getd("$ghome20") == 1){mes "20.^009933เปิด^000000 "+$@gwname20$+"";}
+if(getd("$ghome20") == 0){mes "20.^FF0000ปิด^000000 "+$@gwname20$+"";}
+if(getd("$ghome21") == 1){mes "21.^009933เปิด^000000 "+$@gwname21$+"";}
+if(getd("$ghome21") == 0){mes "21.^FF0000ปิด^000000 "+$@gwname21$+"";}
+end;
+
+
+oghome1:
+mes "^009933เปิด^000000 "+$@gwname1$+" เรียบร้อย";
+setd "$ghome1",1;
+end;
+oghome2:
+mes "^009933เปิด^000000 "+$@gwname2$+" เรียบร้อย";
+setd "$ghome2",1;
+end;
+oghome3:
+mes "^009933เปิด^000000 "+$@gwname3$+" เรียบร้อย";
+setd "$ghome3",1;
+end;
+oghome4:
+mes "^009933เปิด^000000 "+$@gwname4$+" เรียบร้อย";
+setd "$ghome4",1;
+end;
+oghome5:
+mes "^009933เปิด^000000 "+$@gwname5$+" เรียบร้อย";
+setd "$ghome5",1;
+end;
+oghome6:
+mes "^009933เปิด^000000 "+$@gwname6$+" เรียบร้อย";
+setd "$ghome6",1;
+end;
+oghome7:
+mes "^009933เปิด^000000 "+$@gwname7$+" เรียบร้อย";
+setd "$ghome7",1;
+end;
+oghome8:
+mes "^009933เปิด^000000 "+$@gwname8$+" เรียบร้อย";
+setd "$ghome8",1;
+end;
+oghome9:
+mes "^009933เปิด^000000 "+$@gwname9$+" เรียบร้อย";
+setd "$ghome9",1;
+end;
+oghome10:
+mes "^009933เปิด^000000 "+$@gwname10$+" เรียบร้อย";
+setd "$ghome10",1;
+end;
+oghome11:
+mes "^009933เปิด^000000 "+$@gwname11$+" เรียบร้อย";
+setd "$ghome11",1;
+end;
+oghome12:
+mes "^009933เปิด^000000 "+$@gwname12$+" เรียบร้อย";
+setd "$ghome12",1;
+end;
+oghome13:
+mes "^009933เปิด^000000 "+$@gwname13$+" เรียบร้อย";
+setd "$ghome13",1;
+end;
+oghome14:
+mes "^009933เปิด^000000 "+$@gwname14$+" เรียบร้อย";
+setd "$ghome14",1;
+end;
+oghome15:
+mes "^009933เปิด^000000 "+$@gwname15$+" เรียบร้อย";
+setd "$ghome15",1;
+end;
+oghome16:
+mes "^009933เปิด^000000 "+$@gwname16$+" เรียบร้อย";
+setd "$ghome16",1;
+end;
+oghome17:
+mes "^009933เปิด^000000 "+$@gwname17$+" เรียบร้อย";
+setd "$ghome17",1;
+end;
+oghome18:
+mes "^009933เปิด^000000 "+$@gwname18$+" เรียบร้อย";
+setd "$ghome18",1;
+end;
+oghome19:
+mes "^009933เปิด^000000 "+$@gwname19$+" เรียบร้อย";
+setd "$ghome19",1;
+end;
+oghome20:
+mes "^009933เปิด^000000 "+$@gwname20$+" เรียบร้อย";
+setd "$ghome20",1;
+end;
+oghome21:
+mes "^009933เปิด^000000 "+$@gwname21$+" เรียบร้อย";
+setd "$ghome21",1;
+end;
+/////////////////////////////////////////////
+fghome1:
+mes "^FF0000ปิด^000000 "+$@gwname1$+" เรียบร้อย";
+setd "$ghome1",0;
+end;
+fghome2:
+mes "^FF0000ปิด^000000 "+$@gwname2$+" เรียบร้อย";
+setd "$ghome2",0;
+end;
+fghome3:
+mes "^FF0000ปิด^000000 "+$@gwname3$+" เรียบร้อย";
+setd "$ghome3",0;
+end;
+fghome4:
+mes "^FF0000ปิด^000000 "+$@gwname4$+" เรียบร้อย";
+setd "$ghome4",0;
+end;
+fghome5:
+mes "^FF0000ปิด^000000 "+$@gwname5$+" เรียบร้อย";
+setd "$ghome5",0;
+end;
+fghome6:
+mes "^FF0000ปิด^000000 "+$@gwname6$+" เรียบร้อย";
+setd "$ghome6",0;
+end;
+fghome7:
+mes "^FF0000ปิด^000000 "+$@gwname7$+" เรียบร้อย";
+setd "$ghome7",0;
+end;
+fghome8:
+mes "^FF0000ปิด^000000 "+$@gwname8$+" เรียบร้อย";
+setd "$ghome8",0;
+end;
+fghome9:
+mes "^FF0000ปิด^000000 "+$@gwname9$+" เรียบร้อย";
+setd "$ghome9",0;
+end;
+fghome10:
+mes "^FF0000ปิด^000000 "+$@gwname10$+" เรียบร้อย";
+setd "$ghome10",0;
+end;
+fghome11:
+mes "^FF0000ปิด^000000 "+$@gwname11$+" เรียบร้อย";
+setd "$ghome11",0;
+end;
+fghome12:
+mes "^FF0000ปิด^000000 "+$@gwname12$+" เรียบร้อย";
+setd "$ghome12",0;
+end;
+fghome13:
+mes "^FF0000ปิด^000000 "+$@gwname13$+" เรียบร้อย";
+setd "$ghome13",0;
+end;
+fghome14:
+mes "^FF0000ปิด^000000 "+$@gwname14$+" เรียบร้อย";
+setd "$ghome14",0;
+end;
+fghome15:
+mes "^FF0000ปิด^000000 "+$@gwname15$+" เรียบร้อย";
+setd "$ghome15",0;
+end;
+fghome16:
+mes "^FF0000ปิด^000000 "+$@gwname16$+" เรียบร้อย";
+setd "$ghome16",0;
+end;
+fghome17:
+mes "^FF0000ปิด^000000 "+$@gwname17$+" เรียบร้อย";
+setd "$ghome17",0;
+end;
+fghome18:
+mes "^FF0000ปิด^000000 "+$@gwname18$+" เรียบร้อย";
+setd "$ghome18",0;
+end;
+fghome19:
+mes "^FF0000ปิด^000000 "+$@gwname19$+" เรียบร้อย";
+setd "$ghome19",0;
+end;
+fghome20:
+mes "^FF0000ปิด^000000 "+$@gwname20$+" เรียบร้อย";
+setd "$ghome20",0;
+end;
+fghome21:
+mes "^FF0000ปิด^000000 "+$@gwname21$+" เรียบร้อย";
+setd "$ghome21",0;
+end;
+}else{mes "คุณไม่ใช่ GM";}
+
+OnInit: waitingroom "ตั่งค่าวาปกิลวอ",0; end;
+}
+
+////////////วาปไป///////////////
+new_1-1,147,112,1	script	วาปไป#1	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "new_1-2",144,112; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#2	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#3	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#4	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#5	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#6	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#7	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#8	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#9	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#10	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#11	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#12	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#13	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#14	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#15	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#16	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#17	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#18	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#19	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#20	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+morocc,183,51,1	script	วาปไป#21	45,1,1,{
+OnTouch:
+unittalk getcharid(3),"ข้อความ";
+warp "morocc",183,56; ///ตำแหน่งที่จะไป
+	end;
+}
+///////วาปกลับ//////////////
+
+morocc,183,60,1	script	วาปกลับ#1	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#2	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#3	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#4	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#5	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#6	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#7	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#8	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#9	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#10	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#11	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#12	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#13	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#14	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#15	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#16	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#17	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#18	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#19	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+morocc,183,60,1	script	วาปกลับ#20	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+
+morocc,183,60,1	script	วาปกลับ#21	45,1,1,{
+OnTouch:
+warp "morocc",183,56; ///ตำแหน่งที่จะกลับ
+	end;
+}
+///////////////////////////////////////////////
+

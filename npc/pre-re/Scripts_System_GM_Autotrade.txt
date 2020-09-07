@@ -1,0 +1,44 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Scripts_System_GM_Autotrade	FAKE_NPC,{
+
+OnScripts:
+	mes "^FF0000สวัสดีค่ะ หากท่านต้องการ";
+	mes "ต้องร้านค้าแผงลอย";
+	mes "ด้วยระบบ @autotrade";
+	mes "จะมีค่าบริการ 10,000 Zeny^000000";
+	next;
+	menu "^FF0000•^000000 ^0000FFตกลง^000000",L1,"^FF0000•^000000 ^9400D3ยกเลิก^000000",L2; 
+
+L1:
+	if(Zeny<10000) goto Q1;
+	set Zeny, Zeny - 10000; 
+	mes "^FF0000เรียบร้อยแล้วค่ะ ขอบคุณที่ใช้บริการค่ะ^000000"; 
+	atcommand "@autotrade";
+	close;
+
+Q1:
+	mes "^FF0000ขออภัยค่ะ คุณมี Zeny ไม่เพียงพอต่อการใช้บริการค่ะ^000000";
+	close;
+
+L2: 
+	mes "^FF0000โอกาศหน้าเชิญใหม่ค่ะ^000000";
+	close; 
+	end;
+	
+OnInit:
+	bindatcmd "autotrade",strnpcinfo(3) +"::OnScripts",99,99;
+	bindatcmd "at",strnpcinfo(3) +"::OnScripts",99,99;
+	end;
+}

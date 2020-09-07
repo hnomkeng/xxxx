@@ -1,0 +1,14 @@
+new_1-3,0,0,0,0	monster	Roda Frog	1012,15,0,0,0
+new_1-3,0,0,0,0	monster	Poring	1002,15,0,0,0
+new_1-3,0,0,0,0	monster	Lunatic	1063,20,0,0,0
+new_1-3,0,0,0,0	monster	Pupa	1008,15,0,0,0
+new_1-3,0,0,0,0	monster	Fabre	1007,15,0,0,0
+new_1-3,0,0,0,0	monster	Rocker	1052,10,0,0,0
+new_1-3,0,0,0,0	monster	Willow	1010,15,0,0,0
+new_1-3,0,0,0,0	monster	Thief Bug	1051,10,0,0,0
+new_1-3,0,0,0,0	monster	Drops	1113,15,0,0,0
+new_1-3,0,0,0,0	monster	Spore	1014,15,0,0,0
+new_1-3,0,0,0,0	monster	Condor	1009,10,0,0,0
+new_1-3,0,0,0,0	monster	Picky	1049,15,0,0,0
+new_1-3,0,0,0,0	monster	Chonchon	1011,15,0,0,0
+new_1-3,0,0,0,0	monster	GOLDPORING	2248,10,0,0,0

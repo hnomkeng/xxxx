@@ -1,0 +1,23 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,146,229,4	script	รวมไอเทมทุกชนิด	893,{
+
+	dispbottom "ทำการรวมไอเทมให้เรียบร้อยแล้ว";
+	mergeitem;
+	end;
+	
+//OnInit:
+//	waitingroom "รวมไอเทมทุกชนิด",0;
+//	end;
+}

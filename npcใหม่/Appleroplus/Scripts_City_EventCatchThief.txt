@@ -1,0 +1,103 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	EventCatchThief	-1,{
+OnInIt:
+set .Map$,"prontera";		// แมพที่เริ่มกิจกรรม
+set $thiefitem,61001;		// รหัสของรางวัล ที่ได้รับ
+set $thiefitemcount,rand(25,50);	// จำนวนของรางวัลที่ได้รับ ค่าเดิม::( สุ่มตั้งแต่ 5-20)	
+end;
+
+thiefstart:
+announce "กิจกรรม ตามล่าหาหัวขโมย : ตอนนี้ มีโจรได้ขโมย " + getitemname($thiefitem) + " ไปจำนวนหนึ่ง",0;
+initnpctimer;
+end;
+
+OnTimer1000:
+announce "กิจกรรม ตามล่าหาหัวขโมย : ขอให้ผู้เล่นทุกท่านช่วยกันตามหาหัวขโมย และฆ่ามันเพื่อนำ " + getitemname($thiefitem) + " คืนมา",0;
+end;
+
+OnTimer10000:
+announce "กิจกรรม ตามล่าหาหัวขโมย : หัวขโมยมันหลบซ่อนตัวอยู่ในเมือง "+.Map$+" แห่งนี้แหละ ปะปนอยู่กับพวกท่าน",0;
+end;
+
+OnTimer14000:
+announce "กิจกรรม ตามล่าหาหัวขโมย : แต่โปรดระวังที่จะสังหารผู้บริสุทธิ์ ท่านจะมีบาปกรรมติดตัวทันที",0;
+end;
+
+OnTimer19000:
+announce "กิจกรรม ตามล่าหาหัวขโมย : มีเวลาแค่ 20 นาที เท่านั้นก่อนที่มันจะหนี เอาสมบัติออกนอกเมือง",0;
+end;
+
+OnTimer32000:
+announce "กิจกรรม ตามล่าหาหัวขโมย : ถ้าสังหารหัวขโมยได้ข้าจะยก " + getitemname($thiefitem) + " ส่วนหนึ่งที่โดนขโมยไปให้",0;
+end;
+
+OnTimer59000:
+announce "กิจกรรม ตามล่าหาหัวขโมย : นั่น ผู้ต้องสงสัย ได้ปรากฎตัวออกมาแล้ว รีบฆ่ามัน จะได้ เอารางวัล",0;
+end;
+
+OnTimer60000:
+monster .Map$,0,0,"ผู้ต้องสงสัย",rand(3310,3325),1,"thieflose::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3310,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3311,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3312,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3313,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3314,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3315,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3316,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3317,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3318,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3319,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3320,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3321,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3322,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3323,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3324,1,"thiefwin::OnthiefDead";
+monster .Map$,0,0,"ผู้ต้องสงสัย",3325,1,"thiefwin::OnthiefDead";
+stopnpctimer;
+end;
+
+thiefend:
+announce "หัวขโมยได้หนีออกนอกเมืองไปแล้ว ข้าละเจ็บใจจริงๆ",0;
+	killmonster .Map$,"All";
+end;
+
+//เวลาของกิจกรรม
+OnClock2230:	//เวลาเริ่มกิจกรรม
+goto thiefstart;
+end;
+
+OnClock2235:	//เวลาจบกิจกรรม
+goto thiefend;
+end;
+
+}
+
+-	script	thieflose	-1,{
+OnthiefDead:
+	announce "กิจกรรม ตามล่าหาหัวขโมย : ผู้กล้าชื่อ "+strcharinfo(0)+" ได้ฆ่า หัวขโมยตายแล้วได้รับ  " + getitemname($thiefitem) + " จำนวน " + $thiefitemcount + " ea.",bc_all,0;
+	getitem $thiefitem,$thiefitemcount;
+	sc_start SC_BENEDICTIO,300000,5;
+	killmonster .Map$,"All";
+	end;
+}
+-	script	thiefwin	-1,{
+OnthiefDead:
+	dispbottom "เจ้าฆ่าผู้บริสุทธิ์ กรรมจะตามทันเจ้า ";
+	percentheal -50,-50;
+	sc_start SC_CURSE,60000,0;
+	end;
+}
+
+

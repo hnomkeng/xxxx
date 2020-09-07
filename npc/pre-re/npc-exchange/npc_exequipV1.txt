@@ -1,0 +1,59 @@
+-	script	ex_equip	-1,{
+mes "[ แลกไอเทมนักฟาร์ม ]";
+mes "Item : ^CC6600Farmer V.1^000000";
+mes "Item V.1 : ^6666CCStrawberry Hat^000000";
+mes "มีโอกาสดรอป ^FF0000Strawberry^000000 เมื่อกำจัดมอนเตอร์";
+mes "-----------------------------------";
+mes "^FF0000หมดเขตแลกถึงปิดปรับปรุงครั้งต่อไป^000000";
+next;
+mes "[ แลกไอเทมนักฟาร์ม ]";
+mes "ท่านสามารถนำไอเทมต่างๆเหล่านี้มาแลก";
+mes "^6666CCShoes [1]^000000 : จำนวน 3 ea";
+mes "^6666CCMuffler [1]^000000 : จำนวน 2 ea";
+mes "^6666CCBuckler [1]^000000 : จำนวน 2 ea";
+mes "^6666CCChain Mail [1]^000000 : จำนวน 2 ea";
+mes "^FF0000Zeny^000000 : 200,000z";
+next;
+menu
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCStrawberry Hat^000000",straw01,
+"^339900->^000000 ดูตัวอย่างไอเทม",exstraw,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+straw01: 
+if (zeny<200000) goto nohave;
+if (countitem(2404)<3) goto nohave;
+if (countitem(2504)<2) goto nohave;
+if (countitem(2104)<2) goto nohave;
+if (countitem(2315)<2) goto nohave;
+mes "[ แลกไอเทมนักฟาร์ม ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 2404,3;
+delitem 2504,2;
+delitem 2104,2;
+delitem 2315,2;
+set zeny,zeny -200000;
+getitem 18589,1;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Strawberry Hat สำเร็จ",0;
+end;
+
+exstraw:
+callfunc "Shop_QQ","QQ_Famerv1",1;
+end;
+
+nogo:
+end;
+
+nohave:
+mes "[ แลกไอเทมนักฟาร์ม ]";
+mes "เหมือนว่าท่านมีของมาไม่ครบนะ.";  
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "แลกไอเทมนักฟาร์ม", 0;
+end;
+}
+
+morocc,172,86,4	duplicate(ex_equip)	แลกไอเทมนักฟาร์ม#02	570

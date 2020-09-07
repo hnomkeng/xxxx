@@ -1,0 +1,207 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	guildmanager::guildmanager	-1,{
+
+mes "กรุณาใส่ชื่อหัวหน้ากิลด์ที่จะโอน";
+next;
+input @nameguildchangegm$;
+atcommand "@changegm "+@nameguildchangegm$+"";
+next;
+close;
+end;
+//OnInit:
+//waitingroom "โอนหัวหน้ากิลด์",0;
+//end;
+}
+
+prontera,176,190,3	duplicate(guildmanager)	โอนหัวหน้ากิลด์#1	10133
+
+//======================================================//
+
+prontera,178,192,3	script	อัพเลเวลกิลด์	10123,{
+
+mes "ข้าเพิ่มเลเวลกิลด์ให้เจ้า เรียบร้อยแล้ว";
+atcommand "@guildlvlup 50";
+close;
+end;
+//OnInit:
+//waitingroom "อัพเลเวลกิลด์",0;
+//end;
+}
+
+//======================================================//
+
+prontera,180,194,3	script	สร้างกิลด์ ยุบกิลด์	10132,{
+
+mes "ท่านต้องการสร้างกิลด์ใช่ไหม";
+next;
+menu "^FF0000•^000000 สร้างกิลด์",yes,"^FF0000•^000000 ยุบกิลด์",L_4,"^FF0000•^000000 ยกเลิก",no;
+
+yes:
+if( getcharid(2) ){ mes "ท่านมีกิลด์อยู่แล้ว"; close; }
+mes "กรุณาใส่ชื่อกิลด์ที่ต้องการ";
+input @nameguild$;
+atcommand "@guild "+@nameguild$;
+next;
+close;
+
+L_4:
+	mes "ท่านต้องการยุบกิลใช่หรือไม่";
+	next;
+	menu 
+		"^FF0000•^000000 ยกเลิก",no,
+		"^FF0000•^000000 ตกลง",L_22;
+
+L_22:
+	atcommand "@breakguild";
+	next;
+	mes "ขอบคุณที่ใช้บริการ";
+	close;
+
+no:
+close;
+end;
+//OnInit:
+//waitingroom "สร้างกิลด์ ยุบกิลด์",0;
+//end;
+}
+
+//======================================================//
+
+prontera,182,196,3	script	คลังเก็บของกิลด์#01	114,{
+
+set .@npcname$,"[คลังเก็บของกิลด์]";
+set @GID,getcharid(2);
+
+mes .@npcname$;
+mes "สวัสดีครับ ยินดีให้บริการ";
+mes "เลือกเมนูที่คุณต้องการ";
+next;
+menu "^FF0000•^000000 เปิดคลังกิลด์",-,"^FF0000•^000000 เปลี่ยนรหัสคลังกิลด์",change,"^FF0000•^000000 ยกเลิก",ende;
+
+mes .@npcname$;
+mes "กรุณาใส่รหัสคลังกิลด์";
+input .@GuildPW;
+if ( getd("$GuildPW_"+getcharid(2)) == .@GuildPW) goto open;
+if ( getd("$GuildPW_"+getcharid(2)) != .@GuildPW) goto wrong;
+close;
+
+open:
+if(guildopenstorage0 == 1) goto wait;
+guildopenstorage();
+close;
+
+wait:
+mes .@npcname$;
+mes "สมาชิกท่านอื่นใช้คลังกิลด์อยู่";
+close;
+
+wrong:
+mes "";
+mes "ท่านใส่รหัสคลังกิลด์ผิด";
+close;
+
+passwort:
+if(@GID == 0) goto L_NoGuild;
+if(strcharinfo(0) == getguildmaster(@GID)) goto change;
+mes .@npcname$;
+mes "หัวกิลด์เท่านั้นที่เปลี่ยนรหัสได้";
+close;
+
+change:
+mes .@npcname$;
+mes "โปรดใส่รหัสที่คุณต้องการ :";
+input .@GuildPW;
+setd "$GuildPW_"+getcharid(2),.@GuildPW;
+mes "รหัสใหม่คือ ^0000FF"+.@GuildPW+"^000000 ";
+close;
+
+L_NoGuild:
+mes .@npcname$;
+mes "คุณไม่ใช่สมาชิกกิลด์นี้";
+close;
+
+ende:
+mes .@npcname$;
+mes "ยินดีให้บริการ";
+close;
+end;
+//OnInit:
+//waitingroom "คลังเก็บของกิลด์",0;
+//end;
+}
+
+
+//======================================================//
+
+
+-	script	recallguild1-1zone	-1,{
+
+menu 
+"^FF0000•^000000 เรียกรวมพลกิลด์",grecall,
+"^FF0000•^000000 ยกเลิก",Lcancel;
+
+grecall:
+set @nguild,getcharid(2);
+if (strcharinfo(0) == getguildmaster(@nguild)) goto ymaster;
+if (getcharid(2) == @nguild) goto nmaster;
+
+ymaster:
+atcommand "@guildrecall "+ getcharid(2) +"";
+close;
+
+nmaster:
+mes "ไม่สามารถดำเนินการให้ได้";
+mes "เนื่องจากท่านไม่ใช่หัวหน้ากิลด์";
+close;
+
+Lcancel:
+mes "ยินดีให้บริการ";
+end;
+//OnInit:
+//waitingroom "เรียกรวมพลกิลด์",0;
+//end;
+}
+
+prontera,184,198,3	duplicate(recallguild1-1zone)	เรียกรวมพลกิลด์#1000	728
+
+//======================================================//
+
+-	script	recallguildparty	-1,{
+
+menu 
+"^FF0000•^000000 เรียกรวมพลปาร์ตี้",precall,
+"^FF0000•^000000 ยกเลิก",Lcancel;
+
+precall:
+if (strcharinfo(0) != getpartyleader(getcharid(1))) goto nmaster;
+atcommand "@partyrecall "+getcharid(1);
+end;
+
+
+nmaster:
+mes "ไม่สามารถดำเนินการให้ได้";
+mes "ท่านไม่ใช่หัวหน้าปาร์ตี้";
+close;
+end;
+
+Lcancel:
+mes "ยินดีให้บริการ";
+end;
+//OnInit:
+//waitingroom "เรียกรวมพลปาร์ตี้",0;
+//end;
+}
+
+prontera,186,200,3	duplicate(recallguildparty)	เรียกรวมพลปาร์ตี้#01	731

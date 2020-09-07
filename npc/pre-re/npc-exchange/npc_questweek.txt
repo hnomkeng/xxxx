@@ -1,0 +1,63 @@
+// Quest Week
+-	shop	QQ_Week	-1,60012:-1,7776:-1,5254:-1,5305:-1,7619:-1,7620:-1,20239:-1,20441:-1
+
+-	script	Quest_Week	-1,{
+set $@tr$,"[ Quest Week ]";
+mes "[ เควสประจำสัปดาห์ ]";
+mes "Item : ^CC6600Quest Box V.2^000000";
+mes "-----------------------------------";
+mes "ต้องการไอเทม : ^3366CCCyfar^000000 จำนวน 50 ea";
+mes "^3366CCBlack Bear Skin^000000 จำนวน 50 ea";
+mes "และ ^FF0000Zeny^000000 จำนวน 200,000 zeny";
+mes "แลก 1 ครั้ง จะได้รับ 1 อันดับคะแนน";
+next;
+menu
+"^339900->^000000 แลกเปลี่ยนไอเทม Quest Box V.2",ex01,
+"^339900->^000000 จัดอันดับ",rank,
+"^339900->^000000 ดูของรางวัล",reward,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+ex01: 
+if (zeny<200000) goto nohave;
+if (countitem(7053)<50) goto nohave;
+if (countitem(7161)<50) goto nohave;
+mes "[ เควสประจำสัปดาห์ ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+delitem 7053,50;
+delitem 7161,50;
+set zeny,zeny -200000;
+getitem 60012,1;
+query_sql "SELECT `char_id`,`quest_score` FROM `char_rank` WHERE `char_id` = "+ getcharid(0) +" LIMIT 1", .@char_id, .@point;
+			if (!(.@point || .@char_id) )
+				query_sql "INSERT INTO `char_rank` (`char_id`,`quest_score`) VALUES ('"+ getcharid(0) +"', '1')";
+			 else
+				query_sql "UPDATE `char_rank` SET `quest_score` = `quest_score`+1 WHERE `char_id` = "+ getcharid(0) +" LIMIT 1";
+
+			dispbottom "คุณได้ทำการแลกเปลี่ยน Quest Week สำเร็จ และได้รับ 1 Point แต้มทั้งหมดของคุณคือ "+ (.@point +1) +" Point";
+end;
+
+rank:
+callfunc "questrank";
+end;
+
+reward:
+callfunc "Shop_QQ","QQ_Week",1;
+end;
+
+nogo:
+end;
+
+nohave:
+mes "[ เควสประจำสัปดาห์ ]";
+mes "เหมือนว่าท่านมีของมาไม่ครบนะ.";  
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "เควสประจำสัปดาห์", 0;
+end;
+}
+
+morocc,165,129,4	duplicate(Quest_Week)	เควสประจำสัปดาห์#01	804

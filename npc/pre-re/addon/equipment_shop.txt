@@ -1,0 +1,80 @@
+/*
+=================== TERMS OF SERVICES. ===================
+1. ALL RIGHT RESERVED RE-SELLER OR SHARE SCRIPT TO PUBLISH.
+2. BUT YOU RE-SELLER OR SHARE SCRIPT WITH OUT UNAUTHORIZRD
+   I WILL ALL CANCEL MY SUPPORT FOR YOU.
+3. MAINTENANCE SCRIPTS WILL BE FREE SERVICES.
+4. I WILL NOT KEEP ANY INFORMATIONS FROMS YOU SERVER THAT
+   YOU SEND FOR ME.
+5. I HOPE YOU WILL ALL ACCEPT TERMS OF SERVICES.
+==========================================================
+Script. Equipment Shops																			 
+Create By.  Athena Studio
+Bug Report. Kittisak Sarounram [ FB ]																					 
+Contact Us. Kittisak Sarounram [ FB ]																					 
+TEL. 0909183008 [ TRUE MOVE H ]																					 
+==========================================================
+*/
+-	shop	Armor	-1,2302:0,2304:0,2306:0,2308:0,2310:0,2311:0,2313:0,2315:0,2317:0,2318:0,2319:0,2320:0,2322:0,2324:0,2326:0,2329:0,2331:0,2333:0,2336:0,2340:0,2342:0,2353:0,2354:0,2355:0,2359:0,2360:0,2364:0,2365:0,2366:0,2371:0,2372:0,2373:0,2386:0,2387:0,2388:0,2389:0,2390:0,2391:0,2399:0,15000:0,2356:0
+-	shop	Shield	-1,2102:0,2104:0,2106:0,2108:0,2110:0,2113:0,2114:0,2116:0,2118:0,2120:0,2121:0,2122:0,2123:0,2124:0,2125:0,2128:0,2129:0,2130:0,2131:0,2133:0,2134:0,2135:0,2138:0
+-	shop	Footgear	-1,2402:0,2404:0,2406:0,2407:0,2408:0,2412:0,2415:0,2414:0,2416:0,2417:0,2418:0,2419:0,2420:0,2422:0,2424:0,2426:0,2432:0,2434:0,2440:0,2450:0
+-	shop	Garments	-1,2502:0,2504:0,2506:0,2509:0,2512:0,2513:0,2514:0,2515:0,2516:0,2517:0,2518:0,2519:0,2520:0,2521:0,2523:0,2525:0,2527:0,2528:0,2530:0,2531:0,2532:0,2536:0,2542:0,2544:0,2545:0,2553:0,2511:0
+
+
+prontera,140,185,5	script	อุปกรณ์สวมใส่	662,{
+	mes "^0000CD[ อุปกรณ์สวมใส่ ]^000000";
+	switch(select("~ ชุดเกราะ:~ โล่:~ รองเท้า:~ ผ้าคลุม"))
+	{
+		case 1:
+			callshop "Armor",1;	
+			npcshopattach "Armor";
+			end;
+			
+		case 2:
+			callshop "Shield",1;
+			npcshopattach "Shield";
+			end;	
+			
+		case 3:
+			callshop "Footgear",1;
+			npcshopattach "Footgear";
+			end;
+			
+		case 4:
+			callshop "Garments",1;
+			npcshopattach "Garments";
+			end;
+			
+	}
+	end;
+
+
+OnBuyItem:
+	//mes "คุณต้องการ ^FF0066"+getitemname(@bought_nameid)+"^000000  จำนวน กี่รายการ ?";
+	//input .@Amount;
+	//	if	( .@Amount <= 0 )
+	//{
+		set .@Amount,1;
+	//}	
+	
+	for ( set .@i, 0; .@i < getarraysize(@bought_nameid); set .@i, .@i+1 )
+	{
+		query_sql ("SELECT `refineable` FROM `item_db` WHERE `id` = '"+ @bought_nameid[.@i] +"'", .@ref);
+		if ( .@ref == 0 )
+		{
+			getitem2 @bought_nameid[.@i],.@Amount,1,0,0,0,0,0,0;
+		}
+		else
+		{
+			getitem2 @bought_nameid[.@i],.@Amount,1,4,0,0,0,0,0;
+		}
+	}
+	deletearray @bought_nameid, getarraysize(@bought_nameid);
+	close;
+OnInit: 
+waitingroom "อุปกรณ์สวมใส่",0; 
+end;
+}
+
+
+

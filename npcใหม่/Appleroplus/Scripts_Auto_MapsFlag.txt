@@ -1,0 +1,24 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+//prontera	mapflag	town	// พื้นที่เมืองหลวง
+//prontera	mapflag	nobranch	// ห้ามใช้ Dead Branch กิ่งไม้บอส และ กิ่งไม้มอนเตอร์
+//prontera	mapflag	nodrop	// ห้ามโยน Item ลงพื้น
+//prontera	mapflag	restricted	7	// พื้นที่ Zone Restricted
+//prontera	mapflag	nightenabled	// โหมดกลางคืน เมื่อ เข้าช่วงกลางคืน
+//prontera	mapflag	noicewall	// ห้ามใช้ สกิล Ice Wall.
+//prontera	mapflag	nopenalty	// เมื่อตายจะไม่ถูกลงโทษ ลดค่าประสบการณ์
+//prontera	mapflag	pvp	off	// ปิดการใช้ PVP การสังหารกัน ระหว่างผู้เล่น
+//prontera	mapflag	reset	// เปิดให้ใช้งานระบบ Reset Neuralizer หรือ Item 12213 ได้
+//prontera	mapflag	privateairship_source	// เปิดใช้งาน ระบบเรือเหาะได้
+//prontera	mapflag	privateairship_destination	// เปิดใช้งาน ระบบเรือเหาะได้

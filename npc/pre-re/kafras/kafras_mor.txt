@@ -1,0 +1,20 @@
+//—>===============================================================<—|
+// -- # Ragnarok Online EP 4.0 BY Kelberwitz Blade's
+// -- # Morocc HiSo Kafra Corparation !!
+//—>===============================================================<—|
+
+// - - > ¿Ñ§ªÑè¹ Morocc Kafra
+function	script	F_KafSetMoc	{
+	cleararray @wrpC$[0],"",getarraysize(@wrpC$);
+	setarray @wrpD$[0], "Prontera", "Payon", "Alberta", "Comodo", "Comodo Pharos Beacon";
+	setarray @wrpP[0], 1200, 1200, 1800, 1800, 1200;
+	set @wrpC$[0], @wrpD$[0]+" [ "+@wrpP[0]+" z ]";
+	set @wrpC$[1], @wrpD$[1]+" [ "+@wrpP[1]+" z ]";
+	set @wrpC$[2], @wrpD$[2]+" [ "+@wrpP[2]+" z ]";
+	set @wrpC$[3], @wrpD$[3]+" [ "+@wrpP[3]+" z ]";
+	set @wrpC$[4], @wrpD$[4]+" [ "+@wrpP[4]+" z ]";
+	set @wrpC$[5], "Â¡àÅÔ¡";
+	setarray @viewpX[0], 156, 163, 28, 292, 200;
+	setarray @viewpY[0], 97, 260, 167, 211, 288;
+	return;
+}

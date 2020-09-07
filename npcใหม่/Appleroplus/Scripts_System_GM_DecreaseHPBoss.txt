@@ -1,0 +1,42 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+// ใช้คำสั่งสคลิปนี้  ให้พิม @remobev เพื่อเปิดใช้งานเมนู
+-	script	Reduce	FAKE_NPC,{
+
+OnScripts:
+
+	switch(select("ลดเลือดบอสทั้งหมด:คืนค่า"))
+	{
+		case 1: donpcevent strnpcinfo(0) +"::OnRe"; end;
+		case 2: donpcevent strnpcinfo(0) +"::OnDefault"; end;
+	}
+	end;
+
+OnRe:
+	setbattleflag("mvp_hp_rate",50);
+	atcommand "@reloadmobdb";
+	announce "[ระบบ] : ขณะนี้ กิจกรรมลด เลือด บอส 50 % ทุกตัวในเกมได้ เริ่มขึ้นแล้ว.!!!",8;
+	end;
+	
+OnDefault:
+	setbattleflag("mvp_hp_rate",100);
+	atcommand "@reloadmobdb";
+	announce "[ระบบ] : ขณะนี้ กิจกรรมลด เลือด บอส 50 % ทุกตัวในเกมได้ จบลงแล้ว.!!!",8;
+	end;
+	
+	
+OnInit:
+	bindatcmd "remobev",strnpcinfo(3) +"::OnScripts",99,99;
+	end;
+}

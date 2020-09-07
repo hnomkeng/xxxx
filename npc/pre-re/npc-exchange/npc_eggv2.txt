@@ -1,0 +1,56 @@
+-	shop	QQ_Eggv2	-1,7619:-1,7620:-1,7338:-1,31673:-1,20191:-1,31062:-1,20504:-1
+
+function	script	eggscroll02	{
+	setarray .i1[1],12208,12209,12210,12211,12212,12215,12216,14527,12221,14536,14537,14542,14544; // Common Items
+	set .i1rand,rand(1,13); // Randomize Common Items; just change max amount if you add items
+	setarray .i2[1],31062,20191,7338,7619,7620; // Rare Items
+	set .i2rand,rand(1,5); // Randomize Rare Items; just change max amount if you add items
+	setarray .i3[1],20504,31673; // Super Rare Items
+	set .i3rand,rand(1,2); //Randomize Super Rare Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		// Super Rare Item 5%
+		if (.chance == 5){
+		getitem .i3[.i3rand],1;
+		announce "ผู้เล่น"+strcharinfo(0)+" เปิดกล่อง Random Egg Scroll V.2 และได้รับ "+getitemname(.i3[.i3rand])+"",0;
+		end;
+		} 
+
+		// Rare Item 30%
+		else if (.chance == 30){
+		getitem .i2[.i2rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" เปิดกล่อง Random Egg Scroll V.2 และได้รับ "+getitemname(.i2[.i2rand])+"",0;
+		end;
+		} 
+
+		// Common Items
+		else {
+		getitem .i1[.i1rand],1;
+		end; 
+		}
+}
+
+-	script	ex_eggv2	-1,{
+mes "[ ตัวอย่างไอเทม ]";
+mes "-----------------------------------";
+mes "ท่านต้องการดูตัวอย่าง Item ใด ?";
+mes "-----------------------------------";
+next;
+menu
+"^339900->^000000 Random Egg V.2",egg1,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+egg1:
+callfunc "Shop_QQ","QQ_Eggv2",1;
+end;
+
+nogo:
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "ตัวอย่างไอเทม", 0;
+end;
+}

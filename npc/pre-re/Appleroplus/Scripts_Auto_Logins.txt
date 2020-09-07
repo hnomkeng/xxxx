@@ -1,0 +1,385 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Login	FAKE_NPC,{
+OnPCLoginEvent:
+	if(getgmlevel() >=50) end;
+		//==============================================
+		//==============================================
+		//==============================================
+		
+		//เช็คไอเทมที่เสียหายถ้ามีซ่อมให้ทันที
+		if (getbrokenid(1) > 0)
+		{
+			atcommand "@repairall"; 
+		}
+		
+		//แก้สถานะต่างๆ
+		sc_end SC_STAN;
+		sc_end SC_STUN;
+		sc_end SC_STONE;
+		sc_end SC_SLOWDOWN;
+		sc_end SC_FREEZE;
+		sc_end SC_SLEEP;
+		sc_end SC_CURSE;
+		sc_end SC_SILENCE;
+		sc_end SC_CONFUSION;
+		sc_end SC_BLIND;
+		sc_end SC_BLEEDING;
+		sc_end SC_DECREASEAGI;
+		sc_end SC_POISON;
+		sc_end SC_HALLUCINATION;
+		sc_end SC_STRIPWEAPON;
+		sc_end SC_STRIPARMOR;
+		sc_end SC_STRIPHELM;
+		sc_end SC_STRIPSHIELD;
+		sc_end SC_CHANGEUNDEAD;
+		sc_end SC_ORCISH;
+		sc_end SC_BERSERK;
+		sc_end SC_SKE;
+		sc_end SC_SWOO;
+		sc_end SC_SKA;
+		sc_end SC_BURNING;
+		sc_end SC_FREEZING;
+		sc_end SC_FEAR;
+
+		//บัพค่าอาหาร 30นาที Support rAthena
+		sc_start SC_STRFood, 1800000,5;
+		sc_start SC_AGIFood, 1800000,5;
+		sc_start SC_VITFood, 1800000,5;
+		sc_start SC_INTFood, 1800000,5;
+		sc_start SC_DEXFood, 1800000,5;
+		sc_start SC_LUKFood, 1800000,5;
+		
+		//บัพสกิลต่างๆ
+		sc_start SC_BLESSING,1800000,10;
+		sc_start SC_INCREASEAGI,1800000,10;
+		sc_start 41,1800000,10; //กอเรีย
+		sc_start 40,1800000,10; // MAGNIFICAT เร่ง
+		if(agitcheck()){
+				sc_end SC_POEMBRAGI;
+				sc_end SC_SERVICE4U;
+				sc_end SC_ASSNCROS;
+				sc_end SC_APPLEIDUN;
+			dispbottom "[เอลฟ์แห่งเสียงดนตรี] คุณ เป็นผู้เล่น ระดับ ทั่วไป  ยกเลิกสถานะ ( บากิ & เซอร์วิส ) เนื่องจากอยู่ในช่วงเวลา สงครามชิงปราสาท)";
+		}else{
+			sc_start4 SC_POEMBRAGI,1000*60*5,5,70,90,10;
+			sc_start4 SC_SERVICE4U,1000*60*5,5,40,40,1;
+			dispbottom "[เอลฟ์แห่งเสียงดนตรี] คุณ เป็นผู้เล่น ระดับ ทั่วไป ในขณะคุณได้อยู่ในสถานะ ( บากิ & เซอร์วิส ) เป็นเวลา 5 นาที (ไม่สามารถใช้ได้ใน สนามประลอง & สงครามชิงปราสาท ได้)";
+		}
+
+		//เพิ่มHPและSP 100%
+		percentheal 100,100; 
+		
+		//เอฟเฟกเพิ่มความสวยงาม
+		specialeffect 509;
+		specialeffect 410;
+		specialeffect2 509;
+		specialeffect2 EF_HEAL2;
+		specialeffect2 EF_INCAGILITY;
+		specialeffect2 EF_BLESSING;
+		//==============================================
+		//==============================================
+		//==============================================
+		
+		//ส่องไอเทมปริศนาที่มีในตัวทั้งหมด
+			atcommand "@identifyall";
+		
+		
+		// VIP บัพ
+		if(vip_status(VIP_STATUS_ACTIVE) || getgmlevel() >= 99){
+			sc_start 72,1800000,5; // WEAPON เคลือบอาวุธ
+			sc_start 73,1800000,5; // SHIELD เคลือบโล่
+			sc_start 74,1800000,5; // ARMOR เคลือบชุดเกราะ
+			sc_start 75,1800000,5; // HELM เคลือบส่วนหัว
+			sc_start SC_SpeedUp1,1800000,1; //วิ่งเร็ว
+			sc_start SC_ATKPOTION,1800000,50; //+atk
+			sc_start SC_MATKPOTION,1800000,50; //+matk
+			sc_start SC_ENDURE,1800000,10;
+			sc_start 29,1800000,10; //แอง
+			sc_start SC_IMPOSITIO,1800000,5;
+			sc_start 41,1800000,5; //กอเรีย
+			sc_start 34,1800000,1; //พิษ
+			sc_start 121,1800000,10; //วินวอค
+			sc_start 39,1800000,10; //ไครี่
+			sc_start 120,1800000,10; // Falconeye
+			sc_start 36,1800000,10; // SUFFRAGIUM ร่ายไว
+			sc_start 115,1800000,5; // ASSUMPTIO ถึก
+			sc_start 40,1800000,5; // MAGNIFICAT เร่ง
+			sc_start 44,1800000,5; // WEAPONPERFECTION เพิ่มโจมตี 100% อาวุธ
+			sc_start 46,1800000,5; //MAXIMIZEPOWER โจมตีแรงที่สุด
+			sc_start SC_HitFood,1800000,10;
+			sc_start SC_FleeFood,1800000,10;
+			sc_start SC_BATKFood,1800000,10;
+			sc_start SC_MATKFood,1800000,10;
+			
+			if(agitcheck()){
+				sc_end SC_POEMBRAGI;
+				sc_end SC_SERVICE4U;
+				sc_end SC_ASSNCROS;
+				sc_end SC_APPLEIDUN;
+				dispbottom "[เอลฟ์แห่งเสียงดนตรี] คุณ เป็นผู้เล่น ระดับ VIP ได้รับ บัพช่วยเหลือพิเศษ & ยกเลิกสถานะ ( บากิ & เซอร์วิส ) เนื่องจากอยู่ในช่วงเวลา สงครามชิงปราสาท)";
+			}else{
+				sc_start4 SC_POEMBRAGI,1000*60*15,5,70,90,10;
+				sc_start4 SC_SERVICE4U,1000*60*15,5,40,40,1;
+				dispbottom "[เอลฟ์แห่งเสียงดนตรี] คุณ เป็นผู้เล่น ระดับ VIP ได้รับ บัพช่วยเหลือพิเศษ & ในขณะคุณได้อยู่ในสถานะ ( บากิ & เซอร์วิส ) เป็นเวลา 15 นาที (ไม่สามารถใช้ได้ใน สนามประลอง & สงครามชิงปราสาท ได้)";
+			}
+			
+			//เพิ่มHPและSP 100%
+			percentheal 100,100; 
+			
+			//เอฟเฟกเพิ่มความสวยงาม
+		specialeffect2 509;
+		specialeffect2 EF_HEAL2;
+		specialeffect2 EF_INCAGILITY;
+		specialeffect2 EF_BLESSING;
+		//==============================================
+		//==============================================
+		//==============================================
+		}
+	if ( vip_status(VIP_STATUS_ACTIVE) )
+	{
+		soundeffect "welcomemro.wav",0;
+		atcommand "@exp";
+		atcommand "@stats";
+		atcommand "@time";
+		atcommand "@rates";
+		announce "[ระบบ] : ขณะนี้ คุณ [ "+strcharinfo(0)+" ] [ ผู้เล่น VIP ] ได้เข้ามาสู่โลกของเราแล้วจ้า",0,0xFF3399;
+		dispbottom "==============================";
+		dispbottom "[ระบบ] : เติมเงินจากบัตร True Money วันนี้รับ Cash Point คูณ 10 จากราคาของบัตร";
+		dispbottom "[ระบบ] : เติมเงินแบบโอนผ่านบัญชีจะได้รับ Cash Point โบนัสเพิ่มจากเดิม 10% ";
+		dispbottom "[ระบบ] : ขอให้สนุกนะค่ะ และ อย่าลืมชวนเพื่อนๆมาเล่นด้วยกันเยอะๆนะค่ะ";
+		dispbottom "[ระบบ] : คุณเข้าเกมเวลา [ "+ gettime(3) +" : "+ gettime(2) +" : "+ gettime(1) +" ]";
+		//dispbottom "==============================";
+		end;
+	}
+	else
+	{
+		soundeffect "welcomemro.wav",0;
+		atcommand "@exp";
+		atcommand "@stats";
+		atcommand "@time";
+		atcommand "@rates";
+		announce "[ระบบ] : ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้ามาสู่โลกของเราแล้วจ้า",0,0xCC00CC;
+		dispbottom "==============================";
+		dispbottom "[ระบบ] : เติมเงินจากบัตร True Money วันนี้รับ Cash Point คูณ 10 จากราคาของบัตร";
+		dispbottom "[ระบบ] : เติมเงินแบบโอนผ่านบัญชีจะได้รับ Cash Point โบนัสเพิ่มจากเดิม 10% ";
+		dispbottom "[ระบบ] : ขอให้สนุกนะค่ะ และ อย่าลืมชวนเพื่อนๆมาเล่นด้วยกันเยอะๆนะค่ะ";
+		dispbottom "[ระบบ] : คุณเข้าเกมเวลา [ "+ gettime(3) +" : "+ gettime(2) +" : "+ gettime(1) +" ]";
+		//dispbottom "==============================";
+		end;
+	}
+}
+//==================================================================================
+-	script	GMLogin	FAKE_NPC,{
+OnPCLoginEvent:
+		if(getgmlevel() > 50 ) {
+		soundeffect "welcomemro.wav",0;
+		
+		//==============================================
+		//==============================================
+		//==============================================
+		
+		//เช็คไอเทมที่เสียหายถ้ามีซ่อมให้ทันที
+		if (getbrokenid(1) > 0)
+		{
+			atcommand "@repairall"; 
+		}
+		
+		//แก้สถานะต่างๆ
+		sc_end SC_STAN;
+		sc_end SC_STUN;
+		sc_end SC_STONE;
+		sc_end SC_SLOWDOWN;
+		sc_end SC_FREEZE;
+		sc_end SC_SLEEP;
+		sc_end SC_CURSE;
+		sc_end SC_SILENCE;
+		sc_end SC_CONFUSION;
+		sc_end SC_BLIND;
+		sc_end SC_BLEEDING;
+		sc_end SC_DECREASEAGI;
+		sc_end SC_POISON;
+		sc_end SC_HALLUCINATION;
+		sc_end SC_STRIPWEAPON;
+		sc_end SC_STRIPARMOR;
+		sc_end SC_STRIPHELM;
+		sc_end SC_STRIPSHIELD;
+		sc_end SC_CHANGEUNDEAD;
+		sc_end SC_ORCISH;
+		sc_end SC_BERSERK;
+		sc_end SC_SKE;
+		sc_end SC_SWOO;
+		sc_end SC_SKA;
+		sc_end SC_BURNING;
+		sc_end SC_FREEZING;
+		sc_end SC_FEAR;
+
+		//บัพค่าอาหาร 30นาที Support rAthena
+		sc_start SC_STRFood, 1800000,5;
+		sc_start SC_AGIFood, 1800000,5;
+		sc_start SC_VITFood, 1800000,5;
+		sc_start SC_INTFood, 1800000,5;
+		sc_start SC_DEXFood, 1800000,5;
+		sc_start SC_LUKFood, 1800000,5;
+		
+		//บัพสกิลต่างๆ
+		sc_start SC_BLESSING,1800000,10;
+		sc_start SC_INCREASEAGI,1800000,10;
+		sc_start 41,1800000,10; //กอเรีย
+		sc_start 40,1800000,10; // MAGNIFICAT เร่ง
+		if(agitcheck()){
+				sc_end SC_POEMBRAGI;
+				sc_end SC_SERVICE4U;
+				sc_end SC_ASSNCROS;
+				sc_end SC_APPLEIDUN;
+			dispbottom "[เอลฟ์แห่งเสียงดนตรี] คุณ เป็นผู้เล่น ระดับ ทั่วไป  ยกเลิกสถานะ ( บากิ & เซอร์วิส ) เนื่องจากอยู่ในช่วงเวลา สงครามชิงปราสาท)";
+		}else{
+			sc_start4 SC_POEMBRAGI,1000*60*5,5,70,90,10;
+			sc_start4 SC_SERVICE4U,1000*60*5,5,40,40,1;
+			dispbottom "[เอลฟ์แห่งเสียงดนตรี] คุณ เป็นผู้เล่น ระดับ ทั่วไป ในขณะคุณได้อยู่ในสถานะ ( บากิ & เซอร์วิส ) เป็นเวลา 5 นาที (ไม่สามารถใช้ได้ใน สนามประลอง & สงครามชิงปราสาท ได้)";
+		}
+
+		//เพิ่มHPและSP 100%
+		percentheal 100,100; 
+		
+		//เอฟเฟกเพิ่มความสวยงาม
+		specialeffect 509;
+		specialeffect 410;
+		specialeffect2 509;
+		specialeffect2 EF_HEAL2;
+		specialeffect2 EF_INCAGILITY;
+		specialeffect2 EF_BLESSING;
+		//==============================================
+		//==============================================
+		//==============================================
+		
+		//ส่องไอเทมปริศนาที่มีในตัวทั้งหมด
+			atcommand "@identifyall";
+		
+		
+		// VIP บัพ
+		if(vip_status(VIP_STATUS_ACTIVE) || getgmlevel() >= 99){
+			sc_start 72,1800000,5; // WEAPON เคลือบอาวุธ
+			sc_start 73,1800000,5; // SHIELD เคลือบโล่
+			sc_start 74,1800000,5; // ARMOR เคลือบชุดเกราะ
+			sc_start 75,1800000,5; // HELM เคลือบส่วนหัว
+			sc_start SC_SpeedUp1,1800000,1; //วิ่งเร็ว
+			sc_start SC_ATKPOTION,1800000,50; //+atk
+			sc_start SC_MATKPOTION,1800000,50; //+matk
+			sc_start SC_ENDURE,1800000,10;
+			sc_start 29,1800000,10; //แอง
+			sc_start SC_IMPOSITIO,1800000,5;
+			sc_start 41,1800000,5; //กอเรีย
+			sc_start 34,1800000,1; //พิษ
+			sc_start 121,1800000,10; //วินวอค
+			sc_start 39,1800000,10; //ไครี่
+			sc_start 120,1800000,10; // Falconeye
+			sc_start 36,1800000,10; // SUFFRAGIUM ร่ายไว
+			sc_start 115,1800000,5; // ASSUMPTIO ถึก
+			sc_start 40,1800000,5; // MAGNIFICAT เร่ง
+			sc_start 44,1800000,5; // WEAPONPERFECTION เพิ่มโจมตี 100% อาวุธ
+			sc_start 46,1800000,5; //MAXIMIZEPOWER โจมตีแรงที่สุด
+			sc_start SC_HitFood,1800000,10;
+			sc_start SC_FleeFood,1800000,10;
+			sc_start SC_BATKFood,1800000,10;
+			sc_start SC_MATKFood,1800000,10;
+			
+			if(agitcheck()){
+				sc_end SC_POEMBRAGI;
+				sc_end SC_SERVICE4U;
+				sc_end SC_ASSNCROS;
+				sc_end SC_APPLEIDUN;
+				dispbottom "[เอลฟ์แห่งเสียงดนตรี] คุณ เป็นผู้เล่น ระดับ VIP ได้รับ บัพช่วยเหลือพิเศษ & ยกเลิกสถานะ ( บากิ & เซอร์วิส ) เนื่องจากอยู่ในช่วงเวลา สงครามชิงปราสาท)";
+			}else{
+				sc_start4 SC_POEMBRAGI,1000*60*15,5,70,90,10;
+				sc_start4 SC_SERVICE4U,1000*60*15,5,40,40,1;
+				dispbottom "[เอลฟ์แห่งเสียงดนตรี] คุณ เป็นผู้เล่น ระดับ VIP ได้รับ บัพช่วยเหลือพิเศษ & ในขณะคุณได้อยู่ในสถานะ ( บากิ & เซอร์วิส ) เป็นเวลา 15 นาที (ไม่สามารถใช้ได้ใน สนามประลอง & สงครามชิงปราสาท ได้)";
+			}
+			
+			//เพิ่มHPและSP 100%
+			percentheal 100,100; 
+			
+			//เอฟเฟกเพิ่มความสวยงาม
+		specialeffect2 509;
+		specialeffect2 EF_HEAL2;
+		specialeffect2 EF_INCAGILITY;
+		specialeffect2 EF_BLESSING;
+		//==============================================
+		//==============================================
+		//==============================================
+		atcommand "@exp";
+		atcommand "@stats";
+		atcommand "@time";
+		atcommand "@rates";
+		atcommand "@speed 0";
+		atcommand "@users";
+		//atcommand "@hide";
+		announce "[ระบบ] : ขณะนี้ คุณ [ "+strcharinfo(0)+" ] [ Game Master ]ได้เข้ามาสู่โลกของเราแล้วจ้า",0,0x66FFFF;
+		dispbottom "==============================";
+		dispbottom "[ระบบ] : เติมเงินจากบัตร True Money วันนี้รับ Cash Point คูณ 10 จากราคาของบัตร";
+		dispbottom "[ระบบ] : เติมเงินแบบโอนผ่านบัญชีจะได้รับ Cash Point โบนัสเพิ่มจากเดิม 10% ";
+		dispbottom "[ระบบ] : ขอให้สนุกนะค่ะ และ อย่าลืมชวนเพื่อนๆมาเล่นด้วยกันเยอะๆนะค่ะ";
+		dispbottom "[ระบบ] : คุณเข้าเกมเวลา [ "+ gettime(3) +" : "+ gettime(2) +" : "+ gettime(1) +" ]";
+		//dispbottom "==============================";
+		//==============================================
+		//==============================================
+		//==============================================
+		end;
+		}
+end;
+}
+}
+//==================================================================================
+-	script	Logout	FAKE_NPC,{
+OnPCLogoutEvent:
+	if(getgmlevel() >=50) end;
+	if ( vip_status(VIP_STATUS_ACTIVE) )
+	{
+		announce "[ระบบ] : ขณะนี้ คุณ [ "+strcharinfo(0)+" ] [ ผู้เล่น VIP ] ได้ออกจากเกมส์เรียบร้อยแล้ว",0,0xFF3399;
+		end;
+	}
+	else
+	{
+		announce "[ระบบ] : ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้ออกจากเกมส์เรียบร้อยแล้ว",0,0xCC00CC;
+		end;
+	}
+}
+//==================================================================================
+-	script	GMLogout	FAKE_NPC,{
+OnPCLogoutEvent:
+		if(getgmlevel() > 50 ) {
+		announce "[ระบบ] : ขณะนี้ คุณ [ "+strcharinfo(0)+" ] [ Game Master ] ได้ออกจากเกมส์เรียบร้อยแล้ว",0,0x66FFFF;
+		end;
+		}
+end;
+}
+
+//==================================================================================
+-	script	SystemServer	FAKE_NPC,{
+OnInit:
+	announce "[ System ] : ทำการ Reload Script เรียบร้อยแล้วระบบทั้งหมดทำงานตามปกติ",8;
+	announce "[ System ] : ผู้เล่นทุกท่านที่ออนไลน์ ในระบบขณะนี้ จะได้รับ Item ชดเชย ดังต่อไปนี้",8;
+	announce "[ System ] : Cash Coin 5 ea. Poring Coin 5 ea. Old Card Album 1 ea.",8;
+	announce "[ System ] : Token Of Ziegfried 1 ea. Butterfly Wing 10 ea. Fly Wing 20 ea. ขออภัยในความไม่สดวก",8;
+	//แจก Item ชดเชย หากทำการ Reload Script
+	addrid(0);
+	getitem 61001,5;
+	getitem 7539,10;
+	getitem 7621,1;
+	getitem 616,1;
+	getitem 602,10;
+	getitem 601,20;
+	end;
+}
+//==================================================================================

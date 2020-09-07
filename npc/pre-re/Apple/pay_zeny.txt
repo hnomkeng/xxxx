@@ -1,0 +1,14 @@
+prontera,164,179,4	script	แจกเงิน	90,{
+	if (#pay_zeny == 5) {
+		dispbottom "เคยกดรับไปแล้ว";
+	} else {
+		set #pay_zeny, 5;
+		set Zeny,Zeny+500000000;
+		dispbottom "รับเงินแล้วเรียบร้อย";
+	}
+	end;
+
+OnInit:
+	waitingroom "[ แจกเงิน ]",0;
+end;
+}

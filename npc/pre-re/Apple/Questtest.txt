@@ -1,0 +1,111 @@
+///////////////////////////////////////////////
+//                                          //
+//                                          //
+//Tharakan Khumtong                         //
+//////////////////////////////////////////////
+
+-	shop	QuestView	-1,501:100,502:100    ///<ไอเท็ม>:<ราคาใช้แสดง ไม่มีผลอะไร>**เพิ่มของโชว์เหมือนร้านค้า**
+function	script	Quest_setting	{
+
+///////////////////////////////////////////
+//@bought_nameid เลข item ของเควส อิงจาก Shop QuestView
+////setarray @itemuse[0] ของที่ใช้ทำเควส
+//@zenyuse เงินที่ใช้
+//@muts จำนวนที่จะได้
+if(@bought_nameid == 501) {	setarray @itemuse[0],502,503,504,505; setarray @itemusemany[0],1,2,3,4; set @zenyuse, 100; set @muts, 10;}
+else if(@bought_nameid == 502) {	setarray @itemuse[0],503,504,505,506; setarray @itemusemany[0],1,2,3,4; set @zenyuse, 100;set @muts, 10;}
+///เพิ่มเควส
+//else if(@bought_nameid == 503) {	setarray @itemuse[0],503,504,505,506; setarray @itemusemany[0],1,2,3,4; set @zenyuse, 100;set @muts, 10;}
+//else if(@bought_nameid == 504) {	setarray @itemuse[0],503,504,505,506; setarray @itemusemany[0],1,2,3,4; set @zenyuse, 100;set @muts, 10;}
+
+return;
+}
+///////////////////////////////////////////
+morocc,179,139,8	script	เควส	99,{
+
+mes "สวัสดีคุณ ^FF0000 "+strcharinfo(0)+" ^000000 ";
+mes "เลือกของที่ต้องการ ";
+next;
+
+callfunc "Itemshop","QuestView",1;
+
+
+OnBuyItem:
+callfunc "Quest_itemnum";
+end;
+}
+
+function	script	Itemshop	{	npcshopattach getarg(0),1;	close2;	cutin "",255;	callshop getarg(0),getarg(1);	end;	}
+
+
+//////////////////////////////////////////////////
+
+function	script	Quest_itemnum	{
+for (set .@g2,0; .@g2 < getarraysize(@bought_nameid); set .@g2,.@g2+1) {
+	sleep2 1;
+	set @bought_nameid,@bought_nameid[.@g];
+	deletearray @itemuse[0],getarraysize(@itemuse);
+	deletearray @itemusemany[0],getarraysize(@itemusemany);
+	set @broken,0;	set @zenyuse, 0;
+	callfunc "Quest_setting";
+		if(@itemuse[0] <= 0)	goto check;	
+			set .@r,0;	set .@up,0;	set @itemgetmany,0;
+			for( set .@r,0; .@r < getarraysize(@itemuse); set .@r,.@r+1 ) {
+				if(.@up >= getarraysize(@itemuse)) break;
+				set .@itemup[.@up], countitem(@itemuse[.@up])/@itemusemany[.@up];
+				if(.@up == 0) set @itemgetmany,.@itemup[.@up];
+				if(@itemgetmany > .@itemup[.@up]) set @itemgetmany,.@itemup[.@up];
+				set .@up,.@up+1;
+				continue;
+			}
+check:	
+		if(@itemuse[0] <= 0){
+			if (0 == getitemslots( @bought_nameid[.@g2])){	mes "ในขณะนี้ "+getitemname(@bought_nameid[.@g2])+" ยังไม่มีเควสจาก GM";}
+			if (1 <= getitemslots( @bought_nameid[.@g2])){	mes "ในขณะนี้ "+getitemname(@bought_nameid[.@g2])+" ["+getitemslots( @bought_nameid[.@g2])+"] ยังไม่มีเควสจาก GM";	}
+		}
+		else if (@itemgetmany == 0){
+			if (0 == getitemslots( @bought_nameid[.@g])){	mes "Item ที่ต้องการแลกกับ "+getitemname(@bought_nameid[.@g])+" จำนวน 1 ea";	}
+			if (1 <= getitemslots( @bought_nameid[.@g])){	mes "Item ที่ต้องการแลกกับ "+getitemname(@bought_nameid[.@g])+" ["+getitemslots( @bought_nameid[.@g])+"] จำนวน 1 ea";	}
+			set .@d,0;
+			for( set .@i,0; .@i < getarraysize(@itemuse); set .@i,.@i+1 ) {
+				if(.@d >= getarraysize(@itemuse)) break;
+				if (0 == getitemslots( @itemuse[.@d])){	mes " "+(.@d+1)+"> "+getitemname(@itemuse[.@d])+" จำนวน "+@itemusemany[.@d]+" ea";	}
+				if (1 <= getitemslots( @itemuse[.@d])){	mes " "+(.@d+1)+"> "+getitemname(@itemuse[.@d])+" ["+getitemslots( @itemuse[.@d])+"] จำนวน "+@itemusemany[.@d]+" ea";	}
+				set .@d,.@d+1;
+				continue;
+			}
+			if(@zenyuse != 0) {	mes	"และใช้เงินจำนวน  "+ @zenyuse +" Zeny";	}
+		}
+		else if (@bought_quantity[.@g] > @itemgetmany){
+			mes "จาก Item ที่ท่านมี ท่านสามารถแลก "+getitemname(@bought_nameid[.@g])+" ได้ไม่เกิน  "+@itemgetmany+" ea ";
+		}
+		else if (Zeny < (@zenyuse*@bought_quantity[.@g])){	
+			if (@bought_quantity[.@g] == 1)	mes "เงินที่ท่านเตรียมมามีไม่พอ ต้องใช้เงินจำนวน  "+@zenyuse+" Zeny ในการแลก "+getitemname(@bought_nameid[.@g])+"";
+			else if (@bought_quantity[.@g] >= 2)	mes "เงินที่ท่านเตรียมมามีไม่พอ ต้องใช้เงินจำนวน  "+(@zenyuse*@bought_quantity[.@g])+" Zeny ในการแลก "+getitemname(@bought_nameid[.@g])+" จำนวน "+@bought_quantity[.@g]+" ea";
+		}
+	else if ((@bought_quantity[.@g] <= @itemgetmany) && (Zeny >= (@zenyuse*@bought_quantity[.@g]))){
+			set .@r,0;	set .@up,0;
+			for( set .@r,0; .@r < getarraysize(@itemuse); set .@r,.@r+1 ) {
+				if(.@up >= getarraysize(@itemuse)) break;
+				delitem @itemuse[.@up],@itemusemany[.@up]*@bought_quantity[.@g];
+				dispbottom " "+getitemname(@itemuse[.@up])+" ได้ถูกนำไปใช้จำนวน "+(@itemusemany[.@up]*@bought_quantity[.@g])+" ea";
+				set .@up,.@up+1;
+				continue;
+			}
+			if(@zenyuse != 0) {	
+				set Zeny,(Zeny-@zenyuse*@bought_quantity[.@g]);
+				dispbottom " เงินได้ถูกนำไปใช้จำนวน "+(@zenyuse*@bought_quantity[.@g])+" zeny";
+			}
+
+			getitem @bought_nameid[.@g],@muts;
+		}
+				
+deletearray @bought_nameid[0],getarraysize(@bought_nameid);
+deletearray @bought_quantity[0],getarraysize(@bought_quantity);
+deletearray @itemuse[0],getarraysize(@itemuse);
+deletearray @itemusemany[0],getarraysize(@itemusemany);
+set @broken,0;	set @zenyuse, 0;set @muts, 0;
+}
+end;
+}
+

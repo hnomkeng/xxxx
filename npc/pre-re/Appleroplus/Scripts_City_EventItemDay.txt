@@ -1,0 +1,34 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,148,256,4	script	รับไอเทมฟรีทุกวัน	873,{
+
+set .@item,7621,1;; //ไอเทม
+set .@quantity,5; //จำนวน
+if(gettime(5) != FREE_DATE) {
+mes "สวัสดีค่ะยินดีให้บริการค่ะ";
+mes "วันนี้คุณสามารถรับไอเทมได้ฟรี";
+mes "และจะสามารถรับได้อีกในวันถัดไปนะค่ะ^_^";
+set FREE_DATE,gettime(5);
+getitem .@item,.@quantity;
+close;
+} else {
+mes "คุณรับไอเทมไปแล้วจะสามารถรับ";
+mes "ได้อีกในวันถัดไปนะค่ะ";
+close;
+end; 
+//OnInit: 
+//waitingroom "รับไอเทมฟรีทุกวัน",0; 
+//end; 
+}
+}

@@ -1,0 +1,56 @@
+-	script	job_blacksmith50	-1,{
+
+if (Class==5) goto L_is_merchant;
+
+if (Class==0) goto nojob;
+if (Class==1) goto nojob;
+if (Class==2) goto nojob;
+if (Class==3) goto nojob;
+if (Class==4) goto nojob;
+if (Class==6) goto nojob;
+if (Class==7) goto nojob;
+if (Class==8) goto nojob;
+if (Class==9) goto nojob;
+if (Class==10) goto nojob;
+if (Class==11) goto nojob;
+if (Class==12) goto nojob;
+if (Class==14) goto nojob;
+if (Class==15) goto nojob;
+if (Class==16) goto nojob;
+if (Class==17) goto nojob;
+if (Class==18) goto nojob;
+if (Class==19) goto nojob;
+if (Class==20) goto nojob;
+if (Class==24) goto nojob;
+if (Class==25) goto nojob;
+
+nojob:
+	mes "เจ้ามาทำอะไรที่นี่ อย่างงั้นเรอะ";
+	mes "ที่นี่ไม่ใช่ที่ของเจ้า จงไปที่อื่นสะ";
+	close;
+
+L_is_merchant:
+	if(JobLevel < 50) goto L_notJ50;
+	if(SkillPoint >0) goto L_notUseAll;
+	mes "คุณต้องการเปลี่ยนอาชีพเป็น Black Smith ใช่หรือไม่";
+	next;
+	menu "^009933•^000000 ใช่",-,"^FF0000•^000000 ไม่ใช่",L_close;
+	mes "ตกลง ตามนั้นค่ะ";
+	next;
+	jobchange 10;
+	mes "เรียบร้อยค่ะ ยินดีให้บริการค่ะ";
+	close;
+
+L_notJ50:
+	mes "Job Lv ของท่านยังไม่ถึง 50 ค่ะ";
+	close;
+L_notUseAll:
+	mes "Skill Point ยังใช้ไม่หมดค่ะ";
+	close;
+L_close:
+	mes "ยินดีให้บริการค่ะ";
+	close;
+	end;
+}
+
+geffen_in,102,172,0	duplicate(job_blacksmith50)	เปลี่ยนอาชีพ BlackSmith#06	831

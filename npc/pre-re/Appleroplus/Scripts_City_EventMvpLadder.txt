@@ -1,0 +1,323 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+//= 1.0
+//==============================================
+prontera,143,284,4	script	กิจกรรม MVP Ladder	796,{
+	mes "[ กิจกรรม MvP Ladder ]";
+	mes "คุณต้องการเล่นเกม MvP Ladder หรือไม่?";
+	next;
+	switch(select("^FF0000•^000000 ใช่มาเริ่มกันเลย!:^FF0000•^000000 ข้อมูล.:^FF0000•^000000 แสดงสถิติที่ดีที่สุดให้ฉัน.:^FF0000•^000000 ไม่.")) {
+	case 1:
+		break;
+	case 2:
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "ในเกมนี้ปาร์ตี้ของคุณจะต้องฆ่าสัตว์ประหลาด MvP ทุกตัวในลำดับจากน้อยที่สุดไปมากที่สุด";
+		if ( .finish_item_amount )
+			mes "หากปาร์ตี้ของคุณสามารถจบเกม MVP ladder สมาชิกแต่ละคนจะได้รับ "+ callfunc("F_InsertPlural", .finish_item_amount, getitemname( .finish_item_id )) +".";
+		if ( .register_cost )
+			mes "แต่ค่าธรรมเนียมแรกเข้าคือ "+ callfunc( "F_InsertComma", .register_cost ) +" Zeny.";
+		next;
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "คุณแพ้ในเกมหากคุณทำไม่สำเร็จ "+ .timeout +" นาที, หรือถ้าทั้งปาตี้ของคุณถูกฆ่า";
+		mes "โชคดี!";
+		close;
+	case 3:
+		mes "[ กิจกรรม MvP Ladder ]";
+		if ( !$mvpladdderparty_time ) {
+			mes "ยังไม่มีใครทำจบเกมนี้.";
+			close;
+		}
+		mes "สถิติที่ดีที่สุดคือ";
+		mes "[ "+( $mvpladdderparty_time / 60 )+" นาที "+( $mvpladdderparty_time % 60 )+" วินาที ]";
+		mes "โดย ปาร์ตี้ ^FF0000"+ $mvpladdderparty_name$ +"^000000.";
+		.@size = getarraysize( $mvpladderparty_member$ );
+		for ( .@i = 0; .@i < .@size; .@i++ )
+			mes "^000000"+ ( .@i +1 ) +". ^0000FF"+ $mvpladderparty_member$[.@i];
+		if ( getgmlevel() < .gmlvlreset ) close;
+		next;
+		if ( select( "^FF0000•^000000 ยกเลิก.", "^FF0000•^000000 รีเซ็ตบันทึก" ) == 1 ) close;
+		if ( select( "^FF0000•^000000 ไม่เป็นไร.", "^FF0000•^000000 ฉันต้องการรีเซ็ตมันจริงๆ." ) == 1 ) close;
+		$mvpladdderparty_time = 0;
+		$mvpladdderparty_name$ = "";
+		deletearray $mvpladderparty_member$[.@i];
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "รีเซ็ตบันทึกสำเร็จ.";
+		close;
+	case 4:
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "เมื่อคุณแข็งแกร่งพอที่จะจบเกมโปรดกลับมา.";
+		close;
+	}
+	if ( !getcharid(1) ) {
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "คุณต้องจัดปาร์ตี้เพื่อเล่น.";
+		close;
+	}
+	if ( is_party_leader() == false ) {
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "เฉพาะหัวหน้าปาร์ตี้เท่านั้นที่สามารถลงทะเบียนได้.";
+		close;
+	}
+	.@origin = getcharid(3);
+	getpartymember getcharid(1), 1;
+	getpartymember getcharid(1), 2;
+	for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+		if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) ) {
+			attachrid $@partymemberaid[.@i];
+			if ( strcharinfo(3) == strnpcinfo(4) )
+				.@online++;
+		}
+	}
+	attachrid .@origin;
+	if ( $@partymembercount != .register_min ) {
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "คุณต้องจัดปาร์ตี้ด้วย "+ .register_min +" สมาชิกที่จะเล่น.";
+		close;
+	}
+	else if ( .@online != .register_min )  {
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "ปาร์ตี้ของคุณจะต้องมี "+ .register_min +" สมาชิกออนไลน์บนแผนที่ '"+ strnpcinfo(4) +"'.";
+		close;
+	}
+	else if ( .register_cost && Zeny < .register_cost ) {
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "คุณมีเซนีไม่เพียงพอ โปรดกลับมาเมื่อคุณทำ.";
+		close;
+	}
+	else if ( .party_id ) {
+		mes "[ กิจกรรม MvP Ladder ]";
+		mes "ฉันขอโทษ แต่มีปาร์ตี้กำลังเล่นเกม โปรดรอจนกว่าปาร์ตี้จะเสร็จสิ้น";
+		mes "ขอบคุณ.";
+		close;
+	}
+	Zeny -= .register_cost;
+	announce "ปาตี้ ["+ strcharinfo(1) +"] ได้เริ่ม MvP ladder เกม.", bc_all;
+	set .party_id, getcharid(1);
+	set .@time_enter, gettimetick(2);
+	for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+		if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) ) {
+			attachrid $@partymemberaid[.@i];
+			if ( strcharinfo(3) == strnpcinfo(4) ) {
+				announce "คุณมี "+ .timeout +" นาทีให้เสร็จสมบูรณ์ "+ .totalround +" รอบ.", bc_self;
+				.@name$[.@c] = strcharinfo(0);
+				.@c++;
+			}
+		}
+	}
+	cleanmap .eventmap$;
+	warpparty .eventmap$, 0,0, .party_id, strnpcinfo(4);
+	donpcevent strnpcinfo(0)+"::OnMvpDead";
+	sleep .timeout * 60000;
+	if ( .round == .totalround +1 ) {
+		getpartymember .party_id, 1;
+		getpartymember .party_id, 2;
+		mapannounce .eventmap$, "ขอแสดงความยินดี... คุณสามารถเอาชนะทั้งหมด MVPs!", bc_map;
+		for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+			if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) ) {
+				attachrid $@partymemberaid[.@i];
+				if ( strcharinfo(3) == .eventmap$ )
+					getitem .finish_item_id, .finish_item_amount;
+			}
+		}
+		set .@timeused, gettimetick(2) - .@time_enter;
+		if ( .bonus_item_amount && .@timeused < .bonus_time * 60 ) {
+			mapannounce .eventmap$, "คุณจะได้รับรางวัลรายการโบนัสสำหรับทำบันไดให้เสร็จภายใน "+ .bonus_time +" นาที.", bc_map;
+			for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+				if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) ) {
+					attachrid $@partymemberaid[.@i];
+					if ( strcharinfo(3) == .eventmap$ )
+						getitem .bonus_item_id, .bonus_item_amount;
+				}
+			}
+		}
+
+		if ( !$mvpladdderparty_time || .@timeused < $mvpladdderparty_time ) {
+			mapannounce .eventmap$, "และคุณทำลายสถิติ! [ "+( .@timeused / 60 )+" นาที "+( .@timeused % 60 )+" วินาที ]", bc_map;
+			set $mvpladdderparty_time, .@timeused;
+			set $mvpladdderparty_name$, getpartyname( .party_id );
+			copyarray $mvpladderparty_member$, .@name$, .register_min;
+		}
+		else
+			mapannounce .eventmap$, "เวลาที่ใช้ [ "+( .@timeused / 60 )+" นาที "+( .@timeused % 60 )+" วินาที ]", bc_map;
+		sleep 10000;
+		announce "ปาตี้ ["+ getpartyname( .party_id ) +"] เสร็จสิ้น MvP ladder เกม!", bc_all;
+	}
+	else
+		announce "ปาตี้ ["+ getpartyname( .party_id ) +"] ล้มเหลวในการเสร็จสิ้น MvP ladder เกม.", bc_all;
+	mapwarp .eventmap$, .map$, .x, .y;
+	killmonsterall .eventmap$;
+	.party_id = .round = 0;
+	end;
+
+OnMvpDead:
+	getpartymember .party_id, 1;
+	getpartymember .party_id, 2;
+	.round++;
+	if ( .round >= 2 && .round != .totalround +1 && .round_item_amount ) {
+		for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+			if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) ) {
+				attachrid $@partymemberaid[.@i];
+				if ( strcharinfo(3) == .eventmap$ )
+					getitem .round_item_id, .round_item_amount;
+			}
+		}
+	}
+	if ( .round == .totalround +1 ) {
+		awake strnpcinfo(0);
+		end;
+	}
+	else if ( .round == .totalround )
+		mapannounce .eventmap$, "รอบสุดท้ายจะเริ่มขึ้น "+ .delay +" วินาที...", bc_map;
+	else
+		mapannounce .eventmap$, "เริ่มรอบ "+ .round +" ใน "+ .delay +" วินาที...", bc_map;
+	sleep .delay * 1000;
+	if ( .mvpid[.round] == 1646 )  // เลือก Bio3 MVP สุ่ม
+		.mvpid[.round] = rand(1646,1651);
+	monster .eventmap$,0,0, "--ja--", .mvpid[.round], 1, strnpcinfo(0)+"::OnMvpDead";
+	mapannounce .eventmap$, getmonsterinfo( .mvpid[.round], MOB_NAME ) +" เกิดขึ้น!", bc_map|bc_blue;
+	end;
+
+OnPCLogoutEvent:
+	if ( hp > 0 )
+		.@less_one = 1;
+	else
+		end;
+OnPCDieEvent:
+	if ( strcharinfo(3) != .eventmap$ || !getcharid(1) ) end;
+	if ( getcharid(1) != .party_id ) end;
+	getpartymember .party_id, 1;
+	getpartymember .party_id, 2;
+	for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+		if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) ) {
+			attachrid $@partymemberaid[.@i];
+			if ( strcharinfo(3) == .eventmap$ && hp > 0 )
+				.@alive++;
+		}
+	}
+	if ( .@less_one )
+		.@alive--;
+	if ( !.@alive ) {
+		mapannounce .eventmap$, "Party wiped!", bc_map;
+		sleep 10000;
+		awake strnpcinfo(0);
+	}
+	end;
+
+OnInit:
+//	Waitingroom "กิจกรรม MVP Ladder" , 0;
+//	Configurations -----------------------------------------------------
+
+	// จำกัด เวลา (เป็นนาที)
+	// เมื่อหมดเวลาผู้เล่นทุกคนในห้องจะถูกเตะออก
+	// อย่าตั้งค่านี้เป็นศูนย์!
+	set .timeout, 60;
+
+	// ค่าธรรมเนียมแรกเข้า (ใน Zeny)
+	set .register_cost, 100000;
+
+	// จำนวนสมาชิกปาตี้ี่แน่นอนต้องเริ่มเล่นเกม
+	set .register_min, 1;
+
+	// id ของแต่ละ mvp คุณสามารถเพิ่มมากขึ้น
+	setarray .mvpid[1],
+		1086,//	Golden Thief Bug	64
+		1115,//	Eddga				65
+		1150,//	Moonlight Flower	67
+		1159,//	Phreeoni			69
+		1112,//	Drake				70
+		1583,//	Tao Gunka			70
+		1492,//	Incantation Samurai	71
+		1046,//	Doppelgangger		72
+		1252,//	Garm				73
+		1418,//	Evil Snake Lord		73
+		1059,//	Mistress			74
+		1190,//	Orc Lord			74
+		1087,//	Orc Hero			77
+		1251,//	Knight of Windstorm	77
+		1038,//	Osiris				78
+		1658,//	Ygnizem				79
+		1272,//	Dark Lord			80
+		1871,//	Fallen Bishop		80
+		1039,//	Baphomet			81
+		1147,//	Maya				81
+		1785,//	Atroce				82
+		1389,//	Dracula				85
+		1630,//	Bacsojin			85
+		1885,//	Gorynych			85
+		1623,//	RSX 0806			86
+		1511,//	Amon Ra				88
+		1688,//	Lady Tanee			89
+		1768,//	Gloom Under Night	89
+		1719,//	Datale				90
+		1734,//	Kiel D-01			90
+		1157,//	Pharaoh				93
+		1373,//	Lord of Death		94
+		1312,//	Turtle General		97
+		1779,//	Ktullanux			98
+		1874,//	Beelzebub			98
+		1646,// Bio3 placeholder    99
+		1708,//	Thanatos			99
+		1751,//	Valkyrie Randgris	99
+		1832;//	Ifrit				99
+
+	// จำนวนรอบ (ค่าเริ่มต้น: 39)
+	set .totalround, getarraysize(.mvpid) -1;
+
+	// รางวัลไอเทมสำหรับการจบแต่ละรอบ
+	set .round_item_id, 61001;
+	set .round_item_amount, 1;
+
+	// รายการรางวัลสำหรับ แต่ละรอบของ ladder
+	set .finish_item_id, 61001;
+	set .finish_item_amount, 5;
+
+	// bonusให้รางวัลถ้าบันไดเสร็จภายในเวลาที่กำหนด (เป็นนาที)
+	set .bonus_time, 45; // หากทำเสร็จภายใน 45 นาทีจะได้รับรางวัลนี้
+	set .bonus_item_id, 61001;
+	set .bonus_item_amount, 10;
+
+	// การหน่วงเวลาระหว่างรอบเป็นวินาที (ค่าเริ่มต้น: 3)
+	set .delay, 5;
+
+	// ระดับต่ำสุดของ GM เพื่อรีเซ็ตเรคคอร์ดที่ดีที่สุด
+	set .gmlvlreset, 99;
+
+	// event map
+	set .eventmap$, "guild_vs2-2";
+
+	// mapflag องค์ประกอบ
+	setarray .@mapflag,
+		mf_nowarp,
+		mf_nowarpto,
+		mf_nosave,
+		mf_nomemo,
+		mf_noteleport,
+//		mf_nopenalty, // disable exp loss
+		mf_noreturn,
+//		mf_nobranch,
+//		mf_nomobloot, // disable monster drop loots,
+//		mf_nomvploot, // 2 of these
+		mf_partylock;
+
+//	Config Ends --------------------------------------------------------------
+
+	mapannounce .eventmap$, "ผู้ดูแลระบบได้รีเฟรชเซิร์ฟเวอร์ กรุณาลงทะเบียนใหม่ เราต้องขออภัยในความไม่สะดวก.", bc_map;
+	getmapxy .map$, .x, .y, BL_NPC;
+	mapwarp .eventmap$, .map$, .x, .y;
+	killmonsterall .eventmap$;
+	.@size = getarraysize( .@mapflag );
+	for ( .@i = 0; .@i < .@size; .@i++ )
+		setmapflag .eventmap$, .@mapflag[.@i];
+	end;
+}

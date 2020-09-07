@@ -1,0 +1,125 @@
+//////////////////////////////////////////////
+//                                          //
+//                                          //
+//Tharakan Khumtong                         //
+//////////////////////////////////////////////	
+
+morocc,163,144,4	script	รับแลกเงิน	866,{
+
+mes "[ ^FF0000แลกเงิน^000000 ]";	
+mes "อัตราการจ่าย "+gettimestr("%Y-%m-%d",21)+"";
+mes "-------------------------";
+mes "^FF00001^000000 M = ^FF00001,000^000000 บาท";
+mes "จำกัดวันละ : ^FF0000100^000000 M";
+if(getd("$cashoutamount") < 100000000){
+	mes "แลกแล้ว : ^FF0000"+callfunc("F_InsertComma",(getd("$cashoutamount")))+"^000000  Zeny";}
+else{
+	mes "แลกแล้ว : ^FF0000"+callfunc("F_InsertComma",(getd("$cashoutamount")))+"^000000  Zeny";
+	mes "(^FF0000เต็มจำนวน^000000)";
+}
+mes "-------------------------";
+next;
+if(getd("$cashoutamount") >= 100000000){mes "(^FF0000เต็มจำนวน^000000)";end;}
+menu 
+"^FF0000•^000000 [ ^3366FFแลกเงิน^000000 ]",bank,
+"^009933•^000000 [ เช็คสถานะของคุณ ]",cashout2,
+"^FF0000•^000000 [ รายชื่อผู้รับเงินแล้ว ]",cashout1;
+
+cashout1:
+query_sql( "SELECT `name`,`time`,`num` FROM `tharakan_cashout` WHERE `status` = '1'",.@Name$,.@time$,.@nump );
+dispbottom "------------------รายชื่อผู้ได้รับรางวัล------------------";
+mes "[ ^3399FFรายชื่อผู้ได้รับเงินแล้ว^000000 ]";	
+if( getarraysize( .@Name$ ) ){
+	for( set .@a,0; .@a < getarraysize( .@Name$ ); set .@a,.@a + 1 )
+		
+		if(.@nump[.@a] > 0){
+			dispbottom ""+(.@a + 1)+".ชื่อตัวลคร : "+.@Name$[.@a]+" เวลา : "+.@time$[.@a]+"";
+			mes "" +(.@a + 1) +".^FF0000ชื่อตัวลคร^000000 : "+.@Name$[.@a]+"";}
+dispbottom "------------------------------------------------------------";
+}else{
+	dispbottom "ไม่มีข้อมูลในระบบ";
+	dispbottom "------------------------------------------------------------";
+	mes "---^FF0000ไม่มีข้อมูลในระบบ^000000---";
+}
+end;
+
+cashout2:
+query_sql("SELECT `name`,`status`,`char_id`,`time`,`bank`,`amount`,`num` FROM `tharakan_cashout` WHERE `char_id` = '"+getcharid(0)+"'",.@Name$,.@status,.@char_id,.@time$,.@bank$,.@amount,.@num);
+if(.@char_id >0 ){
+mes "^FF0000ชื่อตัวละครที่ส่ง^000000 : "+.@Name$+"";
+mes "^FF0000Char id^000000 : "+.@char_id+"";
+mes "^FF0000คิวที่^000000 : "+.@num+"";
+if(.@status == 0){
+mes "^FF0000สถานะ^000000 : ^FF0000รอตรวจสอบ^000000";
+mes "^FF0000เวลา^000000 : -";
+}else{
+mes "^FF0000สถานะ^000000 : ^33CC00ตรวจสอบสำเร็จ^000000";
+mes "^FF0000เวลา^000000 : "+.@time$+"";
+mes "^FF0000โอนเงิน^000000 : "+.@bank$+"";
+mes "^FF0000จำนวนเงิน^000000 : "+callfunc("F_InsertComma",(.@amount))+" บาท";
+}
+}else{mes "^FF0000ไม่มีข้อมูลในระบบ^000000 ";}
+end;
+
+bank:
+query_sql("SELECT `status`,`amount` FROM `tharakan_cashout` WHERE `char_id` = '"+getcharid(0)+"'",.@status,.@amount);
+if(.@status == 0	&&	.@amount > 0){mes "^FF0000หมายเหตุ^000000 : คุณมียอดถอนค้างอยู่ กรุณารอตรวจสอบจากทีมงาน"; next; goto cashout2;}
+next;
+mes "[ ^FF0000แลกเงิน^000000 ]";
+mes "ชื่อตัวละครที่ส่ง : ^FF0000"+strcharinfo(0)+"^000000";	
+mes "-------------------------------";
+mes "^FF0000สำคัญมาก!!^000000 : ใส่จำนวน Zeny ที่ต้องการแลก";
+input .@infoput;
+next;
+if(.@infoput < 1000000){mes "^FF0000หมายเหตุ^000000 : ขั้นต่ำ 1M";end;}
+if(.@infoput == 1000000)+
+(.@infoput == 2000000)+
+(.@infoput == 3000000)+
+(.@infoput == 4000000)+
+(.@infoput == 5000000)+
+(.@infoput == 6000000)+
+(.@infoput == 7000000)+
+(.@infoput == 8000000)+
+(.@infoput == 9000000)+
+(.@infoput == 10000000){goto bank2;}else{mes "^FF0000หมายเหตุ^000000 : กรุณาใส่เป็นจำนวนเต็ม";end;}
+end;
+
+bank2:
+if((.@infoput+getd("$cashoutamount")) > 100000000 ){mes "^FF0000หมายเหตุ^000000 : ยอดถอนได้วันนี้เหลือ ^FF0000"+callfunc("F_InsertComma",(getd("$cashoutamount")))+"^000000";end;}
+if(zeny < .@infoput){mes "^FF0000หมายเหตุ^000000 : จำนวน Zeny ไม่พอสำหรับการแลกเปลี่ยน";end;}
+mes "^FF0000สำคัญมาก!!^000000 : กรุณาใส่ ชื่อ-นามสกุล เลขบัญชื่อ และชื่อธนาคาร";	
+input $@infoput$;
+next;
+mes "^6600FFจำนวน Zeny^000000 : "+callfunc("F_InsertComma",(.@infoput))+" Zeny";
+mes "-------------------------------";
+mes "^FF0000ข้อมูลบัญชี^000000 : "+$@infoput$+"";
+mes "-------------------------------";
+mes "^0099FFอัตราแลกเปลียน^000000 : "+callfunc("F_InsertComma",(.@infoput/1000))+" บาท";
+menu 
+"^FF0000•^000000 [ ^009933ยืนยัน^000000 ]",add2,
+"^009933•^000000 [ ^FF0000แก้ไข^000000 ]",bank;
+
+add2:
+mes "-------------------------------";
+mes "^339900ส่งข้อมูลเรียร้อย!! กรุณารอตรวจสอบจากทีมงาน...^000000";	
+specialeffect2 86 ;
+set Zeny,Zeny - .@infoput;
+setd "$cashoutamount",getd("$cashoutamount")+.@infoput;
+query_sql( "INSERT INTO `tharakan_cashout` SET `char_id`='"+getcharid(0)+"',`name`='"+strcharinfo(0)+"',`amount`='"+(.@infoput/1000)+"',`zeny`='"+.@infoput+"',`bank`='"+$@infoput$+"' ON DUPLICATE KEY UPDATE `bank`='"+$@infoput$+"'" );
+end;
+
+}
+-	script	Cashout_reset#1	-1,{
+	OnInit:
+ bindatcmd("cashresett",""+strnpcinfo(0)+"::OnReset");
+ end;
+ if(getgmlevel()){
+ OnReset:  
+ mes "^339900รีเซ็ตข้อมูลเรียบร้อย^000000";	
+ query_sql("DELETE FROM `tharakan_cashout`");
+ setd "$cashoutamount",0; 
+ 
+ }
+ end;
+}
+

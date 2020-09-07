@@ -1,0 +1,22 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Auto_NightDay	-1,{
+    OnInit:
+    OnClock0600:
+    OnClock1800:
+    set .@hr, gettime(3);
+    if(.@hr >= 6 && .@hr < 18) day;
+    else night;
+    end;
+}

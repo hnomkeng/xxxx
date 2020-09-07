@@ -1,0 +1,35 @@
+-	script	OnlineBonus	-1,{
+OnInit:
+set .time_count, 60;	// ออนไลน์นานเท่าไหร่ จึงจะได้ Cash (นาที)
+end;
+
+
+OnPCLoginEvent:
+mes "[ Online Bonus ]";
+mes "ระบบออนไลน์แลกไอเทม";
+mes "เมื่อท่านออนไลน์ครบ ^FF000060 นาที^000000";
+mes "ได้รับ : ^3366CCOnline Bonus Box^000000 1 ea";
+mes "^FF0000หากไม่ขยับตัว เวลาจะหยุดพักไว้^000000";
+mes "ดูรายละเอียดเพิ่มเติมที่หน้าเว็บ";
+mes "www.vacation-revo.com";
+initnpctimer getcharid(3);
+end;
+
+OnTimer60000:
+stopnpctimer;
+initnpctimer;
+getmapxy( .@map$, .@x, .@y, 0 );
+if ( .@map$ != @map$ || .@x != @x || .@y != @y ) {	// ถ้าไม่ขยับไปไหน จะพักเวลาไว้
+set @map$, .@map$;
+set @x, .@x;
+set @y, .@y;
+set @count, @count+1;
+if ( @count >= .time_count ) {
+set @count, 0;
+atcommand "@item 60003 1";
+}
+}
+
+end;
+}
+

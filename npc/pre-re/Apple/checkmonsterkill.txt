@@ -1,0 +1,460 @@
+///////////////////////////////////////////////
+//                                          //
+//                                          //
+//Tharakan Khumtong                         //
+//////////////////////////////////////////////
+-	script	checkplayercmd_example	FAKE_NPC,{
+	OnInit:
+	///////ตั่งค่า/////////////
+	set $antifalis,5; // ตอบผิดได้กี่ครั้ง
+	set $setretimem,30; //ตั่งเวลานับถอยหลัง
+	set $Monsterkillsset, 200;  // จำนวนมอสเตอร์ที่ตรวจจับสกิลกับที่
+	set $Monsterkillsset2, 500;  // จำนวนมอสเตอร์ที่ตรวจจับทั่วไป
+	////////////////
+	
+		bindatcmd("check", strnpcinfo(3)+"::OnNpc1");
+		end;
+		
+	OnNpc1:
+	if(getgmlevel()){
+addtimer 100,"marcoinport::ONnpc";
+	}else{end;}
+end;
+
+}
+-	script	marcoinport	FAKE_NPC,{
+
+ONnpc:
+	if(getgmlevel()){	
+menu
+		"^009933•^000000 ตรวจด้วยชื่อ",checkname,
+		"^009933•^000000 ตรวจด้วย ^FF0000Account id^000000",checkaid;
+
+
+checkname:
+mes "ใส่ [^FF0000ชื่อตัวละคร^000000] ที่ต้องการตรวจสอบ";
+input $@idplayer$;
+next;
+if(strcharinfo(0) == $@idplayer$){mes "^FF0000ไม่สามรถใช้กับตัวเองได้^000000";end;}
+mes "***ตรวจความถูกต้อง***";
+mes " ชื่อตัวละคร : ^FF0000"+$@idplayer$+"^000000 ";
+menu
+		"^009933•^000000 ยืนยัน",yse,
+		"^009933•^000000 ยกเลิก",no;
+
+checkaid:
+mes "ใส่ [^FF0000Account_id^000000] ที่ต้องการตรวจสอบ";
+input $idplayer;
+next;
+query_sql("SELECT char_id FROM `char` WHERE account_id = "+$idplayer+"", .@char_id);
+if(.@char_id == getcharid(0)){mes "^FF0000ไม่สามารถใช้กับตัวเองได้^000000";end;}
+set $@idplayer$,$idplayer;
+mes ""+@char_id$+"---------ตรวจความถูกต้อง--------";
+mes " Account_id : ^FF0000"+$@idplayer$+"^000000 ";
+menu
+		"^009933•^000000 ยืนยัน",yse2,
+		"^009933•^000000 ยกเลิก",no;			
+
+
+yse:
+donpcevent "marcoinport::OnPlayername";
+end;
+yse2:
+donpcevent "marcoinport::OnPlayerid";
+end;
+no:
+end;	
+	
+OnPlayername:	
+attachrid(getcharid(3,$@idplayer$)); callfunc("Playername",1,3);
+OnPlayerid:	
+attachrid($idplayer);callfunc("Playeraid",1,3);
+}else{end;}
+end;
+
+			ONnpcs:
+			attachrid(getcharid(3,$@idplayer$));
+			set checkmarconame,1;
+			if(checkmarco == 1){
+			set temedmarco,temedmarco+1;
+			if(temedmarco < ($setretimem+1)){
+		sleep2 1000;
+			if(temedmarco == 0){dispbottom "หยุดเวลา";end;}else{dispbottom "จับเวลา : "+temedmarco+"";}
+			goto ONnpcs;
+			}else{
+			if (checkoption(0x40)) setoption 0x40,0;
+			sc_end 47;
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+	end;}
+			
+			}
+			end;
+			
+			ONnpcs2:
+			attachrid($idplayer);
+			getcharid(0);
+			set checkmarcoid,1;	
+			run:
+			if(checkmarco == 1){
+			set temedmarco,temedmarco+1;
+			if(temedmarco < ($setretimem+1)){
+		sleep2 1000;
+			if(temedmarco == 0){dispbottom "หยุดเวลา";end;}else{dispbottom "จับเวลา : "+temedmarco+"";}
+			goto run;
+			}else{
+			if (checkoption(0x40)) setoption 0x40,0;
+			sc_end 47;
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+	end;}
+			}
+			end;
+			
+			ONnpcs3:
+			attachrid(getcharid(3,$@idplayer3$));
+			getcharid(0);
+			run2:
+			if(checkmarco == 1){
+			set temedmarco,temedmarco+1;
+			if(temedmarco < ($setretimem+1)){
+		sleep2 1000;
+			if(temedmarco == 0){dispbottom "หยุดเวลา";end;}else{dispbottom "จับเวลา : "+temedmarco+"";}
+			goto run2;
+			}else{
+			if (checkoption(0x40)) setoption 0x40,0;
+			sc_end 47;
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+	end;}
+			}
+			end;
+}
+
+function	script	Playername	{
+		sc_start 47,30000000,1;	
+		pcblockmove getcharid(3),1;
+		setoption 0x40;	
+		set checkmarconame,1;
+	set checkmarco,1;
+	set checkid,1;
+	for(set botnum,botnum; botnum < ($antifalis+1); set botnum,botnum+1){
+		set .@String$,rand(0,10);
+		mes "คุณมีเวลา : ^FF0000"+$setretimem+" วินาที^000000";
+		mes "ใส่ตัวเลขที่คุณเห็น  : ^FF0000"+.@String$+"^000000";
+		mes "มีโอกาสผิดได้ ^FF0000"+botnum+" ^000000/ "+$antifalis+" ครั้ง";
+		dispbottom "----------------แอนตี้บอท-----------------";
+		dispbottom "คุณมีเวลา : "+$setretimem+" วินาที";
+		dispbottom "ใส่ตัวเลขที่คุณเห็น ";
+		dispbottom "CODE : "+.@String$+"";
+		dispbottom "มีโอกาสผิดได้ "+botnum+" / "+$antifalis+" ครั้ง";
+		dispbottom "------------------------------------------";
+		if(botnum == 0){donpcevent "marcoinport::ONnpcs";}
+		input .@Input$;
+		if( .@Input$ != .@String$ ){
+			if (botnum >= $antifalis) {
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;	
+set runcheckcode,0;		
+				close;
+				end;
+			}
+			mes "ลองอีกครั้ง..";
+			next;
+		} else {
+			break;
+		}
+	}
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+			if (checkoption(0x40)) setoption 0x40,0;
+			pcblockmove getcharid(3),0;
+			sc_end 47;	
+			
+end;
+	
+
+	}
+	
+	function	script	Playeraid	{
+
+			sc_start 47,30000000,1;	
+pcblockmove getcharid(3),1;
+		setoption 0x40;	
+		set checkmarcoid,1;
+	set checkmarco,1;
+	set checkid,0;
+	for(set botnum,botnum; botnum < ($antifalis+1); set botnum,botnum+1){
+		set .@String$,rand(0,10);
+		mes "คุณมีเวลา : ^FF0000"+$setretimem+" วินาที^000000";
+		mes "ใส่ตัวเลขที่คุณเห็น  : ^FF0000"+.@String$+"^000000";
+		mes "มีโอกาสผิดได้ ^FF0000"+botnum+" ^000000/ "+$antifalis+" ครั้ง";
+		dispbottom "----------------แอนตี้บอท-----------------";
+		dispbottom "คุณมีเวลา : "+$setretimem+" วินาที";
+		dispbottom "ใส่ตัวเลขที่คุณเห็น ";
+		dispbottom "CODE : "+.@String$+"";
+		dispbottom "มีโอกาสผิดได้ "+botnum+" / "+$antifalis+" ครั้ง";
+		dispbottom "------------------------------------------";
+		if(botnum == 0){donpcevent "marcoinport::ONnpcs2";}
+		input .@Input$;
+		if( .@Input$ != .@String$ ){
+			if (botnum >= $antifalis) {
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+				close;
+				end;
+			}
+			mes "ลองอีกครั้ง..";
+			next;
+		} else {
+			break;
+		}
+	}
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+			if (checkoption(0x40)) setoption 0x40,0;
+			pcblockmove getcharid(3),0;	
+			sc_end 47;	
+			
+end;
+	
+
+	}
+	
+	
+	-	script	Check_Kill#2	-1,{
+	OnNPCKillEvent:
+	set Monsterkills, Monsterkills+1;
+if(Monsterkills == 1){getmapxy( @map$, @x, @y, BL_PC );}
+if(Monsterkills == $Monsterkillsset){getmapxy( @map2$, @x2, @y2, BL_PC );}
+if(Monsterkills > ($Monsterkillsset+100)){set Monsterkills,0;}
+if(Monsterkills > ($Monsterkillsset2+100)){set Monsterkills,0;}
+if(@map$ == @map2$	&&	@x == @x2	&&	@y == @y2){	
+if(Monsterkills >= $Monsterkillsset) goto checkanti;
+end;
+}
+if(Monsterkills >= $Monsterkillsset2)goto checkanti;	
+end;
+
+checkanti:	
+	set Monsterkills,0;	
+sc_start 47,30000000,1;	
+		pcblockmove getcharid(3),1;
+		setoption 0x40;	
+	set checkmarco,1;
+	set checkid,1;
+	set checkmarcokill,1;
+	set $@idplayer3$,strcharinfo(0);
+	for(set botnum,botnum; botnum < ($antifalis+1); set botnum,botnum+1){
+		set .@String$,rand(0,10);
+		mes "คุณมีเวลา : ^FF0000"+$setretimem+" วินาที^000000";
+		mes "ใส่ตัวเลขที่คุณเห็น  : ^FF0000"+.@String$+"^000000";
+		mes "มีโอกาสผิดได้ ^FF0000"+botnum+" ^000000/ "+$antifalis+" ครั้ง";
+		dispbottom "----------------แอนตี้บอท-----------------";
+		dispbottom "คุณมีเวลา : "+$setretimem+" วินาที";
+		dispbottom "ใส่ตัวเลขที่คุณเห็น ";
+		dispbottom "CODE : "+.@String$+"";
+		dispbottom "มีโอกาสผิดได้ "+botnum+" / "+$antifalis+" ครั้ง";
+		dispbottom "------------------------------------------";
+		if(temedmarco == 0){setnpctimer 0; attachnpctimer(strcharinfo(0)); startnpctimer;}
+		input .@Input$;
+		if( .@Input$ != .@String$ ){
+			if (botnum >= $antifalis) {
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;	
+set runcheckcode,0;			
+				close;
+				end;
+			}
+			mes "ลองอีกครั้ง..";
+			next;
+		} else {
+			break;
+		}
+	}
+	next;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+			if (checkoption(0x40)) setoption 0x40,0;
+			pcblockmove getcharid(3),0;
+			sc_end 47;	
+			
+end;
+				
+OnTimer100:
+ONnpcs:
+			if(checkmarco == 1){
+			set temedmarco,temedmarco+1;
+			if(temedmarco < ($setretimem+1)){
+		sleep2 1000;
+			if(temedmarco == 0){dispbottom "หยุดเวลา";end;}else{dispbottom "จับเวลา : "+temedmarco+"";}
+			goto ONnpcs;
+			}else{
+			if (checkoption(0x40)) setoption 0x40,0;
+			sc_end 47;
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+				}
+			
+			}
+			end;
+stopnpctimer;
+
+}
+
+
+
+-	script	atbacklist#2	-1,{
+OnPCLoginEvent:
+if(checkmarco == 1){
+for(set botnum,botnum; botnum < ($antifalis+1); set botnum,botnum+1){
+		set .@String$,rand(0,10);
+		mes "^FF0000หมายเหตุ^000000 : คุณอยู่ในขั้นตอนตรวจสอบ กรุณาทำตามขั้นตอนเพื่อเริ่มการใช้งาน";
+		next;
+		mes "คุณมีเวลา : ^FF0000"+$setretimem+" วินาที^000000";
+		mes "ใส่ตัวเลขที่คุณเห็น  : ^FF0000"+.@String$+"^000000";
+		mes "มีโอกาสผิดได้ ^FF0000"+botnum+" ^000000/ "+$antifalis+" ครั้ง";
+		dispbottom "----------------แอนตี้บอท-----------------";
+		dispbottom "คุณมีเวลา : "+$setretimem+" วินาที";
+		dispbottom "ใส่ตัวเลขที่คุณเห็น ";
+		dispbottom "CODE : "+.@String$+"";
+		dispbottom "มีโอกาสผิดได้ "+botnum+" / "+$antifalis+" ครั้ง";
+		dispbottom "------------------------------------------";
+		if(temedmarco > 0){setnpctimer 0; attachnpctimer(strcharinfo(0)); startnpctimer;}
+		input .@Input$;
+		if( .@Input$ != .@String$ ){
+			if (botnum >= $antifalis) {
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+				close;
+				end;
+			}
+			mes "ลองอีกครั้ง..";
+			next;
+		} else {
+			break;
+		}
+	}
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+			if (checkoption(0x40)) setoption 0x40,0;
+			pcblockmove getcharid(3),0;
+			sc_end 47;	
+			
+end;
+}
+OnTimer100:
+ONnpcs:
+			if(checkmarco == 1){
+			set temedmarco,temedmarco+1;
+			if(temedmarco < ($setretimem+1)){
+		sleep2 1000;
+			if(temedmarco == 0){dispbottom "หยุดเวลา";end;}else{dispbottom "จับเวลา : "+temedmarco+"";}
+			goto ONnpcs;
+			}else{
+			if (checkoption(0x40)) setoption 0x40,0;
+			sc_end 47;
+				atcommand "@jailfor 1d "+strcharinfo(0)+"";
+				announce "[แอนตี้บอท]: ผู้เล่น [" +strcharinfo(0) +"] โดนขังคุก 1 วัน",0,0xe80f0f;
+set botnum,0;
+set temedmarco,0;
+set checkmarco,0;
+set checkmarcokill,0;
+set checkmarconame,0;
+set checkmarcoid,0;	
+set Monsterkills,0;
+set runcheckcode,0;
+				}
+			
+			}
+stopnpctimer;
+
+end;
+
+}

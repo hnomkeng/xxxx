@@ -1,0 +1,147 @@
+-	script	specialrefine	-,{
+callfunc "specialrefine","[ Special Refine ]",0;
+end;
+}
+
+function	script	specialrefine	{
+again:
+mes "[ Special Refine ]";
+mes "สวัสดีค่ะ ยินดีให้บริการค่ะ";
+mes "เลือกเมนูที่คุณต้องการค่ะ";
+mes " ";
+next;
+setarray .@position$[1], "","","","","","","","","","";
+set .@menu$,"";
+for( set .@i,1; .@i <= 10; set .@i,.@i+1 )
+{
+if( getequipisequiped(.@i) )
+set .@menu$, .@menu$ + .@position$[.@i] + "- " + "" + getequipname(.@i) + "";
+set .@menu$, .@menu$ + ":";
+}
+set .@part,select(.@menu$);
+if( !getequipisequiped(.@part) )
+end;
+if( !getequipisenableref(.@part) )
+{
+mes "[ Special Refine ]";
+mes "ไม่สามารถตีบวกได้ค่ะ";
+end;
+}
+if( getequiprefinerycnt(.@part) >= 10 )
+{
+mes "[ Special Refine ]";
+mes "อุปกรณ์ไม่สามารถอัพเกรดได้ค่ะ";
+end;
+}
+mes "[ Special Refine ]";
+mes "สวัสดีค่ะ";
+mes "เลือกเมนูที่คุณต้องการค่ะ";
+mes " ";
+next;
+set .@refineget,1;
+switch(select("^339900->^000000 บัตรใบกันแตก ( หากมีจะถูกใช้อัตโนมัติ )")) {
+case 1:
+break;
+
+end;
+}
+switch( getequipweaponlv(.@part) )
+{
+case 1: callsub S_RefineValidate,1,7620,50,.@part,.@refineget; break;
+case 2: callsub S_RefineValidate,2,7620,200,.@part,.@refineget; break;
+case 3: callsub S_RefineValidate,3,7620,5000,.@part,.@refineget; break;
+case 4: callsub S_RefineValidate,4,7620,2000,.@part,.@refineget; break;
+default: callsub S_RefineValidate,0,7619,2000,.@part,.@refineget; break;
+}
+if( getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100) )
+{
+if( getequiprefinerycnt(.@part) > 5 )
+{
+announce "ผู้เล่น "+strcharinfo(0)+" ได้อัพเกรด +"+(getequiprefinerycnt(.@part)+1)+" "+getequipname(.@part) + " สำเร็จ ",bc_all;
+}
+SuccessRefItem .@part;
+next;
+end;
+}
+else
+{
+if( countitem(7338) >= 1 )
+{
+mes ""+getarg(0)+"";
+downrefitem .@part,1;
+delitem 7338,1;
+next;
+if (rand(5) == 1)
+Emotion e_cash;
+end;
+}
+FailedRefItem .@part;
+end;
+}
+S_RefineValidate:
+mes "[ Special Refine ]";
+mes "ต้องการ "+getitemname(getarg(1))+" "+getarg(4)+" ea";
+mes "ต้องการ  " + (getarg(2)*getarg(4)) + " Zeny";
+mes "จำนวนตีบวก : ^0000FF"+getarg(4)+"^000000";
+mes "คุณต้องตกลงการตีบวกค่ะ ";
+next;
+if( select("^339900->^000000 ตกลง :^FF0000->^000000 ยกเลิก") == 1 )
+{
+if( getequippercentrefinery(getarg(3)) < 100 )
+{
+mes "[ Special Refine ]";
+mes "อุปกรณ์มีโอกาส ^FF0000เสียหาย^000000";
+mes "คุณต้องตกลงการตีบวกค่ะ";
+mes " ";
+next;
+if( select("^339900->^000000 ตกลง:^FF0000->^000000 ยกเลิก") == 2 )
+{
+end;
+}
+}
+if( countitem(getarg(1)) > 0 && Zeny > getarg(2)*getarg(4) )
+{
+if (getarg(4) > 1) {
+set .@refineget,getarg(4);
+while (.@refineget != 0) {
+if(getequipisequiped(getarg(3)) == 0) { 
+end;
+}
+delitem getarg(1), 1;
+set Zeny, Zeny - getarg(2);
+if( getequippercentrefinery(getarg(3)) > rand(100) || getequippercentrefinery(getarg(3)) > rand(100) )
+{
+if( getequiprefinerycnt(getarg(3)) > 5 )
+{
+announce "ผู้เล่น "+strcharinfo(0)+" ได้อัพเกรด +"+(getequiprefinerycnt(.@part)+1)+" "+getequipname(.@part) + " สำเร็จ ",bc_all;
+}
+SuccessRefItem getarg(3);
+}
+else
+{
+FailedRefItem getarg(3);
+end;
+}
+set .@refineget,.@refineget-1;
+}
+end;
+}
+delitem getarg(1), 1;
+set Zeny, Zeny - getarg(2);
+return;
+}
+else
+{
+mes "[ Special Refine ]";
+mes "ต้องการ "+getitemname(getarg(1))+" "+getarg(4)+" ea ค่ะ";
+mes "ต้องการ เงิน " + (getarg(2)*getarg(4)) + " Zeny ค่ะ";
+end;
+}
+}
+else
+{
+end;
+}
+}
+
+morocc_in,75,35,3	duplicate(specialrefine)	Special Refine#09	951

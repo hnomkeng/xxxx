@@ -1,0 +1,5 @@
+-	script	cellbug	-1,{
+setcell "c_tower4",48,31,49,31,cell_walkable,0;
+setcell "c_tower4",47,29,47,28,cell_walkable,0;
+end;
+}

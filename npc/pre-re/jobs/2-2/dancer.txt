@@ -1,0 +1,42 @@
+comodo,193,151,4	script	เปลี่ยนอาชีพ Dancer	86,{
+if (Class!=3) goto Notache;
+if(JobLevel < 40) goto L_notJ40;
+if(SkillPoint >0) goto L_notUseAll;
+if(Sex==1) goto L_noDance;
+ mes "[ Jobchanger ]";
+ mes "ท่านต้องการเปลื่ยนอาชีพเป็น Dance ใช่หรือไม่";
+ next;
+ menu "ใช่",-,"ไม่ใช่",L_close;
+ mes "[ Jobchanger ]";
+ mes "ถ้าเป็นอย่างนั้น ข้าก็จะเปลื่ยนให้เจ้าทันที";
+ next;
+ JobChange 20;
+ mes "เจ้าได้เป็น Dancerเรียบร้อยแล้ว";
+ close;
+
+L_close:
+ mes "[ Jobchanger ]";
+ mes "เราคงมีโอกาศได้พบกันใหม่อีกแน่ บาย";
+ close;
+
+L_notJ40:
+ mes "[ Jobchanger ]";
+ mes "Job Lv ของท่านยังไม่ถึง 40";
+ close;
+
+L_notUseAll:
+ mes "[ Jobchanger ]";
+ mes "ท่านยังใช้ Skill Point ไม่หมด";
+ close;
+
+Notache:
+ mes "[ Jobchanger ]";
+ mes "คุณไม่ได้ เป็นนักธนูนินา";
+ close;
+
+L_noDance:
+mes "[ Jobchanger ]";
+ mes "คุณจะเป็นผู้ชายนะครับ";
+ close;
+
+}

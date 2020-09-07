@@ -1,0 +1,41 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	GetPoint	-1,{
+OnNPCKillEvent:
+if (killedrid) > 0 {
+set .@v1,rand(1,1000);
+set .@v2,rand(1,1000);
+if ( .@v1 >= 950 )
+{
+if (.@v1 == 990 && .@v2 >= 990 )
+{ 
+set #CASHPOINTS,#CASHPOINTS + 3;
+dispbottom "[ระบบ] : ยินดีด้วย คุณได้รับ 3 Cash Points จากการกำจัดมอนเตอร์";
+}
+else if (.@v1 == 960 && .@v2 > 995 )
+{ 
+set #CASHPOINTS,#CASHPOINTS + 2;
+dispbottom "[ระบบ] : ยินดีด้วย คุณได้รับ 2 Cash Points จากการกำจัดมอนเตอร์";
+}
+else if (.@v1 >975 && .@v2 > 996 )
+{ 
+set #CASHPOINTS,#CASHPOINTS + 1;
+dispbottom "[ระบบ] : ยินดีด้วย คุณได้รับ 1 Cash Points จากการกำจัดมอนเตอร์";
+}
+}	
+}			
+end;
+}
+	
+	

@@ -1,0 +1,50 @@
+//===== Developers Script ===================================
+//= Zone Vs Zone 1-1
+//===== Current Version =====================================
+//= 1.0
+//===== Description ========================================= 
+//= Zone Vs Zone 1-1
+//===== Additional Comments ================================= 
+//= 1.0 Start Version
+//= 1.1 Edit By Xtrap-COLO
+//===========================================================
+
+2009rwc_03	mapflag	gvg
+2009rwc_03	mapflag	nobranch
+2009rwc_03	mapflag	noicewall
+2009rwc_03	mapflag	nomemo
+2009rwc_03	mapflag	nosave	SavePoint
+2009rwc_03	mapflag	noteleport
+
+gvg25_cas01	mapflag	gvg
+gvg25_cas01	mapflag	nobranch
+gvg25_cas01	mapflag	noicewall
+gvg25_cas01	mapflag	nomemo
+gvg25_cas01	mapflag	nosave	SavePoint
+gvg25_cas01	mapflag	noteleport
+
+gvg25_cas02	mapflag	gvg
+gvg25_cas02	mapflag	nobranch
+gvg25_cas02	mapflag	noicewall
+gvg25_cas02	mapflag	nomemo
+gvg25_cas02	mapflag	nosave	SavePoint
+gvg25_cas02	mapflag	noteleport
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

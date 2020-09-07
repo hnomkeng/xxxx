@@ -1,0 +1,113 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : áÁèÁ´¹éÍÂ ¨ÍÁ»èÇ¹
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+// ËÁÇ¡ ËÙ »Ò¡
+function	script	StatusItem1	{
+bonus bAllStats,3;
+bonus bAtkRate,2;
+bonus bMatkRate,2;
+bonus2 bAddRace,RC_Boss,3;
+bonus2 bMagicAddRace,RC_Boss,3;
+bonus bDelayrate,-3;
+bonus bVariableCastrate,-3;
+bonus2 bDropAddRace,RC_ALL,5;
+bonus2 bExpAddRace,RC_ALL,5;
+bonus bMaxHPrate,5;
+bonus bMaxSPrate,5;
+bonus bSpeedAddRate,20;
+if(getrefine()>4) { bonus bHit,80; bonus bFlee,40; }
+if(getrefine()>5) { bonus bAllStats,10; }
+if(getrefine()>6) { bonus bMaxHP,5000; bonus bMaxSP,1000; }
+if(getrefine()>7) { bonus2 bIgnoreDefClassRate,Class_All,10; bonus2 bIgnoreMdefClassRate,Class_All,10; }
+if(getrefine()>8) { bonus2 bAddSize,0,10; bonus2 bAddSize,1,10; bonus2 bAddSize,2,10; bonus2 bMagicAddSize,0,10; bonus2 bMagicAddSize,1,10; bonus2 bMagicAddSize,2,10; }
+if(getrefine()>9) { bonus bMaxHPrate,10; bonus bMaxSPrate,10; }
+if(getrefine()>10) { bonus bSpeedAddRate,20; }
+if(getrefine()>11) { bonus2 bAddRace,RC_Boss,10; bonus2 bMagicAddRace,RC_Boss,10; }
+if(getrefine()>12) { bonus bDelayrate,-10; bonus bVariableCastrate,-10; }
+if(getrefine()>13) { bonus bMaxHP,3000000; bonus bMaxSP,300000; }
+if(getrefine()>14) { bonus bAddMaxWeight,10000; }
+if(getrefine()>15) { bonus2 bHPDrainRate,1000,10; bonus2 bSPDrainRate,1000,10; }
+if(getrefine()>16) { bonus2 bIgnoreDefRaceRate,RC_DemiHuman,10; bonus2 bIgnoreDefRaceRate,RC_Player,10; bonus2 bIgnoreMdefRaceRate,RC_DemiHuman,10; bonus2 bIgnoreMdefRaceRate,RC_Player,10; }
+if(getrefine()>17) { bonus2 bAddRace,RC_DemiHuman,10; bonus2 bAddRace,RC_Player,10; bonus2 bMagicAddRace,RC_DemiHuman,10; bonus2 bMagicAddRace,RC_Player,10; }
+if(getrefine()>18) { bonus bShortWeaponDamageReturn,10; bonus bMagicDamageReturn,10; }
+if(getrefine()>19) { bonus bAtkRate,10; bonus bMatkRate,10; bonus bAtk,500; bonus bMatk,500; }
+end;
+}
+// ¼éÒ¤ÅØÁ
+function	script	StatusItem2	{
+bonus bAllStats,5;
+bonus bAtkRate,5;
+bonus bMatkRate,5;
+bonus2 bAddRace,RC_Boss,10;
+bonus2 bMagicAddRace,RC_Boss,10;
+bonus bMaxHPrate,5;
+bonus bMaxSPrate,5;
+bonus bSpeedAddRate,20;
+bonus bAtk,250;
+bonus bMatk,250;
+bonus bCritical,100;
+bonus bHit,100;
+bonus bMaxHP,10000;
+bonus bMaxSP,3000;
+bonus bDelayrate,-10;
+bonus bVariableCastrate,-10;
+if(getrefine()>4) { bonus bIntravision; }
+if(getrefine()>5) { bonus bAllStats,12; }
+if(getrefine()>6) { bonus3 bAutoSpell,"NPC_DARKBLESSING",1,30; }
+if(getrefine()>7) { bonus2 bIgnoreDefClassRate,Class_All,12; bonus2 bIgnoreMdefClassRate,Class_All,12; }
+if(getrefine()>8) { bonus2 bAddSize,0,12; bonus2 bAddSize,1,12; bonus2 bAddSize,2,12; bonus2 bMagicAddSize,0,12; bonus2 bMagicAddSize,1,12; bonus2 bMagicAddSize,2,12; }
+if(getrefine()>9) { bonus bMaxHPrate,12; bonus bMaxSPrate,12; }
+if(getrefine()>10) { bonus bSpeedAddRate,25; }
+if(getrefine()>11) { bonus2 bAddRace,RC_Boss,12; bonus2 bMagicAddRace,RC_Boss,12; }
+if(getrefine()>12) { bonus bDelayrate,-12; bonus bVariableCastrate,-12; }
+if(getrefine()>13) { bonus bMaxHP,3500000; bonus bMaxSP,350000; }
+if(getrefine()>14) { bonus bAddMaxWeight,15000; }
+if(getrefine()>15) { bonus2 bHPDrainRate,1000,12; bonus2 bSPDrainRate,1000,12; }
+if(getrefine()>16) { bonus2 bIgnoreDefRaceRate,RC_DemiHuman,12; bonus2 bIgnoreDefRaceRate,RC_Player,12; bonus2 bIgnoreMdefRaceRate,RC_DemiHuman,12; bonus2 bIgnoreMdefRaceRate,RC_Player,12; }
+if(getrefine()>17) { bonus2 bAddRace,RC_DemiHuman,12; bonus2 bAddRace,RC_Player,12; bonus2 bMagicAddRace,RC_DemiHuman,12; bonus2 bMagicAddRace,RC_Player,12; }
+if(getrefine()>18) { bonus bShortWeaponDamageReturn,12; bonus bMagicDamageReturn,12; }
+if(getrefine()>19) { bonus bAtkRate,12; bonus bMatkRate,12; bonus bAtk,700; bonus bMatk,700; }
+end;
+}
+// ÃÐºº¿ÒÁ ËÁÇ¡ ËÙ »Ò¡
+function	script	StatusItem3	{
+bonus bAllStats,2;
+bonus bAtkRate,1;
+bonus bMatkRate,1;
+bonus2 bAddRace,RC_Boss,2;
+bonus2 bMagicAddRace,RC_Boss,2;
+bonus bDelayrate,-2;
+bonus bVariableCastrate,-2;
+bonus2 bDropAddRace,RC_ALL,4;
+bonus2 bExpAddRace,RC_ALL,4;
+bonus bMaxHPrate,1;
+bonus bMaxSPrate,1;
+bonus bSpeedAddRate,10;
+if(getrefine()>4) { bonus bHit,40; bonus bFlee,20; }
+if(getrefine()>5) { bonus bAllStats,7; }
+if(getrefine()>6) { bonus bMaxHP,3000; bonus bMaxSP,500; }
+if(getrefine()>7) { bonus2 bIgnoreDefClassRate,Class_All,7; bonus2 bIgnoreMdefClassRate,Class_All,7; }
+if(getrefine()>8) { bonus2 bAddSize,0,7; bonus2 bAddSize,1,7; bonus2 bAddSize,2,7; bonus2 bMagicAddSize,0,7; bonus2 bMagicAddSize,1,7; bonus2 bMagicAddSize,2,7; }
+if(getrefine()>9) { bonus bMaxHPrate,7; bonus bMaxSPrate,7; }
+if(getrefine()>10) { bonus bSpeedAddRate,10; }
+if(getrefine()>11) { bonus2 bAddRace,RC_Boss,7; bonus2 bMagicAddRace,RC_Boss,7; }
+if(getrefine()>12) { bonus bDelayrate,-7; bonus bVariableCastrate,-7; }
+if(getrefine()>13) { bonus bMaxHP,2000000; bonus bMaxSP,200000; }
+if(getrefine()>14) { bonus bAddMaxWeight,7000; }
+if(getrefine()>15) { bonus2 bHPDrainRate,1000,7; bonus2 bSPDrainRate,1000,7; }
+if(getrefine()>16) { bonus2 bIgnoreDefRate,RC_DemiHuman,7; bonus2 bIgnoreDefRate,RC_Player,7; bonus2 bIgnoreMdefRate,RC_DemiHuman,7; bonus2 bIgnoreMdefRate,RC_Player,7; }
+if(getrefine()>17) { bonus2 bAddRace,RC_DemiHuman,7; bonus2 bAddRace,RC_Player,7; bonus2 bMagicAddRace,RC_DemiHuman,7; bonus2 bMagicAddRace,RC_Player,7; }
+if(getrefine()>18) { bonus bShortWeaponDamageReturn,7; bonus bMagicDamageReturn,7; }
+if(getrefine()>19) { bonus bAtkRate,7; bonus bMatkRate,7; bonus bAtk,200; bonus bMatk,200; }
+end;
+}

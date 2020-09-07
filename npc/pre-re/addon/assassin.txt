@@ -1,0 +1,52 @@
+/*
+=================== TERMS OF SERVICES. ===================
+1. ALL RIGHT RESERVED RE-SELLER OR SHARE SCRIPT TO PUBLISH.
+2. BUT YOU RE-SELLER OR SHARE SCRIPT WITH OUT UNAUTHORIZRD
+   I WILL ALL CANCEL MY SUPPORT FOR YOU.
+3. MAINTENANCE SCRIPTS WILL BE FREE SERVICES.
+4. I WILL NOT KEEP ANY INFORMATIONS FROMS YOU SERVER THAT
+   YOU SEND FOR ME.
+5. I HOPE YOU WILL ALL ACCEPT TERMS OF SERVICES.
+==========================================================
+Script. Assassin Ingredients																						 
+Create By. Athena Studio
+Bug Report. Kittisak Sarounram [ FB ]																					 
+Contact Us. Kittisak Sarounram [ FB ]																					 
+TEL. 0909183008 [ TRUE MOVE H ]																					 
+==========================================================
+*/
+
+-	shop	assassin	-1,678:-1
+-	shop	assassin_2	-1,657:-1,713:-1,937:-1,939:-1,952:-1,972:-1,7033:-1
+
+morocc,119,99,4	script	ส่วนผสมทำยาพิษ	667,{
+	switch(select("~ ส่วนผสมสำเร็จรูป:~ ส่วนผสมแยก"))
+	{
+		case 1:
+			callshop "assassin",1;
+			npcshopattach "assassin";
+			end;
+			
+		case 2:
+			callshop "assassin_2",1;
+			end;
+	}
+	end;
+	
+OnBuyItem:
+	mes "[ Ingredients Assassin ]";
+	mes "Name : "+ getitemname(@bought_nameid[.@i]) +"";
+	input .@Amount;
+	for ( set .@i, 0; .@i < getarraysize(@bought_nameid); set .@i, .@i+1 )
+	{
+		if ( getitemname(@bought_nameid[.@i]) == getitemname(678) ) {
+			getitem 657,.@Amount; getitem 713,.@Amount; getitem 937,.@Amount; getitem 939,.@Amount; getitem 952,.@Amount; getitem 972,.@Amount; getitem 7033,.@Amount;
+		}
+		else
+			getitem @bought_nameid[.@i],.@Amount;
+	}
+	deletearray @bought_nameid, getarraysize(@bought_nameid);
+OnInit: 
+waitingroom "ส่วนผสมทำยาพิษ",0; 
+end;
+}

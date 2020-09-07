@@ -1,0 +1,33 @@
+-	script	RankingMVP	-1,{
+	end;
+
+OnNPCKillEvent:
+	set .@killedrid, killedrid;
+
+	// Mob & Emp Case script-->
+	if (.@killedrid < 1000 || !(getmonsterinfo(.@killedrid, MOB_MODE)&MD_BOSS) || .@killedrid == 1288) end;
+
+	// MVP Case Script -->
+	if (getmonsterinfo(.@killedrid, MOB_MVPEXP) > 0)
+	{
+		query_sql "SELECT `char_id`,`mvp_score` FROM `char_rank` WHERE `char_id`="+ getcharid(0) +" LIMIT 1", .@char_id, .@point;
+		if (!(.@point || .@char_id) )
+			query_sql "INSERT INTO `char_rank` (`char_id`,`mvp_score`) VALUES ('"+ getcharid(0) +"', '1')";
+		else
+			query_sql "UPDATE `char_rank` SET `mvp_score` = `mvp_score` +1 WHERE `char_id`= "+ getcharid(0) +" LIMIT 1";
+
+		dispbottom "คุณได้รับแต้ม MVP Score เพิ่มขึ้น 1 Point แต้มทั้งหมดของคุณคือ "+ (.@point+1) +" Point";
+	}
+
+//		// SET ITEM SPECIAL
+//		set @mvpitem, rand (1,100);
+//		setarray $@selitem[0],7539,7539;
+//		if (@mvpitem>=95) {
+//			getmapxy .@map$, .@x, .@y, 0;
+//			makeitem $@selitem[rand(getarraysize($@selitem))],1,.@map$,.@x,.@y;
+//			getitem 7539,1;
+//			dispbottom "คุณได้รับไอเท็มพิเศษ";
+//		}
+
+	end;
+}

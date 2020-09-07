@@ -1,0 +1,176 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	LOGIN	-1,{
+OnWhisperGlobal:
+OnLoginCmnd:
+OnPCLoginEvent:
+	if(.Rest) message strcharinfo(0),"[ Daily Login : ในการรับของรางวัล, คุณต้องเข้าสู่ระบบในอีก "+  .Rest +" นาที ]";
+	sleep2 1000 + .Rest * 60000;
+	set .@i, (gettime(7) * 365 * 24 * 60) + (gettime(8) * 24 * 60) + (gettime(3) * 60) +gettime(2);
+	if(.@i >= (#LastDailyReward + .MinWait)){
+		if(.@i < #LastDailyReward + .MaxWait){	set #DRewardCon, #DRewardCon + 1;
+		} else {	set #DRewardCon, 0;	}
+		set .@g, (#DRewardCon > getarraysize(.Rewards$)) ? (getarraysize(.Rewards$)-1) : #DRewardCon;
+		explode(.@XT$,.Rewards$[.@g],"|");
+		for(set .@x,0; .@x < getarraysize(.@XT$); set .@x,.@x + 1){
+			set .@TT[.@x], atoi(.@XT$[.@x]);
+		}
+		if(.Mode & 1 && .@TT[4]){
+			for(set .@x,4; .@x < getarraysize(.@TT); set .@x,.@x + 2)
+			{
+				//.@aid = getcharid(3);
+				//query_sql "SELECT `userid` FROM `login` WHERE `account_id` LIKE '"+escape_sql(.@aid)+"'",.@user$;
+				//set .@account, .@aid;
+				//query_sql "INSERT INTO `reward_npc` VALUES ('','"+escape_sql(.@user$)+"','"+.@account+"','"+.@TT[.@x]+"','"+.@TT[.@x+1]+"','0',NULL)";
+				getitem  .@TT[.@x], .@TT[.@x+1];
+				message strcharinfo(0),"[ Daily Login : คุณได้รับไอเท็ม "+ getitemname(.@TT[.@x]) + " จำนวน "+  .@TT[.@x+1] +"ea. ]";	
+			}
+		}
+		if(.Mode & 2){
+			if(.@TT[0]){	set zeny,zeny + .@TT[0];	message strcharinfo(0),"คุณได้รับ "+ .@TT[0] +"z";	}
+			if(.@TT[1]){	set getd(.Points$[0]),getd(.Points$[0]) + .@TT[1];	message strcharinfo(0),"คุณได้รับ "+ .@TT[1] +" "+.Points$[1];	}
+		}
+		if(.Mode & 4 && (.@TT[3] || .@TT[4])) getexp .@TT[3], .@TT[4];
+		if(.Mode & 8){
+			for(set .@x,0; .@x < getarraysize(.BuffInfo); set .@x,.@x + 4){
+				if(#DRewardCon % .BuffInfo[.@x + 1] == 0)
+					sc_start .BuffInfo[.@x], .BuffInfo[.@x + 2] * 60000, .BuffInfo[.@x + 3];
+			}
+		}
+		message strcharinfo(0),"[ Daily Login : คุณได้รับของรางวัลการเข้าสู่ระบบประจำวันที่ "+#DRewardCon+" "+((#DRewardCon > 1)?"":"")+". ]";
+		//message strcharinfo(0),"[ Daily Login : คุณสามารถรับของรางวัลได้ที่ NPC : Mail Box ตำแหน่ง Morocc (168,80) บริเวณกลางเมือง ]";
+		cutin .Pic$[.@g],4;
+		set #LastDailyReward, .@i;
+	} else {
+		set .@days,(#LastDailyReward + .MinWait - .@i)/60/24;
+		set .@hours,((#LastDailyReward + .MinWait - .@i)/60)%24;
+		set .@mins,(#LastDailyReward + .MinWait - .@i)%60;
+		message strcharinfo(0),"[ Daily Login : คุณต้องรออีก "+ ((.@days) ? .@days +" : วัน " : "") +""+ ((.@hours) ? .@hours +" : ชั่วโมง " : "") +""+ ((.@mins) ? .@mins +" : นาที " : "") +" จึงจะสามารถรับของรางวัลครั้งต่อไปได้. ]";
+	}
+end;
+OnInit:
+	//การตั้งค่าเบื้องต้น
+	//   1: ไอเท็ม | 2: คาฟรา พอยท์ | 4: ค่าประสบการณ์  
+	//   8: ได้รับบัฟเสริมทุกๆวันที่เข้าสู่ระบบ
+	// (เมื่อตั้งค่า, ตัวอย่าง. 3 = ไอเท็ม & คาฟรา พอยท์)
+	set .Mode,1;
+
+	// * เมื่อต้องการยกเลิกการใช้งานคำสั่งให้เพิ่มเติม // ในส่วนด้านหน้า
+	bindatcmd("relogdilay"	,"LOGIN::OnLoginCmnd",0,99);
+
+	//จำนวน นาที ขั้นต่ำที่จะสามารถรับของรางวัล
+	//   วัน: 22*60 - 24*60
+	//   สัปดาห์: 10080
+	set .MinWait,1440;
+
+	//จำนวน นาที ที่ขาดการเข้าสู่ระบบจะเริ่มนับของรางวัลใหม่
+	//   วัน: 48*60 - 50*60
+	//   สัปดาห์: 20160
+	set .MaxWait,21000;
+
+	//จำนวน นาที หลังจากเข้าสู่ระบบจึงจะได้รับของรางวัล
+	set .Rest,0;
+
+	//ประเภทตัวแปรของพอยท์
+	//   [0] ชื่อตัวแปรของพอยท์ที่จะได้รับ
+	//   [1] ชื่อของพอยท์ที่จะแสดงในส่วนของ mes
+	setarray .Points$,"#KAFRAPOINTS","K-Points";
+
+	// บัฟเสริมที่จะสามารถได้รับติดต่อกัน
+	// บัพในแต่ละส่วนจะมีจำนวนตัวแปรทั้งหมด 4 ตัวแปร ( บัพ สูงสุดได้เพียง 32)
+	// <Type>,<Days>,<Duration>,<Rate>, // Buff 1
+	// <Type>,<Days>,<Duration>,<Rate>, // Buff 2
+	//   ...;
+	//
+	//  ตัวอย่าง: 188,7,45,3
+	//    -ทุกๆ 7 วัน เมื่อผู้เล่นเข้าสู่ระบบติดต่อกันจะได้รับ +3 Str จำนวน 45 นาที
+	//
+	//  Type ของ 188, จะอ้างอิงถึง SC_ เพื่อจะใช้งาน, SC_INCSTR ในตัวอย่างดังนี้
+	//     -สำหรับรายชื่อ SC_ ทั้งหมด สามารถดูได้ที่ db/const.txt
+	//  Days คือส่วนวันของบัฟที่จะใช้, ในตัวอย่างนี้ 7, ดังนั้นในทุกๆ 7 วันจะได้รับบัพ, 14,21,28....
+	//  Duration คือจำนวนนาทีของบัพ, ในตัวอย่างคือ 45 นาที
+	//  Rate คือจำนวนของค่าบัพ, ในตัวอย่างคือผู้เล่นจะได้รับ 3 Str
+	setarray .BuffInfo	,260,2,360,1	// Life Insurance จำนวน 360 นาที ในทุกๆ 2 วัน
+				,198,3,120,10	// +10% Hp จำนวน 120 นาที ในทุกๆ 3 วัน
+				,196,5,120,25	// +25 Flee จำนวน 120 นาที ในทุกๆ 5 วัน
+				,257,7,240,50;	// +50% Exp จำนวน 240 นาที ในทุกๆ 7 วัน
+	// ของรางวัลประจำวัน (สูงสุด 128 วัน):
+	//   "<Zeny>|<Points>|<BaseExp>|<JobExp>|<itemID-1>|<amount-1>|<itemID-2>|<amount-2>...etc", // Day 1
+	//   "<Zeny>|<Points>|<BaseExp>|<JobExp>|<itemID-1>|<amount-1>|<itemID-2>|<amount-2>...etc"  // Day 2
+	//   ...;
+	// ความยาวของค่า string ในแต่ละวัน ไม่ควรเกิน 255 หรือ น้อยกว่า
+	// * หากผู้เล่นเข้าสู่ระบบได้้นานกว่าวันที่กำหนด
+	//   ผู้เล่นจะได้รับรางวัลในส่วนของวันสุดท้ายทุกๆวัน
+	setarray .Rewards$,
+		"0|0|0|0|12263|3", 
+		"0|0|0|0|14592|3", 
+		"0|0|0|0|12263|3",
+		"0|0|0|0|7621|3",
+		"0|0|0|0|11504|30",
+		"0|0|0|0|11503|30",
+		"0|0|0|0|61018|1",
+		"0|0|0|0|12212|15",
+		"0|0|0|0|12211|3",
+		"0|0|0|0|12216|15",
+		"0|0|0|0|12215|15",
+		"0|0|0|0|12264|3",
+		"0|0|0|0|12265|3",
+		"0|0|0|0|61018|2",
+		"0|0|0|0|7621|5",
+		"0|0|0|0|12263|5",
+		"0|0|0|0|12264|5",
+		"0|0|0|0|11503|50", 
+		"0|0|0|0|11504|50", 
+		"0|0|0|0|14592|5",
+		"0|0|0|0|61018|3",
+		"0|0|0|0|12265|5", 
+		"0|0|0|0|12211|5",
+		"0|0|0|0|12216|20",
+		"0|0|0|0|12215|20",
+		"0|0|0|0|12212|20",
+		"0|0|0|0|12264|5",
+		"0|0|0|0|61018|4";
+
+	setarray .Pic$,
+		"dilay_login_01",
+		"dilay_login_02",		
+		"dilay_login_03",		
+		"dilay_login_04",		
+		"dilay_login_05",		
+		"dilay_login_06",		
+		"dilay_login_07",		
+		"dilay_login_08",		
+		"dilay_login_09",		
+		"dilay_login_10",		
+		"dilay_login_11",		
+		"dilay_login_12",		
+		"dilay_login_13",		
+		"dilay_login_14",		
+		"dilay_login_15",		
+		"dilay_login_16",		
+		"dilay_login_17",		
+		"dilay_login_18",		
+		"dilay_login_19",		
+		"dilay_login_20",		
+		"dilay_login_21",		
+		"dilay_login_22",		
+		"dilay_login_23",		
+		"dilay_login_24",		
+		"dilay_login_25",		
+		"dilay_login_26",		
+		"dilay_login_27",		
+		"dilay_login_28";		
+
+	end;
+}

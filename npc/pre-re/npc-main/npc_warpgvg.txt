@@ -1,0 +1,55 @@
+function	script	warpgvg	{
+menu
+"[เล่นหน้าบ้าน] - Fadhgridh ["+getmapusers("prtg_cas03")+"]",case18,
+"[เล่นหน้าบ้าน]  - Scarlet Palace ["+getmapusers("payg_cas02")+"]",case12,
+"[^339900บ้านวิ่ง^000000] - Bamboo Grove Hill",case15,
+"[^FF000036^000000] - Hohenschwangau",case2,
+"[^FF000036^000000] - Sacred Altar",case14,
+"[^FF000036^000000] - Holy Shadow",case13,
+"[^0033FF26^000000] - Bergel",case9,
+"[^0033FF26^000000] - Swanhild",case17;
+//"Neuschwanstein",case1,
+//"Nuernberg",case3,
+//"Wuerzburg",case4,
+//"Rothenburg",case5,
+//"Repherion",case6,
+//"Eeyorbriggar",case7,
+//"Yesnelph",case8,
+//"Mersetzdeitz",case10,
+//"Bright Arbor",case11,
+//"Kriemhild",case16,
+//"Skoegul",case19,
+//"Gondul",case20;
+
+case1: warp "alde_gld",48,91; end;
+case2: warp "alde_gld",103,245; end;
+case3: warp "alde_gld",142,87; end;
+case4: warp "alde_gld",236,243; end;
+case5: warp "alde_gld",269,90; end;
+case6: warp "gef_fild13",217,75; end;
+case7: warp "gef_fild13",307,237; end;
+case8: warp "gef_fild13",77,297; end;
+case9: warp "gef_fild13",190,276; end;
+case10: warp "gef_fild13",312,91; end;
+case11: warp "pay_gld",121,232; end;
+case12: warp "pay_gld",297,116; end;
+case13: warp "pay_gld",318,293; end;
+case14: warp "pay_gld",140,164; end;
+case15: 
+if( !getcharid(2) ) {
+	mes "[ Guild War]";
+	mes "ขออภัย..ท่านไม่มีกิลด์";
+	mes "จึงไม่สามารถเข้าร่วมกิลด์วอร์ได้";
+	close;
+	}
+switch(rand(1,3)) {
+case 1: warp "payg_cas05",43,18; end;
+case 2: warp "payg_cas05",43,43; end;
+case 3: warp "payg_cas05",18,43; end;
+}
+case16: warp "prt_gld",141,64; end;
+case17: warp "prt_gld",240,131; end;
+case18: warp "prt_gld",153,133; end;
+case19: warp "prt_gld",126,240; end;
+case20: warp "prt_gld",195,240; end;
+}

@@ -1,0 +1,143 @@
+//Al de Baran Guild Castles Map
+// Neuschwanstein
+//alde_gld,48,79,0	warp	aldg01	1,1,aldeg_cas01,34,248
+aldeg_cas01,34,252,0	warp	aldg01-1	1,1,alde_gld,48,83
+// Hohen
+//alde_gld,95,253,0	warp	aldg02	1,1,aldeg_cas02,88,163
+aldeg_cas02,88,159,0	warp	aldg02-1	1,1,alde_gld,95,249
+// Neunberg
+//alde_gld,142,81,0	warp	aldg03	1,1,aldeg_cas03,114,286
+aldeg_cas03,114,290,0	warp	aldg03-1	1,1,alde_gld,142,85
+// Wuerzburg
+//alde_gld,243,242,0	warp	aldg04	1,1,aldeg_cas04,149,17
+aldeg_cas04,145,17,0	warp	aldg04-1	1,1,alde_gld,239,242
+// Rotenburg
+//alde_gld,259,90,0	warp	aldg05	1,1,aldeg_cas05,216,103
+aldeg_cas05,216,107,0	warp	aldg05-1	1,1,alde_gld,264,90
+
+alde_gld,95,253,0	script	#Hohen	WARPNPC,2,2,{
+	if( !getcharid(2) ) {
+	mes "[ Guild War]";
+	mes "ขออภัย..ท่านไม่มีกิลด์";
+	mes "จึงไม่สามารถเข้าร่วมกิลด์วอร์ได้";
+	close;
+	}
+    warp "aldeg_cas02",88,163;
+    end;
+}
+
+
+// Geffen Castles Map	
+// Yesnelph	
+//gef_fild13,112,269,0	warp	gefg05	1,1,gefg_cas03,100,280	
+//gef_fild13,139,240,0	warp	gefg06	1,1,gefg_cas03,125,250	
+//gef_fild13,77,284,0	warp	gefg04	1,1,gefg_cas03,60,286	
+//gef_fild13,83,185,0	warp	gefg07	1,1,gefg_cas03,89,159	
+// Repherion
+//gef_fild13,150,54,0	warp	gefg01	1,1,gefg_cas01,34,140	
+// Repherion 2
+//gef_fild13,210,75,0	warp	gefg02	1,1,gefg_cas01,95,178	
+// Bergel
+//gef_fild13,196,281,0	warp	gefg08	1,1,gefg_cas04,24,149	
+// Mersetzdeitz
+//gef_fild13,256,57,0	warp	gefg09	1,1,gefg_cas05,11,134	
+//gef_fild13,305,83,0	warp	gefg09-1	1,1,gefg_cas05,99,200	
+// Eeyobriggar
+//gef_fild13,308,244,0	warp	gefg03	1,1,gefg_cas02,70,143	
+
+gef_fild13,196,281,0	script	#Bergel	WARPNPC,2,2,{
+	if( !getcharid(2) ) {
+	mes "[ Guild War]";
+	mes "ขออภัย..ท่านไม่มีกิลด์";
+	mes "จึงไม่สามารถเข้าร่วมกิลด์วอร์ได้";
+	close;
+	}
+    warp "gefg_cas04",24,149;
+    end;
+}
+
+//Payon Guild Castles Map
+// Brigt Arbor
+//pay_gld,121,238,0	warp	payg01	1,1,payg_cas01,214,48
+//payg_cas01,214,44,0	warp	payg01-1	1,1,pay_gld,121,233
+// Scarlet Palace
+//pay_gld,291,116,0	warp	payg02	1,1,payg_cas02,272,57
+payg_cas02,276,61,0	warp	payg02-1	1,1,pay_gld,295,116
+// Holy Shadow
+//pay_gld,321,293,0	warp	payg03	1,1,payg_cas03,226,26
+payg_cas03,226,22,0	warp	payg03-1	1,1,pay_gld,317,293
+// Sacred Altar
+//pay_gld,140,156,0	warp	payg04	1,1,payg_cas04,252,271
+payg_cas04,252,275,0	warp	payg04-1	1,1,pay_gld,140,160
+// Bamboo Grove Hill
+//pay_gld,204,269,0	warp	payg05	3,1,payg_cas05,62,225
+payg_cas05,62,222,0	warp	payg05-1	5,1,pay_gld,204,266
+
+pay_gld,321,293,0	script	#Holy Shadow	WARPNPC,2,2,{
+	if( !getcharid(2) ) {
+	mes "[ Guild War]";
+	mes "ขออภัย..ท่านไม่มีกิลด์";
+	mes "จึงไม่สามารถเข้าร่วมกิลด์วอร์ได้";
+	close;
+	}
+    warp "payg_cas03",226,26;
+    end;
+}
+
+pay_gld,140,156,0	script	#Sacred Altar	WARPNPC,2,2,{
+	if( !getcharid(2) ) {
+	mes "[ Guild War]";
+	mes "ขออภัย..ท่านไม่มีกิลด์";
+	mes "จึงไม่สามารถเข้าร่วมกิลด์วอร์ได้";
+	close;
+	}
+    warp "payg_cas04",252,271;
+    end;
+}
+
+pay_gld,291,116,0	script	#Scarlet Palace	WARPNPC,2,2,{
+	if( !getcharid(2) ) {
+	mes "[ Guild War]";
+	mes "ขออภัย..ท่านไม่มีกิลด์";
+	mes "จึงไม่สามารถเข้าร่วมกิลด์วอร์ได้";
+	close;
+	}
+    warp "payg_cas02",272,57;
+    end;
+}
+
+//Prontera Castles Map
+// Skoegul
+//prt_gld,107,240,0	warp	prtg04-1	1,1,prtg_cas04,86,13
+// Kriemhild
+//prt_gld,129,65,0	warp	prtg01	1,1,prtg_cas01,99,32
+// Fadhgridh
+//prt_gld,153,141,0	warp	prtg03-1	1,1,prtg_cas03,168,12
+// Gondul
+//prt_gld,212,240,0	warp	prtg05-1	1,1,prtg_cas05,17,235
+// Swanhild
+//prt_gld,240,124,0	warp	prtg02-1	1,1,prtg_cas02,43,229
+// ปราสาทพรอน
+prt_gld,159,25,0	warp	prtg002	6,2,prt_castle,102,178
+
+prt_gld,240,124,0	script	#Swanhild	WARPNPC,2,2,{
+	if( !getcharid(2) ) {
+	mes "[ Guild War]";
+	mes "ขออภัย..ท่านไม่มีกิลด์";
+	mes "จึงไม่สามารถเข้าร่วมกิลด์วอร์ได้";
+	close;
+	}
+    warp "prtg_cas02",43,229;
+    end;
+}
+
+prt_gld,153,141,0	script	#Fadhgridh	WARPNPC,2,2,{
+	if( !getcharid(2) ) {
+	mes "[ Guild War]";
+	mes "ขออภัย..ท่านไม่มีกิลด์";
+	mes "จึงไม่สามารถเข้าร่วมกิลด์วอร์ได้";
+	close;
+	}
+    warp "prtg_cas03",168,12;
+    end;
+}

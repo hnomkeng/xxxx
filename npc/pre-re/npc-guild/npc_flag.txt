@@ -1,0 +1,9 @@
+// 36 คน
+//morocc,188,112,4	duplicate(OutsideFlagsPA3)	Holy Shadow#mor1	722
+//morocc,191,112,4	duplicate(OutsideFlagsPA4)	Sacred Altar#mor1	722
+//morocc,194,112,4	duplicate(OutsideFlagsA2)	Hohenschwangau#mor1	722
+// 26 คน
+//morocc,197,112,4	duplicate(OutsideFlagsPR2)	Swanhild#mor1	722
+//morocc,200,112,4	duplicate(OutsideFlagsG4)	Bergel#mor1	722
+// บ้านวิ่ง
+//morocc,203,112,4	duplicate(OutsideFlagsPA5)	Bamboo Grove Hill#mor1	722

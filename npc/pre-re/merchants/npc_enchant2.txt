@@ -1,0 +1,286 @@
+-	script	enchant1::enchantweapon	-1,{
+		mes "[ Apprentice Craftsman ]";
+		mes "เพิ่มขีดความสามารถของอุปกรณ์";
+		mes "-------------------------------";
+		mes "ใช้เงิน ^FF0000100,000^000000 Zeny";
+		mes "^3366FFElunium^000000 5 ea, ^3366FFOridecon^000000 10 ea และ ^3366FFSteel^000000 20 ea";
+		mes "โอกาสสำเร็จ : 80%";
+		mes "^FF0000หากล้มเหลว ไอเทมจะหายไป^000000";
+		next;
+		mes "[ Apprentice Craftsman ]";
+		mes "^FF0000คำเตือน!! ต้องอ่าน!!^000000";
+		mes "ต้องมีไอเทมที่จะออฟในตัว";
+		mes "^FF0000แค่ 1 ชิ้นเท่านั้น^000000";
+		mes "หากเจ้ามีของชนิดเดียวกัน อยู่ในช่องเก็บของ";
+		mes "จงจำไว้ว่า ชิ้นที่อยู่เป็นอันดับแรก";
+		mes "จะถูกเรียกมาเสริมพลัง";
+		next;
+		mes "[ Apprentice Craftsman ]";
+		mes "^FF0000ข้าจะไม่รับผิดชอบ หากมีข้อผิดพลาดเกิดขึ้น^000000";
+		mes "";
+		mes "-------------------------------";
+		mes "รายละเอียดเพิ่มเติม : www.vacation-revo.com";
+		mes "-------------------------------";
+		next;
+		switch(select("^339900->^000000 ประเภท ดาบมือเดียว & สองมือ:^339900->^000000 ประเภท มีด & กาต้า:^339900->^000000 ประเภท ขวาน & กระบอง:^339900->^000000 ประเภท หอก:^339900->^000000 ประเภท หนังสือ & ไม้เท้า:^339900->^000000 ประเภท ธนู & เครื่องดนตรี & แส้:^339900->^000000 ประเภท สนับมือ:^FF0000->^000000 ยกเลิก")) {
+		case 1:
+			switch(select("-> Tsurugi [2]:-> Saber [3]:-> Haedonggum [2]:-> Flamberge [2]:-> Two-Handed Sword [2]:-> Broad Sword [2]:-> Claymore [2]:-> Zweihander [2]")) {
+			case 1:
+				callsub S_EnchantArmor,1120,80;
+			case 2:
+				callsub S_EnchantArmor,1127,80;
+			case 3:
+				callsub S_EnchantArmor,1129,80;
+			case 4:
+				callsub S_EnchantArmor,1149,80;
+			case 5:
+				callsub S_EnchantArmor,1158,80;
+			case 6:
+				callsub S_EnchantArmor,1162,80;
+			case 7:
+				callsub S_EnchantArmor,1172,80;
+			case 8:
+				callsub S_EnchantArmor,1171,80;
+			}
+		case 2:
+			switch(select("-> Gladius [2]:-> Damascus [2]:-> Jur [3]:-> Katar [2]:-> Jamadhar [1]:-> Infiltrator [1]:-> Katar of Frozen Icicle [3]:-> Katar of Quaking [3]:-> Katar of Raging Blaze [3]:-> Katar of Piercing Wind [3]")) {
+			case 1:
+				callsub S_EnchantArmor,1220,80;
+			case 2:
+				callsub S_EnchantArmor,1226,80;
+			case 3:
+				callsub S_EnchantArmor,1251,80;
+			case 4:
+				callsub S_EnchantArmor,1253,80;
+			case 5:
+				callsub S_EnchantArmor,1255,80;
+			case 6:
+				callsub S_EnchantArmor,1266,80;
+			case 7:
+				callsub S_EnchantArmor,1275,80;
+			case 8:
+				callsub S_EnchantArmor,1276,80;
+			case 9:
+				callsub S_EnchantArmor,1277,80;
+			case 10:
+				callsub S_EnchantArmor,1278,80;
+			}
+		case 3:
+			switch(select("-> War Axe [2]:-> Two-Handed Axe [2]:-> Doom Slayer [1]:-> Sword Mace [1]:-> Chain [3]:-> Stunner [2]")) {
+			case 1:
+				callsub S_EnchantArmor,1306,80;
+			case 2:
+				callsub S_EnchantArmor,1361,80;
+			case 3:
+				callsub S_EnchantArmor,1371,80;
+			case 4:
+				callsub S_EnchantArmor,1517,80;
+			case 5:
+				callsub S_EnchantArmor,1520,80;
+			case 6:
+				callsub S_EnchantArmor,1532,80;
+			}
+		case 4:
+			switch(select("-> Lance [0]:-> Trident [3]:-> Halberd [2]:-> Crescent Scythe [1]:-> Zephyrus [3]")) {
+			case 1:
+				callsub S_EnchantArmor,1411,80;
+			case 2:
+				callsub S_EnchantArmor,1461,80;
+			case 3:
+				callsub S_EnchantArmor,1464,80;
+			case 4:
+				callsub S_EnchantArmor,1476,80;
+			case 5:
+				callsub S_EnchantArmor,1481,80;
+			}
+		case 5:
+			switch(select("-> Book [3]:-> Sage's Diary [2]:-> Hardcover Book [1]:-> Encyclopedia [2]:-> Staff [3]:-> Arc Wand [2]:-> Wand of Occult [0]:-> Evil Bone Wand [0]:-> Wing Staff [0]:-> Survivor's Rod Dex [2]:-> Survivor's Rod Int [2]:-> Soul Staff [0]:-> Wizardry Staff [0]")) {
+			case 1:
+				callsub S_EnchantArmor,1550,80;
+			case 2:
+				callsub S_EnchantArmor,1560,80;
+			case 3:
+				callsub S_EnchantArmor,1561,80;
+			case 4:
+				callsub S_EnchantArmor,1564,80;
+			case 5:
+				callsub S_EnchantArmor,1608,80;
+			case 6:
+				callsub S_EnchantArmor,1611,80;
+			case 7:
+				callsub S_EnchantArmor,1614,80;
+			case 8:
+				callsub S_EnchantArmor,1615,80;
+			case 9:
+				callsub S_EnchantArmor,1616,80;
+			case 10:
+				callsub S_EnchantArmor,1618,80;
+			case 11:
+				callsub S_EnchantArmor,1620,80;
+			case 12:
+				callsub S_EnchantArmor,1472,80;
+			case 13:
+				callsub S_EnchantArmor,1473,80;
+			}
+		case 6:
+			switch(select("-> Arbalest [2]:-> Gakkung Bow [2]:-> Hunter Bow [2]:-> Hunter Bow [1]:-> Orc Archer Bow [0]:-> Guitar [1]:-> Harp [2]:-> Tail Whip [3]:-> Whip [2]")) {
+			case 1:
+				callsub S_EnchantArmor,1715,80;
+			case 2:
+				callsub S_EnchantArmor,1716,80;
+			case 3:
+				callsub S_EnchantArmor,1718,80;
+			case 4:
+				callsub S_EnchantArmor,1726,80;
+			case 5:
+				callsub S_EnchantArmor,1734,80;
+			case 6:
+				callsub S_EnchantArmor,1908,80;
+			case 7:
+				callsub S_EnchantArmor,1910,80;
+			case 8:
+				callsub S_EnchantArmor,1959,80;
+			case 9:
+				callsub S_EnchantArmor,1961,80;
+			}
+		case 7:
+			switch(select("-> Fist [1]:-> Claw [2]:-> Finger [2]:-> Magma Fist [3]:-> Icicle Fist [3]:-> Electric Fist [3]:-> Seismic Fist [3]")) {
+			case 1:
+				callsub S_EnchantArmor,1808,80;
+			case 2:
+				callsub S_EnchantArmor,1810,80;
+			case 3:
+				callsub S_EnchantArmor,1812,80;
+			case 4:
+				callsub S_EnchantArmor,1818,80;
+			case 5:
+				callsub S_EnchantArmor,1819,80;
+			case 6:
+				callsub S_EnchantArmor,1820,80;
+			case 7:
+				callsub S_EnchantArmor,1821,80;
+			}
+		case 8:
+			mes "[ Apprentice Craftsman ]";
+			mes "โปรดกลับมาใหม่เมื่อเจ้าสนใจที่จะ เพิ่มความสามารถให้กับมัน";
+			close;
+		}
+
+S_EnchantArmor:
+	set .@itemid,getarg(0);
+	set .@failrate,getarg(1);
+	if ((countitem(.@itemid) > 0) && (countitem(.@itemid) < 2)) {
+		mes "[ Apprentice Craftsman ]";
+		mes "-------------------------------";
+		mes "ใช้เงิน ^FF0000100,000^000000 Zeny";
+		mes "^3366FFElunium^000000 5 ea และ ^3366FFOridecon^000000 10 ea";
+		mes "โอกาสสำเร็จ : 80%";
+		mes "^FF0000หากล้มเหลว ไอเทมจะหายไป^000000";
+		next;
+		mes "[ Apprentice Craftsman ]";
+		mes "แน่นอนสิ่งสำคัญที่สุด";
+		mes "^ff5555ระดับการอัพเกรดและการ์ดที่ใส่อยู่";
+		mes "จะหายไปด้วย^000000";
+		mes "เจ้ายังอยากที่จะ เสริมความสามารถให้ชุดเกราะไหม";
+		next;
+		switch(select("^FF0000->^000000 อืม..ขอคิดอีกที:^339900->^000000 ข้าตัดสินใจแล้ว ลงมือเลย")) {
+		case 1:
+			mes "[ Apprentice Craftsman ]";
+			mes "ปลอดภัยไว้ก่อนดีกว่าใช่ไหมล่ะ ฮ่า ฮ่าา";
+			close;
+		case 2:
+			if (Zeny < 100000) {
+				mes "[ Apprentice Craftsman ]";
+				mes "ขออภัยแต่เจ้ามีค่าบริการไม่เพียงพอ";
+				close;
+			}
+			if (countitem(984)<10) {
+				mes "[ Apprentice Craftsman ]";
+				mes "เหมือนท่านมีของมาไม่ครบนะ";
+				mes "โปรดตรวจสอบให้ดีอีกครั้ง.";
+				close;
+			}
+			if (countitem(985)<5) {
+				mes "[ Apprentice Craftsman ]";
+				mes "เหมือนท่านมีของมาไม่ครบนะ";
+				mes "โปรดตรวจสอบให้ดีอีกครั้ง.";
+				close;
+			}
+			if (countitem(999)<20) {
+				mes "[ Apprentice Craftsman ]";
+				mes "เหมือนท่านมีของมาไม่ครบนะ";
+				mes "โปรดตรวจสอบให้ดีอีกครั้ง.";
+				close;
+			}
+			mes "[ Apprentice Craftsman ]";
+			mes "อ่า เอาล่ะ";
+			close2;
+			specialeffect2 EF_MAPPILLAR;
+			progressbar "ffff00",1;
+			set .@enc_ran,rand(1,.@failrate);
+			set zeny,zeny-100000;
+			delitem 984,10;
+			delitem 985,5;
+			delitem 999,20;
+			delitem .@itemid,1;
+			if (.@enc_ran == 1) {
+				set .@addpart,62014;
+			}
+			else if ((.@enc_ran > 2) && (.@enc_ran < 4)) {
+				set .@addpart,62013;
+			}
+			else if ((.@enc_ran > 5) && (.@enc_ran < 12)) {
+				set .@addpart,62001;
+			}
+			else if ((.@enc_ran > 13) && (.@enc_ran < 20)) {
+				set .@addpart,62002;
+			}
+			else if ((.@enc_ran > 21) && (.@enc_ran < 28)) {
+				set .@addpart,62003;
+			}
+			else if ((.@enc_ran > 29) && (.@enc_ran < 36)) {
+				set .@addpart,62004;
+			}
+			else if ((.@enc_ran > 37) && (.@enc_ran < 44)) {
+				set .@addpart,62005;
+			}
+			else if ((.@enc_ran > 45) && (.@enc_ran < 52)) {
+				set .@addpart,62006;
+			}
+			else if ((.@enc_ran > 53) && (.@enc_ran < 60)) {
+				set .@addpart,62007;
+			}
+			else if ((.@enc_ran > 61) && (.@enc_ran < 68)) {
+				set .@addpart,62008;
+			}
+			else if ((.@enc_ran > 69) && (.@enc_ran < 76)) {
+				set .@addpart,62009;
+			}
+			else if ((.@enc_ran > 77) && (.@enc_ran < 84)) {
+				set .@addpart,62010;
+			}
+			else if ((.@enc_ran > 91) && (.@enc_ran < 95)) {
+				set .@addpart,62011;
+			}
+			else if ((.@enc_ran > 96) && (.@enc_ran < 100)) {
+				set .@addpart,62012;
+			}
+			else {
+				specialeffect2 EF_PHARMACY_FAIL;
+				mes "[ Apprentice Craftsman ]";
+				mes "แย่จริง !!";
+				mes "การเสริมความสามารถให้ชุดเกราะ ไม่สำเร็จ";
+				close;
+			}
+			getitem2 .@itemid, 1, 1, 0, 0, 0, 0, 0, .@addpart;
+		}
+	}
+	else {
+		mes "[ Apprentice Craftsman ]";
+		mes "เจ้าไม่มีไอเทมชิ้นนี้นะ !!";
+		mes "โปรดกลับมาใหม่เมื่อเจ้าต้องการ";
+		close;
+	}
+}
+
+morocc,60,60,5	duplicate(enchantweapon)	เสริมพลังอาวุธ	88

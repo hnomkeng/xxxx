@@ -1,0 +1,68 @@
+function	script	pramool_config	{
+Start:
+menu "- เพิ่มสินค้าที่จะเริ่มประมูล",additempramool01,
+"- ปิดประมูล รับเงิน หรือ ไอเทม",closepramool1,
+"- ปิดการประมูลแต่เพียงเท่านี้",closepramool2,
+"- กำหนดการเปิด - ปิด ประมูล",closepramool3;
+
+additempramool01:
+mes "กรุณาใส่ Id ของสินค้า";
+input $pramoolitem01;
+next;
+mes "กรุณาใส่จำนวน ของสินค้า";
+input $pramoolitem01amount;
+next;
+mes "กรุณาใส่ราคาเปิดประมูล";
+input $startbiterate;
+set $bitratepramool,$startbiterate;
+set $paybiteratepramool,$startbiterate;
+next;
+mes "กรุณาใส่ราคาบิทเรทขั้นต่ำ";
+input $bitratepramool;
+npcshopdelitem "pramoolshop",501;
+npcshopadditem "pramoolshop",$pramoolitem01,$startbiterate;
+close2;
+announce "ขณะนี้ การประมูลสินค้าได้เริ่มต้นขึ้นแล้ว ท่านในอยากร่วมลงประมูล พบได้ที่ กลางมอ ใกล้ พนักงาน พ่อค้านายทุน ครับ",bc_all,0xFFFF00;
+sleep2 3000;
+announce "สินค้าคือ "+getitemname($pramoolitem01)+" "+$pramoolitem01amount+" ea",bc_all,0xFFFF00;
+sleep2 3000;
+announce "เปิดในราคา "+$startbiterate+" z และ บิทครั้งต่อไป ต้องไม่ค่ำกว่า "+($paybiteratepramool+$bitratepramool)+" z",bc_all,0xFFFF00;
+sleep2 3000;
+announce "เรียนเชิญประมูลได้ที่ กลางมอ เดินลงสะพานไป ใกล้ พ่อค้านายทุน",bc_all,0xFFFF00;
+set $playbiterate,1;
+enablenpc "pramools";
+end;
+
+closepramool1:
+mes "...";
+close2;
+set $playbiterate,2;
+announce "ขอปิดการประมูลแต่เพียงเท่านี้นะค่ะ ผู้ชนะ กดรับไอเทมที่ NPC ได้เลยนะค่ะ",bc_all,0xFFFF00;
+sleep2 3000;
+announce "อย่าลืมนะค่ะ มีเวลาให้รับไอเทมจำกัด หากไม่มารับภายในเวลาที่กำหนดจะมีโทษแบนผู้ชนะนะค่ะ",bc_all,0xFFFF00;
+end;
+
+closepramool2:
+if($playerpramool01$ != "null"){atcommand "@block "+$playerpramool01$+"";}
+set $startbiterate,0;
+set $bitratepramool,0;
+set $paybiteratepramool,0;
+set $playerpramool01$,"null";
+set $pramoolitem01,0;
+set $playbiterate,0;
+delwaitingroom "pramool";
+waitingroom "[#] Pramool [#]",0;
+end;
+
+closepramool3:
+menu "- เปิด Auto ประมูลไว้",oppramool,"- ปิด Auto ประมูลไว้",clpramool;
+
+oppramool:
+set $setpramool,0;
+end;
+clpramool:
+set $setpramool,1;
+end;
+
+end;
+}

@@ -1,0 +1,751 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Poring	-1,{
+
+mes "[ ^0000FFเกมจับคู่^000000 ]";
+mes "สวัสดีจ้าคุณ " + strcharinfo(0) + "";
+mes "ตอนนี้คุณมีแต้มเกมจับคู่  [ ^ff0000"+COPY_POINT+" ^000000 ] แต้ม";
+mes "สามารถเอาแต้มไปแลกของรางวัลได้";
+
+	switch(select("^FF0000•^000000  เริ่มเล่น","^FF0000•^000000  ข้อมูลและวิธีเล่น")){
+
+		case 1:
+
+		next;
+
+		if (countitem(7539)<10) { mes "[ ^0000FFเกมจับคู่^000000 ]";mes "ในการเล่นคุณจะต้องใช้";mes "^FF0000Poring Coin^000000 10 ea.";mes "ในการเล่น 1 รอบ"; close; }
+
+		if ($evCStart1== 0) { mes "[ ^0000FFเกมจับคู่^000000 ]"; mes "^FF0000มีผู้เล่นอื่นกำลังเล่นอยู่^000000";	mes "^FF0000กรุณารอสักครู่^000000";	close;}
+
+		delitem 7539,10;
+
+		set .C_POINTXx1,0; 
+
+		initnpctimer "เกมจับคู่#1"; 
+
+		doevent "Start#mobswitch_system1::OnStart1";
+
+		npctalk "เกมรอบนี้เป็นของ คุณ " + strcharinfo(0) + " มีเวลาในการเล่น 90 วินาที ในการเล่น เริ่มได้ !!";
+
+		break;
+
+
+
+
+
+		case 2:	
+
+		next;
+
+		mes "[ ^0000FFเกมจับคู่^000000 ]";
+
+		mes "วิธีเล่น";
+
+		mes "มีเวลาเล่นรอบระ ^FF000090^000000 วินาที";	
+
+		mes "ในการเล่น ^FF00001^000000 รอบคุณจะต้องใช้";
+
+		mes "^FF0000Poring Coin^000000 10 ea.";
+
+		mes "เมื่อเริ่มเกมจะป้ายขึ้นมา ^FF000030^000000 อัน";
+
+		mes "จะมี มอนเตอร์ ทั้งหมด ^FF000015^000000 แบบ";
+
+		next;
+
+		mes "[ ^0000FFเกมจับคู่^000000 ]";
+
+		mes "ถ้าจับคู่ถูกจะได้ ^FF00001^000000 แต้ม";	
+
+		mes "แต่ถ้าคุณจับคู่ได้ทั้งหมด ^FF000015^000000 คู่";	
+
+		mes "ก็จะได้โบนัสพิเศษ ^FF000010^000000 แต้ม";		
+
+		break;
+
+
+
+	}
+
+	close;
+
+end;
+
+OnTimer30000:
+
+	npctalk "เหลืออีก 60 วินาที !!";
+
+	end;
+
+OnTimer60000:
+
+	npctalk "เหลืออีก 30 วินาที !!";
+
+	end;
+
+OnTimer75000:
+
+	npctalk "เหลืออีก 15 วินาที !!";
+
+	end;
+
+OnTimer80000:
+
+	sleep 1000;npctalk "10";
+
+	sleep 1000;npctalk "9";
+
+	sleep 1000;npctalk "8";
+
+	sleep 1000;npctalk "7";
+
+	sleep 1000;npctalk "6";
+
+	sleep 1000;npctalk "5";
+
+	sleep 1000;npctalk "4";
+
+	sleep 1000;npctalk "3";
+
+	sleep 1000;npctalk "2";
+
+	sleep 1000;npctalk "1";
+
+	sleep 1000;npctalk "หมดเวลา !!";
+
+	stopnpctimer;
+
+	sleep 2500;
+
+	enablenpc "เสี่ยงทาย#01";
+
+	enablenpc "เสี่ยงทาย#02";
+
+	enablenpc "เสี่ยงทาย#03";
+
+	enablenpc "เสี่ยงทาย#04";
+
+	enablenpc "เสี่ยงทาย#05";
+
+	enablenpc "เสี่ยงทาย#06";
+
+	enablenpc "เสี่ยงทาย#07";
+
+	enablenpc "เสี่ยงทาย#08";
+
+	enablenpc "เสี่ยงทาย#09";
+
+	enablenpc "เสี่ยงทาย#10";
+
+	enablenpc "เสี่ยงทาย#11";
+
+	enablenpc "เสี่ยงทาย#12";
+
+	enablenpc "เสี่ยงทาย#13";
+
+	enablenpc "เสี่ยงทาย#14";
+
+	enablenpc "เสี่ยงทาย#15";
+
+	enablenpc "เสี่ยงทาย#16";
+
+	enablenpc "เสี่ยงทาย#17";
+
+	enablenpc "เสี่ยงทาย#18";
+
+	enablenpc "เสี่ยงทาย#19";
+
+	enablenpc "เสี่ยงทาย#20";
+
+	enablenpc "เสี่ยงทาย#21";
+
+	enablenpc "เสี่ยงทาย#22";
+
+	enablenpc "เสี่ยงทาย#23";
+
+	enablenpc "เสี่ยงทาย#24";
+
+	enablenpc "เสี่ยงทาย#25";
+
+	enablenpc "เสี่ยงทาย#26";
+
+	enablenpc "เสี่ยงทาย#27";
+
+	enablenpc "เสี่ยงทาย#28";
+
+	enablenpc "เสี่ยงทาย#29";
+
+	enablenpc "เสี่ยงทาย#30";
+end;
+OnInit: 
+//waitingroom "เริ่มเล่นเกมจับคู่",0;
+set $evCStart1,1; 	
+
+end; 
+
+}
+
+
+
+-	script	#mobswitch1npc	-1,{
+
+	if(@jh)end;
+
+	set @click$,strnpcinfo(2);
+
+	doevent	"Start#mobswitch_system1::OnClick";
+
+	end;
+
+OnInit:
+
+	hideonnpc strnpcinfo(0);
+
+	end;
+
+}
+
+
+prontera,98,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_1	100
+prontera,100,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_2	100
+prontera,102,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_3	100
+prontera,104,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_4	100
+prontera,106,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_5	100
+prontera,108,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_6	100
+prontera,110,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_7	100
+prontera,112,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_8	100
+prontera,114,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_9	100
+prontera,116,255,4	duplicate(#mobswitch1npc)	#mobswitch1_1_10	100
+
+
+
+prontera,98,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_1	100
+prontera,100,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_2	100
+prontera,102,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_3	100
+prontera,104,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_4	100
+prontera,106,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_5	100
+prontera,108,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_6	100
+prontera,110,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_7	100
+prontera,112,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_8	100
+prontera,114,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_9	100
+prontera,116,252,4	duplicate(#mobswitch1npc)	#mobswitch1_2_10	100
+
+
+
+prontera,98,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_1	100
+prontera,100,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_2	100
+prontera,102,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_3	100
+prontera,104,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_4	100
+prontera,106,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_5	100
+prontera,108,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_6	100
+prontera,110,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_7	100
+prontera,112,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_8	100
+prontera,114,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_9	100
+prontera,116,249,4	duplicate(#mobswitch1npc)	#mobswitch1_3_10	100
+
+
+
+-	script	Start#mobswitch_system1	-1,{
+
+OnStart1:
+
+	if(.aid)end;
+
+	callsub SetDate;
+
+	set .aid,getcharid(3);
+
+	initnpctimer;
+
+	set @click$,"";
+
+	set @clickA$,"";
+
+	set @clickB$,"";
+
+	set .C_POINTXx1,0;
+
+	set $evCStart1,0; 
+
+//=================================
+
+OnTimer90000:
+
+//=================================
+
+	disablenpc "เสี่ยงทาย#01";
+
+	disablenpc "เสี่ยงทาย#02";
+
+	disablenpc "เสี่ยงทาย#03";
+
+	disablenpc "เสี่ยงทาย#04";
+
+	disablenpc "เสี่ยงทาย#05";
+
+	disablenpc "เสี่ยงทาย#06";
+
+	disablenpc "เสี่ยงทาย#07";
+
+	disablenpc "เสี่ยงทาย#08";
+
+	disablenpc "เสี่ยงทาย#09";
+
+	disablenpc "เสี่ยงทาย#10";
+
+	disablenpc "เสี่ยงทาย#11";
+
+	disablenpc "เสี่ยงทาย#12";
+
+	disablenpc "เสี่ยงทาย#13";
+
+	disablenpc "เสี่ยงทาย#14";
+
+	disablenpc "เสี่ยงทาย#15";
+
+	disablenpc "เสี่ยงทาย#16";
+
+	disablenpc "เสี่ยงทาย#17";
+
+	disablenpc "เสี่ยงทาย#18";
+
+	disablenpc "เสี่ยงทาย#19";
+
+	disablenpc "เสี่ยงทาย#20";
+
+	disablenpc "เสี่ยงทาย#21";
+
+	disablenpc "เสี่ยงทาย#22";
+
+	disablenpc "เสี่ยงทาย#23";
+
+	disablenpc "เสี่ยงทาย#24";
+
+	disablenpc "เสี่ยงทาย#25";
+
+	disablenpc "เสี่ยงทาย#26";
+
+	disablenpc "เสี่ยงทาย#27";
+
+	disablenpc "เสี่ยงทาย#28";
+
+	disablenpc "เสี่ยงทาย#29";
+
+	disablenpc "เสี่ยงทาย#30";
+
+//=================================
+
+	for(set .@i,1;.@i<=3;set .@i,.@i+1)
+
+		for(set .@j,1;.@j<=10;set .@j,.@j+1)
+
+			if(playerattached())
+
+				hideoffnpc "#mobswitch1_"+.@i+"_"+.@j;
+
+			else
+
+				hideonnpc "#mobswitch1_"+.@i+"_"+.@j;
+
+	if(!playerattached())
+
+	{
+
+		if(isloggedin(.aid))
+
+		stopnpctimer;
+
+		if (.C_POINTXx1 == 15) { mapannounce "prontera","[ เกมจับคู่ ] : สุดยอดเลย !! คุณ "+rid2name(.aid)+" สามารถจับคู่ได้ทั้งหมด "+.C_POINTXx1+" คู่ !! ได้รับ โบนัสพิเศษ เพิ่มอีก 10 แต้ม !!",bc_map;	sleep 3500;	set .aid,0;set $evCStart1,1; end;}
+
+		mapannounce "prontera","[ เกมจับคู่ ] : คุณ "+rid2name(.aid)+" สามารถจับคู่ได้ทั้งหมด "+.C_POINTXx1+" คู่",bc_map;
+
+		sleep 3500;
+
+		set .aid,0;
+
+		set $evCStart1,1;
+
+	}
+
+	end;
+
+	function	e	{
+
+		debugmes ""+getarg(0);
+
+		return getarg(0);
+
+	}
+
+	function	getv	{
+
+		return getd("."+getarg(0)+"view");
+
+	}
+
+	function	hnpc	{
+
+		if(getarg(2))
+
+		{
+
+			hideonnpc "#"+getarg(0);
+
+			hideonnpc "#"+getarg(1);
+
+		}
+
+		else{
+
+			hideoffnpc "#"+getarg(0);
+
+			hideoffnpc "#"+getarg(1);
+
+		}
+
+		return;
+
+	}
+
+	function	setnpc	{
+
+		setnpcdisplay "#"+getarg(0),(!getarg(1)?"":strmobinfo(1,getv(getarg(0))))+"#"+getarg(0),!getarg(1)?857:getv(getarg(0));
+
+	}
+
+	function	viewid	{
+
+		function 	md	{
+
+			//while(!strmobinfo(3,set(.@t,rand(1001,1323))));
+
+			while(1)
+
+			{
+
+				set .@zt,.@zt+1;
+
+				
+				if(.@zt&13)sleep2(1);
+
+				if(strmobinfo(3,set(.@t,rand(1001,1323))))
+
+					break;
+
+			}
+
+			return .@t;
+
+		}
+
+		set .@t,md();
+
+		for(set .@i,0;.@i<30;set .@i,.@i+1)
+
+			if(.@t==.viewid[.@i]||.@t==1285||.@t==1286||.@t==1287||.@t==1288)
+
+			{
+
+				set .@t,md();
+
+				set .@i,-1;
+
+			}
+
+		return .@t;
+
+	}
+
+	function	gviewid	{
+
+		set .@n,getarraysize(.viewid);
+
+		//while(!set(.@u,.viewid[set(.@t,rand(.@n))]))continue;
+
+		while(1)
+
+		{
+
+			set .@zt,.@zt+1;
+
+			if(.@zt&13)sleep2(1);
+
+			if(set(.@u,.viewid[set(.@t,rand(.@n))]))
+
+				break;
+
+		}
+
+		for(;.@t<.@n;set .@t,.@t+1)
+
+			set .viewid[.@t],.viewid[.@t+1];
+
+		return .@u;
+
+	}
+
+	function	rviewid	{
+
+		setd ".mobswitch1"+getarg(0)+"view",getarg(1);
+
+		return 0;
+
+	}
+
+OnClick:
+
+	if(.aid!=getcharid(3)||@click$==@clickA$||@click$==@clickB$||@jh)end;
+
+	set @jh,1;
+
+	setnpc(@click$,getv(@click$));
+
+	if(@clickA$==""&&@clickB$=="")
+
+	{
+
+		set @clickA$,@click$;
+
+		set @jh,0;
+
+		end;
+
+	}
+
+	set @clickB$,@click$;
+
+	callsub Check;
+
+	set @click$,"";
+
+	set @clickA$,"";
+
+	set @clickB$,"";
+
+	set @jh,0;
+
+	end;
+
+Check:
+
+	if(getv(@clickA$)==getv(@clickB$))
+
+	{
+
+		specialeffect 40,AREA,"#"+@clickA$;
+
+		specialeffect 40,AREA,"#"+@clickB$;
+
+		set .C_POINTXx1,.C_POINTXx1+1;
+
+		sleep2(1000);
+
+		set COPY_POINT,COPY_POINT+1;
+
+		dispbottom "[ เกมจับคู่ ] : ท่านได้รับแต้ม + 1 แต้ม ขณะนี้ท่านมีแต้มทั้งหมด "+COPY_POINT+" แต้ม ";
+
+		hnpc(@clickA$,@clickB$,1);
+
+		setnpc(@clickA$,0);
+
+		setnpc(@clickB$,0);
+
+		if (.C_POINTXx1 == 15) { set COPY_POINT,COPY_POINT+10; dispbottom "[ เกมจับคู่ ] : ท่านได้รับแต้มพิเศษเมื่อจับคู่ครบทั้งหมด รับ โบนัสพิเศษ อีก + 10 แต้ม ขณะนี้ท่านมีแต้มทั้งหมด "+COPY_POINT+" แต้ม "; specialeffect2 266;	sleep2 100;	specialeffect2 183;	sleep2 100;	specialeffect2 262;	sleep2 200;	specialeffect2 183;	sleep2 100;	specialeffect2 236;	sleep2 100;	specialeffect2 237;	sleep2 100;	specialeffect2 238;	sleep2 100;	specialeffect2 263;	sleep2 100;	specialeffect2 183;	sleep2 100;	specialeffect2 68;	sleep2 500;	specialeffect2 68;	sleep2 500;	specialeffect2 68;	sleep2 500;	specialeffect2 68;return;}
+
+		return;
+
+	}
+
+	specialeffect 67,AREA,"#"+@clickA$;
+
+	specialeffect 67,AREA,"#"+@clickB$;
+
+	//set .C_POINTXx1,.C_POINTXx1-1;
+
+	dispbottom "[ เกมจับคู่ ] : ท่านจับคู่ผิดกรุณาเลือกใหม่ !! ";
+
+	sleep2(1000);
+
+	hnpc(@clickA$,@clickB$,1);
+
+	setnpc(@clickA$,0);
+
+	setnpc(@clickB$,0);
+
+	if(.aid)hnpc(@clickA$,@clickB$,0);
+
+	return;
+
+
+
+SetDate:
+
+	deletearray .viewid[0],128;
+
+	for(set .@i,0;.@i<15;set .@i,.@i+1)
+
+		set .viewid[.@i+15],set(.viewid[.@i],viewid());
+
+	for(set .@i,1;.@i<=3;set .@i,.@i+1)
+
+		for(set .@j,1;.@j<=10;set .@j,.@j+1)
+
+			setnpc("mobswitch1_"+.@i+"_"+.@j,rviewid("_"+.@i+"_"+.@j,gviewid()));
+
+	return;
+
+}
+
+
+
+prontera,98,255,4	script	เสี่ยงทาย#01	11119,{}
+prontera,100,255,4	script	เสี่ยงทาย#02	11119,{}
+prontera,102,255,4	script	เสี่ยงทาย#03	11119,{}
+prontera,104,255,4	script	เสี่ยงทาย#04	11119,{}
+prontera,106,255,4	script	เสี่ยงทาย#05	11119,{}
+prontera,108,255,4	script	เสี่ยงทาย#06	11119,{}
+prontera,110,255,4	script	เสี่ยงทาย#07	11119,{}
+prontera,112,255,4	script	เสี่ยงทาย#08	11119,{}
+prontera,114,255,4	script	เสี่ยงทาย#09	11119,{}
+prontera,116,255,4	script	เสี่ยงทาย#10	11119,{}
+
+
+
+prontera,98,252,4	script	เสี่ยงทาย#11	11119,{}
+prontera,100,252,4	script	เสี่ยงทาย#12	11119,{}
+prontera,102,252,4	script	เสี่ยงทาย#13	11119,{}
+prontera,104,252,4	script	เสี่ยงทาย#14	11119,{}
+prontera,106,252,4	script	เสี่ยงทาย#15	11119,{}
+prontera,108,252,4	script	เสี่ยงทาย#16	11119,{}
+prontera,110,252,4	script	เสี่ยงทาย#17	11119,{}
+prontera,112,252,4	script	เสี่ยงทาย#18	11119,{}
+prontera,114,252,4	script	เสี่ยงทาย#19	11119,{}
+prontera,116,252,4	script	เสี่ยงทาย#20	11119,{}
+
+
+
+prontera,98,249,4	script	เสี่ยงทาย#21	11119,{}
+prontera,100,249,4	script	เสี่ยงทาย#22	11119,{}
+prontera,102,249,4	script	เสี่ยงทาย#23	11119,{}
+prontera,104,249,4	script	เสี่ยงทาย#24	11119,{}
+prontera,106,249,4	script	เสี่ยงทาย#25	11119,{}
+prontera,108,249,4	script	เสี่ยงทาย#26	11119,{}
+prontera,110,249,4	script	เสี่ยงทาย#27	11119,{}
+prontera,112,249,4	script	เสี่ยงทาย#28	11119,{}
+prontera,114,249,4	script	เสี่ยงทาย#29	11119,{}
+prontera,116,249,4	script	เสี่ยงทาย#30	11119,{}
+
+-	shop	PoringShop	-1,7619:200,7620:200,6423:120,6607:70,6608:70,7227:60,6380:30,7539:30
+
+
+
+function	script	BuyPoringShop	{
+
+if(@bought_nameid == 7619)		{		set @PuzShop,800*@bought_quantity;		callfunc "ShopPoring"; end;}
+else if(@bought_nameid == 7620)	{		set @PuzShop,200*@bought_quantity;		callfunc "ShopPoring"; end;}
+else if(@bought_nameid == 6423)	{		set @PuzShop,120*@bought_quantity;		callfunc "ShopPoring"; end;}
+else if(@bought_nameid == 6607)	{		set @PuzShop,70*@bought_quantity;		callfunc "ShopPoring"; end;}
+else if(@bought_nameid == 6608)	{		set @PuzShop,70*@bought_quantity;		callfunc "ShopPoring"; end;}
+else if(@bought_nameid == 7227)	{		set @PuzShop,60*@bought_quantity;		callfunc "ShopPoring"; end;}
+else if(@bought_nameid == 6380)	{		set @PuzShop,30*@bought_quantity;		callfunc "ShopPoring"; end;}
+else if(@bought_nameid == 7539)	{		set @PuzShop,30*@bought_quantity;		callfunc "ShopPoring"; end;}
+
+
+
+
+return;
+
+}
+
+
+
+-	script	rewardPoring	-1,{
+
+mes "[^0000FFร้านค้า เกมจับคู่^000000]";
+
+mes "สวัสดีค่ะคุณ :: ^4233F4"+strcharinfo(0)+"^000000";
+
+mes "ตอนนี้คุณมีแต้มเกมจับคู่  [ ^ff0000"+COPY_POINT+" ^000000 ] แต้ม";
+
+	callshop "PoringShop",1;
+
+	npcshopattach "PoringShop";
+
+end;
+
+
+
+OnBuyItem:
+
+callfunc "BuyPoringShop";
+end;
+//OnInit:
+//waitingroom "ร้านค้า เกมจับคู่",0;
+//end;
+}
+
+
+
+function	script	ShopPoring	{
+
+
+
+	if(@PuzShop<= COPY_POINT) {
+
+	set COPY_POINT,COPY_POINT-@PuzShop;
+
+	getitem @bought_nameid,@bought_quantity;
+
+	dispbottom "[ >> คุณได้รับของเรียบร้อยแล้ว << ]";
+
+		} else {
+
+			dispbottom "จำนวน คะแนนจับคู่ ไม่พอแลก "+getitemname(@bought_nameid)+"  "+@bought_quantity+" ชิ้น จำนวน แต้มจับคู่ ที่ต้องการคือ "+@PuzShop;
+
+			end;
+
+		}
+
+end;
+
+}
+
+
+
+function	script	PoringCoin	{
+
+input @Poringcoin;
+
+if (countitem(7539) < @Poringcoin) goto nonitem;
+
+delitem 7539,@Poringcoin;
+
+	set COPY_POINT,(COPY_POINT + @Poringcoin);
+
+	dispbottom "========= คุณมี Poring Point ทั้งหมด "+COPY_POINT+" Cash===========";
+
+end;
+
+nonitem:
+
+	dispbottom "========= Poring Coin ของคุณมีจำนวนน้อยกว่าที่คุณระบุ ===========";
+
+	dispbottom "========= Poring Coin ของคุณมีจำนวนน้อยกว่าที่คุณระบุ ===========";
+
+end;
+
+}
+
+prontera,104,259,4	duplicate(Poring)	เริ่มเล่นเกมจับคู่#1	405
+prontera,108,259,4	duplicate(rewardPoring)	ร้านค้า เกมจับคู่	11061

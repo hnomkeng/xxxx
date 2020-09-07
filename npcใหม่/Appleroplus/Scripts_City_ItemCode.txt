@@ -1,0 +1,146 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,173,221,4	script	รับ Item Code	11015,{
+if(getgmlevel() > 90){
+//mes "Code : "+$@itemcode$+"";
+mes "Code : "+$@new_codeitem1$+"";
+switch(select("^FF0000•^000000 ข้ามเมนู:^FF0000•^000000 เลือก Code")) {
+case 1:
+goto start1;
+end;
+case 2:
+switch(select("^FF0000•^000000 สุ่ม Code(เลือกไอเทม):^FF0000•^000000 สุ่ม Code:^FF0000•^000000 ลบ Code")) {
+case 1:
+mes "ใส่เลขไอเทมที่ต้องการ 1";
+input $numitem1;
+next;
+mes "ใส่จำนวน ไอเทมที่ต้องการ 1";
+input $eaitem1;
+mes "ใส่เลขไอเทมที่ต้องการ 2";
+input $numitem2;
+next;
+mes "ใส่จำนวน ไอเทมที่ต้องการ 2";
+input $eaitem2;
+mes "ใส่เลขไอเทมที่ต้องการ 3";
+input $numitem3;
+next;
+mes "ใส่จำนวน ไอเทมที่ต้องการ 3";
+input $eaitem3;
+mes "ใส่เลขไอเทมที่ต้องการ4";
+input $numitem4;
+next;
+mes "ใส่จำนวน ไอเทมที่ต้องการ 4";
+input $eaitem4;
+mes "ใส่เลขไอเทมที่ต้องการ5";
+input $numitem5;
+next;
+mes "ใส่จำนวน ไอเทมที่ต้องการ 5";
+input $eaitem5;
+set $@new_codeitem1$,$@new_codeitem2$;
+set .code_length, 10;
+setarray $@codeitem1$[0],"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9";
+setarray $@codeitem2$[0],"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9";
+for(set @i, 0; @i < .code_length; set @i, @i+1){
+set @random_char, rand(0,(getarraysize($@codeitem1$)-1));
+set @random_char, rand(0,(getarraysize($@codeitem2$)-1));
+set $@new_codeitem1$,$@new_codeitem1$ +$@codeitem1$[@random_char];
+set @new_codeitem2$,@new_codeitem2$ +$@codeitem2$[@random_char];
+}
+//announce "ItemCode : ขณะนี้ Code ที่ออกคือ "+$@new_codeitem1$+" รางวัลได้แก่ "+(getitemname($numitem))+" จำนวน "+$eaitem+" ea",0,0xFFFF00;
+goto start1;
+end;
+case 2:
+set $@new_codeitem1$,$@new_codeitem2$;
+set $numitem1,501;//id item 1
+set $eaitem1,rand(1,10);//จำนวน item 1
+set $numitem2,502;//id item 2
+set $eaitem2,rand(1,10);//จำนวน item 2
+set $numitem3,503;//id item 3
+set $eaitem3,rand(1,10);//จำนวน item 3
+set $numitem4,504;//id item 4
+set $eaitem4,rand(1,10);//จำนวน item 4
+set $numitem5,505;//id item 5
+set $eaitem5,rand(1,10);//จำนวน item 5
+set .code_length, 10;
+setarray $@codeitem1$[0],"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9";
+setarray $@codeitem2$[0],"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z","0","1","2","3","4","5","6","7","8","9";
+for(set @i, 0; @i < .code_length; set @i, @i+1){
+set @random_char, rand(0,(getarraysize($@codeitem1$)-1));
+set @random_char, rand(0,(getarraysize($@codeitem2$)-1));
+set $@new_codeitem1$,$@new_codeitem1$ +$@codeitem1$[@random_char];
+set @new_codeitem2$,@new_codeitem2$ +$@codeitem2$[@random_char];
+}
+//announce "ItemCode : ขณะนี้ Code ที่ออกคือ "+$@new_codeitem1$+" รางวัลได้แก่ "+(getitemname($numitem))+" จำนวน "+$eaitem+" ea",0,0xFFFF00;
+goto start1;
+end;
+case 3:
+set $@new_codeitem1$,$@new_codeitem2$;
+goto start1;
+end;
+//mes "กรุณาตั้งค่า Serial Code";
+//input $@itemcode$;
+//next;
+//mes "กรุณาใส่ ID ของไอเทมด้วยครับ";
+//input $numitem;
+//next;
+//mes "กรุณาใส่จำนวนของไอเทมด้วยครับ";
+//input $eaitem;
+//goto start1;
+//end;
+}
+}
+}
+start:
+goto start1;
+start1:
+mes "Code : ^FF0000สามารถดูได้จาก^000000";
+mes "^0000FF[facebook.com/-ro]^000000";
+mes "Item : "+(getitemname($numitem1))+" จำนวน "+$eaitem1+"";
+mes "Item : "+(getitemname($numitem2))+" จำนวน "+$eaitem2+"";
+mes "Item : "+(getitemname($numitem3))+" จำนวน "+$eaitem3+"";
+mes "Item : "+(getitemname($numitem4))+" จำนวน "+$eaitem4+"";
+mes "Item : "+(getitemname($numitem5))+" จำนวน "+$eaitem5+"";
+switch(select("^FF0000•^000000 ใส่ ItemCode:^FF0000•^000000 ไม่ล่ะ ขอบคุณ")) {
+case 1:
+input .itemcode$;
+if(.itemcode$ == $@new_codeitem2$){mes "ใช้งานไม่ได้"; end;}
+if(.itemcode$ == $@new_codeitem1$){
+if ((#Loginday == gettime(5)) && (#Loginmonth == gettime(6)) && (#Loginyear == gettime(7))) {
+dispbottom "เสียใจด้วย วันนี้คุณรับรางวัล ItemCode ประจำวันไปแล้วนะครับ";
+end;
+}
+getitem $numitem1,$eaitem1;
+getitem $numitem2,$eaitem2;
+getitem $numitem3,$eaitem3;
+getitem $numitem4,$eaitem4;
+getitem $numitem5,$eaitem5;
+announce "ผู้เล่น " + strcharinfo(0) + " ได้รับรางวัล ItemCode ประจำวัน แล้วค่ะ ขอบคุณค่ะ",0,0xFFFF00;
+set #Loginday,gettime(5);
+set #Loginmonth,gettime(6);
+set #Loginyear,gettime(7);
+end;
+}
+else {
+mes "คุณใส่ Serial Code ไม่ถูกต้องนะครับ";
+close;
+}
+end;
+case 2:
+end;
+}
+end;
+//OnInit:
+//waitingroom "รับ Item Code",0;
+//end;
+}

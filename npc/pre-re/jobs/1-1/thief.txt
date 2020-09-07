@@ -1,0 +1,41 @@
+// -- # Ragnarok Online EP 4.0 BY Kelberwitz Blade's
+// -- # Thief Job Change
+// -- # =============================================
+
+moc_prydb1,39,129,2	script	Thief Guide	69,{
+mes "[ Thief Guide ]";
+		mes "อ่า, ข้ารู้สึกได้ถึงความพรากเพียรของเจ้า";
+		mes " ประสบการณ์ที่ผ่านมาคงได้สอนอะไรๆ หลายๆ อย่างให้เจ้าแล้วใช่มั้ย";
+		next;
+		menu
+		"ข้า..อยากเป็น Thief",jobex;
+
+jobex:
+if (BaseJob != Novice) {
+			mes "[ Thief Guide ]";
+			mes "ข้าเสียใจด้วย..ท่านไม่ใช่ Novice";
+			close;
+		}
+if(JobLevel != 10) {
+				mes "[ Thief Guide ]";
+				mes "เอิ่มมมมม...";
+				mes "เจ้าต้องมี Job Lv.10 ก่อนนะนะ.";
+				next;
+				mes "[  Thief Guide ]";
+				mes "ไว้พบกันใหม่นะ";
+				close;
+			}
+if (getskilllv("NV_BASIC") < 9) {
+				mes "[ Thief Guide ]";
+				mes "เอิ่มมมมม...";
+				mes "เจ้าควรจะเรียนรู้ Basic Skills ทั้งหมดก่อน.";
+				next;
+				mes "[ Thief Guide ]";
+				mes "ไว้พบกันใหม่";
+				close;
+			}
+mes "[ Thief Guide ]";
+mes "ยินดีด้วย ท่านได้เป็น Thief แล้ว";
+jobchange 6;
+end;
+}

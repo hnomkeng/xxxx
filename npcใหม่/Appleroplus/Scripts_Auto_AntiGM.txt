@@ -1,0 +1,29 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Auto_AntiGM	-1,{
+OnPCLoginEvent:
+if (getgmlevel() > 1){
+	setarray .@gmaccs[0],2000000,2000001,2000002,2000003; // Account ID ที่เป็น GM ตัวจริง ป้องกันการแฮกระบบหรือทำบัค
+	for(set .@g,0; .@g < getarraysize(.@gmaccs); set .@g,.@g+1){
+		if (getcharid(3) == .@gmaccs[.@g]){
+			dispbottom "==============================";
+			dispbottom "[ระบบ] : คุณ " + strcharinfo(0) + " ตรวจสอบ ข้อมูล Game Master เรียบร้อย";
+			end;
+		}
+	}
+atcommand "@block "+strcharinfo(0);
+announce "[ระบบ] : ขณะนี้ ผู้เล่น [ "+strcharinfo(0)+" ] พยายาม ได้พยายาม ทำบัค เจาะแก้ไขดัดแปลงระบบ Server เพื่อปลอมเป็น Game Master โดนเบนถาวรเรียบร้อยแล้ว สมน้ำหน้า!!!",bc_all;
+}
+end;
+}

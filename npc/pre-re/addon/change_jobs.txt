@@ -1,0 +1,90 @@
+/*
+=================== TERMS OF SERVICES. ===================
+1. ALL RIGHT RESERVED RE-SELLER OR SHARE SCRIPT TO PUBLISH.
+2. BUT YOU RE-SELLER OR SHARE SCRIPT WITH OUT UNAUTHORIZRD
+   I WILL ALL CANCEL MY SUPPORT FOR YOU.
+3. MAINTENANCE SCRIPTS WILL BE FREE SERVICES.
+4. I WILL NOT KEEP ANY INFORMATIONS FROMS YOU SERVER THAT
+   YOU SEND FOR ME.
+5. I HOPE YOU WILL ALL ACCEPT TERMS OF SERVICES.
+==========================================================
+Script. Change Jobs																
+Create By. rAthena Dev.
+Translator Thai By. Athena Studio												
+Bug Report. Kittisak Sarounram [ FB ]											
+Contact Us. Kittisak Sarounram [ FB ]											
+TEL. 0909183008 [ TRUE MOVE H ]													
+==========================================================
+*/
+
+prontera,155,194,4	script	Change Jobs	811,{
+
+mes "กรุณาเลือกอาชีพที่ท่านต้องการเปลี่ยน";
+next;
+menu "- เปลี่ยน Class 2",class2;
+
+class2:
+if(class !=0) goto cancelwa;
+menu "- Knight",kg01,"- Crusader",csd01,"- Wizard",wz01,"- Sage",sg01,"- Hunter",ht01,"- Bard",bd01,"- Dancer",dc01,"- Priest",pri01,"- Monk",mk01,"- Backsmith",bsm01,"- Alchemist",acm01,"- Rogue",rg01,"- Assassin",Assassin01;
+
+kg01: jobchange 7;
+goto chiew;
+csd01: jobchange 14;
+goto chiew;
+wz01: jobchange 9;
+goto chiew;
+sg01: jobchange 16;
+goto chiew;
+ht01: jobchange 11;
+goto chiew;
+bd01: jobchange 19;
+goto chiew;
+dc01: jobchange 20;
+goto chiew;
+pri01: jobchange 8;
+goto chiew;
+mk01: jobchange 15;
+goto chiew;
+bsm01: jobchange 10;
+goto chiew;
+acm01: jobchange 18;
+goto chiew;
+rg01: jobchange 17;
+goto chiew;
+Assassin01: jobchange 12;
+goto chiew;
+
+cancel:
+close;
+
+chiew:
+atcommand "@lvup 99";
+atcommand "@joblvup 70";
+atcommand "@allskill";
+
+resetstatus;
+close;
+
+allskill:
+atcommand "@lvup 99";
+atcommand "@joblvup 70";
+atcommand "@allskill";
+
+resetstatus;
+close;
+
+spn:
+atcommand "@lvup 99";
+atcommand "@joblvup 69";
+atcommand "@allskill";
+
+resetstatus;
+close;
+
+cancelwa:
+close;
+
+OnInit:
+waitingroom "เปลี่ยนอาชีพ",0; 
+end;
+}

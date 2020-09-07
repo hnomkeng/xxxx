@@ -1,0 +1,212 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Levelupbox	-1,{
+
+OnPCBaseLvUpEvent:
+
+if(BaseLevel == 10) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 501,30;
+getitem 505,20;
+getitem 1202,1;
+getitem 1302,1;
+getitem 1402,1;
+getitem 1502,1;
+getitem 1602,1;
+getitem 1702,1;
+getitem 1750,50;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 10! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 20) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 2302,1;
+getitem 2102,1;
+getitem 2402,1;
+getitem 2502,1;
+getitem 2302,1;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 20! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 30) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 1010,10;
+getitem 1011,10;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 30! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 40) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 9001,1;
+getitem 643,1;
+getitem 531,10;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 40! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 50) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 664,5;
+getitem 665,5;
+getitem 666,5;
+getitem 667,5;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 50! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 60) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 616,1;
+getitem 7539,10;
+getitem 7621,2;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 60! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 70) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 5486,1;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 70! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 80) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 2286,1;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 80! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 90) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 5445,1;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 90! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 100) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 12263,2;
+getitem 12264,2;
+getitem 12265,2;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 100! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 110) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 12250,2;
+getitem 12251,2;
+getitem 12252,2;
+getitem 12253,2;
+getitem 12254,2;
+getitem 12255,2;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 110! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 120) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 984,10;
+getitem 985,10;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 120! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 130) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 7776,1;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 130! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 140) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 7227,10;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 140! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 150) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 61001,5;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 150! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 160) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 673,10;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 160! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 170) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 7619,3;
+getitem 7620,3;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 170! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 180) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 6438,3;
+getitem 6439,3;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 180! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 190) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 12412,1;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 190! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+if(BaseLevel == 200) {
+specialeffect2 71;
+specialeffect2 72;
+specialeffect2 73;
+getitem 61001,10;
+getitem 61013,1;
+getitem 7227,10;
+getitem 7539,30;
+getitem 12221,10;
+announce "ขอแสดงความยินดีด้วยคุณ "+strcharinfo(0)+" เลเวลเพิ่มขึ้นถึง 200! ได้รับของขวัญสุดพิเศษ",0;
+end;
+}
+}

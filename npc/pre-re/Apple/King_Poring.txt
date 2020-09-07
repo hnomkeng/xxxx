@@ -1,0 +1,29 @@
+-	script	King_Poring_System	-1,{
+					
+OnPCLoginEvent:
+set $@FirstRun, 1;
+
+if ( $@FirstRun == 0 && $@FirstRound != 1 ) { end; }
+	set $@FirstRound, 1;
+	sleep 1800000;
+	
+	MainSystem:
+		set .rdmap, rand(getarraysize(.allmaps$));
+		announce "King Poring: นี่เจ้าไม่แม้แต่จะสนใจพวกข้าเชียวรึ อีกทั้งตลอดมายังกล้ามาดูถูกพวกข้าอีก เจ้าคงเห็นว่าพวกข้าเป็นเพียงแค่ Poring ซินะ !! เอาหละ !! มันถึงเวลาเอาคืนแล้ว สิบปี ที่พวกข้าต้องทนอดกลั้นมาตลอด !!",0;
+		sleep 3000;
+		announce "King Poring: ตามหา King Poring ที่ "+.allmaps$[.rdmap]+" และกำจัด King Poring ซะ",0;
+		monster .allmaps$[.rdmap],0,0,"King Poring",3579,1,"King_Poring_System::OnKingDead"; //แก้ไขเลข monster ที่นี้
+end;
+
+OnKingDead:
+announce "King Poring: King Poring ถูกกำจัดแล้ว !!!! ",0;
+set $@FirstRun, 0;
+sleep 1800000;
+goto MainSystem;
+
+Oninit:
+setarray .allmaps$, "alde_gld", "cmd_fild01", "cmd_fild06", "comodo", "gef_fild00", "gef_fild04", "gef_fild06", "gef_fild10", "gef_fild13", "mjolnir_09",
+					"mjolnir_12", "moc_fild07", "moc_fild10", "moc_fild13", "moc_fild16", "moc_fild18", "pay_fild01", "pay_fild03", "pay_fild04", "pay_fild05",
+					"pay_fild06", "pay_fild07", "prt_fild04", "prt_fild05", "prt_fild06", "prt_fild08", "prt_fild09", "xmas", "yuno_fild01", "yuno_fild04";
+end;
+}

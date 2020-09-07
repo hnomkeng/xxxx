@@ -1,0 +1,113 @@
+/*
+=================== TERMS OF SERVICES. ===================
+1. ALL RIGHT RESERVED RE-SELLER OR SHARE SCRIPT TO PUBLISH.
+2. BUT YOU RE-SELLER OR SHARE SCRIPT WITH OUT UNAUTHORIZRD
+   I WILL ALL CANCEL MY SUPPORT FOR YOU.
+3. MAINTENANCE SCRIPTS WILL BE FREE SERVICES.
+4. I WILL NOT KEEP ANY INFORMATIONS FROMS YOU SERVER THAT
+   YOU SEND FOR ME.
+5. I HOPE YOU WILL ALL ACCEPT TERMS OF SERVICES.
+==========================================================
+Script. Alchemist Ingredients																				 
+Create By. Athena Studio
+Bug Report. Kittisak Sarounram [ FB ]																					 
+Contact Us. Kittisak Sarounram [ FB ]																					 
+TEL. 0909183008 [ TRUE MOVE H ]																					 
+==========================================================
+*/
+-	shop	alchemist_1	-1,605:-1,606:-1,970:-1,7135:-1,7136:-1,7137:-1,7138:-1,7139:-1,7142:-1,12118:-1,12119:-1,12120:-1,12121:-1,501:-1,503:-1,504:-1,505:-1,545:-1,546:-1,547:-1
+-	shop	alchemist_2	-1,12040:-1,501:-1,502:-1,503:-1,504:-1,505:-1,506:-1,507:-1,508:-1,509:-1,510:-1,511:-1,911:-1,952:-1,1017:-1,1061:-1,905:-1,1059:-1,7033:-1,929:-1,1032:-1,1050:-1,1051:-1,950:-1,1044:-1,7140:-1,7141:-1,1012:-1,7126:-1,1057:-1,708:-1,704:-1,970:-1,1093:-1,1092:-1,713:-1,7143:-1,7134:-1,715:-1,716:-1,717:-1
+-	shop	alchemist_3	-1,7129:-1,7127:-1,7128:-1,7133:-1,7434:-1,7419:-1,7132:-1,7131:-1,7130:-1,7144:-1
+
+prontera,147,177,4	script	ส่วนผสมทำยา	701,{
+	switch(select("~ ส่วนผสมสำเร็จรูป:~ ส่วนผสมแยก:~ หนังสือสำหรับทำส่วนผสม"))
+	{
+		case 1:
+			callshop "alchemist_1",1;
+			npcshopattach "alchemist_1";
+			end;
+			
+		case 2:
+			callshop "alchemist_2",1;
+			end;
+			
+		case 3:
+			callshop "alchemist_3",1;
+			end;
+	}
+	end;
+
+OnBuyItem:
+	mes "[ Ingredients Alchemist ]";
+	mes "Name : "+ getitemname(@bought_nameid[.@i]) +"";
+	input .@Amount;
+	for ( set .@i, 0; .@i < getarraysize(@bought_nameid); set .@i, .@i+1 )
+	{
+		if ( getitemname(@bought_nameid[.@i]) == getitemname(605) ) {
+			getitem 708,.@Amount; getitem 970,.@Amount; getitem 713,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(606) ) {
+			getitem 518,.@Amount; getitem 704,.@Amount; getitem 713,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(970) ) {
+			getitem 7033,.@Amount*5; getitem 905,.@Amount*5; getitem 713,.@Amount; getitem 1092,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(7135) ) {
+			getitem 970,.@Amount; getitem 1059,.@Amount; getitem 713,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(7136) ) {
+			getitem 929,.@Amount; getitem 713,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(7137) ) {
+			getitem 1032,.@Amount*2; getitem 713,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(7138) ) {
+			getitem 1050,.@Amount; getitem 1051,.@Amount; getitem 713,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(7139) ) {
+			getitem 950,.@Amount; getitem 970,.@Amount; getitem 1044,.@Amount; getitem 713,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(7142) ) {
+			getitem 7140,.@Amount; getitem 7141,.@Amount; getitem 7143,.@Amount; getitem 713,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(12118) ) {
+			getitem 716,.@Amount; getitem 1012,.@Amount*2; getitem 1093,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(12119) ) {
+			getitem 717,.@Amount; getitem 950,.@Amount*3; getitem 1093,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(12120) ) {
+			getitem 715,.@Amount; getitem 7126,.@Amount*2; getitem 1093,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(12121) ) {
+			getitem 717,.@Amount; getitem 1057,.@Amount*3; getitem 1093,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(501) ) {
+			getitem 507,.@Amount; getitem 1093,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(503) ) {
+			getitem 508,.@Amount; getitem 1093,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(504) ) {
+			getitem 509,.@Amount; getitem 1093,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(505) ) {
+			getitem 510,.@Amount; getitem 911,.@Amount; getitem 1093,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(545) ) {
+			getitem 501,.@Amount; getitem 952,.@Amount; getitem 1092,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(546) ) {
+			getitem 503,.@Amount; getitem 1017,.@Amount; getitem 1092,.@Amount; getitem 7134,.@Amount;
+		}
+		else if ( getitemname(@bought_nameid[.@i]) == getitemname(547) ) {
+			getitem 504,.@Amount; getitem 1061,.@Amount; getitem 7134,.@Amount;
+		}
+		else
+			getitem @bought_nameid[.@i],.@Amount;
+	}
+	deletearray @bought_nameid, getarraysize(@bought_nameid);
+OnInit: 
+waitingroom "ส่วนผสมทำยา",0; 
+end;
+}

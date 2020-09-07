@@ -1,0 +1,157 @@
+-	shop	pramoolshop	-1,501:-1
+
+
+morocc,156,163,4	script	pramool	569,{
+Start:
+set $levelpramool,70; // ตัวละครต้องมีเลเวลถึงกำหนด
+mes "สินค้าวันนี้คือ";
+mes "<ITEM>"+getitemname($pramoolitem01)+"<INFO>"+$pramoolitem01+"</INFO></ITEM>";
+mes "จำนวน ^009900"+$pramoolitem01amount+"^000000 ea";
+mes "ราคาเริ่มต้นที่ [ ^009900"+$startbiterate+"^000000 ] z";
+mes "บิทขั้นต่ำครั้งละ [ ^FF0000"+$bitratepramool+"^000000 ] z";
+mes "ราคาประมูล ณ ตอนนี้ [ ^0099FF"+$paybiteratepramool+"^000000 ] z";
+mes "ชื่อผู้ครอบครอง : ^FF33FF"+$playerpramool01$+"^000000";
+if(Baselevel < $levelpramool){next; mes "^FF0000คุณมีเลเวลตัวละครไม่ถึงกำหนด^000000"; end;}
+if($playbiterate == 0){next; mes "ยังไม่มีสินค้าเปิดให้ประมูล"; end;}
+if($playbiterate == 1){menu "- ร่วมประมูลแบบใส่บิทเอง",usepramooluse,"- ร่วมประมูลขั้นต่ำที่ [ ^FF0000"+$bitratepramool+"^000000 ] z",usepramool,"- ดูตัวอย่างสินค้า ^0099FFPramool^000000",expramoolshop;}
+if($playbiterate == 2){
+if(getcharid(3) == $lockplayerwinpramool){ next; mes "ยินดีด้วยคุณเป็นผู้ชนะประมูล ได้รับ "+getitemname($pramoolitem01)+" 1 ea";
+if(Zeny < $paybiteratepramool){mes "อ่าว คุณเป็นผู้ชนะแต่ไม่มีเงินมารับของนิ"; mes "คุณติดโทษแบน จนกว่าจะนำเงินมาชดใช้ความผิด"; atcommand "@jail "+strcharinfo(0)+""; end;}
+set Zeny,Zeny -$paybiteratepramool;
+getitem $pramoolitem01,$pramoolitem01amount;
+delwaitingroom "pramool";
+waitingroom "[#] Pramool [#]",0;
+set $playbiterate,0;
+set $startbiterate,0;
+set $bitratepramool,0;
+set $paybiteratepramool,0;
+set $playerpramool01$,"null";
+set $pramoolitem01,0;
+end;
+}
+if($lockplayerwinpramool != getcharid(3)){ next; mes "คุณไม่ใช่ผู้ชนะการประมูลนิ ไปไกล ๆ !!"; end; }
+}
+end;
+
+usepramooluse:
+next;
+mes "กรุณาใส่ราคาที่จะประมูล";
+mes "ต้องไม่น้อยกว่า ^FF0000"+($paybiteratepramool+$bitratepramool)+"^000000 z";
+input .bitratepramool;
+if(.bitratepramool == 0){next; mes "กรุณาใส่จำนวนที่จะประมูล"; end;}
+if(.bitratepramool < $paybiteratepramool+$bitratepramool){next; mes "คุณใส่บิทเรทต่ำกว่าที่กำหนด"; end;}
+if(Zeny < .bitratepramool){next; mes "จำนวนเงินของคุณไม่เพียงพอ"; end;}
+next;
+mes "คุณอยากร่วมประมูลที่ [ ^009900"+.bitratepramool+"^000000 ] Zeny";
+menu "- ไม่ล่ะ ขอบคุณ",no1,"- ยืนยัน ตกลง",oknofixpramool;
+
+oknofixpramool:
+set $paybiteratepramool,.bitratepramool;
+set $playerpramool01$,""+strcharinfo(0)+"";
+set $lockplayerwinpramool,getcharid(3);
+npcshopdelitem "pramoolshop",$pramoolitem01;
+npcshopadditem "pramoolshop",$pramoolitem01,$paybiteratepramool;
+announce "ขอขอบคุณ "+strcharinfo(0)+" สำหรับการบิทประมูล ราคาตอนนี้คือ "+$paybiteratepramool+" มีใครสามารถให้ได้มากกว่านี้ไหมครับ",bc_all,0xFFFF00;
+delwaitingroom "pramool";
+waitingroom ""+$paybiteratepramool+" z",0;
+end;
+
+no1:
+end;
+
+no2:
+end;
+
+usepramool:
+if(Zeny < $paybiteratepramool+$bitratepramool){next; mes "จำนวนเงินของคุณไม่พอสำหรับการประมูล"; end;}
+next;
+mes "คุณอยากร่วมประมูลที่ [ ^009900"+($paybiteratepramools+$bitratepramool)+"^000000 ] Zeny";
+menu "- ไม่ล่ะ ขอบคุณ",no2,"- ยืนยัน ตกลง",okfixpramools;
+
+okfixpramools:
+set $paybiteratepramool,$paybiteratepramool +$bitratepramool;
+set $playerpramool01$,""+strcharinfo(0)+"";
+set $lockplayerwinpramool,getcharid(3);
+npcshopdelitem "pramoolshop",$pramoolitem01;
+npcshopadditem "pramoolshop",$pramoolitem01,$paybiteratepramool;
+announce "ขอขอบคุณ "+strcharinfo(0)+" สำหรับการบิทประมูล ราคาตอนนี้คือ "+$paybiteratepramool+" มีใครสามารถให้ได้มากกว่านี้ไหมครับ",bc_all,0xFFFF00;
+delwaitingroom "pramool";
+waitingroom ""+$paybiteratepramool+" z",0;
+end;
+
+expramoolshop:
+npcshopattach "pramoolshop";
+callshop "pramoolshop",1;
+end;
+
+// =================== ตั้งค่าแบบ ตั้งเวลา ===========================
+
+OnClock1634: // เวลาเริ่มต้นประมูลสินค้า
+if($setpramool == 1){end;}
+set $pramoolitem01,30001; // item ที่ทำการประมูล
+set $pramoolitem01amount,1000; // จำนวนไอเทมที่ได้จากการประมูล
+set $startbiterate,100000; // ราคาเริ่มต้นประมูล
+set $bitratepramool,$startbiterate;
+set $paybiteratepramool,$startbiterate;
+set $bitratepramool,50000; // ราคาบิทประมูลขั้นต่ำ
+set $settimepramool,60000; // 1000 = 1 วินาที [ ตั้งเวลาสำหรับการประมูล ]
+set $settimepramoolfinish,60000; // 1000 = 1 วินาที [ ตั้งเวลาสำหรับการรับไอเทมผู้ชนะประมูล ]
+npcshopdelitem "pramoolshop",501;
+npcshopadditem "pramoolshop",$pramoolitem01,$startbiterate;
+announce "ขณะนี้ การประมูลสินค้าได้เริ่มต้นขึ้นแล้ว ท่านในอยากร่วมลงประมูล พบได้ที่ กลางมอ ใกล้ พนักงาน พ่อค้านายทุน ครับ",bc_all,0xFFFF00;
+sleep2 3000;
+announce "สินค้าคือ "+getitemname($pramoolitem01)+" จำนวน "+$pramoolitem01amount+" ea",bc_all,0xFFFF00;
+sleep2 3000;
+announce "เปิดในราคา "+$startbiterate+" z และ บิทครั้งต่อไป ต้องไม่ค่ำกว่า "+($paybiteratepramool+$bitratepramool)+" z",bc_all,0xFFFF00;
+sleep2 3000;
+announce "เรียนเชิญประมูลได้ที่ กลางมอ เดินลงสะพานไป ใกล้ พ่อค้านายทุน มีเวลาประมูลเพียง "+($settimepramool/60000)+" นาที",bc_all,0xFFFF00;
+set $playbiterate,1;
+enablenpc "pramools";
+
+sleep2 $settimepramool; // ปิดประมูล สำหรับให้ผู้ชนะ รับสินค้า ที่ประมูลชนะ
+
+set $playbiterate,2;
+announce "ขอปิดการประมูลแต่เพียงเท่านี้นะค่ะ ผู้ชนะ กดรับไอเทมที่ NPC ได้เลยนะค่ะ",bc_all,0xFFFF00;
+sleep2 3000;
+announce "อย่าลืมนะค่ะ มีเวลาให้รับคืนประมาณ "+($settimepramoolfinish/60000)+" นาที หากไม่มารับภายในเวลาที่กำหนดจะมีโทษแบนผู้ชนะนะค่ะ",bc_all,0xFFFF00;
+
+sleep2 $settimepramoolfinish; // แบนผู้เล่นที่บิทชนะ แต่ บิทเล่น ไม่มารับของ
+
+if($playerpramool01$ != "null"){atcommand "@block "+$playerpramool01$+"";}
+set $startbiterate,0;
+set $bitratepramool,0;
+set $paybiteratepramool,0;
+set $playerpramool01$,"null";
+set $pramoolitem01,0;
+set $playbiterate,0;
+set $settimepramool,0;
+set $settimepramoolfinish,0;
+delwaitingroom "pramool";
+waitingroom "[#] Pramool [#]",0;
+end;
+
+OnInit:
+set $playbiterate,0;
+set $startbiterate,0;
+set $bitratepramool,0;
+set $paybiteratepramool,0;
+set $playerpramool01$,"null";
+set $pramoolitem01,0;
+set $settimepramool,0;
+set $settimepramoolfinish,0;
+waitingroom "ประมูลสินค้า [เงินสด]",0;
+end;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

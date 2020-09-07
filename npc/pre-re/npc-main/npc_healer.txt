@@ -1,0 +1,113 @@
+-	script	Heal	-1,{
+	if (getgroupid()>5) {
+		mes "[ VIP Support ]";
+		mes "สวัสดีจ้า ท่านคือ ^FF0000"+strcharinfo(0)+",^000000";
+		mes "มีอะไรให้ข้าช่วยอย่างนั้นหรือ ?";
+		next;
+		menu 
+			"^339900->^000000 รับบัพฟรี Heal & AB Lv.10",buff_vip,
+			"^339900->^000000 ซ่อมแซมไอเทม 5,000z",repair_normal,
+			//"^339900->^000000 วาร์ปกิลด์วอร์ (GvG)",warp_gvg,
+			"^339900->^000000 เข้าลานประลอง ผู้เล่นจำนวน ["+getmapusers("pvp_n_1-5")+"] คน",deal_pvp;
+	} else {
+		mes "[ Buff Support ]";
+		mes "สวัสดีจ้า ท่านคือ ^FF0000"+strcharinfo(0)+",^000000";
+		mes "มีอะไรให้ข้าช่วยอย่างนั้นหรือ ?";
+		next;
+		menu 
+			"^339900->^000000 รับบัพฟรี Heal & AB Lv.10",buff_normal,
+			"^339900->^000000 ซ่อมแซมไอเทม 5,000z",repair_normal,
+			//"^339900->^000000 วาร์ปกิลด์วอร์ (GvG)",warp_gvg,
+			"^339900->^000000 เข้าลานประลอง ผู้เล่นจำนวน ["+getmapusers("pvp_n_1-5")+"] คน",deal_pvp;
+	}
+	
+buff_normal:
+	set .@delay, 5;	// ดีเลย์การใช้งาน (วินาที)
+	if ( gettimetick(2)-@delay_heal < .@delay ) {
+		dispbottom "[ Buffer] รออีก "+(.@delay-(gettimetick(2)-@delay_heal))+" วินาที ถึงจะทำการ Buff รอบต่อไปได้";
+		end;
+	} else if ( BaseLevel > 70) {
+		if ( Zeny < 5000 ) {
+			dispbottom "[ Free Buff ] มีจำนวนเงินไม่เพียงพอ";
+			end;
+		}
+		sc_start SC_BLESSING,60000 * 10,10;
+		sc_start SC_INCREASEAGI,60000 * 10,10;
+		percentheal 30,0;
+		
+		specialeffect2 EF_BLESSING;
+		specialeffect2 EF_INCAGI;
+		set @delay_heal, gettimetick(2);
+		set Zeny,Zeny-5000;
+		dispbottom "[ Free Buff ] คุณได้รับ AB Lv.10 นาน 10 นาที";
+		end;
+	} else {
+		sc_start SC_BLESSING,60000 * 10,10;
+		sc_start SC_INCREASEAGI,60000 * 10,10;
+		percentheal 100,100;
+		
+		specialeffect2 EF_BLESSING;
+		specialeffect2 EF_INCAGI;
+		set @delay_heal, gettimetick(2);
+		dispbottom "[ Free Buffer ] คุณได้รับ AB Lv.10 นาน 10 นาที";
+	}
+end;
+
+buff_vip:
+	set .@delay, 5;	// ดีเลย์การใช้งาน (วินาที)
+	if ( gettimetick(2)-@delay_heal < .@delay ) {
+		dispbottom "[ VIP Buffer] รออีก "+(.@delay-(gettimetick(2)-@delay_heal))+" วินาที ถึงจะทำการ Buff รอบต่อไปได้";
+		end;
+	} else {
+		sc_start SC_BLESSING,60000 * 30,10;
+		sc_start SC_INCREASEAGI,60000 * 30,10;
+		sc_start SC_MAGNIFICAT,60000 * 15,10;
+		//sc_start SC_EXPBOOST,60000 * 15,30;
+		//sc_start SC_JEXPBOOST,60000 * 15,10;
+		//sc_start4 SC_S_LIFEPOTION,60000 * 15,-5,5,0,0;
+		percentheal 100,100;
+		
+		specialeffect2 EF_BLESSING;
+		specialeffect2 EF_INCAGI;
+		set @delay_heal, gettimetick(2);
+		dispbottom "[ VIP Buffer ] คุณได้รับ AB Lv.10 นาน 30 นาที";
+	}
+end;
+
+repair_normal:
+	if (zeny<4999) {
+		mes "[ Buff Support ]";
+		mes "เสียใจด้วย! ^FF0000ท่านมีเงินไม่เพียงพอ^000000";
+		end;
+	}
+	if (getbrokenid(1)<=0) {
+		mes "[ Buff Support ]";
+		mes "ท่านไม่มีไอเทมใดเสียหาย.";
+		end;
+	}
+	if (getbrokenid(1)>0) { atcommand "@repairall"; } {
+		set zeny,zeny-5000;
+		mes "[ Buff Support ]";
+		mes "ข้าซ่อมมันให้เจ้าเรียบร้อยแล้วล่ะ.";
+	}
+end;
+
+warp_gvg:
+	mes "[ GvG Warper ]";
+	mes "ในส่วนของวาร์ปบ้านกิลด์วอร์";
+	mes "-----------------------------------";
+	mes "บ้านที่จำกัดสมาชิก หากมีสมาชิกในกิลด์เกินตามที่กำหนด จะถูกส่งกลับจุดเซฟทันที";
+	mes "-----------------------------------";
+	next;
+end;
+
+deal_pvp:
+announce "[ลานประลอง] ผู้เล่น "+strcharinfo(0)+" ได้เข้าสู่ลานประลอง",bc_all,0xFF0000;
+warp "pvp_n_1-5",0,0;
+OnInit: 
+waitingroom "บัฟ+PVP",0; 
+end;
+}
+
+morocc,161,97,4	duplicate(Heal)	Buff Support#mor1	703
+

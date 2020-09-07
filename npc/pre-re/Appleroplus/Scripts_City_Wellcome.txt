@@ -1,0 +1,25 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,160,200,4	script	ยินดีต้อนรับ	11116,{
+	end;
+OnInit:
+	set .message$,"ยินดีต้อนรับสู่โลกของเรา";
+	while(1)
+	{
+	 set .message$,delchar(.message$+charat(.message$,0),0);
+	 delwaitingroom;
+	 waitingroom .message$,0;
+	 sleep 500;
+	}
+}

@@ -1,0 +1,43 @@
+-	script	RankingEMP	-1,{
+	end;
+
+OnNPCKillEvent:
+	// check guild
+	set .@guild_id, getcharid(2);
+	if (!.@guild_id) end;
+
+	// check emp mob
+	set .@killedrid, killedrid;
+	setarray .@mob_id[0],1288;
+
+	// process
+	for (set .@i, 0; .@i < getarraysize(.@mob_id); set .@i, .@i + 1)
+	{
+		if (.@killedrid == .@mob_id[.@i])
+		{
+			query_sql "SELECT `char_id`,`emp_score` FROM `char_rank` WHERE `char_id` = "+ getcharid(0) +" LIMIT 1", .@char_id, .@point;
+			if (!(.@point || .@char_id) )
+				query_sql "INSERT INTO `char_rank` (`char_id`,`emp_score`) VALUES ('"+ getcharid(0) +"', '1')";
+			 else
+				query_sql "UPDATE `char_rank` SET `emp_score` = `emp_score`+1 WHERE `char_id` = "+ getcharid(0) +" LIMIT 1";
+
+			dispbottom "คุณได้ทำลาย [E]mperium [D]estroyer และได้รับ 1 Point แต้มทั้งหมดของคุณคือ "+ (.@point +1) +" Point";
+		}
+	}
+	end;
+
+OnAgitEnd:
+OnAgitEnd2:
+	sleep 2000;
+	query_sql "SELECT `castle_id`,`guild_id` FROM `guild_castle`WHERE `guild_id`> 0 LIMIT 127", .@castle_id, .@gid;
+	if (.@castle_id)
+	{
+		for (set .@i, 0; .@i < getarraysize(.@castle_id); set .@i, .@i + 1)
+		{
+			query_sql "SELECT `guild_id`FROM `guild`WHERE  `guild_id` = '"+ .@gid[.@i] +"' LIMIT 1", .@gid2;
+			if(.@gid2)
+				query_sql "UPDATE `guild` SET `point` = `point`+1 WHERE `guild_id` = "+ .@gid2 +" LIMIT 1";
+		}
+	}
+	end;
+}

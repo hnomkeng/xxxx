@@ -1,0 +1,123 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prt_in,172,131,3	script	ท่องโลกภายนอก	4_f_dangdang1,{
+mes "^FF0000สำหรับผู้ชมอายุมากกว่า 13 ปี^000000";
+mes "<URL>ฟังเพลงออนไลน์<INFO>http://radio.siamha.com/fm93.html,800,600</INFO></URL>";
+mes "<URL>เพลงใหม่<INFO>https://www.youtube.com/feed/trending?bp=4gIuCggvbS8wNHJsZhIiUExGZ3F1TG5MNTlhbjV2enVKY3hsb0hXS05TWkJDZm9SUQ%3D%3D,800,600</INFO></URL>";
+mes "<URL>ข่าวสารต่างๆ<INFO>https://www.youtube.com/feed/trending?bp=4gIuCggvbS8wNWpoZxIiUEwzWlE1Q3BOdWxRbHd1b19OSFltNVg3TlhyN0kxQVpjYw%3D%3D,800,600</INFO></URL>";
+mes "<URL>อ่านมังงะ<INFO>https://www.mangathai.com,800,600</INFO></URL>";
+mes "^FF0000สำหรับผู้ชมที่มีอายุมากกว่า 18 ปี^000000";
+mes "<URL>หนัง โป๊ 18+<INFO>https://www.pornhub.com,800,600</INFO></URL>";
+mes "<URL>อ่านโดจิน โป๊ 18+<INFO>https://lnwdoujin.com/,800,600</INFO></URL>";
+mes "^FF0000หากเปิดไม่ได้ให้^000000";
+mes "^FF0000ให้เลือกตัวละครใหม่อีกครั้ง^000000";
+close;
+end;
+OnInit:
+waitingroom "ท่องโลกภายนอก",0;
+end;	
+}
+
+prt_in,172,141,5	script	#AP1	910,{
+end;	
+}
+prt_in,169,141,5	script	#AP2	910,{
+end;	
+}
+prt_in,166,141,5	script	#AP3	910,{
+end;	
+}
+prt_in,163,141,5	script	#AP10	2_vending_machine1,{
+end;	
+}
+prt_in,173,138,5	script	#AP11	2_drop_machine,{
+end;	
+}
+prt_in,173,135,5	script	#AP12	2_postbox,{
+end;	
+}
+prt_in,168,135,5	script	#AP4	4_tower_04,{
+end;	
+}
+prt_in,166,134,5	script	#AP5	4_tower_07,{
+end;	
+}
+prt_in,164,137,5	script	#AP6	4_tower_02,{
+end;	
+}
+prt_in,161,134,5	script	#AP7	4_tower_09,{
+end;	
+}
+prt_in,167,137,5	script	#AP8	4_tower_12,{
+end;	
+}
+prt_in,161,137,5	script	#AP9	4_tower_14,{
+end;	
+}
+
+prt_in,127,78,5	script	ท่องโลกแห่งเกม	4_m_05,{
+mes "^FF0000ยินดีต้อนรับสู่เข้าสู่โลกแห่งเกม^000000";
+mes "^FF0000เชิญเลือกแนวเกมที่คุณต้องการได้เลย^000000";
+mes "<URL>เลือกเกม 1<INFO>https://poki.com/th,800,600</INFO></URL>";
+mes "<URL>เลือกเกม 2<INFO>https://th.y8.com/tags,800,600</INFO></URL>";
+mes "<URL>เลือกเกม 3<INFO>http://game.sanook.com/flashgame/,800,600</INFO></URL>";
+mes "<URL>เลือกเกม 4<INFO>https://www.xn--250-dkl4k3bxi1d.com/,800,600</INFO></URL>";
+mes "<URL>เลือกเกม 5<INFO>http://game.siamha.com/,800,600</INFO></URL>";
+mes "<URL>เลือกเกม 6<INFO>https://www.hdgames.net/,800,600</INFO></URL>";
+mes "<URL>เลือกเกม 7<INFO>http://www.kikugame.com/,800,600</INFO></URL>";
+mes "^FF0000หากเปิดไม่ได้ให้^000000";
+mes "^FF0000ให้เลือกตัวละครใหม่อีกครั้ง^000000";
+close;
+end;
+OnInit:
+waitingroom "ท่องโลกแห่งเกม",0;
+end;	
+}
+
+prt_in,123,81,5	script	#AP13	910,{
+end;	
+}
+prt_in,116,81,5	script	#AP14	910,{
+end;	
+}
+prt_in,131,68,5	script	#AP15	910,{
+end;	
+}
+prt_in,109,77,5	script	#AP22	2_vending_machine1,{
+end;	
+}
+prt_in,113,79,5	script	#AP23	2_drop_machine,{
+end;	
+}
+prt_in,131,74,5	script	#AP24	2_postbox,{
+end;	
+}
+prt_in,125,74,7	script	#AP16	4_tower_04,{
+end;	
+}
+prt_in,124,71,7	script	#AP17	4_tower_07,{
+end;	
+}
+prt_in,127,70,7	script	#AP18	4_tower_02,{
+end;	
+}
+prt_in,122,77,7	script	#AP19	4_tower_09,{
+end;	
+}
+prt_in,117,78,7	script	#AP20	4_tower_12,{
+end;	
+}
+prt_in,122,68,7	script	#AP21	4_tower_14,{
+end;	
+}

@@ -1,0 +1,44 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Auto_LoginMsgPlayer	-1,{ 
+OnPCLoginEvent:
+mes "^FF0000คุณได้เข้าสู่เกมเวลา ["+ gettime(3) +":"+ gettime(2) +":"+ gettime(1) +"]^000000";
+mes "^FF0000~• [ข้อมูลของคุณ] •~^000000";
+mes "ชื่อตัวละคร : "+strcharinfo(0)+"";
+if (getcharid(2)) {	mes "ชื่อกิลด์ : "+getguildname(getcharid(2))+"";	} else if (!getcharid(2)) {	mes "ชื่อกิลด์ : ไม่มีกิลด์";	}
+if (getcharid(1)) {	mes "ชื่อปาร์ตี้ : "+getpartyname(getcharid(1))+"";	} else if (!getcharid(1)) {	mes "ชื่อปาร์ตี้ : ไม่มีปาร์ตี้";	}
+mes "แอดเค้า ไอดี : "+ getcharid(3) +"";
+mes "ตัวละคร ไอดี : "+ getcharid(0) +"";
+mes "กิลด์ ไอดี : "+((getcharid(2)==0)?"ไม่มีกิลด์":""+ getcharid(2) +"");
+mes "ปาร์ตี้ ไอดี : "+((getcharid(1)==0)?"ไม่มีปาร์ตี้":""+ getcharid(1) +"");
+mes "^FF0000~• [คำแนะนำ] •~^000000";
+mes "เติมเงินจากบัตร True Money วันนี้รับ Cash Point คูณ 10 จากราคาของบัตร";
+mes "เติมเงินแบบโอนผ่านบัญชีจะได้รับ Cash Point โบนัสเพิ่มจากเดิม 10% ";
+mes "^FF0000~• [คำสั่งสำหรับผู้เล่น] •~^000000";
+mes "@iteminfo ดูข้อมูลไอเทม";
+mes "@mobinfo ดูข้อมูลมอนเตอร์";
+mes "@rates ข้อมูลเซฟเวอร์";
+mes "@time เวลาเซฟเวอร์";
+mes "@load กลับจุดเซฟ";
+mes "@autoloot เก็บของที่ดรอปเข้าตัว";
+mes "@alootid เก็บของไอดีที่ระบุเข้าตัว";
+mes "@autotrade ตั้งร้านออฟไลน์";
+mes "@afk ออนตัวละครออฟไลน์";
+mes "@kill ฆ่าตัวตาย";
+mes "@stats ข้อมูลตัวละคร";
+mes "@itemlist เช็คข้อมูลไอเทมตัวละคร";
+mes "@cartlist เช็คข้อมูลไอเทมในรถเข็น";
+mes "@storagelist เช็คข้อมูลไอเทมในคลัง";
+end;
+}

@@ -1,0 +1,87 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	SystemServerPoints	-1,{
+
+//--Start of the Script
+OnPCLoginEvent:
+   dispbottom "==============================";
+   dispbottom "[ระบบ] : เปิดระบบตรวจจับเวลา Online เรียบร้อยแล้ว";
+   dispbottom "[ระบบ] : เมื่อ Online เมื่อสะสมเวลาครบ 1 ชั่วโมง จะได้รับ Cash Coin 1 ea.";
+   dispbottom "[ระบบ] : และ Poring Coin 3 ea. เข้าตัวละครทันที";
+   dispbottom "[ระบบ] : สะสมเวลาได้สูงสุดต่อวัน วันละ 12 ชั่วโมง ";
+   dispbottom "[ระบบ] : จากนั้น ระบบ จะหยุด นับเวลา จะเริ่มสะสมใหม่ในวันถัดไป";
+   dispbottom "==============================";
+attachnpctimer ""+strcharinfo(0)+"";
+initnpctimer;
+end;
+    
+OnTimer60000:
+//Check if Vending (normal or @at)
+if(checkvending() >= 1) {
+   dispbottom "==============================";
+   dispbottom "[ระบบ]: ปิดระบบตรวจจับเวลา Online เนื่องจากคุณได้ ทำการตั้งร้านค้าแผงลอย";
+   dispbottom "[ระบบ]: กรุณาออกเข้าเกมใหม่ เพื่อเริ่มนับเวลาใหม่";
+   dispbottom "==============================";
+    stopnpctimer;
+    end;
+}
+set @consecutive_minute,@consecutive_minute+1;
+stopnpctimer;
+initnpctimer;
+//ตรวจสอบ 1 นาที
+if(@consecutive_minute == 60){
+    set @consecutive_minute,0;
+    set @consecutive_hour, @consecutive_hour + 1;
+	goto Hour;
+end;
+}
+end;
+
+Hour:
+    if(@consecutive_hour == 1) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 1 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 2) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 2 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 3) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 3 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 4) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 4 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 5) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 5 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 6) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 6 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 7) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 7 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 8) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 8 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 9) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 9 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 10) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 10 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 11) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 11 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "=============================="; end; }
+    if(@consecutive_hour == 12) { getitem 61001,1; getitem 7539,3; dispbottom "=============================="; dispbottom "[ระบบ]:คุณออนไลน์ครบ 12 ช.ม. แล้ว ได้รับ Cash Coin 1 ea. Poring Coin 3 ea. "; dispbottom "[ระบบ]:ปิดระบบจับเวลา Online เนื่องจากคุณออนไลน์ครบ 12 ช.ม. แล้วจะเริ่มนับอีกครั้งในวันต่อไป"; dispbottom "=============================="; stopnpctimer; end; }
+end;
+
+}
+prontera,146,200,4	script	ตรวจสอบเวลาออนไลน์	763,{
+
+
+mes "คุณ [^FF0000 " + strcharinfo(0) + " ^000000]";
+mes "ได้ออนไลน์ต่อเนื่องมาเป็น";
+mes "เวลา [^FF0000 " + @consecutive_hour + " ^000000]:[^FF0000 " + @consecutive_minute + " ^000000] ช.ม.";
+mes "เมื่อสะสมเวลาครบ 1 ชั่วโมง";
+mes "จะได้รับ Cash Coin 1 ea. และ ";
+mes "Poring Coin 3 ea. เข้าตัวละครทันที";
+mes "ในทุกๆ 1 ชั่วโมง";
+mes "สะสมเวลาได้สูงสุดต่อวัน";
+mes "วันละ 12 ชั่วโมง";
+mes "จากนั้น ระบบ จะหยุด นับเวลา";
+mes "จะเริ่มสะสมใหม่ในวันถัดไป";
+close;
+end;
+
+//OnInit:
+//waitingroom "ตรวจสอบเวลาออนไลน์",0;
+//end;
+}

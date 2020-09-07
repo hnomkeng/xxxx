@@ -1,0 +1,90 @@
+///////////////////////////////////////////////
+//                                          //
+//                                          //
+//Tharakan Khumtong                         //
+//////////////////////////////////////////////
+-	script	Eventmap_game_setting#1	-1,{
+OnInit:
+set $mapeventzeny,1000000; //เงินที่ใช้
+set $mapeventmax,7; //จำนวนคนในปาร์ตี้
+/////////////////////////////////
+set $@mapevent1$,"morocc"; ///แมพที่ NPC อยู่
+set $@mapevent2$,"firstcity"; ///แมพที่จะวาปไป
+end;
+}
+morocc,157,144,4	script	WONDER WORLD	105 ,{
+.@pid = getcharid(1);
+	if(!.@pid) end;
+	if(getpartyleader(.@pid, 2) != getcharid(0)) {
+		mes "^FF0000คุณไม่ใช่หัวปาร์ตี้^000000";	
+		end;
+	}
+	mes "ขอต้อนรับปาร์ตี้ : ^FF0000[" + GetPartyName(getcharid(1)) + "] ^000000";
+	mes "--------------------------";
+	mes "คุณามารถรวมทีม ^FF0000"+$mapeventmax+"^000000 คน ";
+	mes "เพื่อเข้าไปยังแผนที่พิเศษได้.... ";
+	next;
+	mes "มี ^FF0000item^000000 มากมายที่ไม่สามารถหาได้จากที่อื่น";
+	mes "--------------------------";
+	mes "^FF0000หมายเหตุ^000000 : หากคุณตายจะถุกส่งตัวกลับทันที";
+	next;
+	menu 
+	"^FF0000•^000000 วาปไปยัง Wonderword",go,
+	"^FF0000ยกเลิก^000000",no;
+	no:
+	end;
+	
+	go:
+	if(zeny < $mapeventzeny){mes "^FF0000หมายเหตุ^000000 : ต้องใช้ "+$mapeventzeny+" เป็นค่าวาปทีมของท่านไปยังแมพพิเศษ";end;}
+	getpartymember .@pid,0;
+	getpartymember .@pid,1;
+	getpartymember .@pid,2;
+
+	for ( .@i = 0; .@i < $@partymembercount; .@i++ ) {
+		if ( isloggedin( $@partymemberaid[.@i], $@partymembercid[.@i] ) ) {
+			getmapxy(.@map$,.@x,.@y,BL_PC, $@partymembername$[.@i]);
+			if(.@map$ != $@mapevent1$) {
+				mes "^FF0000กรุณารวมทีมอยุ่ในแมพเดียวกันทั้งหมด!!^000000";	
+				end;
+			}
+			if($@partymembercount < $mapeventmax)+
+			($@partymembercount > $mapeventmax) {
+				mes "^FF0000ปาร์ตี้ต้องมีสมาชิก "+$mapeventmax+" คน!!^000000";	
+				end;
+			}
+			
+		} else {
+			mes "^FF0000มีสมาชิกในปาร์ตี้ออกจากเกม!!^000000";	
+			end;
+		}
+	}
+npctalk "Warp!" ;
+mes "ขอให้ท่านโชคดี..........";
+specialeffect 12;
+sleep2 1500;
+set Zeny,Zeny-$mapeventzeny;
+set @ewpx,rand(100);
+set @ewpy,rand(100);
+warpparty $@mapevent2$,@ewpx,@ewpy,.@pid;
+
+
+OnInit:
+end;
+}
+
+-	script	MapEvent#1	-1,{
+OnPCDieEvent:
+getmapxy( @map$, @x, @y, BL_PC );
+if(@map$ == $@mapevent2$){warp "SavePoint",0,0;mes "^FF0000คุณถูกส่งกลับจากแมพพิเศษ!!^000000";	}
+end;
+}
+/////////////เปลี่ยนแมพ Morocc///////////////////
+firstcity	mapflag	noteleport	//ห้ามเทเลพอต
+firstcity	mapflag	nomemo	//ห้ามเซฟวาป
+firstcity	mapflag	nobranch	//ห้ามหักไม่ผี
+firstcity	mapflag	noreturn	//ออกจากเกมเข้าใหม่กลับจุดเซฟ
+firstcity	mapflag	nosave	SavePoint	//ห้ามเซฟแมพ
+firstcity	mapflag	pvp	//เปิด  PVP
+firstcity	mapflag	noicewall	//ห้ามไอซ์วอร์
+firstcity	mapflag	noexp	//ไม่ได้exp
+///////////////////////////////////

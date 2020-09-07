@@ -1,0 +1,1285 @@
+
+
+prontera,127,204,4	script	อัพเกรด 1-10 ใบสั่งป้องกันแตก	963,{
+
+	disable_items;
+	if (checkweight(1201,1) == 0) {
+		mes "[ ^0000FFเพิ่มออฟชั่นคอสตูมขั้นเทพ^000000 ]";
+		mes "คุณมีไอเทมมากเกินไป เอาไปเก็บก่อน!";
+		close;
+	}
+	if (MaxWeight - Weight < 10000) {
+		mes "[ ^0000FFเพิ่มออฟชั่นคอสตูมขั้นเทพ^000000 ]";
+		mes "คุณมีน้ำหนักมากเกินไป!";
+		close;
+	}
+	
+		set .@UnbreaksTicket,61406;
+		set .@UnbreaksTicketAmnt,1;
+	
+		mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+		mes "ฉันสามารถอัพเกรด";
+		mes "อาวุธและอุปกรณ์ทุกชนิดได้";
+		mes "คุณต้องการอัพเกรดอะไรล่ะ . ";
+		next;
+		setarray .@position$[1], "ส่วนหัว","ชุดเกาะ","อาวุธ","โล่","ผ้าคลุม","รองเท้า","เครื่องประดับ 1","เครื่องประดับ 2","ส่วนหู","ส่วนปาก";
+		setarray .@compare[1], EQI_HEAD_TOP, EQI_ARMOR, EQI_HAND_L, EQI_HAND_R, EQI_GARMENT, EQI_SHOES, EQI_ACC_L, EQI_ACC_R, EQI_HEAD_MID, EQI_HEAD_LOW;
+		for( set .@i,1; .@i <= 10; set .@i,.@i+1 )
+		{
+			if( getequipisequiped(.@compare[.@i]) )
+				set .@menu$, .@menu$ + .@position$[.@i] + "-" + "[" + getequipname(.@compare[.@i]) + "]";
+				set .@menu$, .@menu$ + ":";
+		}
+		set .@part,.@compare[select(.@menu$)];
+		
+		if( !getequipisequiped(.@part) )
+		close;
+		
+		if( !getequipisenableref(.@part) )
+		{
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ไอเทมชิ้นนี้ไม่สามารถอัพเกรดได้.";
+			close;
+		}
+		
+		if( getequiprefinerycnt(.@part) >= 10 )
+		{
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ไอเทมชิ้นนี้ได้อัพเกรดมาในระดับสูงสุดแล้ว...";
+			close;
+		}
+		
+		switch( getequipweaponlv(.@part) )
+		{
+			case 1: callsub S_RefineValidate,1,7620,50,.@part; break;
+			case 2: callsub S_RefineValidate,2,7620,200,.@part; break;
+			case 3: callsub S_RefineValidate,3,7620,5000,.@part; break;
+			case 4: callsub S_RefineValidate,4,7620,20000,.@part; break;
+			default: callsub S_RefineValidate,0,7619,2000,.@part; break;
+		}
+		
+		if( getequippercentrefinery(.@part) > rand(100) || getequippercentrefinery(.@part) > rand(100) )
+		{
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ก๊อง ก๊อง ก๊อง !!!";
+			
+			if( getequiprefinerycnt(.@part) > 7 )
+			{
+				announce "อัพเกรด 1-10 ใบสั่งป้องกันแตก : ผู้เล่น [ "+strcharinfo(0)+" ] ได้ตีบวก "+getequipname(.@part)+" ขึ้น +"+(getequiprefinerycnt(.@part)+1)+" ติด",bc_all,0x99FF00;
+			}
+			
+			SuccessRefItem .@part;
+			
+			// Headgear
+			if ( .@part == 6 && getequiprefinerycnt(.@part) <= 5) {
+			
+				set .@Opt1,rand(getarraysize(.HEADGEAROPT));
+				
+				if ( .@Opt1 == 2 ) {
+				
+					set .@Opt1_V, 30*getequiprefinerycnt(.@part);
+					
+				} else {
+				
+					set .@Opt1_V, getequiprefinerycnt(.@part);
+					
+				}
+				
+					setrandomoption(.@part,0,getd(".HEADGEAROPT["+.@Opt1+"]"),.@Opt1_V,0);
+					
+			} else if ( .@part == 6 && getequiprefinerycnt(.@part) > 5) {
+			
+				set .@Opt1,rand(2,5);
+				
+				if ( .@Opt1 == 2 ) {
+				
+					set .@Opt1_V, 30*getequiprefinerycnt(.@part);
+					
+				} else {
+				
+					set .@Opt1_V, getequiprefinerycnt(.@part);
+					
+				}
+				
+					setrandomoption(.@part,0,getd(".HEADGEAROPT["+.@Opt1+"]"),.@Opt1_V,0);
+					
+			}
+			
+			// ARMOROPT
+			if ( .@part == 7 ) {
+			
+				if ( getequiprefinerycnt(.@part) <= 5 ) {
+			
+				set .@Opt1,rand(getarraysize(.ARMOROPT));
+				
+				} else {
+				
+				set .@Opt1,rand(2,6);
+				
+				}
+				
+				if ( .@Opt1 == 0 || .@Opt1 == 1 || .@Opt1 == 3 || .@Opt1 == 5 ) {
+				
+					set .@Opt1_V, getequiprefinerycnt(.@part);
+					
+				} else if ( .@Opt1 == 2 ) {
+					
+					set .@Opt1_V, 30*getequiprefinerycnt(.@part);
+					
+				} else if ( .@Opt1 == 4 ) {
+				
+					if ( getequiprefinerycnt(.@part) <= 3 ) {
+						
+						set .@Opt1_V, 1;
+						
+					} else if ( getequiprefinerycnt(.@part) == 4 || getequiprefinerycnt(.@part) == 5 ) {
+					
+						set .@Opt1_V, 2;
+					
+					} else if ( getequiprefinerycnt(.@part) == 6 || getequiprefinerycnt(.@part) == 7 || getequiprefinerycnt(.@part) == 8 ) {
+					
+						set .@Opt1_V, getequiprefinerycnt(.@part) - 3;
+					
+					} else if ( getequiprefinerycnt(.@part) == 9 || getequiprefinerycnt(.@part) == 10 ) {
+					
+						set .@Opt1_V, getequiprefinerycnt(.@part) - 2;
+					
+					}
+				
+				} else {
+				
+					if ( getequiprefinerycnt(.@part) == 1 || getequiprefinerycnt(.@part) == 2 ) {
+						
+						set .@Opt1_V, 1;
+						
+					} else if ( getequiprefinerycnt(.@part) == 3 || getequiprefinerycnt(.@part) == 4 ) {
+					
+						set .@Opt1_V, 2;
+					
+					} else if ( getequiprefinerycnt(.@part) == 5 || getequiprefinerycnt(.@part) == 6 ) {
+					
+						set .@Opt1_V, 3;
+					
+					} else if ( getequiprefinerycnt(.@part) == 7 || getequiprefinerycnt(.@part) == 8 ) {
+					
+						set .@Opt1_V, 4;
+					
+					} else if ( getequiprefinerycnt(.@part) == 9 ) {
+					
+						set .@Opt1_V, 5;
+					
+					} else if ( getequiprefinerycnt(.@part) == 10 ) {
+					
+						set .@Opt1_V, 6;
+					
+					}
+				
+				}
+				
+				setrandomoption(.@part,0,getd(".ARMOROPT["+.@Opt1+"]"),.@Opt1_V,0);
+			
+			}
+			
+			// Shield
+			if ( .@part == 8 && getiteminfo(getequipid(.@part),5) == 32 ) {
+			
+				if ( getequiprefinerycnt(.@part) <= 5 ) {
+			
+					set .@Opt1,rand(getarraysize(.SHIELDOPT));
+				
+				} else {
+				
+					set .@Opt1,rand(2,6);
+				
+				}
+				
+				if ( .@Opt1 == 0 || .@Opt1 == 1 || .@Opt1 == 3 || .@Opt1 == 5 || .@Opt1 == 6 ) {
+				
+					set .@Opt1_V, getequiprefinerycnt(.@part);
+				
+				} else if ( .@Opt1 == 2 ) {
+				
+					set .@Opt1_V, 30*getequiprefinerycnt(.@part);;
+				
+				} else {
+				
+					if ( getequiprefinerycnt(.@part) <= 2 ) {
+					
+						set .@Opt1_V, 1;
+					
+					} else if ( getequiprefinerycnt(.@part) == 3 || getequiprefinerycnt(.@part) == 4 ) {
+					
+						set .@Opt1_V, 2;
+					
+					} else {
+					
+						set .@Opt1_V, getequiprefinerycnt(.@part) - 2;
+					
+					}
+				
+				}
+				
+					setrandomoption(.@part,0,getd(".SHIELDOPT["+.@Opt1+"]"),.@Opt1_V,0);
+					
+			}
+			
+			// Boots
+			if ( .@part == 2 ) {
+			
+				if ( getequiprefinerycnt(.@part) <= 5 ) {
+				
+					set .@Opt1, rand(getarraysize(.BOOTSOPT));
+				
+				} else {
+				
+					set .@Opt1, rand(2,6);
+				
+				}
+				
+				if ( .@Opt1 == 0 || .@Opt1 == 1 ) {
+				
+					set .@Opt1_V, getequiprefinerycnt(.@part);
+				
+				} else if ( .@Opt1 == 2 ) {
+				
+					set .@Opt1_V, 30*getequiprefinerycnt(.@part);
+				
+				} else if ( .@Opt1 == 3 ) {
+				
+					set .@Opt1_V, 4*getequiprefinerycnt(.@part);
+				
+				} else if ( .@Opt1 == 4 ) {
+				
+					if ( getequiprefinerycnt(.@part) <= 4 ) {
+						
+						set .@Opt1_V, 1;
+						
+					} else if ( getequiprefinerycnt(.@part) == 5 || getequiprefinerycnt(.@part) == 6 ) {
+					
+						set .@Opt1_V, 2;
+					
+					} else if ( getequiprefinerycnt(.@part) == 7 ) {
+					
+						set .@Opt1_V, 3;
+					
+					} else if ( getequiprefinerycnt(.@part) == 8 || getequiprefinerycnt(.@part) == 9 ) {
+					
+						set .@Opt1_V, 4;
+					
+					} else {
+					
+						set .@Opt1_V, 5;
+					
+					}
+				
+				} else if ( .@Opt1 == 5 ) {
+				
+					if ( getequiprefinerycnt(.@part) <= 3 ) {
+					
+						set .@Opt1_V, 1;
+					
+					} else if ( getequiprefinerycnt(.@part) == 4 || getequiprefinerycnt(.@part) == 5 ) {
+					
+						set .@Opt1_V, 2;
+					
+					} else {
+					
+						set .@Opt1_V, getequiprefinerycnt(.@part) - 3;
+					
+					}
+				
+				} else {
+				
+					set .@Opt1_V, 6*getequiprefinerycnt(.@part);
+				
+				}
+				
+				setrandomoption(.@part,0,getd(".BOOTSOPT["+.@Opt1+"]"),.@Opt1_V,0);
+			
+			}
+			
+			// Garment
+			if ( .@part == 3 ) {
+			
+				if ( getequiprefinerycnt(.@part) <= 5 ) {
+				
+					set .@Opt1, rand(getarraysize(.GARMENTOPT));
+				
+				} else {
+				
+					set .@Opt1, rand(2,6);
+				
+				}
+				
+				if ( .@Opt1 == 0 || .@Opt1 == 1 || .@Opt1 == 3 || .@Opt1 == 6 ) {
+				
+					set .@Opt1_V, getequiprefinerycnt(.@part);
+				
+				} else if ( .@Opt1 == 2 ) {
+				
+					set .@Opt1_V, 30*getequiprefinerycnt(.@part);
+				
+				} else if ( .@Opt1 == 4 ) {
+				
+					if ( getequiprefinerycnt(.@part) <= 2 ) {
+					
+						set .@Opt1_V, 1;
+					
+					} else if ( getequiprefinerycnt(.@part) == 3 || getequiprefinerycnt(.@part) == 4 ) {
+					
+						set .@Opt1_V, 2;
+					
+					} else {
+					
+						set .@Opt1_V, getequiprefinerycnt(.@part) - 2;
+						
+					}
+				
+				}
+
+				setrandomoption(.@part,0,getd(".GARMENTOPT["+.@Opt1+"]"),.@Opt1_V,0);
+			
+			}
+			
+			// WEAPON LV.1
+			if ( .@part == 8 || .@part == 9 && getiteminfo(getequipid(.@part),13) == 1 ) {
+			
+				if ( getequiprefinerycnt(.@part) <= 5 ) {
+				
+					set .@Opt1, rand(getarraysize(.WEAPONLV1OPT1));
+				
+				} else if ( getequiprefinerycnt(.@part) == 6 && getequiprefinerycnt(.@part) == 7 ) {
+				
+					set .@Opt2, rand(getarraysize(.WEAPONLV1OPT21));
+				
+				} else if ( getequiprefinerycnt(.@part) == 8 ) {
+				
+					set .@Opt2, rand(getarraysize(.WEAPONLV1OPT22));
+				
+				} else {
+				
+					set .@Opt2, rand(getarraysize(.WEAPONLV1OPT23));
+				
+				}
+				
+				if ( .@Opt1 == 0 || .@Opt1 == 7 ) {
+				
+					set .@Opt1_V, getequiprefinerycnt(.@part);
+				
+				} else if ( .@Opt1 == 1 ) {
+				
+					if ( getequiprefinerycnt(.@part) <= 2 ) {
+					
+						set .@Opt1_V, 1;
+					
+					} else if ( getequiprefinerycnt(.@part) > 2 && getequiprefinerycnt(.@part) <= 5 ) {
+					
+						set .@Opt1_V, 2;
+					
+					}
+				
+				} else if ( .@Opt1 >= 2 && .@Opt1 <= 6 ) {
+				
+					set .@Opt1_V, 1;
+				
+				}
+				
+				if ( .@Opt2 <= 5 && getequiprefinerycnt(.@part) == 6 ) {
+
+					set .@Opt2_V, 1;
+					
+				} else if ( .@Opt2 <= 4 && getequiprefinerycnt(.@part) == 7 ) {
+				
+					set .@Opt2_V, 1;
+				
+				} else if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 7 ) {
+				
+					set .@Opt2_V, 3;
+				
+				}
+				
+				if ( .@Opt2 == 6 && getequiprefinerycnt(.@part) == 6 ) {
+				
+					set .@Opt2_V, 4;
+					
+				} else if ( .@Opt2 == 6 && getequiprefinerycnt(.@part) == 7 ) {
+				
+					set .@Opt2_V, 5;
+				
+				}
+				
+				if ( .@Opt2 <= 4 && getequiprefinerycnt(.@part) == 8 ) {
+				
+					set .@Opt2, 2;
+				
+				} else if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 8 ) {
+				
+					set .@Opt2_V, 5;
+				
+				} else if ( .@Opt2 == 6 && getequiprefinerycnt(.@part) == 8 ) {
+				
+					set .@Opt2_V, 3;
+				
+				} else if ( .@Opt2 == 7 && getequiprefinerycnt(.@part) == 8 ) {
+				
+					set .@Opt2_V, 6;
+				
+				} else if ( .@Opt2 == 8 && getequiprefinerycnt(.@part) == 8 ) {
+				
+					set .@Opt2_V, 2;
+				
+				}
+				
+				if ( .@Opt2 == 0 || .@Opt2 == 4 || .@Opt2 == 5 && getequiprefinerycnt(.@part) <= 10 && getequiprefinerycnt(.@part) > 8 ) {
+				
+					set .@Opt2_V, 1;
+				
+				} else if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 9 ) {
+				
+					set .@Opt2_V, 4;
+				
+				} else if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 10	 ) {
+				
+					set .@Opt2_V, 5;
+				
+				} else if ( .@Opt2 == 2 && getequiprefinerycnt(.@part) == 9 ) {
+				
+					set .@Opt2_V, 7;
+				
+				} else if ( .@Opt2 == 2 && getequiprefinerycnt(.@part) == 10 ) {
+				
+					set .@Opt2_V, 8;
+				
+				} else if ( .@Opt2 == 3 && getequiprefinerycnt(.@part) == 9 ) {
+				
+					set .@Opt2_V, 2;
+				
+				} else if ( .@Opt2 == 3 && getequiprefinerycnt(.@part) == 10 ) {
+				
+					set .@Opt2_V, 3;
+				
+				} else if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 10 ) {
+				
+					set .@Opt2_V, 2;
+				
+				}
+				
+				if ( getiteminfo(getequipid(.@part),5) == 2 || getiteminfo(getequipid(.@part),5) == 34 ) {
+				
+					if ( getequipcardid(.@part,1) != 1 && getequipcardid(.@part,1) != 2 && getequipcardid(.@part,1) != 3 && getequipcardid(.@part,1) != 4
+						&& getequipcardid(.@part,1) != 1281 && getequipcardid(.@part,1) != 1282 && getequipcardid(.@part,1) != 1283 && getequipcardid(.@part,1) != 1284
+						&& getequipcardid(.@part,1) != 2561 && getequipcardid(.@part,1) != 2562 && getequipcardid(.@part,1) != 2563 && getequipcardid(.@part,1) != 2564 ) {
+				
+						if ( getequiprefinerycnt(.@part) <= 5 ) {
+						
+							setrandomoption(.@part,0,getd(".WEAPONLV1OPT1["+.@Opt1+"]"),.@Opt1_V,0);
+							
+						} else if ( getequiprefinerycnt(.@part) == 6 || getequiprefinerycnt(.@part) == 7 ) {
+						
+							setrandomoption(.@part,1,getd(".WEAPONLV1OPT21["+.@Opt2+"]"),.@Opt2_V,0);
+							
+						} else if ( getequiprefinerycnt(.@part) == 8 ) {
+						
+							setrandomoption(.@part,1,getd(".WEAPONLV1OPT22["+.@Opt2+"]"),.@Opt2_V,0);
+						
+						} else {
+						
+							setrandomoption(.@part,1,getd(".WEAPONLV1OPT23["+.@Opt2+"]"),.@Opt2_V,0);
+						
+						}
+				
+					}
+				
+				}
+				
+			}
+			
+			// WEAPON LV.2
+			if ( .@part == 8 || .@part == 9 && getiteminfo(getequipid(.@part),13) == 2 ) {
+			
+				if ( getequiprefinerycnt(.@part) <= 5 ) {
+				
+					set .@Opt1, rand(getarraysize(.WEAPONLV2OPT1));
+				
+				} else if ( getequiprefinerycnt(.@part) == 6 && getequiprefinerycnt(.@part) == 7 ) {
+				
+					set .@Opt2, rand(getarraysize(.WEAPONLV2OPT21));
+				
+				} else if ( getequiprefinerycnt(.@part) == 8 ) {
+				
+					set .@Opt2, rand(getarraysize(.WEAPONLV2OPT22));
+				
+				} else {
+				
+					set .@Opt2, rand(getarraysize(.WEAPONLV2OPT23));
+				
+				}
+				
+					if ( .@Opt1 == 0 && getequiprefinerycnt(.@part) >= 1 && getequiprefinerycnt(.@part) < 4 ) {
+					
+						set .@Opt1_V, getequiprefinerycnt(.@part);
+					
+					} else if ( .@Opt1 == 0 && getequiprefinerycnt(.@part) == 4 ) {
+					
+						set .@Opt1_V, 5;
+					
+					} else if ( .@Opt1 == 0 && getequiprefinerycnt(.@part) == 5 ) {
+					
+						set .@Opt1_V, 7;
+					
+					}
+					
+					if ( .@Opt1 == 1 && getequiprefinerycnt(.@part) == 1 && getequiprefinerycnt(.@part) == 2 ) {
+					
+						set .@Opt1_V, 1;
+					
+					} else if ( .@Opt1 == 1 && getequiprefinerycnt(.@part) == 3 && getequiprefinerycnt(.@part) == 4 ) {
+					
+						set .@Opt1_V, 2;
+					
+					} else if ( .@Opt1 == 1 && getequiprefinerycnt(.@part) == 5 ) {
+					
+						set .@Opt1_V, 3;
+					
+					}
+					
+					if ( .@Opt1 == 2 || .@Opt1 == 3 || .@Opt1 == 4 || .@Opt1 == 5 || .@Opt1 == 6 ) {
+					
+						set .@Opt1_V, 1;
+					
+					}
+					
+					if ( .@Opt1 == 7 || .@Opt1 == 8 ) {
+					
+						set .@Opt1_V, 2 * getequiprefinerycnt(.@part);
+					
+					}
+					
+						if ( .@Opt2 == 0 && getequiprefinerycnt(.@part) == 6 ) {
+						
+							set .@Opt2_V, 3;
+						
+						} else if ( .@Opt2 == 0 && getequiprefinerycnt(.@part) == 7 ) {
+						
+							set .@Opt2_V, 5;
+						
+						}
+						
+						if ( .@Opt2 == 1 || .@Opt2 == 3 ) {
+						
+							set .@Opt2_V, getequiprefinerycnt(.@part) - 5;
+							
+						}
+						
+						if ( .@Opt2 == 2 ) {
+						
+							set .@Opt2_V, getequiprefinerycnt(.@part);
+						
+						}
+						
+						if ( .@Opt2 == 4 || .@Opt2 == 5 || .@Opt2 == 6 || .@Opt2 == 7 && getequiprefinerycnt(.@part) == 6 && getequiprefinerycnt(.@part) == 7 ) {
+
+							set .@Opt2_V, 1;
+						
+						} else if ( .@Opt2 == 4 || .@Opt2 == 5 || .@Opt2 == 6 || .@Opt2 == 7 && getequiprefinerycnt(.@part) == 8 ) {
+						
+							set .@Opt2_V, 2;
+						
+						}
+						
+						if ( .@Opt2 == 8 && getequiprefinerycnt(.@part) == 8 && getequiprefinerycnt(.@part) == 9 ) {
+						
+							set .@Opt2_V, 1;
+						
+						} else if ( .@Opt2 == 8 && getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 2;
+						
+						}
+							
+						if ( .@Opt2 == 9 && getequiprefinerycnt(.@part) == 8 && getequiprefinerycnt(.@part) == 9 ) {
+						
+							set .@Opt2_V, 2;
+						
+						} else if ( .@Opt2 == 9 && getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 3;
+						
+						}
+			
+					if ( getiteminfo(getequipid(.@part),5) == 2 || getiteminfo(getequipid(.@part),5) == 34 ) {
+				
+						if ( getequipcardid(.@part,1) != 1 && getequipcardid(.@part,1) != 2 && getequipcardid(.@part,1) != 3 && getequipcardid(.@part,1) != 4
+							&& getequipcardid(.@part,1) != 1281 && getequipcardid(.@part,1) != 1282 && getequipcardid(.@part,1) != 1283 && getequipcardid(.@part,1) != 1284
+							&& getequipcardid(.@part,1) != 2561 && getequipcardid(.@part,1) != 2562 && getequipcardid(.@part,1) != 2563 && getequipcardid(.@part,1) != 2564 ) {
+					
+							if ( getequiprefinerycnt(.@part) <= 5 ) {
+							
+								setrandomoption(.@part,0,getd(".WEAPONLV2OPT1["+.@Opt1+"]"),.@Opt1_V,0);
+								
+							} else if ( getequiprefinerycnt(.@part) == 6 || getequiprefinerycnt(.@part) == 7 ) {
+							
+								setrandomoption(.@part,1,getd(".WEAPONLV2OPT21["+.@Opt2+"]"),.@Opt2_V,0);
+								
+							} else if ( getequiprefinerycnt(.@part) == 8 ) {
+							
+								setrandomoption(.@part,1,getd(".WEAPONLV2OPT22["+.@Opt2+"]"),.@Opt2_V,0);
+							
+							} else {
+							
+								setrandomoption(.@part,1,getd(".WEAPONLV2OPT23["+.@Opt2+"]"),.@Opt2_V,0);
+							
+							}
+					
+						}
+				
+					}
+					
+				}	
+					
+				// WEAPON LV.3
+				if ( .@part == 8 || .@part == 9 && getiteminfo(getequipid(.@part),13) == 3 ) {
+				
+					if ( getequiprefinerycnt(.@part) <= 5 ) {
+				
+						set .@Opt1, rand(getarraysize(.WEAPONLV3OPT1));
+				
+					} else if ( getequiprefinerycnt(.@part) == 6 && getequiprefinerycnt(.@part) == 7 ) {
+					
+						set .@Opt2, rand(getarraysize(.WEAPONLV3OPT2));
+					
+					} else {
+					
+						set .@Opt2, rand(getarraysize(.WEAPONLV3OPT22));
+						
+						if ( getequiprefinerycnt(.@part) == 8 && .@Opt2 == 7 || .@Opt2 == 8 ) {
+						
+							set .@Opt2, 6;
+						
+						} else if ( getequiprefinerycnt(.@part) == 9 && .@Opt2 == 6 || .@Opt2 == 8 ) {
+						
+							set .@Opt2, 7;
+							
+						} else if ( getequiprefinerycnt(.@part) == 10 && .@Opt2 == 6 || .@Opt2 == 7 ) {
+						
+							set .@Opt2, 8;
+							
+						}
+						
+					}
+					
+						if ( .@Opt1 == 0 || .@Opt1 == 8 || .@Opt1 == 10 ) {
+						
+							set .@Opt1_V, 2 * getequiprefinerycnt(.@part);
+						
+						}
+						
+						if ( .@Opt1 == 1 <= 2 ) {
+						
+							set .@Opt1_V, 1;
+						
+						} else if ( .@Opt1 == 1 && getequiprefinerycnt(.@part) > 2 && getequiprefinerycnt(.@part) <= 5 ) {
+						
+							set .@Opt1_V, 2;
+						
+						}
+						
+						if ( .@Opt1 == 2 || .@Opt1 == 3 || .@Opt1 == 4 || .@Opt1 == 5 || .@Opt1 == 6 || .@Opt1 == 7 ) {
+						
+							set .@Opt1_V, 1;
+						
+						}
+						
+						if ( .@Opt1 == 9 || .@Opt1 == 11 ) {
+						
+							set .@Opt1_V, getequiprefinerycnt(.@part);
+						
+						}
+						
+						if ( .@Opt2 == 0 ) {
+						
+							set .@Opt2_V, getequiprefinerycnt(.@part) - 5;
+						
+						}
+						
+						if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) > 5 && getequiprefinerycnt(.@part) <= 8 ) {
+						
+							set .@Opt2_V, getequiprefinerycnt(.@part) - 5;
+						
+						} else if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 9 ) {
+						
+							set .@Opt2_V, 5;
+						
+						} else if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 7;
+						
+						}
+						
+						if ( .@Opt2 == 2 || .@Opt2 == 3 || .@Opt2 == 4 || .@Opt2 == 5 && getequiprefinerycnt(.@part) > 5 && getequiprefinerycnt(.@part) <= 7 ) {
+						
+							set .@Opt2_V, 2;
+						
+						}
+						
+						if ( .@Opt2 == 6 || .@Opt2 == 7 && getequiprefinerycnt(.@part) > 5 && getequiprefinerycnt(.@part) <= 7 ) {
+						
+							set .@Opt2_V, 1;
+						
+						}
+						
+						if ( .@Opt2 == 2 && getequiprefinerycnt(.@part) == 8 ) {
+						
+							set .@Opt2_V, 2;
+						
+						} else if ( .@Opt2 == 2 && getequiprefinerycnt(.@part) == 9 || getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 3;
+						
+						}
+						
+						if ( .@Opt2 == 3 && getequiprefinerycnt(.@part) > 7 && getequiprefinerycnt(.@part) <= 10 ) {
+						
+							set .@Opt2_V, 2;
+						
+						}
+						
+						if ( .@Opt2 == 4 && getequiprefinerycnt(.@part) == 8 || getequiprefinerycnt(.@part) == 9 ) {
+						
+							set .@Opt2_V, 2;
+						
+						} else if ( .@Opt2 == 4 && getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 3;
+						
+						}
+						
+						if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 8 ) {
+						
+							set .@Opt2_V, 2;
+						
+						} else if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 9 ) {
+						
+							set .@Opt2_V, 4;
+						
+						} else if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 6;
+						
+						}
+						
+						if ( .@Opt2 == 6 && getequiprefinerycnt(.@part) > 7 && getequiprefinerycnt(.@part) <= 10 ) {
+						
+							set .@Opt2_V, 0;
+							
+						} 
+						
+					if ( getiteminfo(getequipid(.@part),5) == 2 || getiteminfo(getequipid(.@part),5) == 34 ) {
+				
+						if ( getequipcardid(.@part,1) != 1 && getequipcardid(.@part,1) != 2 && getequipcardid(.@part,1) != 3 && getequipcardid(.@part,1) != 4
+							&& getequipcardid(.@part,1) != 1281 && getequipcardid(.@part,1) != 1282 && getequipcardid(.@part,1) != 1283 && getequipcardid(.@part,1) != 1284
+							&& getequipcardid(.@part,1) != 2561 && getequipcardid(.@part,1) != 2562 && getequipcardid(.@part,1) != 2563 && getequipcardid(.@part,1) != 2564 ) {
+					
+							if ( getequiprefinerycnt(.@part) <= 5 ) {
+							
+								setrandomoption(.@part,0,getd(".WEAPONLV3OPT1["+.@Opt1+"]"),.@Opt1_V,0);
+								
+							} else if ( getequiprefinerycnt(.@part) == 6 || getequiprefinerycnt(.@part) == 7 ) {
+							
+								setrandomoption(.@part,1,getd(".WEAPONLV3OPT2["+.@Opt2+"]"),.@Opt2_V,0);
+								
+							} else {
+							
+								setrandomoption(.@part,1,getd(".WEAPONLV3OPT22["+.@Opt2+"]"),.@Opt2_V,0);
+							
+							}
+					
+						}
+				
+					}
+						
+				}
+				
+				// WEAPON LV.4
+				if ( .@part == 8 || .@part == 9 && getiteminfo(getequipid(.@part),13) == 4 ) {
+				
+					if ( getequiprefinerycnt(.@part) <= 5 ) {
+				
+						set .@Opt1, rand(getarraysize(.WEAPONLV4OPT1));
+				
+					} else if ( getequiprefinerycnt(.@part) == 6 && getequiprefinerycnt(.@part) == 7 ) {
+					
+						set .@Opt2, rand(getarraysize(.WEAPONLV4OPT2));
+					
+					} else {
+					
+						set .@Opt2, rand(getarraysize(.WEAPONLV4OPT22));
+						
+						if ( getequiprefinerycnt(.@part) == 8 && .@Opt2 == 7 || .@Opt2 == 8 ) {
+						
+							set .@Opt2, 6;
+						
+						} else if ( getequiprefinerycnt(.@part) == 9 && .@Opt2 == 6 || .@Opt2 == 8 ) {
+						
+							set .@Opt2, 7;
+							
+						} else if ( getequiprefinerycnt(.@part) == 10 && .@Opt2 == 6 || .@Opt2 == 7 ) {
+						
+							set .@Opt2, 8;
+							
+						}
+						
+					}
+					
+						if ( .@Opt1 == 0 && getequiprefinerycnt(.@part) <= 5 ) {
+						
+							set .@Opt1_V, 3 * getequiprefinerycnt(.@part);
+						
+						}
+						
+						if ( .@Opt1 == 1 <= 2 ) {
+						
+							set .@Opt1_V, 1;
+						
+						} else if ( .@Opt1 == 1 && getequiprefinerycnt(.@part) == 3 && getequiprefinerycnt(.@part) == 4 ) {
+						
+							set .@Opt1_V, 2;
+						
+						} else if ( .@Opt1 == 1 && getequiprefinerycnt(.@part) == 5 ) {
+						
+							set .@Opt1_V, 3;
+						
+						}
+						
+						if ( .@Opt1 == 2 || .@Opt1 == 3 || .@Opt1 == 4 || .@Opt1 == 5 || .@Opt1 == 6 || .@Opt1 == 7 ) {
+						
+							set .@Opt1_V, 1;
+						
+						}
+						
+						if ( .@Opt1 == 8 || .@Opt1 == 10 ) {
+						
+							set .@Opt1_V, 4 * getequiprefinerycnt(.@part);
+						
+						}
+						
+						if ( .@Opt1 == 9 ) {
+						
+							set .@Opt1_V, 2 * getequiprefinerycnt(.@part);
+						
+						}
+						
+						if ( .@Opt1 == 11 ) {
+						
+							set .@Opt1_V, getequiprefinerycnt(.@part);
+						
+						}
+						
+						if ( .@Opt2 == 0 ) {
+						
+							set .@Opt2_V, getequiprefinerycnt(.@part) - 5 * 2;
+						
+						}
+						
+						if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 6 ) {
+						
+							set .@Opt2_V, 1;
+						
+						} else if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 7 ) {
+						
+							set .@Opt2_V, 3;
+						
+						} else if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 8 ) {
+						
+							set .@Opt2_V, 5;
+						
+						} else if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 9 ) {
+						
+							set .@Opt2_V, 7;
+						
+						} else if ( .@Opt2 == 1 && getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 8;
+						
+						}
+						
+						if ( .@Opt2 == 2 || .@Opt2 == 3 || .@Opt2 == 4 || .@Opt2 == 5 && getequiprefinerycnt(.@part) > 5 && getequiprefinerycnt(.@part) <= 7 ) {
+						
+							set .@Opt2_V, 2;
+						
+						}
+						
+						if ( .@Opt2 == 6 || .@Opt2 == 7 && getequiprefinerycnt(.@part) > 5 && getequiprefinerycnt(.@part) <= 7 ) {
+						
+							set .@Opt2_V, 1;
+						
+						}
+						
+						if ( .@Opt2 == 2 && getequiprefinerycnt(.@part) == 8 ) {
+						
+							set .@Opt2_V, 2;
+						
+						} else if ( .@Opt2 == 2 && getequiprefinerycnt(.@part) == 9 || getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 3;
+						
+						}
+						
+						if ( .@Opt2 == 3 && getequiprefinerycnt(.@part) > 7 && getequiprefinerycnt(.@part) <= 10 ) {
+						
+							set .@Opt2_V, 2;
+						
+						}
+						
+						if ( .@Opt2 == 4 && getequiprefinerycnt(.@part) == 8 || getequiprefinerycnt(.@part) == 9 ) {
+						
+							set .@Opt2_V, 2;
+						
+						} else if ( .@Opt2 == 4 && getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 3;
+						
+						}
+						
+						if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 8 ) {
+						
+							set .@Opt2_V, 2;
+						
+						} else if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 9 ) {
+						
+							set .@Opt2_V, 4;
+						
+						} else if ( .@Opt2 == 5 && getequiprefinerycnt(.@part) == 10 ) {
+						
+							set .@Opt2_V, 6;
+						
+						}
+						
+						if ( .@Opt2 == 6 && getequiprefinerycnt(.@part) > 7 && getequiprefinerycnt(.@part) <= 10 ) {
+						
+							set .@Opt2_V, 0;
+							
+						} 
+						
+					if ( getiteminfo(getequipid(.@part),5) == 2 || getiteminfo(getequipid(.@part),5) == 34 ) {
+				
+						if ( getequipcardid(.@part,1) != 1 && getequipcardid(.@part,1) != 2 && getequipcardid(.@part,1) != 3 && getequipcardid(.@part,1) != 4
+							&& getequipcardid(.@part,1) != 1281 && getequipcardid(.@part,1) != 1282 && getequipcardid(.@part,1) != 1283 && getequipcardid(.@part,1) != 1284
+							&& getequipcardid(.@part,1) != 2561 && getequipcardid(.@part,1) != 2562 && getequipcardid(.@part,1) != 2563 && getequipcardid(.@part,1) != 2564 ) {
+					
+							if ( getequiprefinerycnt(.@part) <= 5 ) {
+							
+								setrandomoption(.@part,0,getd(".WEAPONLV4OPT1["+.@Opt1+"]"),.@Opt1_V,0);
+								
+							} else if ( getequiprefinerycnt(.@part) == 6 || getequiprefinerycnt(.@part) == 7 ) {
+							
+								setrandomoption(.@part,1,getd(".WEAPONLV4OPT2["+.@Opt2+"]"),.@Opt2_V,0);
+								
+							} else {
+							
+								setrandomoption(.@part,1,getd(".WEAPONLV4OPT22["+.@Opt2+"]"),.@Opt2_V,0);
+							
+							}
+					
+						}
+				
+					}
+						
+				}
+			
+				
+			
+			next;
+			Emotion ET_BEST;
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ว้าว ...";
+			mes "เป็นยังไงฝีมือข้า";
+			close;
+		}
+		else if ( countitem(.@UnbreaksTicket) )
+		{
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ก๊อง ก๊อง ก๊อง !!!";
+			
+			if( getequiprefinerycnt(.@part) > 7 )
+			{
+				announce "อัพเกรด 1-10 ใบสั่งป้องกันแตก : ผู้เล่น [ "+strcharinfo(0)+" ] ได้ตีบวก "+getequipname(.@part)+" ขึ้น +"+(getequiprefinerycnt(.@part)+1)+" แตก",bc_all,0x99FF00;
+			}
+			set .@PT_EE,getequipid(.@part);
+			set .@PT_EB,getequiprefinerycnt(.@part)-1;
+			set .@PT_EC,getequipcardid(.@part,0);
+			set .@PT_EA,getequipcardid(.@part,1);
+			set .@PT_ER,getequipcardid(.@part,2);
+			set .@PT_ED,getequipcardid(.@part,3);
+			getitem2 .@PT_EE,1,1,.@PT_EB,0,.@PT_EC,.@PT_EA,.@PT_ER,.@PT_ED;
+			failedrefitem .@part;
+			delitem .@UnbreaksTicket,.@UnbreaksTicketAmnt;
+			Emotion ET_HUK;
+			next;
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ก๊อง ก๊อง ก๊อง ...!!!";
+			mes "อุ้ย... !!!!";
+			next;
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ข้าขอโทษ..";
+			mes "มัน...";
+			mes "ไอเทมมันลื่นหลุดมือไป...";
+			close;
+		}
+		else
+		{
+			failedrefitem .@part;
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ก๊อง ก๊อง ก๊อง ...!!!";
+			mes "อุ้ย... !!!!";
+			next;
+			mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+			mes "ข้าขอโทษ..";
+			mes "มัน...";
+			mes "ไอเทมมันลื่นหลุดมือไป...";
+			close;
+		}
+		
+S_RefineValidate:
+
+		set .@UnbreaksTicket,61406;
+		
+		if (getarg(0))
+		
+			mes "อาวุธเลเวล [^0000FF " + getarg(0) + " ^000000]";
+			mes "คุณต้องใช้ :";
+			mes "- ^ff9999" + getitemname(getarg(1)) + "^000000";
+			if ( countitem(.@UnbreaksTicket))
+			{
+				mes "- ^ff9999" + getitemname(.@UnbreaksTicket) + "^000000";
+				mes "^FF0000คุณมีใบกันแตกอยู่ในตัว หากล้มเหลว ไอเท็มยังคงอยู่ และ ระดับเลเวลจะลดลง 1 หากล้มเหลว^000000";
+			}
+			mes "- ^ff9999" + getarg(2) + " เซนี.^000000";
+			mes " ";
+			mes "คุณต้องการดำเนินการต่อหรือไม่?";
+			next;
+			
+			if( select("- ใช่:- ไม่.") == 1 )
+			{
+				if( getequippercentrefinery(getarg(3)) < 100 )
+				{
+					mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+					mes "ว้าว !!";
+					mes "ไอเทมคุณอาจจะมีโอกาศ";
+					mes "แตกเสียหายได้นะ...";
+					next;
+					mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+					mes "^ff0000ไอเทมที่คุณกำลังจะอัพเกรด^000000!!";
+					mes "^ff0000 มีโอกาศแตกเสียหายได้นะ !^000000";
+					mes "คุณต้องการดำเนินการต่อหรือไม่?";
+					next;
+					
+					if( select("- ใช่ !:- ไม่.") == 2 )
+					{
+						mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+						mes "ไม่เป็นไร...";
+						mes "ถ้าคุณต้องการอัพเกรดไอเทมก็แวะมาหากันได้นะ.";
+						close;
+					}
+				}
+			
+				if( countitem(getarg(1)) > 0 && Zeny > getarg(2) )
+				{
+					delitem getarg(1), 1;
+					set Zeny, Zeny - getarg(2);
+					return;
+				}
+				else
+				{
+					mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+					mes "คุณมีจำนวนเงินไม่เพียงพอที่จะอัพเกรดไอเทม หรือ ไม่มี ^0000FF" + getitemname(getarg(1)) + "^000000";
+					mes "กรุณากลับไปหามาใหม่.";
+					close;
+				}
+			}
+			else
+			{
+				mes "[^FF0000 อัพเกรด 1-10 ใบสั่งป้องกันแตก ^000000]";
+				mes "ไม่เป็นไร.";
+				mes "ข้ามีเวลาทั้งวัน.";
+close;
+
+OnInit:
+setarray .HEADGEAROPT[0],RDMOPT_ETC_DROP,
+						RDMOPT_ETC_EXP,
+						RDMOPT_VAR_MAXHPAMOUNT,
+						RDMOPT_VAR_ITEMDEFPOWER,
+						RDMOPT_RANGE_ATTACK_DAMAGE_USER,
+						RDMOPT_ATTR_TOLERACE_ALL;
+						
+setarray .ARMOROPT[0],RDMOPT_ETC_DROP,
+						RDMOPT_ETC_EXP,
+						RDMOPT_VAR_MAXHPAMOUNT,
+						RDMOPT_VAR_MDEFPOWER,
+						RDMOPT_DEC_SPELL_CAST_TIME,
+						RDMOPT_ETC_STUNRESIS,
+						RDMOPT_VAR_MAXHPPERCENT;
+						
+setarray .SHIELDOPT[0],RDMOPT_ETC_DROP,
+						RDMOPT_ETC_EXP,
+						RDMOPT_VAR_MAXHPAMOUNT,
+						RDMOPT_VAR_ITEMDEFPOWER,
+						RDMOPT_ATTR_TOLERACE_NOTHING,
+						RDMOPT_ETC_STUNRESIS,
+						RDMOPT_CLASS_DAMAGE_BOSS_USER;
+						
+setarray .BOOTSOPT[0],RDMOPT_ETC_DROP,
+						RDMOPT_ETC_EXP,
+						RDMOPT_VAR_MAXHPAMOUNT,
+						RDMOPT_VAR_AVOIDSUCCESSVALUE,
+						RDMOPT_RACE_TOLERACE_HUMAN,
+						RDMOPT_VAR_MAGICATKPERCENT,
+						RDMOPT_VAR_MAXSPAMOUNT;
+						
+setarray .GARMENTOPT[0],RDMOPT_ETC_DROP,
+						RDMOPT_ETC_EXP,
+						RDMOPT_VAR_MAXHPAMOUNT,
+						RDMOPT_VAR_MDEFPOWER,
+						RDMOPT_RACE_DAMAGE_HUMAN,
+						RDMOPT_VAR_ATTPOWER,
+						RDMOPT_VAR_MAXSPPERCENT;
+
+setarray .WEAPONLV1OPT1[0],RDMOPT_VAR_ATTPOWER,
+							RDMOPT_VAR_MAGICATKPERCENT,
+							RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_LUKAMOUNT,
+							RDMOPT_CLASS_DAMAGE_BOSS_TARGET;
+							
+setarray .WEAPONLV1OPT21[0],RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_LUKAMOUNT,
+							RDMOPT_VAR_PLUSASPDPERCENT,
+							RDMOPT_RANGE_ATTACK_DAMAGE_TARGET;
+
+setarray .WEAPONLV1OPT22[0],RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_LUKAMOUNT,
+							RDMOPT_VAR_PLUSASPDPERCENT,
+							RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_RANGE_ATTACK_DAMAGE_TARGET,
+							RDMOPT_DEC_SPELL_CAST_TIME;
+
+setarray .WEAPONLV1OPT23[0],RDMOPT_VAR_PLUSASPD,
+							RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_RANGE_ATTACK_DAMAGE_TARGET,
+							RDMOPT_DEC_SPELL_CAST_TIME,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_ETC_SPGAIN;
+
+setarray .WEAPONLV2OPT1[0],RDMOPT_VAR_ATTPOWER,
+							RDMOPT_VAR_MAGICATKPERCENT,
+							RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_LUKAMOUNT,
+							RDMOPT_CLASS_DAMAGE_BOSS_TARGET,
+							RDMOPT_DAMAGE_CRI_TARGET;
+
+setarray .WEAPONLV2OPT21[0],RDMOPT_VAR_PLUSASPDPERCENT,
+							RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_RANGE_ATTACK_DAMAGE_TARGET,
+							RDMOPT_DEC_SPELL_CAST_TIME,
+							RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_LUKAMOUNT;
+							
+setarray .WEAPONLV2OPT22[0],RDMOPT_VAR_PLUSASPD,
+							RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_RANGE_ATTACK_DAMAGE_TARGET,
+							RDMOPT_DEC_SPELL_CAST_TIME,
+							RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_LUKAMOUNT,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_VAR_INTAMOUNT;
+							
+setarray .WEAPONLV2OPT23[0],RDMOPT_VAR_PLUSASPD,
+							RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_RANGE_ATTACK_DAMAGE_TARGET,
+							RDMOPT_DEC_SPELL_CAST_TIME,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_VAR_INTAMOUNT;
+							
+setarray .WEAPONLV3OPT1[0],RDMOPT_VAR_ATTPOWER,
+							RDMOPT_VAR_MAGICATKPERCENT,
+							RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_VAR_LUKAMOUNT,
+							RDMOPT_DAMAGE_CRI_TARGET,
+							RDMOPT_RANGE_ATTACK_DAMAGE_TARGET,
+							RDMOPT_CLASS_DAMAGE_BOSS_TARGET,
+							RDMOPT_RACE_DAMAGE_HUMAN;
+							
+setarray .WEAPONLV3OPT2[0],RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_DEC_SPELL_CAST_TIME,
+							RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_VAR_PLUSASPD;
+							
+setarray .WEAPONLV3OPT22[0],RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_DEC_SPELL_CAST_TIME,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_VAR_PLUSASPD,
+							RDMOPT_ETC_SPGAIN,
+							RDMOPT_ETC_HPGAIN1,
+							RDMOPT_ETC_HPGAIN2,
+							RDMOPT_ETC_HPGAIN3;
+							
+setarray .WEAPONLV4OPT1[0],RDMOPT_VAR_ATTPOWER,
+							RDMOPT_VAR_MAGICATKPERCENT,
+							RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_VAR_LUKAMOUNT,
+							RDMOPT_DAMAGE_CRI_TARGET,
+							RDMOPT_RANGE_ATTACK_DAMAGE_TARGET,
+							RDMOPT_CLASS_DAMAGE_BOSS_TARGET,
+							RDMOPT_RACE_DAMAGE_HUMAN;
+							
+setarray .WEAPONLV4OPT2[0],RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_DEC_SPELL_CAST_TIME,
+							RDMOPT_VAR_STRAMOUNT,
+							RDMOPT_VAR_AGIAMOUNT,
+							RDMOPT_VAR_VITAMOUNT,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_VAR_PLUSASPD;
+							
+setarray .WEAPONLV4OPT22[0],RDMOPT_RACE_DAMAGE_HUMAN,
+							RDMOPT_DEC_SPELL_CAST_TIME,
+							RDMOPT_VAR_INTAMOUNT,
+							RDMOPT_VAR_DEXAMOUNT,
+							RDMOPT_VAR_PLUSASPD,
+							RDMOPT_ETC_SPGAIN,
+							RDMOPT_ETC_HPGAIN1,
+							RDMOPT_ETC_HPGAIN2,
+							RDMOPT_ETC_HPGAIN3;						
+
+//waitingroom "อัพเกรด 1-10 ใบสั่งป้องกันแตก",0;
+end;
+}
+}

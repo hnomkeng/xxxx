@@ -1,0 +1,29 @@
+function	script	questrank	{ 
+	set .@questnumlist,10;
+			query_sql "SELECT `char`.`name`, `char_rank`.`quest_score` FROM `char_rank`, `char` WHERE `char`.`char_id` = `char_rank`.`char_id` ORDER BY `char_rank`.`quest_score` DESC LIMIT 0 , "+.@questnumlist+" ",@qname$,@qcount;
+			mes "[ เควสประจำสัปดาห์ ]";
+			if(!getarraysize(@qname$))mes "ยังไม่มีผู้เล่นใดได้คะแนน";
+			for(set @i,0 ; @i < getarraysize(@qname$) ; set @i,@i+1)
+				mes ""+(@i+1)+". ผู้เล่น ^1c7cd5"+@qname$[@i]+"^000000 มี ^FF0000"+@qcount[@i]+"^000000 คะแนน ";
+			end;
+}
+
+function	script	rouletterank	{ 
+	set .@roulettenumlist,10;
+			query_sql "SELECT `char`.`name`, `char_rank`.`roulette_score` FROM `char_rank`, `char` WHERE `char`.`char_id` = `char_rank`.`char_id` ORDER BY `char_rank`.`roulette_score` DESC LIMIT 0 , "+.@roulettenumlist+" ",@roulettename$,@roulettecount;
+			mes "[ Roullete Rank ]";
+			if(!getarraysize(@roulettename$))mes "ยังไม่มีผู้เล่นใดได้คะแนน";
+			for(set @i,0 ; @i < getarraysize(@roulettename$) ; set @i,@i+1)
+				mes ""+(@i+1)+". ผู้เล่น ^1c7cd5"+@roulettename$[@i]+"^000000 มี ^FF0000"+@roulettecount[@i]+"^000000 คะแนน ";
+			end;
+}
+
+function	script	equiprank	{ 
+	set .@equipnumlist,10;
+			query_sql "SELECT `char`.`name`, `char_rank`.`equip_score` FROM `char_rank`, `char` WHERE `char`.`char_id` = `char_rank`.`char_id` ORDER BY `char_rank`.`equip_score` DESC LIMIT 0 , "+.@equipnumlist+" ",@equipname$,@equipcount;
+			mes "[ Equip Rank ]";
+			if(!getarraysize(@equipname$))mes "ยังไม่มีผู้เล่นใดได้คะแนน";
+			for(set @i,0 ; @i < getarraysize(@equipname$) ; set @i,@i+1)
+				mes ""+(@i+1)+". ผู้เล่น ^1c7cd5"+@equipname$[@i]+"^000000 มี ^FF0000"+@equipcount[@i]+"^000000 คะแนน ";
+			end;
+}

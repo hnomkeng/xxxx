@@ -1,0 +1,65 @@
+-	script	guildsystem	-1,{
+callfunc "guildsystem";
+end;
+}
+
+function	script	guildsystem	{
+
+if(agitcheck()) goto wars;
+goto main;
+
+
+
+wars:
+set @GIDGUILD,getcharid(2);
+set .@name$, "[ Guild System ]";
+
+mes "[ Guild System ]";
+mes "เจ้ามีอะไรให้ข้าช่วยมั้ย ?";
+next;
+menu 
+//"^339900->^000000 สร้างกิลด์",Yes,
+//"^339900->^000000 อัพเวลกิลด์ 1M / Lv.",Ca,
+"^339900->^000000 จัดการลบกิลด์",Ea;
+
+main:
+set @GIDGUILD,getcharid(2);
+set .@name$, "[ Guild System ]";
+
+mes "[ Guild System ]";
+mes "เจ้ามีอะไรให้ข้าช่วยมั้ย ?";
+next;
+menu 
+//"^339900->^000000 สร้างกิลด์",Yes,
+//"^339900->^000000 อัพเวลกิลด์",Ca,
+"^339900->^000000 โอนหัวกิลด์",Da,
+"^339900->^000000 จัดการลบกิลด์",Ea;
+
+Yes:
+if( getcharid(2) ){end;}
+mes .@name$;
+mes "กรอกชื่อกิลด์ค่ะ";
+input @nameguild$;
+atcommand "@guild "+@nameguild$;
+end;
+
+Ca:
+if(Zeny < 1000000) {mes .@name$; mes "ต้องการ เงิน 1,000,000 Zeny ค่ะ";  end; }
+set zeny,zeny -1000000;
+atcommand "@guildlvup 1";
+end;
+
+Da:
+mes .@name$;
+mes "กรอกชื่อตัวละครค่ะ";
+input @name$;
+next;
+atcommand "@changegm "+@name$+"";
+end;
+
+Ea:
+atcommand "@breakguild";
+end;
+}
+
+morocc,188,112,5	duplicate(guildsystem)	Guild System#mor1	895

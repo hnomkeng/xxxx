@@ -1,0 +1,101 @@
+-	shop	QQ_Zenyeggv1	-1,7338:-1,7619:-1,7620:-1,31545:-1,20405:-1,31569:-1,31625:-1,31123:-1,20069:-1,18756:-1,2959:-1,31395:-1,31178:-1
+
+function	script	zenyeggv1	{
+	setarray .i1[1],12208,12209,12210,12211,12212,12215,12216,14527,12221,14536,14537,14542,14544; // Common Items
+	set .i1rand,rand(1,13); // Randomize Common Items; just change max amount if you add items
+	setarray .i2[1],31545,20405,31569,31123,20069,7619,7620,7338; // Rare Items
+	set .i2rand,rand(1,8); // Randomize Rare Items; just change max amount if you add items
+	setarray .i3[1],18756,2959,31395,31178; // Super Rare Items
+	set .i3rand,rand(1,4); //Randomize Super Rare Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		// Super Rare Item 5%
+		if (.chance == 5){
+		getitem .i3[.i3rand],1;
+		announce "ผู้เล่น"+strcharinfo(0)+" เปิดกล่อง Zeny Egg V.1 และได้รับ "+getitemname(.i3[.i3rand])+"",0;
+		end;
+		} 
+
+		// Rare Item 20%
+		else if (.chance == 30){
+		getitem .i2[.i2rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" เปิดกล่อง Zeny Egg V.1 และได้รับ "+getitemname(.i2[.i2rand])+"",0;
+		end;
+		} 
+
+		// Common Items
+		else {
+		getitem .i1[.i1rand],1;
+		end; 
+		}
+}
+
+-	script	ex_zenyeggv1	-1,{
+mes "[ Zeny Egg Random ]";
+mes "-----------------------------------";
+mes "Item : ^CC6600Zeny Egg V.1^000000";
+mes "-----------------------------------";
+mes "Price : 1,000,000 zeny";
+mes "-----------------------------------";
+mes "^FF0000- ไม่สามารถใช้สกิล DC ของพ่อค้าได้^000000";
+mes "-----------------------------------";
+next;
+mes "[ Zeny Egg Random ]";
+mes "สามารถแลกเปลี่ยนได้ทีละ 1 ครั้ง";
+mes "ครั้งละ 1-10 ใบเท่านั้น";
+next;
+menu
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCZeny Egg V.1^000000 1 ฟอง",zeny01,
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCZeny Egg V.1^000000 5 ฟอง",zeny02,
+"^339900->^000000 แลกเปลี่ยนไอเทม ^6666CCZeny Egg V.1^000000 10 ฟอง",zeny03,
+"^339900->^000000 ดูตัวอย่างไอเทม",exzenyegg,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+zeny01: 
+if (zeny<1000000) goto nohave;
+mes "[ Zeny Egg Random ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+set zeny,zeny -1000000;
+getitem 60010,1;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Zeny Egg V.1 1 ฟอง สำเร็จ",0;
+end;
+
+zeny02: 
+if (zeny<5000000) goto nohave;
+mes "[ Zeny Egg Random ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+set zeny,zeny -5000000;
+getitem 60010,5;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Zeny Egg V.1 5 ฟอง สำเร็จ",0;
+end;
+
+zeny03: 
+if (zeny<10000000) goto nohave;
+mes "[ Zeny Egg Random ]";
+mes "การแลกเปลี่ยนสำเร็จ.";
+set zeny,zeny -10000000;
+getitem 60010,10;
+announce "นักฟาร์ม "+strcharinfo(0)+" ได้ทำการแลกไอเทม Zeny Egg V.1 10 ฟอง สำเร็จ",0;
+end;
+
+exzenyegg:
+callfunc "Shop_QQ","QQ_Zenyeggv1",1;
+end;
+
+nogo:
+end;
+
+nohave:
+mes "[ Zeny Egg Random ]";
+mes "เหมือนว่าท่านมีของมาไม่ครบนะ.";  
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "Zeny Egg V.1", 0;
+end;
+}
+
+morocc,154,137,5	duplicate(ex_zenyeggv1)	Zeny Egg#03	570

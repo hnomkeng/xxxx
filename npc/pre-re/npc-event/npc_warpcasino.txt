@@ -1,0 +1,117 @@
+morocc,224,103,0	script	 #casino	723,1,1,{
+mes "[ Lucky Room ]";
+mes "ท่านต้องการเข้าไปห้องแห่งความสุข";
+mes "อย่างนั้นหรอ";
+mes "ท่านต้องจ่ายข้ามา ^FF00005,000^000000 Zeny";
+next;
+menu
+"ใช่..ข้ามีเงิน พาข้าเข้าไปที่นั่น",letgo,
+"ไม่ดีกว่า..ข้าไม่มีเงิน",nogo;
+
+letgo:
+if (zeny<5000) { mes "[ Lucky Room ]";	mes "ข้าว่าท่านมีเงินไม่เพียงพอนะ..";  close; }
+set zeny,zeny -5000;
+warp "start_a01",58,91; end;
+end;
+
+
+nogo:
+mes "[ Lucky Room ]";
+mes "ไว้โอกาสหน้าแล้วกันนะ";
+end;
+}
+
+//morocc,197,66,0	warp	casino01	1,1,alde_gld,184,199
+
+start_a01,58,98,4	script	 กลับจุดเซฟ#casinoload	723,{
+mes "[ Return Save Point ]";
+mes "ท่านต้องการกลับจุดเซฟอย่างงั้นสินะ";
+next;
+menu
+"ใช่..",letgo1;
+
+letgo1:
+atcommand "@load";
+end;
+
+}
+
+//alde_gld,187,200,4	script	Casino Guard#01	707,{ end; }
+//alde_gld,180,200,5	script	Casino Guard#02	707,{ end; }
+//morocc,200,67,5	script	Casino Guard#03	707,{ end; }
+//morocc,196,63,5	script	Casino Guard#04	707,{ end; }
+
+
+
+//morocc,203,68,4	script	 #Lucky	857,{
+end;
+
+OnInit:
+waitingroom "<- Lucky Room ->", 0;
+end;
+}
+
+turbo_room,95,117,5	script	Kafra Express::Lucky#01	114,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	callfunc "F_Kafra",5,6,1,130,0;
+
+	M_Save:
+		savepoint "turbo_room",99,99;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+-	script	luckysup	-1,{
+mes "[ Buff Support ]";
+mes "สวัสดีจ้า ท่านคือ ^FF0000"+strcharinfo(0)+",^000000";
+mes "มีอะไรให้ข้าช่วยอย่างนั้นหรือ ?";
+next;
+menu 
+"^339900->^000000 รับบัพฟรี Heal & AB Lv.5",he01;
+
+he01:
+mes "[ Buff Support ]";
+mes "ท่านจะได้รับบัพ ";
+mes "Heal AB Lv.5 นาน 15 นาที";
+mes "";
+callfunc "luckybuff";
+end;
+}
+
+function	script	luckybuff	{
+set .@delay, 0;	// ดีเลย์การใช้งาน (วินาที)
+set .@cast, 0;	// ระยะเวลาร่าย (วินาที)
+if ( gettimetick(2)-@delay_heal < .@delay )
+dispbottom "[ System ] โปรดรออีก "+(.@delay-(gettimetick(2)-@delay_heal))+" วินาทีถึงจะใช้งานได้อีกครั้ง";
+else {
+//progressbar "0x007000", .@cast;
+set @delay_heal, gettimetick(2);
+sc_end SC_POISON;
+sc_end SC_FREEZE;
+sc_end SC_SLEEP;
+sc_end SC_STAN;
+sc_end SC_STUN;
+sc_end SC_STONE;
+sc_end SC_SILENCE;
+sc_end SC_BLIND;
+sc_end SC_Bleeding;
+sc_end SC_CONFUSION;
+sc_end SC_CURSE;
+sc_end SC_HALLUCINATION;
+sc_end SC_ORCISH;
+sc_start SC_BLESSING,900000,5;
+sc_start SC_INCREASEAGI,900000,5;
+percentheal 100,0; 
+specialeffect2 37;
+specialeffect2 42;
+dispbottom "[ Free Buff ] คุณได้รับ AB Lv.5 นาน 15 นาที";
+end;
+}
+}
+
+turbo_room,91,117,5	duplicate(luckysup)	Buff Support#Lucky1	909
+turbo_room,93,117,5	shop	Tool Dealer#lucky1	93,602:-1

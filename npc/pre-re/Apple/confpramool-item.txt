@@ -1,0 +1,76 @@
+function	script	pramools_config	{
+Start:
+menu "- เพิ่มสินค้าที่จะเริ่มประมูล",additempramools01,
+"- ปิดประมูล รับเงิน หรือ ไอเทม",closepramools1,
+"- ปิดการประมูลแต่เพียงเท่านี้",closepramools2,
+"- กำหนดการเปิด - ปิด ประมูล",closepramools3;
+
+additempramools01:
+mes "กรุณาใส่ Id ของสินค้า";
+input $pramoolsitem01;
+next;
+mes "กรุณาใส่จำนวน ของสินค้า";
+input $pramoolsitem01amount;
+next;
+mes "กรุณาใส่ Id ที่จะนำมาใช้ในการประมูล";
+mes "เช่น TCG / PC / CC";
+input $useitempramools;
+next;
+mes "กรุณาใส่ราคาเปิดประมูล";
+input $startbiterates;
+set $bitratepramools,$startbiterates;
+set $paybiteratepramools,$startbiterates;
+next;
+mes "กรุณาใส่ราคาบิทเรทขั้นต่ำ";
+input $bitratepramools;
+npcshopdelitem "pramoolsshop",501;
+npcshopadditem "pramoolsshop",$pramoolsitem01,$startbiterates;
+close2;
+announce "ขณะนี้ การประมูลสินค้าได้เริ่มต้นขึ้นแล้ว ท่านในอยากร่วมลงประมูล พบได้ที่ กลางมอ ใกล้ พนักงาน พ่อค้านายทุน ครับ",bc_all,0xFFFF00;
+sleep2 3000;
+announce "สินค้าคือ "+getitemname($pramoolsitem01)+" 1 ea",bc_all,0xFFFF00;
+sleep2 3000;
+announce "เปิดในราคา "+$startbiterates+" ea และ บิทครั้งต่อไป ต้องไม่ค่ำกว่า "+($paybiteratepramools+$bitratepramools)+" ea",bc_all,0xFFFF00;
+sleep2 3000;
+announce "เรียนเชิญประมูลได้ที่ กลางมอ เดินลงสะพานไป ใกล้ พ่อค้านายทุน",bc_all,0xFFFF00;
+set $playbiterates,1;
+//enablenpc "pramools";
+end;
+
+closepramools1:
+mes "...";
+close2;
+set $playbiterates,2;
+announce "ขอปิดการประมูลแต่เพียงเท่านี้นะค่ะ ผู้ชนะ กดรับไอเทมที่ NPC ได้เลยนะค่ะ",bc_all,0xFFFF00;
+sleep2 3000;
+announce "อย่าลืมนะค่ะ มีเวลาให้รับคืนประมาณ 1 นาที หากไม่มารับภายในเวลาที่กำหนดจะมีโทษแบนผู้ชนะนะค่ะ",bc_all,0xFFFF00;
+end;
+
+closepramools2:
+if($playerpramools01$ != "null"){atcommand "@block "+$playerpramools01$+"";}
+set $startbiterates,0;
+set $bitratepramools,0;
+set $paybiteratepramools,0;
+set $playerpramools01$,"null";
+set $pramoolsitem01,0;
+set $playbiterates,0;
+set $pramoolsitem01amount,0;
+set $useitempramools,0;
+set $settimepramools,0;
+set $settimepramoolsfinish,0;
+delwaitingroom "pramools";
+waitingroom "[#] pramools [#]",0;
+end;
+
+closepramools3:
+menu "- เปิด Auto ประมูลไว้",oppramools,"- ปิด Auto ประมูลไว้",clpramools;
+
+oppramools:
+set $setpramools,0;
+end;
+clpramools:
+set $setpramools,1;
+end;
+
+end;
+}

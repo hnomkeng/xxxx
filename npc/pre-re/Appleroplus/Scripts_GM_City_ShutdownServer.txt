@@ -1,0 +1,195 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,161,209,4	script	จัดการระบบ GM#01	864,{
+
+	set @gm,getgmlevel();
+	if (@gm <= 50) goto USER;
+	if (@gm >= 90) goto GM;
+
+
+
+	USER:
+	mes "[ จัดการระบบ GM ]";
+    mes "คุณไม่สามารถเข้าถึง NPC นี้ได้!";
+	close;
+
+
+
+	GM:
+	mes "โปรดเลือกหัวข้อจากเมนูด้านล่างค่ะ";
+	next;
+	menu 
+	"^FF0000•^000000 ปิด Server 1ชม.",timeend1,
+	"^FF0000•^000000 ปิด Server ประจำวัน.",timeend2,
+	"^FF0000•^000000 ปิด Server นอกเวลา.",timeend3,
+	"ยกเลิก.",DE;
+
+	timeend1:
+	mes "[ จัดการระบบ GM ]";
+	mes "ท่านต้องการปิดServer หรือไม่";
+	next;
+	menu 
+	"นับถอยหลังก ปิด Server",-,
+	"ยกเลิก",DE;
+
+
+
+	addtimer 1000,"time1::OnTimer1";	//ทางเราจะทำการปิดพักServer ในอีก 2นาที !
+	addtimer 10000,"time1::OnTimer2";	//Server จะเปิด Online ในอีก 1 ชั่วโมงข้างหน้า ค่ะ !
+	addtimer 20000,"time1::OnTimer3";	//ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !
+	addtimer 30000,"time1::OnTimer2";	//Server จะเปิด Online ในอีก 1 ชั่วโมงข้างหน้า ค่ะ !
+	addtimer 40000,"time1::OnTimer3";	//ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !
+	addtimer 60000,"time1::OnTimer4";	//Server จะถูกปิดลงในอีก 1นาทีข้างหน้า !
+	addtimer 70000,"time1::OnTimer2";	//Server จะเปิด Online ในอีก 1 ชั่วโมงข้างหน้า ค่ะ !
+	addtimer 80000,"time1::OnTimer3";	//ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !
+	addtimer 90000,"time1::OnTimer2";	//Server จะเปิด Online ในอีก 1 ชั่วโมงข้างหน้า ค่ะ !
+	addtimer 100000,"time1::OnTimer3";	//ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !
+	addtimer 120000,"time1::OnTimer5";	//ขอบคุณค่ะ เจอกันในอีก 1ชั่วโมงข้างหน้า !
+	addtimer 123000,"time1::OnTimer6";	//@mapexit
+	mes "[ จัดการระบบ GM ]";
+	mes "Server จะถูกปิดภายใน 2 นาที.";
+	close;
+
+
+
+	timeend2:
+	mes "[ จัดการระบบ GM ]";
+	mes "ท่านต้องการปิดServer หรือไม่";
+	next;
+	menu 
+	"^FF0000•^000000 นับถอยหลัง ปิด Server",-,
+	"^FF0000•^000000 ยกเลิก",DE;
+
+
+
+	addtimer 1000,"time2::OnTimer1";	//ทางเราจะทำการปิดพักServer ในอีก 2นาที !
+	addtimer 10000,"time2::OnTimer2";	//Server จะเปิด Online พรุ่งนี้ค่ะ ในเวลาเปิดของ Server ค่ะ !
+	addtimer 20000,"time2::OnTimer3";	//ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !
+	addtimer 30000,"time2::OnTimer2";	//Server จะเปิด Online พรุ่งนี้ค่ะ ในเวลาเปิดของ Server ค่ะ !
+	addtimer 40000,"time2::OnTimer3";	//ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !
+	addtimer 60000,"time2::OnTimer4";	//Server จะถูกปิดลงในอีก 1นาทีข้างหน้า !
+	addtimer 70000,"time2::OnTimer2";	//Server จะเปิด Online พรุ่งนี้ค่ะ ในเวลาเปิดของ Server ค่ะ !
+	addtimer 80000,"time2::OnTimer3";	//ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !
+	addtimer 90000,"time2::OnTimer2";	//Server จะเปิด Online พรุ่งนี้ค่ะ ในเวลาเปิดของ Server ค่ะ !
+	addtimer 100000,"time2::OnTimer3";	//ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !
+	addtimer 120000,"time2::OnTimer5";	//ขอบคุณค่ะ เจอกันในอีก 1ชั่วโมงข้างหน้า !
+	addtimer 123000,"time2::OnTimer6";	//@mapexit
+	mes "[ จัดการระบบ GM ]";
+	mes "Server จะถูกปิดภายใน 2 นาที.";
+	close;
+
+
+
+	timeend3:
+	mes "[ จัดการระบบ GM ]";
+	mes "กรุณาใส่ข้อความในการปิด Server";
+	set @closesv3$,0;
+	input @closesv3$;
+	next;
+	mes "[ จัดการระบบ GM ]";
+	mes "ท่านต้องการปิดServer หรือไม่";
+	next;
+	menu 
+	"^FF0000•^000000 นับถอยหลัง ปิด Server",-,
+	"^FF0000•^000000 ยกเลิก",DE;
+
+
+
+	addtimer 1000,"time3::OnTimer1";
+	addtimer 10000,"time3::OnTimer2";
+	addtimer 20000,"time3::OnTimer3";
+	addtimer 30000,"time3::OnTimer2";
+	addtimer 40000,"time3::OnTimer3";
+	addtimer 60000,"time3::OnTimer4";
+	addtimer 70000,"time3::OnTimer2";
+	addtimer 80000,"time3::OnTimer3";
+	addtimer 90000,"time3::OnTimer2";
+	addtimer 100000,"time3::OnTimer3";
+	addtimer 120000,"time3::OnTimer5";
+	addtimer 123000,"time3::OnTimer6";
+	mes "[ จัดการระบบ GM ]";
+	mes "Server จะถูกปิดภายใน 2 นาที.";
+	mes "ด้วยหมายเหตุ "+@closesv3$+".";
+	close;
+
+
+	DE:
+	mes "[ จัดการระบบ GM ]";
+	mes "สิ่งที่เป็นค่าเดิมซึ่งดีอยู่แล้วควรใช้งานต่อไป";
+	close;
+	}
+
+//=================	time1-6	===================================================================
+-	script	time1	-1,{
+OnTimer1:
+	announce "จัดการระบบ GM: ทางเราจะทำการปิด Server ในอีก 2นาที !",0;
+	end;
+OnTimer2:
+	announce "จัดการระบบ GM: Server จะเปิด Online ในอีก 1 ชั่วโมงข้างหน้า ค่ะ !",0;
+	end;
+OnTimer3:
+	announce "จัดการระบบ GM: ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !",0;
+	end;
+OnTimer4:
+	announce "จัดการระบบ GM: Server จะถูกปิดลงในอีก 1 นาทีข้างหน้า !",0;
+	end;
+OnTimer5:
+	announce "จัดการระบบ GM: ขอบคุณค่ะ เจอกันในอีก 1 ชั่วโมงข้างหน้า !",0;
+	end;
+OnTimer6:
+	atcommand "@mapexit";
+	end;
+}
+//=================	time2-6	===================================================================
+-	script	time2	-1,{
+OnTimer1:
+	announce "จัดการระบบ GM: ทางเราจะทำการปิด Server ในอีก 2นาที !",0;
+	end;
+OnTimer2:
+	announce "จัดการระบบ GM: Server จะเปิด Online พรุ่งนี้ค่ะ ในเวลาเปิดของ Server ค่ะ !",0;
+	end;
+OnTimer3:
+	announce "จัดการระบบ GM: ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !",0;
+	end;
+OnTimer4:
+	announce "จัดการระบบ GM: Server จะถูกปิดลงในอีก 1นาทีข้างหน้า !",0;
+	end;
+OnTimer5:
+	announce "จัดการระบบ GM: ขอบคุณค่ะ เจอกันพรุ่งนี้ค่ะ !",0;
+	end;
+OnTimer6:
+	atcommand "@mapexit";
+end;
+}
+//=================	time3-6	===================================================================
+-	script	time3	-1,{
+OnTimer1:
+	announce "จัดการระบบ GM: ทางเราจะทำการปิด Server ในอีก 2นาที. ด้วยหมายเหตุ "+@closesv3$+" !",0;
+	end;
+OnTimer2:
+	announce "จัดการระบบ GM: ทางเราจะทำการปิด Server ด้วยหมายเหตุ "+@closesv3$+". !",0;
+	end;
+OnTimer3:
+	announce "จัดการระบบ GM: ขอให้ผู้เล่นทุกท่าน Logout ด้วยค่ะ เพื่อความปลอดภัยในข้อมูลตัวละครของท่าน !",0;
+	end;
+OnTimer4:
+	announce "จัดการระบบ GM: Server จะถูกปิดลงในอีก 1นาทีข้างหน้า !",0;
+	end;
+OnTimer5:
+	announce "จัดการระบบ GM: ขอบคุณค่ะ เจอกันตามที่ประกาศนะค่ะ ด้วยหมายเหตุ "+@closesv3$+". !",0;
+	end;
+OnTimer6:
+	atcommand "@mapexit"; 
+	end;
+}

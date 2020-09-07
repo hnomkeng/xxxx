@@ -1,0 +1,65 @@
+// Ex Promotionv1
+-	shop	QQ_Promotionv1	-1,60002:-1,7619:-1,7620:-1,7776:-1,5506:-1,5507:-1,41001:-1,41002:-1
+
+-	script	ex_promotion	-1,{
+mes "[ Promotion ]";
+mes "Item : ^CC6600Promotion Box^000000";
+mes "-----------------------------------";
+mes "ทุกๆการเติมเงิน 50 บาทจะได้รับ ^FF0000Promotion Box^000000 : 1 กล่อง";
+mes "มีโอกาสได้แรร์ไอเทมมากมาย";
+next;
+menu
+"^339900->^000000 ดูตัวอย่างของรางวัล V.1 (เฉพาะแรร์)",reward1,
+"^339900->^000000 ดูตัวอย่างของรางวัล V.2 (เฉพาะแรร์)",reward2,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+reward1:
+callfunc "Shop_QQ","QQ_Promotionv1",1;
+end;
+
+reward2:
+callfunc "Shop_QQ","QQ_Promotionv2",1;
+end;
+
+nogo:
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "ตัวอย่างโปรโมชั่น", 0;
+end;
+}
+
+morocc,129,79,5	duplicate(ex_promotion)	โปรโมชั่นเติมเงิน#01	611
+
+function	script	promotion01	{
+	setarray .i1[1],12208,12209,12210,12211,12212,12215,12216,14527,12221,607,608,14536,14537,14542,14544,984,985,603,617,644; // Common Items
+	set .i1rand,rand(1,20); // Randomize Common Items; just change max amount if you add items
+	setarray .i2[1],7776,5506,5507,7619,7620; // Rare Items
+	set .i2rand,rand(1,5); // Randomize Rare Items; just change max amount if you add items
+	setarray .i3[1],41001,41002; // Super Rare Items
+	set .i3rand,rand(1,2); //Randomize Super Rare Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		// Super Rare Item 5%
+		if (.chance == 5){
+		getitem .i3[.i3rand],1;
+		announce "ผู้เล่น"+strcharinfo(0)+" เปิดกล่อง Promotion Box V.1 และได้รับ "+getitemname(.i3[.i3rand])+"",0;
+		end;
+		} 
+
+		// Rare Item 20%
+		else if (.chance == 20){
+		getitem .i2[.i2rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" เปิดกล่อง Promotion Box V.1 และได้รับ "+getitemname(.i2[.i2rand])+"",0;
+		end;
+		} 
+
+		// Common Items
+		else {
+		getitem .i1[.i1rand],1;
+		end; 
+		}
+}

@@ -1,0 +1,46 @@
+function	script	donatebox	{
+	setarray .i1[1],7776,14156,14158,14169,14170,14178,12103,7338,51003,51004; // Common Items
+	set .i1rand,rand(1,10); // Randomize Common Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		getitem .i1[.i1rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" ได้เปิด Donate Box และได้รับ "+getitemname(.i1[.i1rand])+"",0;
+		end; 
+}
+
+function	script	donatebox300	{
+	setarray .i1[1],7776,14156,14158,14169,14170,14178,12103,7338,2576; // Common Items
+	set .i1rand,rand(1,9); // Randomize Common Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		getitem .i1[.i1rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" ได้เปิด Donate 300 Box และได้รับ "+getitemname(.i1[.i1rand])+"",0;
+		end; 
+}
+
+function	script	donatebox500	{
+	setarray .i1[1],7776,14156,14158,14169,14170,14178,12103,7338,31249,20517; // Common Items
+	set .i1rand,rand(1,10); // Randomize Common Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		getitem .i1[.i1rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" ได้เปิด Donate 500 Box และได้รับ "+getitemname(.i1[.i1rand])+"",0;
+		end; 
+}
+
+function	script	donatebox1000	{
+	setarray .i1[1],7776,14156,14158,14169,14170,14178,12103,7338,31589,18740,20174; // Common Items
+	set .i1rand,rand(1,11); // Randomize Common Items; just change max amount if you add items
+	set .chance, rand(100);
+	
+		getitem .i1[.i1rand],1;
+		announce "ผู้เล่น "+strcharinfo(0)+" ได้เปิด Donate 1000 Box และได้รับ "+getitemname(.i1[.i1rand])+"",0;
+		end; 
+}
+
+function	script	donatebox3000	{
+getitem 39001,1;
+atcommand "@cash 33000";
+announce "ผู้เล่น "+strcharinfo(0)+" ได้เปิด Donate 3000 Box และได้รับ C Decoration of Music",0;
+end; 
+}

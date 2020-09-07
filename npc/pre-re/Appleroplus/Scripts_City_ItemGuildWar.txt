@@ -1,0 +1,525 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	ItemGuild_H1::ITGW1	-1,{
+set @GID,getcastledata("payg_cas04",1);
+if (strcharinfo(0) == getguildmaster(@GID)) {
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "...ท่านเป็นหัวหน้ากิล...";
+mes "ข้าให้ ItemGuildWar สำหรับเจ้า เพราะเจ้าชนะ Guildwar ครั้งนี้ ";
+mes "... อย่าลืมเอาไปแจกลูกกิลล่ะ ...";
+next;
+getitem $@GW1_I1,$@GW1_I1a;
+getitem $@GW1_I2,$@GW1_I2a;
+getitem $@GW1_I3,$@GW1_I3a;
+getitem $@GW1_I4,$@GW1_I4a;
+getitem $@GW1_I5,$@GW1_I5a;
+disablenpc "รับของรางวัล บ้านพาย่อน#01";
+enablenpc "รับของรางวัล บ้านพาย่อน#01b";
+close;
+}
+if (getcharid(2) == @GID) {
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "ข้ารอ หัวหน้ากิลของเจ้า ที่ชื่อ ^5533FF[ "+getguildmaster(@GID)+" ]^000000";
+mes "เจ้าไม่ใช้หัวหน้ากิล ไปสะ";
+close;
+}
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "สำหรับ หัวหน้ากิล ที่ชื่อ ^ff0000[ "+getguildmaster(@GID)+" ]^000000";
+mes "เท่านั้น";
+close;
+}
+//==============================================
+-	script	ItemGuild_H2::ITGW2	-1,{
+set @GID,getcastledata("prtg_cas01",1);
+if (strcharinfo(0) == getguildmaster(@GID)) {
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "...ท่านเป็นหัวหน้ากิล...";
+mes "ข้าให้ ItemGuildWar สำหรับเจ้า เพราะเจ้าชนะ Guildwar ครั้งนี้ ";
+mes "... อย่าลืมเอาไปแจกลูกกิลล่ะ ...";
+next;
+getitem $@GW2_I1,$@GW2_I1a;
+getitem $@GW2_I2,$@GW2_I2a;
+getitem $@GW2_I3,$@GW2_I3a;
+getitem $@GW2_I4,$@GW2_I4a;
+getitem $@GW2_I5,$@GW2_I5a;
+disablenpc "รับของรางวัล บ้านพรอนเทร่า#01";
+enablenpc "รับของรางวัล บ้านพรอนเทร่า#01b";
+close;
+}
+if (getcharid(2) == @GID) {
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "ข้ารอ หัวหน้ากิลของเจ้า ที่ชื่อ ^5533FF[ "+getguildmaster(@GID)+" ]^000000";
+mes "เจ้าไม่ใช้หัวหน้ากิล ไปสะ";
+close;
+}
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "สำหรับ หัวหน้ากิล ที่ชื่อ ^ff0000[ "+getguildmaster(@GID)+" ]^000000";
+mes "เท่านั้น";
+close;
+}
+//==============================================
+-	script	ItemGuild_H3::ITGW3	-1,{
+set @GID,getcastledata("gefg_cas04",1);
+if (strcharinfo(0) == getguildmaster(@GID)) {
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "...ท่านเป็นหัวหน้ากิล...";
+mes "ข้าให้ ItemGuildWar สำหรับเจ้า เพราะเจ้าชนะ Guildwar ครั้งนี้ ";
+mes "... อย่าลืมเอาไปแจกลูกกิลล่ะ ...";
+next;
+getitem $@GW3_I1,$@GW3_I1a;
+getitem $@GW3_I2,$@GW3_I2a;
+getitem $@GW3_I3,$@GW3_I3a;
+getitem $@GW3_I4,$@GW3_I4a;
+getitem $@GW3_I5,$@GW3_I5a;
+disablenpc "รับของรางวัล บ้านกิฟเฟ่น#01";
+enablenpc "รับของรางวัล บ้านกิฟเฟ่น#01b";
+close;
+}
+if (getcharid(2) == @GID) {
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "ข้ารอ หัวหน้ากิลของเจ้า ที่ชื่อ ^5533FF[ "+getguildmaster(@GID)+" ]^000000";
+mes "เจ้าไม่ใช้หัวหน้ากิล ไปสะ";
+close;
+}
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "สำหรับ หัวหน้ากิล ที่ชื่อ ^ff0000[ "+getguildmaster(@GID)+" ]^000000";
+mes "เท่านั้น";
+close;
+}
+//==============================================
+-	script	ItemGuild_H4::ITGW4	-1,{
+set @GID,getcastledata("aldeg_cas04",1);
+if (strcharinfo(0) == getguildmaster(@GID)) {
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "...ท่านเป็นหัวหน้ากิล...";
+mes "ข้าให้ ItemGuildWar สำหรับเจ้า เพราะเจ้าชนะ Guildwar ครั้งนี้ ";
+mes "... อย่าลืมเอาไปแจกลูกกิลล่ะ ...";
+next;
+getitem $@GW4_I1,$@GW4_I1a;
+getitem $@GW4_I2,$@GW4_I2a;
+getitem $@GW4_I3,$@GW4_I3a;
+getitem $@GW4_I4,$@GW4_I4a;
+getitem $@GW4_I5,$@GW4_I5a;
+disablenpc "รับของรางวัล บ้านนากา#01";
+enablenpc "รับของรางวัล บ้านนากา#01b";
+close;
+}
+if (getcharid(2) == @GID) {
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "ข้ารอ หัวหน้ากิลของเจ้า ที่ชื่อ ^5533FF[ "+getguildmaster(@GID)+" ]^000000";
+mes "เจ้าไม่ใช้หัวหน้ากิล ไปสะ";
+close;
+}
+mes "[ ^0000FFItemGuildWar^000000 ]";
+mes "สำหรับ หัวหน้ากิล ที่ชื่อ ^ff0000[ "+getguildmaster(@GID)+" ]^000000";
+mes "เท่านั้น";
+close;
+}
+//==============================================
+-	script	Visible	-1,{
+end;
+OnInit:
+disablenpc "รับของรางวัล บ้านพาย่อน#01";
+disablenpc "รับของรางวัล บ้านกิฟเฟ่น#01";
+disablenpc "รับของรางวัล บ้านพรอนเทร่า#01";
+disablenpc "รับของรางวัล บ้านนากา#01";
+disablenpc "WarpsWar1#01";
+disablenpc "WarpsWar2#02";
+disablenpc "WarpsWar3#03";
+disablenpc "WarpsWar4#04";
+end;
+OnAgitEnd:
+enablenpc "รับของรางวัล บ้านพาย่อน#01";
+enablenpc "รับของรางวัล บ้านกิฟเฟ่น#01";
+enablenpc "รับของรางวัล บ้านพรอนเทร่า#01";
+enablenpc "รับของรางวัล บ้านนากา#01";
+disablenpc "รับของรางวัล บ้านพาย่อน#01b";
+disablenpc "รับของรางวัล บ้านกิฟเฟ่น#01b";
+disablenpc "รับของรางวัล บ้านพรอนเทร่า#01b";
+disablenpc "รับของรางวัล บ้านนากา#01b";
+disablenpc "WarpsWar1#01";
+disablenpc "WarpsWar2#02";
+disablenpc "WarpsWar3#03";
+disablenpc "WarpsWar4#04";
+end;
+OnAgitStart:
+disablenpc "รับของรางวัล บ้านพาย่อน#01";
+disablenpc "รับของรางวัล บ้านกิฟเฟ่น#01";
+disablenpc "รับของรางวัล บ้านพรอนเทร่า#01";
+disablenpc "รับของรางวัล บ้านนากา#01";
+enablenpc "รับของรางวัล บ้านพาย่อน#01b";
+enablenpc "รับของรางวัล บ้านกิฟเฟ่น#01b";
+enablenpc "รับของรางวัล บ้านพรอนเทร่า#01b";
+enablenpc "รับของรางวัล บ้านนากา#01b";
+enablenpc "WarpsWar1#01";
+enablenpc "WarpsWar2#02";
+enablenpc "WarpsWar3#03";
+enablenpc "WarpsWar4#04";
+end;
+}
+
+//กำหนดไอเทมรางวัล
+-	script	SetupGuildWar	-1,{
+end;
+OnInit:
+
+// Item Guildwar 1
+set $@GW1_I1,61001; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW1_I1a,2000; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW1_I2,61206; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW1_I2a,20; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW1_I3,61203; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW1_I3a,20; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW1_I4,61204; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW1_I4a,30; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW1_I5,61007; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW1_I5a,3; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+
+// Item GuildWar 2
+set $@GW2_I1,61001; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW2_I1a,2000; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW2_I2,61206; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW2_I2a,20; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW2_I3,61203; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW2_I3a,20; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW2_I4,61204; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW2_I4a,30; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW2_I5,61007; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW2_I5a,3; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+
+// Item GuildWar 3
+set $@GW3_I1,61001; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW3_I1a,2000; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW3_I2,61206; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW3_I2a,20; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW3_I3,61203; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW3_I3a,20; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW3_I4,61204; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW3_I4a,30; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW3_I5,61007; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW3_I5a,3; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+
+// Item GuildWar 4
+set $@GW4_I1,61001; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW4_I1a,2000; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW4_I2,61206; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW4_I2a,20; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW4_I3,61203; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW4_I3a,20; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW4_I4,61204; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW4_I4a,30; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+set $@GW4_I5,61007; // รหัสไอเทมกิลวอ หลัง 1 ที่จะแจก
+set $@GW4_I5a,3; // จำนวนไอเทมกิลวอหลัง 1 ที่จะได้ ถ้าไม่ต้องการให้ใส่ตงนี้ 0
+
+end;
+}
+
+//วาปเข้ากิลวอ
+//==============================================
+prontera,162,246,0	script	WarpsWar1#01	45,1,1,{ 
+mes "สงครามชิงปราสาท เปิดทุกวัน จันทร์ อังคาร พุธ วันพฤหัสบดี ศุกร์ เสาร์ อาทิตย์";
+mes "สวัสดีคุณ :^FF0000 "+strcharinfo(0)+" ^000000 ";
+mes "ต้องการเข้าร่วมสงครามชิงปราสาทไหม?.";
+menu 
+"^FF0000•^000000 เข้าร่วมบ้านพาย่อน ^000000",Mm_GVG1, //payg_cas04
+"^FF0000•^000000 เข้าชมสงครามบ้านพาย่อน ^000000",Mm_duGVG1, //payg_cas04
+"^FF0000•^000000 ออก ",Lcancel23;
+
+Mm_GVG1:
+warp "pay_gld",140,160;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าร่วมสงครามชิงปราสาท บ้านพาย่อน ขณะนี้มีผู้เล่นหน้าบ้าน  [ "+getmapusers("pay_gld")+" ] คน และในบ้าน   [ "+getmapusers("payg_cas04")+" ] คน ",0;
+close;
+
+Mm_duGVG1:
+setaudience 1,"payg_cas04";
+warp "pay_gld",140,160;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าชมสงครามชิงปราสาท บ้านพาย่อน ขณะนี้มีผู้เล่นหน้าบ้าน  [ "+getmapusers("pay_gld")+" ] คน และในบ้าน   [ "+getmapusers("payg_cas04")+" ] คน ",0;
+close;
+
+Lcancel23:
+close;
+end;
+}
+
+prontera,164,246,4	script	บ้านพาย่อน#01	11116,{
+end;
+OnInit:
+do {
+set .gvgtotal, getmapusers("pay_gld") + getmapusers("payg_cas04");
+delwaitingroom;
+waitingroom "บ้านพาย่อน " +.gvgtotal+" คน",0;
+sleep 1000; // Evites super infinity loop
+} while(1); // End Loop
+end;
+}
+//==============================================
+prontera,162,252,0	script	WarpsWar2#02	45,1,1,{
+mes "สงครามชิงปราสาท เปิดทุกวัน จันทร์ อังคาร พุธ วันพฤหัสบดี ศุกร์ เสาร์ อาทิตย์";
+mes "สวัสดีคุณ :^FF0000 "+strcharinfo(0)+" ^000000 ";
+mes "ต้องการเข้าร่วมสงครามชิงปราสาทไหม?.";
+menu 
+"^FF0000•^000000 เข้าร่วมบ้านพรอนเทร่า ^000000",Mm_GVG2, //prtg_cas01
+"^FF0000•^000000 เข้าชมสงครามบ้านพรอนเทร่า ^000000",Mm_duGVG2, //prtg_cas01
+"^FF0000•^000000 ออก ",Lcancel23;
+
+Mm_GVG2:
+warp "prt_gld",134,65;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าร่วมสงครามชิงปราสาท บ้านพรอนเทร่า ขณะนี้มีผู้เล่นหน้าบ้าน  [ "+getmapusers("prt_gld")+" ] คน และในบ้าน   [ "+getmapusers("prtg_cas01")+" ] คน ",0;
+close;
+
+Mm_duGVG2:
+setaudience 1,"prtg_cas01";
+warp "prt_gld",134,65;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าชมสงครามชิงปราสาท บ้านพรอนเทร่า ขณะนี้มีผู้เล่นหน้าบ้าน  [ "+getmapusers("prt_gld")+" ] คน และในบ้าน   [ "+getmapusers("prtg_cas01")+" ] คน ",0;
+close;
+
+Lcancel23:
+close;
+end;
+}
+
+prontera,164,252,4	script	บ้านพรอนเทร่า#01	11116,{
+end;
+OnInit:
+do {
+set .gvgtotal, getmapusers("prt_gld") + getmapusers("prtg_cas01");
+delwaitingroom;
+waitingroom "บ้านพรอนเทร่า " +.gvgtotal+" คน",0;
+sleep 1000; // Evites super infinity loop
+} while(1); // End Loop
+end;
+}
+//==============================================
+prontera,162,258,0	script	WarpsWar3#03	45,1,1,{
+mes "สงครามชิงปราสาท เปิดทุกวัน จันทร์ อังคาร พุธ วันพฤหัสบดี ศุกร์ เสาร์ อาทิตย์";
+mes "สวัสดีคุณ :^FF0000 "+strcharinfo(0)+" ^000000 ";
+mes "ต้องการเข้าร่วมสงครามชิงปราสาทไหม?.";
+menu 
+"^FF0000•^000000 เข้าร่วมบ้านกิฟเฟ่น ^000000",Mm_GVG3, //gefg_cas04
+"^FF0000•^000000 เข้าชมสงครามบ้านกิฟเฟ่น ^000000",Mm_duGVG3, //aldeg_cas04
+"^FF0000•^000000 ออก ",Lcancel23;
+
+Mm_GVG3:
+warp "gef_fild13",193,278;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าร่วมสงครามชิงปราสาท บ้านกิฟเฟ่น ขณะนี้มีผู้เล่นหน้าบ้าน  [ "+getmapusers("gef_fild13")+" ] คน และในบ้าน   [ "+getmapusers("gefg_cas04")+" ] คน ",0;
+close;
+
+Mm_duGVG3:
+setaudience 1,"gefg_cas04";
+warp "gef_fild13",193,278;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าชมสงครามชิงปราสาท บ้านพรอนเทร่า ขณะนี้มีผู้เล่นหน้าบ้าน  [ "+getmapusers("gef_fild13")+" ] คน และในบ้าน   [ "+getmapusers("gefg_cas04")+" ] คน ",0;
+close;
+
+Lcancel23:
+close;
+end;
+}
+
+prontera,164,258,4	script	บ้านกิฟเฟ่น#01	11116,{
+end;
+OnInit:
+do {
+set .gvgtotal, getmapusers("gef_fild13") + getmapusers("gefg_cas04");
+delwaitingroom;
+waitingroom "บ้านกิฟเฟ่น " +.gvgtotal+" คน",0;
+sleep 1000; // Evites super infinity loop
+} while(1); // End Loop
+end;
+}
+//==============================================
+prontera,162,264,0	script	WarpsWar4#04	45,1,1,{
+mes "สงครามชิงปราสาท เปิดทุกวัน จันทร์ อังคาร พุธ วันพฤหัสบดี ศุกร์ เสาร์ อาทิตย์";
+mes "สวัสดีคุณ :^FF0000 "+strcharinfo(0)+" ^000000 ";
+mes "ต้องการเข้าร่วมสงครามชิงปราสาทไหม?.";
+menu 
+"^FF0000•^000000 เข้าร่วมบ้านนากา ^000000",Mm_GVG4, //aldeg_cas04
+"^FF0000•^000000 เข้าชมสงครามบ้านนากา ^000000",Mm_duGVG4, //aldeg_cas04
+"^FF0000•^000000 ออก ",Lcancel23;
+
+Mm_GVG4:
+warp "alde_gld",239,242;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าร่วมสงครามชิงปราสาท บ้านนากา ขณะนี้มีผู้เล่นหน้าบ้าน  [ "+getmapusers("alde_gld")+" ] คน และในบ้าน   [ "+getmapusers("aldeg_cas04")+" ] คน ",0;
+close;
+
+Mm_duGVG4:
+setaudience 1,"aldeg_cas04";
+warp "alde_gld",239,242;
+announce "[ระบบ] ขณะนี้ คุณ [ "+strcharinfo(0)+" ] ได้เข้าชมสงครามชิงปราสาท บ้านนากา ขณะนี้มีผู้เล่นหน้าบ้าน  [ "+getmapusers("alde_gld")+" ] คน และในบ้าน   [ "+getmapusers("gefg_cas04")+" ] คน ",0;
+close;
+
+Lcancel23:
+close;
+end;
+}
+
+prontera,164,264,4	script	บ้านนากา#04	11116,{
+end;
+OnInit:
+do {
+set .gvgtotal, getmapusers("alde_gld") + getmapusers("gefg_cas04");
+delwaitingroom;
+waitingroom "บ้านนากา " +.gvgtotal+" คน",0;
+sleep 1000; // Evites super infinity loop
+} while(1); // End Loop
+end;
+}
+//============================================================
+//============================================================
+//============================================================
+// ธงกิลเดิม
+//รายละเอียเพิ่มเติมควรไปปิดของเดิมที่ 
+//npc\guild payg_cas04.txt
+/*
+// Guild Flag (Town)
+//============================================================
+payon,118,322,4	duplicate(InsideFlagsPA4)	Sacred Altar#11	722
+payon,166,165,3	duplicate(InsideFlagsPA4)	Sacred Altar#12	722
+*/
+//npc\guild prtg_cas01.txt
+/*
+// Guild Flag (Town)
+//============================================================
+prontera,155,190,4	duplicate(InsideFlagsPR1)	Kriemhild#15	722
+*/
+//npc\guild gefg_cas04.txt
+/*
+// Guild Flag (Town)
+//============================================================
+geffen,127,130,7	duplicate(InsideFlagsG4)	Bergel#11	722
+*/
+//npc\guild aldeg_cas04.txt
+/*
+// Guild Flag (Town)
+//============================================================
+aldebaran,131,97,4	duplicate(InsideFlagsA4)	Wuerzburg#20	722
+*/
+// และควรปิดธงกิลเดิมของพรอนทั้งหมดด้วยไม่ให้บัง NPC แต่ง ที่
+//npc\guild prtg_cas01.txt
+/*
+// Guild Flag (Town)
+//============================================================
+prontera,155,190,4	duplicate(InsideFlagsPR1)	Kriemhild#15	722
+*/
+//npc\guild prtg_cas02.txt
+/*
+// Guild Flag (Town)
+//============================================================
+prontera,146,194,3	duplicate(InsideFlagsPR2)	Swanhild#17	722
+*/
+//npc\guild prtg_cas03.txt
+/*
+// Guild Flag (Town)
+//============================================================
+prontera,143,203,2	duplicate(InsideFlagsPR3)	Fadhgridh#15	722
+*/
+//npc\guild prtg_cas04.txt
+/*
+// Guild Flag (Town)
+//============================================================
+prontera,167,203,6	duplicate(InsideFlagsPR4)	Skoegul#15	722
+*/
+//npc\guild prtg_cas05.txt
+/*
+// Guild Flag (Town)
+//============================================================
+prontera,165,194,5	duplicate(InsideFlagsPR5)	Gondul#13	722
+*/
+//============================================================
+//============================================================
+//============================================================
+prontera,174,262,4	script	มหาสงครามศักดิ์สิทธิ์#01	11116,{
+end;
+//OnInit:
+//waitingroom "มหาสงครามศักดิ์สิทธิ์",0;
+//end;
+}
+prontera,180,262,4	script	มอนเตอร์ทั่วไป#01	11116,{
+end;
+//OnInit:
+//waitingroom "มอนเตอร์ทั่วไป",0;
+//end;
+}
+prontera,186,262,4	script	มอนเตอร์ธาตุ#01	11116,{
+end;
+//OnInit:
+//waitingroom "มอนเตอร์ธาตุ",0;
+//end;
+}
+prontera,194,254,4	script	มอนเตอร์กึ่งมนุษย์#01	11116,{
+end;
+//OnInit:
+//waitingroom "มอนเตอร์กึ่งมนุษย์",0;
+//end;
+}
+prontera,194,249,4	script	มอนเตอร์มินิบอส#01	11116,{
+end;
+//OnInit:
+//waitingroom "มอนเตอร์มินิบอส",0;
+//end;
+}
+prontera,194,243,4	script	มอนเตอร์บอส#01	11116,{
+end;
+//OnInit:
+//waitingroom "มอนเตอร์บอส",0;
+//end;
+}
+
+-	script	ITGW1b	-1,{
+mes "มหาสงครามศักดิ์สิทธิ์";
+mes "ยังไม่ถึงช่วงเวลา";
+mes "ที่จะรับของรางวัลได้";
+end;	
+}
+-	script	ITGW2b	-1,{
+mes "มหาสงครามศักดิ์สิทธิ์";
+mes "ยังไม่ถึงช่วงเวลา";
+mes "ที่จะรับของรางวัลได้";
+end;	
+}
+-	script	ITGW3b	-1,{
+mes "มหาสงครามศักดิ์สิทธิ์";
+mes "ยังไม่ถึงช่วงเวลา";
+mes "ที่จะรับของรางวัลได้";
+end;	
+}
+-	script	ITGW4b	-1,{
+mes "มหาสงครามศักดิ์สิทธิ์";
+mes "ยังไม่ถึงช่วงเวลา";
+mes "ที่จะรับของรางวัลได้";
+end;	
+}
+
+
+// ธงกิลใหม่
+prontera,162,249,4	duplicate(InsideFlagsPA4)	บ้านพาย่อน#1	722
+prontera,162,255,4	duplicate(InsideFlagsPR1)	บ้านพรอนเทร่า#1	722
+prontera,162,261,4	duplicate(InsideFlagsG4)	บ้านกิฟเฟ่น#1	722
+prontera,162,267,4	duplicate(InsideFlagsA4)	บ้านนากา#1	722
+
+//แจกของกิลวอ
+prontera,159,249,4	duplicate(ITGW1)	รับของรางวัล บ้านพาย่อน#01	11009
+prontera,159,255,4	duplicate(ITGW2)	รับของรางวัล บ้านพรอนเทร่า#01	11010
+prontera,159,261,4	duplicate(ITGW3)	รับของรางวัล บ้านกิฟเฟ่น#01	11011
+prontera,159,267,4	duplicate(ITGW4)	รับของรางวัล บ้านนากา#01	11012
+prontera,159,249,4	duplicate(ITGW1b)	รับของรางวัล บ้านพาย่อน#01b	11009
+prontera,159,255,4	duplicate(ITGW2b)	รับของรางวัล บ้านพรอนเทร่า#01b	11010
+prontera,159,261,4	duplicate(ITGW3b)	รับของรางวัล บ้านกิฟเฟ่น#01b	11011
+prontera,159,267,4	duplicate(ITGW4b)	รับของรางวัล บ้านนากา#01b	11012
+// ทดสอบดาเมจ
+prontera,174,260,0	monster	มหาสงครามศักดิ์สิทธิ์	3300,1,0,0,1
+prontera,180,260,0	monster	มอนเตอร์ทั่วไป	3301,1,0,0,1
+prontera,186,260,0	monster	มอนเตอร์ธาตุ	3302,1,0,0,1
+prontera,192,254,0	monster	มอนเตอร์กึ่งมนุษย์	3303,1,0,0,1
+prontera,192,249,0	monster	มอนเตอร์มินิบอส	3304,1,0,0,1
+prontera,192,243,0	monster	มอนเตอร์บอส	3305,1,0,0,1

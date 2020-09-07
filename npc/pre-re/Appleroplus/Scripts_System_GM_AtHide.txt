@@ -1,0 +1,30 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	atcmd_hide	-1,{
+OnInit:
+	bindatcmd "hide",strnpcinfo(3)+"::OnAtcommand",99,99;
+	end;
+OnAtcommand:
+
+	if(checkoption(OPTION_INVISIBLE) == 1){
+		specialeffect2 587;
+		specialeffect2 589;
+		setoption OPTION_INVISIBLE,0;
+	} else {	
+		specialeffect2 587;
+		specialeffect2 589;
+		setoption OPTION_INVISIBLE,1;
+	}
+	end;
+}

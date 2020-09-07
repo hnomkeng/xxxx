@@ -1,0 +1,40 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,148,259,4	script	เลเวลตันรับรางวัล	112,{
+
+mes "สวัสดีค่ะ ยินดีต้อนรับสู่เลเวลตันรับรางวัล";
+mes "ของผู้เล่นใหม่ ที่ เลเวลถึง 185 ";
+mes "รับทันที่ 3,000,000 เซนี่";
+mes "และ Cash Coin 30 ea.";
+next;
+if(BaseLevel < 174) {
+mes @npcname$;
+mes "เสียใจด้วย, คุณจะต้องมี เลเวล ถึง 175 ก่อนนะค่ะ";
+close;
+}
+if(#reditem){
+mes "คุณได้รับไปแล้วนะค่ะ";
+close;
+}
+getitem 61001,30;
+set Zeny, Zeny + 3000000;
+set #reditem, 1;
+mes "ยินดีด้วยคุณได้รับ 3,000,000 เซนี่";
+mes "และ Cash Coin 30 ea.";
+close;
+end; 
+//OnInit: 
+//waitingroom "เลเวลตันรับรางวัล",0; 
+//end; 
+}

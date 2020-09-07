@@ -1,0 +1,465 @@
+
+// Kafra Storage.
+//============================================================ 
+function	script	F_CashStore	{
+	cutin "kafra_01",2;
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ดิฉันจะเปิดคลังเก็บของให้เดี๋ยวนี้ค่ะ";
+	close2;
+	openstorage;
+	cutin "",255;
+	return;
+}
+// Level99BOX
+//============================================================ 
+function	script	Level99BOX	{
+setarray .BoxItems[0],29342,29318,29319,29311;
+set .Random, rand( getarraysize( .BoxItems ) );
+getitem .BoxItems[ .Random ], 1;
+announce "คุณ ["+strcharinfo(0)+"] ได้เปิดกล่องสุ่มคอสตูม Lv. 99 ได้รับไอเทม ["+getitemname(.BoxItems[ .Random ])+"] ยินดีด้วยค่ะ!",0;
+end;
+}
+// Level99BOX
+//============================================================ 
+function	script	Level98BOX	{
+setarray .BoxItems[0],31001,31006,12909,12909,12909,12908,12908,12908,12907,12907,12907,12906,12906,12906,12905,12905,12905,617,617,617,617,617,617,617,617,12905,12905,12411,731,731,731,969,12900,12900,12900,12902,12902,12902,12902,12902,12909,18539,5358,5341,5342,29578,29324,29570,5325,5820,5515,5514;
+set .Random, rand( getarraysize( .BoxItems ) );
+getitem .BoxItems[ .Random ], 1;
+end;	
+}
+
+// Level99BOX
+//============================================================ 
+function	script	Level97BOX	{
+setarray .BoxItems[0],31001,31006,12909,12909,12909,12908,12908,12908,12907,12907,12907,12906,12906,12906,12905,12905,12905,12905,12905,12905,12905,12905,12411,12411,12411,12411,12900,12900,12900,12900,12900,12900,12900,12900,12900,12900,12900,12902,12902,12902,12902,12902,12902,12902,12902,12902,12902,12902,12909,5376,5359,5801,29595,29556,29557,29558,29560,29525,29611,29056,29617,29566,29567,29568,29569,29570,29571,12900,12900,12900,12902,12902,12902,12902,12902,12909,18539,5358,5341,5342,29578,29324,29570,5325,5820,5515,5514,26886,26902,26922,26933,26922;
+set .Random, rand( getarraysize( .BoxItems ) );
+getitem .BoxItems[ .Random ], 1;
+end;	
+}
+// RabbitBOX I
+//============================================================ 
+function	script	RabbitBoxI	{
+setarray .RBIItem[0],12208,14592,12210,12209,13721;
+setarray .RBIItemRare[0],22496,22465,22403,22471,22494;
+
+	set .rand, rand(0,100);
+	switch(.rand){
+		case 50: case 69: case 7:
+			set .@getitem, .RBIItemRare[rand(0,getarraysize(.RBIItemRare)-1)];
+			getitem .@getitem, 1;
+			announce "RabbitBox I : คุณ ["+strcharinfo(0)+"] ได้รับไอเทม ["+getitemname(.@getitem)+"] ยินดีด้วยค่ะ!",0,0xC45EE7;
+		break;
+	
+		default:
+			getitem .RBIItem[rand(0,getarraysize(.RBIItem)-1)], 1;
+		break;
+	}
+
+}
+// RabbitBOX II
+//============================================================ 
+function	script	RabbitBoxII	{
+setarray .RBIIItem[0],12208,14592,12210,12209,13721;
+setarray .RBIIItemRare[0],22455,29218,29531,22455,29531;
+
+	set .rand, rand(0,200);
+	switch(.rand){
+		case 33: case 69: case 77: case 88: case 125:
+			set .@getitem, .RBIIItemRare[rand(0,getarraysize(.RBIIItemRare)-1)];
+			getitem .@getitem, 1;
+			announce "RabbitBox II : คุณ ["+strcharinfo(0)+"] ได้รับไอเทม ["+getitemname(.@getitem)+"] ยินดีด้วยค่ะ!",0,0xC45EE7;
+		break;
+	
+		default:
+			getitem .RBIIItem[rand(0,getarraysize(.RBIIItem)-1)], 1;
+		break;
+	}
+
+}
+// Call Verify Annouce 3000฿
+//============================================================ 
+function	script	F_Verify	{
+	mes "^0066FF[ ระบบยืนยันตน ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "ท่านสามารถประกาศข้อความ";
+	mes "เพื่อแสดงตนว่าถือครองไอเทม";
+	mes "สร้อยประกัน ชิ้นนี้ได้..";
+	mes "โดยเราจะคิดค่าบริการครั้งละ";
+	mes "100,000Zeny ตกลงไหมคะ ?";
+	next;
+	switch(select("^ff0000•^000000 ตกลง , จัดไป!:^ff0000•^000000 ไม่ , ล่ะ")) {
+case 1:
+	if (Zeny >= 100000) {
+	set Zeny,zeny-100000;
+	announce "[ ระบบยืนยันตน ] คุณ "+strcharinfo(0)+" ได้ถือครองไอเทม สร้อยประกัน ราคา 3,000฿ ค่ะ ~ ",bc_area,0x7AC142;
+	close;
+		} else {
+			mes "^0066FF[ ระบบยืนยันตน ]^000000";
+			mes "ขออภัยค่ะ..";
+			mes "ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+			mes "ต้องมีเงินมากว่า 100,001z ขึ้นไป";
+			mes "จึงจะใช้งานได้ค่ะ ~";
+			close;
+		}
+case 2:
+	mes "^0066FF[ Weight UP Book ]^000000";
+	mes "เรียกใช้งานข้าได้ทุกเมื่อ...";
+	mes "หากเจ้าต้องการแสดงตน...";
+	close;
+	}
+}
+
+// Call Verify Annouce 5000฿
+//============================================================ 
+function	script	F_Verify1	{
+	mes "^0066FF[ ระบบยืนยันตน ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "ท่านสามารถประกาศข้อความ";
+	mes "เพื่อแสดงตนว่าถือครองไอเทม";
+	mes "สร้อยประกัน ชิ้นนี้ได้..";
+	mes "โดยเราจะคิดค่าบริการครั้งละ";
+	mes "100,000Zeny ตกลงไหมคะ ?";
+	next;
+	switch(select("^ff0000•^000000 ตกลง , จัดไป!:^ff0000•^000000 ไม่ , ล่ะ")) {
+case 1:
+	if (Zeny >= 100000) {
+	set Zeny,zeny-100000;
+	announce "[ ระบบยืนยันตน ] คุณ "+strcharinfo(0)+" ได้ถือครองไอเทม สร้อยประกัน ราคา 5,000฿ ค่ะ ~ ",bc_area,0xC45EE7;
+	close;
+		} else {
+			mes "^0066FF[ ระบบยืนยันตน ]^000000";
+			mes "ขออภัยค่ะ..";
+			mes "ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+			mes "ต้องมีเงินมากว่า 100,001z ขึ้นไป";
+			mes "จึงจะใช้งานได้ค่ะ ~";
+			close;
+		}
+case 2:
+	mes "^0066FF[ Weight UP Book ]^000000";
+	mes "เรียกใช้งานข้าได้ทุกเมื่อ...";
+	mes "หากเจ้าต้องการแสดงตน...";
+	close;
+	}
+}
+
+// Call Verify Annouce 10,000฿
+//============================================================ 
+function	script	F_Verify2	{
+	mes "^0066FF[ ระบบยืนยันตน ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "ท่านสามารถประกาศข้อความ";
+	mes "เพื่อแสดงตนว่าถือครองไอเทม";
+	mes "สร้อยประกัน ชิ้นนี้ได้..";
+	mes "โดยเราจะคิดค่าบริการครั้งละ";
+	mes "100,000Zeny ตกลงไหมคะ ?";
+	next;
+	switch(select("^ff0000•^000000 ตกลง , จัดไป!:^ff0000•^000000 ไม่ , ล่ะ")) {
+case 1:
+	if (Zeny >= 100000) {
+	set Zeny,zeny-100000;
+	announce "[ ระบบยืนยันตน ] คุณ "+strcharinfo(0)+" ได้ถือครองไอเทม สร้อยประกัน ราคา 10,000฿ ค่ะ ~ ",bc_area,0xFF6700;
+	close;
+		} else {
+			mes "^0066FF[ ระบบยืนยันตน ]^000000";
+			mes "ขออภัยค่ะ..";
+			mes "ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+			mes "ต้องมีเงินมากว่า 100,001z ขึ้นไป";
+			mes "จึงจะใช้งานได้ค่ะ ~";
+			close;
+		}
+case 2:
+	mes "^0066FF[ Weight UP Book ]^000000";
+	mes "เรียกใช้งานข้าได้ทุกเมื่อ...";
+	mes "หากเจ้าต้องการแสดงตน...";
+	close;
+	}
+}
+// Weight UP Book
+//============================================================ 
+function	script	F_WeightUp	{
+	mes "^0066FF[ Weight UP Book ]^000000";
+	mes "สกิล Enlarge Weight Limit";
+	mes "สกิลนี้ทำให้ถือของได้หนักขึ้น";
+	mes "น้ำหนัก +200 / 1 ครั้ง ที่ใช้งาน";
+	mes "1 ตัวละครสามารถเรียนได้ 10 ครั้ง ";
+	mes "เข้าใจตรงกันนะ ? ";
+	next;
+	switch(select("^ff0000•^000000 เยส..เซอร์!! ลุย !:^ff0000•^000000 ช้าก่อน..")) {
+	case 1:
+		if (gympassmemory < 10) {
+			set .@add_carry,gympassmemory + 1;
+			set .@remain_carry,10 - .@add_carry;
+			if (countitem(22300) > 0) {
+				mes "^0066FF[ Weight UP Book ]^000000";
+				mes "เตรียมตัวให้พร้อม..";
+				mes "ทำใจให้ สงบ เตรียมรับพลัง!!";
+				mes "1 2 3 4 . . .";
+				next;
+				mes "^0066FF[ Weight UP Book ]^000000";
+				mes "ฮึ๊บ ฮึ๊บ ~";
+				specialeffect2 EF_EARTHSPIKE;
+				specialeffect2 EF_DEVIL;
+				specialeffect2 EF_COIN;
+				specialeffect2 EF_SIGHTRASHER;
+				next;
+				mes "^0066FF[ Weight UP Book ]^000000";
+				mes "ยินดีด้วย !!";
+				mes "เจ้าแข็งแกร่งขึ้นแล้วเด็กน้อย";
+				mes "หวังว่าเจ้าจะมีความสุข";
+				mes "กับพลังที่เพิ่มขึ้นของเจ้า !!";
+				delitem 22300,1;
+				set gympassmemory,.@add_carry;
+				skill "ALL_INCCARRY",.@add_carry,0;
+				close;
+			}
+			else {
+				mes "^0066FF[ Weight UP Book ]^000000";
+				mes "เห้ ! ช้าก่อนเจ้าเด็กน้อย";
+				mes "เจ้าคิดว่าข้าโง่ใช่ไหม หืม ?";
+				mes "ข้าว่าเจ้าทำหนังสือหล่นหายไปนะ!";
+				end;
+			}
+		} else {
+			mes "^0066FF[ Weight UP Book ]^000000";
+			mes "ท่านไม่สามารถเรียนได้แล้ว";
+			mes "ท่านเรียนไปถึงเลเวล 10 แล้ว";
+			close;
+		}
+case 2:
+	mes "^0066FF[ Weight UP Book ]^000000";
+	mes "โอเค..";
+	mes "ไว้เจ้าพร้อมเมื่อไหร่";
+	mes "เรียกใช้งานข้าได้ทุกเมื่อ...";
+	close;
+	}
+}
+
+// Giant Fly Wing
+//============================================================ 
+function	script	F_CashPartyCall	{
+	warp "Random",0,0;
+	if(getpartyleader(getcharid(1),2) == getcharid(0)) {
+		getmapxy .@mapl$, .@xl, .@yl, 0;
+		warpparty .@mapl$, .@xl, .@yl, getcharid(1), .@mapl$;
+	}
+	return;
+}
+
+/*
+function	script	F_CashPartyCall2	{
+	warp "Random",0,0;
+	if(getpartyleader(getcharid(1),2) == getcharid(0)) {
+		getmapxy .@mapl$, .@xl, .@yl, 0;
+		getpartymember getcharid(1),2;
+		set .@partymembercount, $@partymembercount;
+		copyarray .@partymemberaid[0], $@partymemberaid[0], .@partymembercount;
+		for(set .@i, 0; .@i < .@partymembercount; set .@i, .@i + 1) {
+			if(attachrid(.@partymemberaid[.@i])) {
+				if(strcharinfo(3) == .@mapl$ && HP > 0) { 
+					warp .@mapl$, .@xl, .@yl;
+				}
+			}
+		}
+	}
+	return;
+}
+*/
+
+// - -  > HiSo Neuralizer : Kelberwitz Blade's
+//============================================================ 
+function	script	F_CashReset	{
+	mes "^0066FF[ Reset Skill ]^000000";
+	mes "ระบบรีสกิลสวัสดีครับ ~";
+	mes "หากท่านต้องการที่จะรีสกิล";
+	mes "ท่านจะต้องทำการปลดอุปกรณ์";
+	mes "นก รถเข็น หรือ ปิโกะออกก่อน ";
+	mes "เข้าใจตรงกันนะ ? ";
+	next;
+	switch(select("^ff0000•^000000 โอเค !! ข้าพร้อมแล้ว !:^ff0000•^000000 ช้าก่อน..")) {
+	case 1:
+		if (Weight < 1) {
+			if (checkriding() || checkfalcon() || checkcart()) {
+			mes "^0066FF[ Reset Skill ]^000000";
+			mes "โปรดตรวจสอบให้แน่ใจว่า..";
+			mes "ท่านได้ปลดอุปกรณ์ที่ใช้งานอยู่";
+			mes "ออกหมเทุกอย่างแล้ว !!";
+			close;
+		}
+			if (countitem(12213) > 0) {
+				mes "^0066FF[ Reset Skill ]^000000";
+				mes "ข้าได้ทำการรีเซทสกิล !!";
+				mes "ให้กับท่านเรียบร้อยแล้ว ~";
+				mes "หวังว่าเจ้าจะมีความสุข";
+				mes "ก่อนอัพสกิลใหม่ก็เช็คดี ๆ ล่ะ !!";
+				delitem 12213,1;
+				resetskill;
+				sc_end SC_ALL;
+				close;
+			}
+			else {
+				mes "^0066FF[ Reset Skill ]^000000";
+				mes "เห้ ! ช้าก่อนเจ้าเด็กน้อย";
+				mes "เจ้าคิดว่าข้าโง่ใช่ไหม หืม ?";
+				mes "ข้าว่าเจ้าทำหนังสือหล่นหายไปนะ!";
+				end;
+			}
+		} else {
+			mes "^0066FF[ Reset Skill ]^000000";
+			mes "โปรดตรวจสอบให้แน่ใจว่า..";
+			mes "น้ำหนักตัวท่านเป็น 0 แล้ว";
+			mes "ดูเหมือนว่าท่านยังไม่พร้อมนะ";
+			close;
+		}
+case 2:
+	mes "^0066FF[ Reset Skill ]^000000";
+	mes "โอเค..";
+	mes "ไว้เจ้าพร้อมเมื่อไหร่";
+	mes "เรียกใช้งานข้าได้ทุกเมื่อ...";
+	close;
+	}
+}
+// Dungeon Teleport Scroll
+//============================================================ 
+function	script	F_CashDungeon	{
+	switch(select("Mjolnir Dead Pit:Payon Dungeon:Toy Dungeon:Glast Heim Underprison:Izlude Dungeon:Turtle Island Dungeon:Clock Tower 3f:Clock Tower B3f:Glast Heim Culvert 2f:Sphinx Dungeon 4f:Inside Pyramid 4f:Prontera Culvert 3f:Amatsu Dungeon 2f"))
+	{
+	case 1: warp "mjo_dun02",80,297; delitem 14527,1; end;	// Mjolnir Dead Pit
+	case 2: warp "pay_dun03",155,150; delitem 14527,1; end;	// Payon Caves
+	case 3: warp "xmas_dun01",133,130; delitem 14527,1; end;	// Toy Factory
+	case 4: warp "gl_prison",140,15; delitem 14527,1; end;	// Glast Heim Prison
+	case 5: warp "iz_dun02",350,335; delitem 14527,1; end;	// Izlude Undersea Tunnel
+	case 6: warp "tur_dun02",165,30; delitem 14527,1; end;	// Turtle Island
+	case 7: warp "alde_dun03",264,19; delitem 14527,1; end;	// Clocktower 3F
+	case 8: warp "c_tower3",34,42; delitem 14527,1; end;	// Clocktower B3F
+	case 9: warp "gl_sew02",292,295; delitem 14527,1; end;	// Glast Heim Sewers 2F
+	case 10: warp "in_sphinx4",120,120; delitem 14527,1; end;	// Sphinx Dungeon 4F
+	case 11: warp "moc_pryd04",195,4; delitem 14527,1; end;	// Pyramid Dungeon 4F
+	case 12: warp "prt_sewb3",20,175; delitem 14527,1; end;	// Prontera Culverts 3F
+	case 13: warp "ama_dun02",0,0; delitem 14527,1; end;	// Amatsu 2F
+	}
+	return;
+}
+
+// Coloured Butterly Wings
+//============================================================ 
+// - Warp player to differents Citys acording to the Scroll
+// - Arg(0) = type of scroll.
+function	script	F_CashCity	{
+	switch(getarg(0))
+	{
+		// Yellow
+		case 1: switch(select("Prontera:Geffen:Payon:Morroc:Aldebaran:Alberta")) {
+			case 1: warp "prontera",0,0; end;
+			case 2: warp "geffen",0,0; end;
+			case 3: warp "payon",0,0; end;
+			case 4: warp "morocc",0,0; end;
+			case 5: warp "aldebaran",0,0; end;
+			case 6: warp "alberta",0,0; end;
+			}
+		break;
+		// Green
+		case 2: switch(select("Juno:Lighthalzen:Einbroch:Hugel")) {
+			case 1: warp "yuno",0,0; end;
+			case 2: warp "lighthalzen",0,0; end;
+			case 3: warp "einbroch",0,0; end;
+			case 4: warp "hugel",0,0; end;
+			}
+		break;
+		// Red
+		case 3: switch(select("Rachel:Veins")) {
+			case 1: warp "rachel",0,0; end;
+			case 2: warp "veins",0,0; end;
+			}
+		break;
+		// Blue
+		case 4: switch(select("Ayothaya:Amatsu:Louyang:Gonryun")) {
+			case 1: warp "ayothaya",0,0; end;
+			case 2: warp "amatsu",0,0; end;
+			case 3: warp "louyang",0,0; end;
+			case 4: warp "gonryun",0,0; end;
+			}
+		break;
+	}
+	return;
+}
+
+// Teleport Scrolls
+//============================================================ 
+function	script	F_CashTele	{
+	switch(getarg(0)) {
+	case 1:
+		switch(select("Savepoint:Prontera:Geffen:Al de Baran:Izlude")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "prontera",167,68; end;
+		case 3: warp "geffen",121,147; end;
+		case 4: warp "aldebaran",168,112; end;
+		case 5: warp "izlude",128,136; end;
+		}
+	case 2:
+		switch(select("Savepoint:Payon:Alberta:Morroc:Comodo")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "payon",172,101; end;
+		case 3: warp "alberta",117,56; end;
+		case 4: warp "morocc",165,255; end;
+		case 5: warp "comodo",193,148; end;
+		}
+	case 3:
+		switch(select("Savepoint:Louyang:Amatsu:Kunlun Field:Ayothaya")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "louyang",216,40; end;
+		case 3: warp "amatsu",197,83; end;
+		case 4: warp "gon_fild01",258,82; end;
+		case 5:warp "ayothaya",149,71; end;
+		}
+	case 4:
+		switch(select("Savepoint:Lutie Field:Umbala:Niflheim")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "xmas_fild01",78,68; end;
+		case 3: warp "umbala",100,154; end;
+		case 4: warp "niflheim",49,146; end;
+		}
+	case 5:
+		switch(select("Savepoint:Juno:Einbroch:Lighthalzen:Hugel")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "yuno",158,39; end;
+		case 3: warp "einbroch",240,200; end;
+		case 4: warp "lighthalzen",214,311; end;
+		case 5: warp "hugel",95,43; end;
+		}
+	case 6:
+		switch(select("Savepoint:Rachel:Veins")) {
+		case 1: warp "SavePoint",0,0; end;
+		case 2: warp "rachel",115,125; end;
+		case 3: warp "veins",205,102; end;
+		}
+	}
+	return;
+}
+
+function	script	F_CashSeigeTele	{
+	switch(select("Neuschwanstein (aldeg_cas01):Hohenschwangau (aldeg_cas02):Nuernberg (aldeg_cas03):Wuerzburg (aldeg_cas04):Rothenburg (aldeg_cas05):Repherion (gefg_cas01):Eeyorbriggar (gefg_cas02):Yesnelph (gefg_cas03):Bergel (gefg_cas04):Mersetzdeitz (gefg_cas05):Bright Arbor (payg_cas01):Sacred Altar (payg_cas02):Holy Shadow (payg_cas03):Scarlet Palace (payg_cas04):Bamboo Grove Hill (payg_cas05):Kriemhild (prtg_cas01):Swanhild (prtg_cas02):Fadhgridh (prtg_cas03):Skoegul (prtg_cas04):Gondul (prtg_cas05)")) {
+	case 1: warp "alde_gld",48,91; end;
+	case 2: warp "alde_gld",103,245; end;
+	case 3: warp "alde_gld",142,87; end;
+	case 4: warp "alde_gld",236,243; end;
+	case 5: warp "alde_gld",269,90; end;
+	case 6: warp "gef_fild13",217,75; end;
+	case 7: warp "gef_fild13",307,237; end;
+	case 8: warp "gef_fild13",77,297; end;
+	case 9: warp "gef_fild13",190,276; end;
+	case 10: warp "gef_fild13",312,91; end;
+	case 11: warp "pay_gld",121,232; end;
+	case 12: warp "pay_gld",297,116; end;
+	case 13: warp "pay_gld",318,293; end;
+	case 14: warp "pay_gld",140,164; end;
+	case 15: warp "pay_gld",202,264; end;
+	case 16: warp "prt_gld",141,64; end;
+	case 17: warp "prt_gld",240,131; end;
+	case 18: warp "prt_gld",153,133; end;
+	case 19: warp "prt_gld",126,240; end;
+	case 20: warp "prt_gld",195,240; end;
+	}
+	return;
+}

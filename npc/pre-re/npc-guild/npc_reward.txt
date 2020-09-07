@@ -1,0 +1,86 @@
+-	script	ex_gvgreward	-1,{
+mes "[ รางวัลกิลด์วอร์ ]";
+mes "Item : ^CC6600GvG Reward Box^000000";
+mes "-----------------------------------";
+mes "ได้บ้าน 1 หลังจะได้รับ ";
+mes "^FF0000GvG Reward Box^000000 : 10 กล่อง";
+mes "-----------------------------------";
+next;
+mes "[ รางวัลกิลด์วอร์ ]";
+mes "โอกาสการดรอปไอเทมทั่วไป 100%";
+mes "-----------------------------------";
+mes "^CC6600Yggdrasil Berry^000000 : 1 ea";
+mes "^CC6600Yggdrasil Seed^000000 : 1 ea";
+mes "^CC66003carat Diamond^000000 : 1 ea";
+mes "^CC6600Old Card Album^000000 : 1 ea";
+mes "^CC6600Oridecon^000000 : 1 ea";
+mes "^CC6600Elunium^000000 : 1 ea";
+next;
+mes "[ รางวัลกิลด์วอร์ ]";
+mes "โอกาสการดรอปไอเทมสวมใส่ 80%";
+mes "-----------------------------------";
+mes "^CC6600Chain Mail [1]^000000 : 1 ea";
+mes "^CC6600Muffler [1]^000000 : 1 ea";
+mes "^CC6600Manteau [1]^000000 : 1 ea";
+mes "^CC6600Shoes [1]^000000 : 1 ea";
+mes "^CC6600Boots [1]^000000 : 1 ea";
+mes "^CC6600Buckler [1]^000000 : 1 ea";
+mes "^CC6600Guard [1]^000000 : 1 ea";
+mes "^CC6600Shield [1]^000000 : 1 ea";
+next;
+mes "[ รางวัลกิลด์วอร์ ]";
+mes "โอกาสการดรอปไอเทมแรร์ 5%";
+mes "-----------------------------------";
+mes "^FF0000Heavenly Maiden Robe [1]^000000 : 1 ea";
+mes "^FF0000Pauldron [1]^000000 : 1 ea";
+mes "^FF0000Full Plate [1]^000000 : 1 ea";
+mes "^FF0000Lord's Clothes [1]^000000 : 1 ea";
+mes "^FF0000Pole Axe [1]^000000 : 1 ea";
+mes "^FF0000War Axe [1]^000000 : 1 ea";
+mes "^FF0000Muramasa^000000 : 1 ea";
+mes "^FF0000Soul Staff^000000 : 1 ea";
+mes "^FF0000Earring [1]^000000 : 1 ea";
+mes "^FF0000Brooch [1]^000000 : 1 ea";
+mes "^FF0000Rosary [1]^000000 : 1 ea";
+mes "^FF0000Glove [1]^000000 : 1 ea";
+mes "^FF0000Necklace [1]^000000 : 1 ea";
+mes "^FF0000Ring [1]^000000 : 1 ea";
+mes "^FF0000Safety Ring^000000 : 1 ea";
+next;
+mes "[ รางวัลกิลด์วอร์ ]";
+mes "โอกาสการดรอปไอเทมแรร์ 1%";
+mes "-----------------------------------";
+mes "^FF0000Emblem of the Sun God^000000 : 1 ea";
+mes "^FF0000Majestic Goat^000000 : 1 ea";
+mes "^FF0000Angel Wing^000000 : 1 ea";
+mes "^FF0000Helm of Angel^000000 : 1 ea";
+mes "^FF0000Tiara^000000 : 1 ea";
+mes "^FF0000Crown^000000 : 1 ea";
+mes "^FF0000Spiky Band^000000 : 1 ea";
+mes "^FF0000Sphinx Hat^000000 : 1 ea";
+mes "^FF0000Jewel Crown^000000 : 1 ea";
+mes "^FF0000Corsair^000000 : 1 ea";
+mes "^FF0000Grand Circlet^000000 : 1 ea";
+mes "^FF0000Spiritual Ring^000000 : 1 ea";
+next;
+menu
+"^339900->^000000 รับรางวัลกิดล์วอร์",reward,
+"^FF0000->^000000 ยกเลิก",nogo;
+
+reward:
+mes "[ รางวัลกิลด์วอร์ ]";
+mes "โปรดติดต่อ..^FF0000Admin^000000 เพื่อรับรางวัลกิลด์วอร์";
+end;
+
+nogo:
+end;
+
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "รางวัลกิลด์วอร์", 0;
+end;
+}
+
+//morocc,183,110,5	duplicate(ex_gvgreward)	รางวัลกิลด์วอร์#01	611

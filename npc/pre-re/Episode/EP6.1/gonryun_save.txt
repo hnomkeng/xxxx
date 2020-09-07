@@ -1,0 +1,29 @@
+gonryun,157,122,5	script	Kafra Express::gonryun	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSetIz";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "ยินดีต้อนรับสู่บริษัท Kafra";
+	mes "เราจะอยู่กับท่านทุกที่ที่ท่านไปถึง";
+	mes "มีอะไรที่ข้าช่วยท่านได้บ้าง?";
+	callfunc "F_Kafra",5,0,0,30,750;
+
+	M_Save:
+		savepoint "gonryun",159,113;
+		callfunc "F_KafEnd",0,1,"in the city of gonryun";
+}
+
+gonryun,162,57,4	script	 กลับมอรอค#gonryun	100,{
+mes "[ Return To Morroc ]";
+mes "ท่านต้องการกลับไปยังมอรอคงั้นหรอ ?";
+next;
+menu
+"ใช่..พาข้ากลับไป",letgo1;
+
+letgo1:
+warp "morocc",159,134;
+end;
+
+OnInit:
+waitingroom "กลับ Morroc", 0;
+end;
+}

@@ -1,0 +1,49 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+function	script	RandomTEST5	{
+setarray .OTH_ITEMLIST[0],5305,5779,5503,5294,5254,2259,5223,5279,2214,5024,5186,5621,5304,5288,5140,5314,5519,5636,5290,5287,5229,5352,5324,5554,5538,5505,5463,5571,5609,5172,5334,5594;
+setarray .COSN_ITEMLIST[0],5388,5376,5325,5269,5283,5137,5362,5361;
+setarray .RARE_ITEMLIST[0],5671;
+setarray .min_amount,1;
+setarray .max_amount,1;
+ 
+    set .rand, rand(0,100);
+    switch(.rand){
+        case 1:
+            set .Random, rand( getarraysize( .RARE_ITEMLIST ) );
+            getitem .RARE_ITEMLIST[ .Random ], 1;
+            announce "ผู้เล่น ["+strcharinfo(0)+"] ได้ทำการเปิด Classic Box ได้รับ "+getitemname(.RARE_ITEMLIST[ .Random ])+" ea.!!!",bc_all,0xCC00CC;
+        break;
+       
+       
+        case 2:
+            set .Random, rand( getarraysize( .COSN_ITEMLIST ) );
+            getitem .COSN_ITEMLIST[ .Random ], 1;
+            announce "ผู้เล่น ["+strcharinfo(0)+"] ได้ทำการเปิด Classic Box ได้รับ "+getitemname(.COSN_ITEMLIST[ .Random ])+" ea.!!",bc_all,0xFF9900;
+        break;
+       
+        default:
+            set .@amount,rand( .min_amount[.@random],.max_amount[.@random] );
+            set .Random, rand( getarraysize( .OTH_ITEMLIST ) );
+        if ( .OTH_ITEMLIST[ .Random ] == 0 || .OTH_ITEMLIST[ .Random ] == 0 ) {
+            getitem .OTH_ITEMLIST[ .Random ], 1;
+			dispbottom "คุณ ["+strcharinfo(0)+"] ได้ทำการเปิด Classic Box ได้รับ "+getitemname(.OTH_ITEMLIST[ .Random ])+" ea.";
+            } else {
+            getitem .OTH_ITEMLIST[ .Random ], .@amount;
+			dispbottom "คุณ ["+strcharinfo(0)+"] ได้ทำการเปิด Classic Box ได้รับ "+getitemname(.OTH_ITEMLIST[ .Random ])+" จำนวน "+.@amount+" ea.";
+        }
+        break;
+    }
+ 
+}

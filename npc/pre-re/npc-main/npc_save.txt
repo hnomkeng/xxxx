@@ -1,0 +1,403 @@
+// Kafra
+// - - > บริเวณ กลางมอ
+morocc,158,97,4	script	Kafra Express::Morocc#01	117,{
+	cutin "kafra_05",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",156,46;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+// - - > บริเวณ บนมอ
+morocc,160,258,4	script	Kafra Express::Morocc#02	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",160,252;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+morocc,163,258,4	duplicate(Heal)	Buff Support#mor2	703
+
+// Add By Fongbeer
+morocc,286,210,4	script	Kafra Express::Morocc#03	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",286,204;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,289,210,4	duplicate(Heal)	Buff Support#mor3	703
+
+
+morocc,36,175,4	script	Kafra Express::Morocc#04	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",36,169;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,39,175,4	duplicate(Heal)	Buff Support#mor4	703
+
+
+morocc,231,45,4	script	Kafra Express::Morocc#05	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",221,37;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,234,45,4	duplicate(Heal)	Buff Support#mor5	703
+
+
+morocc,230,154,4	script	Kafra Express::Morocc#06	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",230,148;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,233,154,4	duplicate(Heal)	Buff Support#mor6	703
+
+
+morocc,85,177,4	script	Kafra Express::Morocc#07	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",88,168;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,88,177,4	duplicate(Heal)	Buff Support#mor7	703
+
+
+morocc,47,75,4	script	Kafra Express::Morocc#08	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",47,69;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,50,75,4	duplicate(Heal)	Buff Support#mor8	703
+
+morocc,186,42,4	script	Kafra Express::Morocc#09	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",198,44;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,189,42,4	duplicate(Heal)	Buff Support#mor9	703
+
+morocc,265,34,4	script	Kafra Express::Morocc#10	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",252,34;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,268,34,4	duplicate(Heal)	Buff Support#mor10	703
+
+morocc,280,76,4	script	Kafra Express::Morocc#11	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",272,73;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,283,76,4	duplicate(Heal)	Buff Support#mor11	703
+
+morocc,210,108,4	script	Kafra Express::Morocc#12	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",210,102;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,213,108,4	duplicate(Heal)	Buff Support#mor12	703
+
+morocc,244,234,4	script	Kafra Express::Morocc#13	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",244,225;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,247,234,4	duplicate(Heal)	Buff Support#mor13	703
+
+morocc,282,297,4	script	Kafra Express::Morocc#14	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",281,288;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,285,297,4	duplicate(Heal)	Buff Support#mor14	703
+
+morocc,232,296,4	script	Kafra Express::Morocc#15	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",227,288;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,235,296,4	duplicate(Heal)	Buff Support#mor15	703
+
+morocc,178,292,4	script	Kafra Express::Morocc#16	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",188,284;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+new_1-3,89,33,5	duplicate(Heal)	Buff Support#mor16	703
+
+morocc,86,291,4	script	Kafra Express::Morocc#17	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",87,281;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,89,291,4	duplicate(Heal)	Buff Support#mor17	703
+
+morocc,88,225,4	script	Kafra Express::Morocc#17	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",89,214;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,91,225,4	duplicate(Heal)	Buff Support#mor17	703
+
+morocc,79,128,4	script	Kafra Express::Morocc#18	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",77,115;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,82,128,4	duplicate(Heal)	Buff Support#mor18	703
+
+morocc,105,112,4	script	Kafra Express::Morocc#19	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",98,102;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,108,112,4	duplicate(Heal)	Buff Support#mor19 	703
+
+morocc,25,40,4	script	Kafra Express::Morocc#20	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",27,30;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,28,40,4	duplicate(Heal)	Buff Support#mor20	703
+
+morocc,108,37,4	script	Kafra Express::Morocc#21	117,{
+	cutin "kafra_04",2;
+	callfunc "F_KafSetMoc";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "สวัสดีค่ะ ท่าน , ^FF0000"+strcharinfo(0)+" ^000000"; 
+	mes "Kafra Corporation ยินดีให้บริการ";
+	mes "ต้องการให้ข้าช่วยเหลืออะไรไหมคะ ?";
+	//callfunc "F_Kafra",5,0,0,60,930;
+	callfunc "F_Kafra",5,0,0,60,930;
+
+	M_Save:
+		savepoint "morocc",116,30;
+		callfunc "F_KafEnd",0,1,"Morroc";
+}
+
+morocc,111,37,4	duplicate(Heal)	Buff Support#mor21	703
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

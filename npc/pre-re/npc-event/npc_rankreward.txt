@@ -1,0 +1,29 @@
+morocc,172,73,4	script	Alchemist Reward	749,{
+mes "[ Alchemist Reward ]";
+mes "Rank : ^6666CCAlchemist^000000 ( ทำยา )";
+mes "อันดับ 1 : ^33CC00500^000000 บาท";
+mes "อันดับ 2 : ^3366FF1,000^000000 CC";
+mes "อันดับ 3 : ^3366FF500^000000 CC";
+mes "คำสั่งเช็คอันดับ : /achemist ";
+mes "หมดเขต : ^FF000010-02-2020^000000 เวลา ^FF000013.00^000000 น.";
+close;
+
+OnInit:
+waitingroom "รางวัลอันดับทำยา", 0;
+end;
+}
+
+morocc,172,69,4	script	Blacksmith Reward	826,{
+mes "[ Blacksmith Reward ]";
+mes "Rank : ^6666CCBlacksmith^000000 ( ตีดาบ )";
+mes "อันดับ 1 : ^33CC00500^000000 บาท";
+mes "อันดับ 2 : ^3366FF1,000^000000 CC";
+mes "อันดับ 3 : ^3366FF500^000000 CC";
+mes "คำสั่งเช็คอันดับ : /blacksmith ";
+mes "หมดเขต : ^FF000010-02-2020^000000 เวลา ^FF000013.00^000000 น.";
+close;
+
+OnInit:
+waitingroom "รางวัลอันดับตีดาบ", 0;
+end;
+}

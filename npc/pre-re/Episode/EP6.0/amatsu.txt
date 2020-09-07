@@ -1,0 +1,37 @@
+amatsu,242,285,5	script	Kafra Express::amatsu	115,{
+	cutin "kafra_03",2;
+	callfunc "F_KafSetIz";
+	mes "^0066FF[ Kafra Express ]^000000";
+	mes "ยินดีต้อนรับสู่บริษัท Kafra";
+	mes "เราจะอยู่กับท่านทุกที่ที่ท่านไปถึง";
+	mes "มีอะไรที่ข้าช่วยท่านได้บ้าง?";
+	callfunc "F_Kafra",5,0,0,30,750;
+
+	M_Save:
+		savepoint "amatsu",247,281;
+		callfunc "F_KafEnd",0,1,"in the city of amatsu";
+}
+
+amatsu,255,285,4	script	 กลับมอรอค#amatsu	100,{
+mes "[ Return To Morroc ]";
+mes "ท่านต้องการกลับไปยังมอรอคงั้นหรอ ?";
+next;
+menu
+"ใช่..พาข้ากลับไป",letgo1;
+
+letgo1:
+warp "morocc",159,134;
+end;
+
+OnInit:
+waitingroom "กลับจุดเซฟ", 0;
+end;
+}
+
+amatsu,247,291,0	warp	ama_tofild	1,1,ama_fild01,77,34
+ama_fild01,77,29,0	warp	ama_totown	1,1,amatsu,247,286
+
+ama_dun01,235,144,0	warp	ama_dun1-1	1,1,ama_dun02,33,40
+ama_dun02,30,40,0	warp	ama_dun1-2	1,1,ama_dun01,232,144
+ama_dun02,196,123,0	warp	ama_dun2-1	1,1,ama_dun03,120,12
+ama_dun03,120,9,0	warp	ama_dun2-2	1,1,ama_dun02,196,120

@@ -1,0 +1,70 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,154,195,4	script	แนะนำพื้นที่เมือง#01	745,{
+
+mes "เราจะพาท่านไปสถานที่ต่างๆในเมือง";
+mes "โปรดเลือกสถานที่ต่างๆที่จะไป";
+next;
+menu 
+"^FF0000•^000000 พื้นที่กิจกรรม",Event,
+"^FF0000•^000000 พื้นที่สงครามชิงปราสาท",Woe,
+"^FF0000•^000000 พื้นที่ดันเจี้ยน",Dungeon,
+"^FF0000•^000000 พื้นที่ตกปลา ขุดแร่",Fishing,
+"^FF0000•^000000 พื้นที่แต่งงาน",Merry,
+"^FF0000•^000000 พื้นที่ตีบวก",Refine,
+"^FF0000•^000000 พื้นที่เทสดาเมจ",Damage,
+"^FF0000•^000000 พื้นที่เควส",Quest,
+"^FF0000•^000000 พื้นที่อัพเกรดไอเทม",Upgrade,
+"^FF0000•^000000 ยกเลิก",cancel;
+
+Event:
+warp "prontera",155,279;
+close;
+
+Woe:
+warp "prontera",155,150;
+close;
+
+Dungeon:
+warp "prontera",155,279;
+close;
+
+Fishing:
+warp "prontera",155,325;
+close;
+
+Merry:
+warp "prontera",155,279;
+close;
+
+Refine:
+warp "prontera",132,203;
+close;
+
+Damage:
+warp "prontera",183,253;
+close;
+
+Quest:
+warp "prontera",155,240;
+close;
+
+Upgrade:
+warp "prontera",155,240;
+close;
+
+cancel:
+close;
+
+}

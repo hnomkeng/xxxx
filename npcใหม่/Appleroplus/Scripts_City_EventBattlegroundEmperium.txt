@@ -1,0 +1,139 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+//= 1.2
+//==============================================
+-	script	bg_emp#control	-1,{
+OnInit:
+	.minplayer2start = 8;       // ผู้เล่นขั้นต่ำที่จะเริ่มต้น (เช่น. ถ้า 3vs3, ให้เซ็ทค่าเป็น 3)
+	.eventlasting    = 20*60;  // ระยะเวลา อีเว้นท์ ก่อนที่จะตั้งค่าอัตโนมัติ (20  นาที * วินาที)
+	setarray .rewarditem[0],   // รางวัลสำหรับทีมที่ชนะการแข่งขัน: <ไอเทม ไอดี>,<จำนวน>,...
+		61001, 50;
+	end;
+OnStart:
+	if ( getwaitingroomstate( 0, .rednpcname$ ) < .minplayer2start || getwaitingroomstate( 0, .bluenpcname$ ) < .minplayer2start )
+		end;
+
+	// สร้าง สนามรบสมรภูมิ Battleground และ ทีม
+	.red = waitingroom2bg( "-", 0,0, strnpcinfo(0)+"::OnRedQuit", strnpcinfo(0)+"::OnRedDead", .rednpcname$ );
+	.blue = waitingroom2bg( "-", 0,0, strnpcinfo(0)+"::OnBlueQuit", strnpcinfo(0)+"::OnBlueDead", .bluenpcname$ );
+	delwaitingroom .rednpcname$;
+	delwaitingroom .bluenpcname$;
+	setwall "bat_a01", 164,347, 6, 4, 0, "bg_emp_town_red";
+	setwall "bat_a01", 154,51, 6, 4, 0, "bg_emp_town_blue";
+	bg_warp .red, "bat_a01", 171,346;
+	bg_warp .blue, "bat_a01", 162,50;
+
+	// ดีเรย์ ก่อนการแข่งขั้นจะเริ่มต้นขึ้น
+	sleep 6000;
+	mapannounce "bat_a01", "กฏระเบียบที่มีความเรียบง่าย คือ ทีมแรกที่ทำลาย Emperium จะเป็นฝ่ายชนะ!", bc_map;
+	sleep 3000;
+	for ( .@i = 5; .@i > 0; --.@i ) {
+		mapannounce "bat_a01", "["+ .@i +"]", bc_map;
+		sleep 1000;
+	}
+	mapannounce "bat_a01", "Start!", bc_map;
+
+	// จุดเกิด Emperiums
+	bg_monster .red,"bat_a01",171,346, "--ja--",1915, strnpcinfo(3)+"::OnRedDown";
+	bg_monster .blue,"bat_a01",162,50, "--ja--",1914, strnpcinfo(3)+"::OnBlueDown";
+	delwall "bg_emp_town_red";
+	delwall "bg_emp_town_blue";
+
+	//ระยะเวลาการแข่งขัน
+	sleep .eventlasting * 1000;
+
+	// สิ้นสุดการแข่งขัน, สมรภูมิ Battleground, รีเซ็ท NPCs
+	killmonster "bat_a01", strnpcinfo(3)+"::OnRedDown";
+	killmonster "bat_a01", strnpcinfo(3)+"::OnBlueDown";
+	if ( .winside ) {
+		mapannounce "bat_a01", "- "+( (.winside == .red)? "Red" : "Blue" )+" ทีมได้รับชัยชนะ! -", bc_map;
+		bg_get_data .winside, 1;
+		for ( .@i = 0; .@i < $@arenamemberscount; ++.@i )
+			getitem .rewarditem[0], .rewarditem[1], $@arenamembers[.@i];
+	} else
+		mapannounce "bat_a01", "- การแข่งขั้นสิ้นสุดลงด้วยการเสมอกัน! -", bc_map;
+	sleep 5000;
+	bg_warp .red, "prontera", 155,182;
+	bg_warp .blue, "prontera", 158,182;
+	bg_destroy .red;
+	bg_destroy .blue;
+	.winside = 0;
+	donpcevent .rednpcname$ +"::OnStart";
+	donpcevent .bluenpcname$ +"::OnStart";
+	end;
+
+// Emperium destroyed
+OnRedDown:  callsub L_EmpDown, "Red", .blue;
+OnBlueDown: callsub L_EmpDown, "Blue", .red;
+L_EmpDown:
+	mapannounce "bat_a01", strcharinfo(0) +" ได้ทำลาย  Emperium ทีม "+ getarg(0) +" เรียบร้อยแล้ว.", bc_map;
+	.winside = getarg(1);
+	awake strnpcinfo(0);
+	end;
+
+// "OnDeath" event
+OnRedDead:  callsub L_Dead, 157,347;
+OnBlueDead: callsub L_Dead, 142,51;
+L_Dead:
+	warp "bat_a01", getarg(0), getarg(1);
+	percentheal 100,100;
+	end;
+
+// "OnQuit" event
+OnRedQuit:  callsub L_Quit, .red, "Red";
+OnBlueQuit: callsub L_Quit, .blue, "Blue";
+L_Quit:
+	percentheal 100, 100;
+	if ( !bg_get_data( getarg(0), 0 ) )
+		mapannounce "bat_a01", "สมาชิก ทีม "+ getarg(1) +" ได้ลาออก!", bc_map, 0xff3333;
+	end;
+}
+
+prontera,144,296,6	script	ทีมสีแดง EMP#bg_emp	733,{
+	end;
+OnInit:
+	sleep 1;
+	set getvariableofnpc( .rednpcname$, "bg_emp#control" ), strnpcinfo(0);
+OnStart:
+	waitingroom "ทีมสีแดง EMP", getvariableofnpc( .minplayer2start, "bg_emp#control" ) +1, "bg_emp#control::OnStart", getvariableofnpc( .minplayer2start, "bg_emp#control" );
+	end;
+}
+
+prontera,144,302,6	script	ทีมสีน้ำเงิน EMP#bg_emp	734,{
+	end;
+OnInit:
+	sleep 1;
+	set getvariableofnpc( .bluenpcname$, "bg_emp#control" ), strnpcinfo(0);
+OnStart:
+	waitingroom "ทีมสีน้ำเงิน EMP", getvariableofnpc( .minplayer2start, "bg_emp#control" ) +1, "bg_emp#control::OnStart", getvariableofnpc( .minplayer2start, "bg_emp#control" );
+	end;
+}
+prontera,141,299,6	script	ศึกตีหินยุทธภพ EMP	974,{
+end;
+//OnInit: 
+//	waitingroom "   ศึกตีหินยุทธภพ EMP",0; 
+//	end;
+
+}
+
+bat_a01	mapflag	battleground
+bat_a01	mapflag	nosave	SavePoint
+bat_a01	mapflag	nowarp
+bat_a01	mapflag	nowarpto
+bat_a01	mapflag	noteleport
+bat_a01	mapflag	nomemo
+bat_a01	mapflag	nopenalty
+bat_a01	mapflag	nobranch
+bat_a01	mapflag	noicewall
+bat_a01	mapflag	hidemobhpbar

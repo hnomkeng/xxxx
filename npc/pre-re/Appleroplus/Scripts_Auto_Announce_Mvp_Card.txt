@@ -1,0 +1,36 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Auto_Announce_Mvp_Card	-1,{
+	OnInit:
+		setarray( .@mvpIdList,  1147, 1583, 1389, 1046, 1087, 1190, 1272, 1115, 1157, 1630, 1059, 1159, 1038, 1511, 1150, 1039, 1086, 1112, 1312, 1251, 1252 );
+		setarray( .mvpCardIds,  4146, 4302, 4134, 4142, 4143, 4135, 4168, 4123, 4148, 4372, 4132, 4121, 4144, 4236, 4131, 4147, 4128, 4137, 4305, 4318, 4324 );
+		
+		// Rate : 1 = 0.01%  /  1000 = 10%  /  10000 = 100%
+		setarray( .mvpCardRates, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 );
+
+		for(.@i = 0; .@i < getarraysize( .@mvpIdList ); .@i++ ) {
+			.mvpIds[ .@mvpIdList[ .@i ] ] = .@i;
+			delmonsterdrop( .@mvpIdList[ .@i ],  .mvpCardIds[ .@i ] );
+		}
+	end;
+	OnNPCKillEvent:
+		.@mvpIndex = .mvpIds[ killedrid ];
+		if( .@mvpIndex == 0) end;
+
+		if( rand( 10000 ) <= .mvpCardRates[ .@mvpIndex ] ){
+			getitem( .mvpCardIds[ .@mvpIndex ], 1 );
+			announce( "[ระบบ] : ยินดีด้วย คุณ [ " + strcharinfo(PC_NAME) + " ] โชคดีจริงๆ ที่สังหาร มอนเตอร์ประเภทบอส ได้รับ " + getitemname( .mvpCardIds[.@mvpIndex] ), bc_all );
+		}
+	end;
+}

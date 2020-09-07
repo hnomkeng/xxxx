@@ -1,0 +1,196 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+//= 1.2
+//============================================== 
+prontera,145,246,4	script	เพิ่มออฟชั่น Mora Arch Bishops	10091,{
+	if (checkweight(1201,1) == 0) {
+		mes "คุณมีน้ำหนักเยอะ ไปลดแล้วกลับมาหาเราใหม่นะค่ะ";
+		close;
+	}
+	if (MaxWeight - Weight < 1000) {
+		mes "คุณมีน้ำหนักเยอะ ไปลดแล้วกลับมาหาเราใหม่นะค่ะ";
+		close;
+	}
+	disable_items;
+	mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+	mes "ฉันเสริมพลังธาตุที่ศักดิ์สิทธิ์ Arch Bishops จะต้องใช้ 2 Mora Coin";
+	next;
+	switch(select("^FF0000•^000000 รายละเอียดเพิ่มเติม:^FF0000•^000000 กรุณาเพิ่มสิ่งที่ต้องการจะเพิ่มออฟชั่น")) {
+	case 1:
+		mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+		mes "ให้ฉันอธิบายคร่าวๆว่าสำหรับMora Coin 2 เหรียญและของที่ระลึกฉันสามารถมอบมนต์เสน่ห์ให้กับสิ่งของดังกล่าวได้";
+		next;
+		mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+		mes "ถึงแม้ว่าสิ่งประดิษฐ์เหล่านี้จะมีเสน่ห์แล้ว แต่เราก็จะทำให้มีเสน่ห์อีกครั้งโดยไม่ต้องตรวจสอบสถานะ";
+		next;
+		mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+		mes "ดังนั้นคุณจึงได้หลงรักของที่ระลึกไว้แล้วโปรดวางสถานที่บางแห่งให้ปลอดภัยและกลับมา";
+		next;
+		mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+		mes "อ้า, อีกหนึ่งสิ่ง! เป็นไปได้ว่าฉันสามารถล้มเหลวแม้ว่าและหากที่เกิดขึ้นที่ระลึกจะหายไปตลอดกาล";
+		close;
+	case 2:
+		mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+		mes "โอเคร, คุณสามารถได้รับ Relic ใหม่จาก Artifice ถ้าล้มเหลว";
+		next;
+		mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+		mes "ถ้าคุณมีพิธีกรรมสำหรับโชคคุณควรใช้ตอนนี้";
+		next;
+		set .@select, select("^FF0000•^000000 รอสักครู่!:^FF0000•^000000 Light of Cure:^FF0000•^000000 Seal of Cathedral:^FF0000•^000000 Ring of Archbishop:^FF0000•^000000 Shoes of Affection:^FF0000•^000000 Shoes of Judgement:^FF0000•^000000 Shawl of Affection:^FF0000•^000000 Shawl of Judgement:^FF0000•^000000 Robe of Affection:^FF0000•^000000 Robe of Judgement:^FF0000•^000000 Bible of Promise 1st Vol:^FF0000•^000000 Wand of Affection:^FF0000•^000000 Mace of Judgement");
+		switch(.@select) {
+		case 1:
+			mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+			mes "แน่นอน ไปกับแสง";
+			close;
+		case 2:
+		case 3:
+		case 4:
+			setarray .@items[0],2864,2865,2866; //Light_Of_Cure,Seal_Of_Cathedral,Ring_Of_Archbishop
+			setarray .@special[0],4803,4804,4805; //Highness_Heal_3sec,Coluceo_Heal30,Heal_Amount2
+			set .@item, .@items[.@select-2];
+			set .@sp, .@special[.@select-2];
+			set .@enchant_type,1;
+			break;
+		case 5:
+		case 6:
+		case 7:
+		case 8:
+		case 9:
+		case 10:
+		case 11:
+			setarray .@items[0],2471,2472,2569,2570,15029,15030,2156; //Shoes_Of_Affection,Shoes_Of_Judgement,Shawl_Of_Affection,Shawl_Of_Judgement,Robe_Of_Affection,Robe_Of_Judgement,Bible_Of_Promise1
+			set .@item, .@items[.@select-5];
+			set .@enchant_type,2;
+			break;
+		case 12:
+			set .@item,1657; //Wand_Of_Affection
+			set .@enchant_type,3;
+			break;
+		case 13:
+			set .@item,16013; //Mace_Of_Judgement
+			set .@enchant_type,4;
+			break;
+		}
+		if (countitem(6380) < 2 || countitem(.@item) == 0) {
+			mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+			mes "สำหรับMora Coin 2 เหรียญฉันสามารถสร้างที่ระลึกให้กับคุณได้หลายวิธี";
+			close;
+		}
+		specialeffect2 EF_REPAIRWEAPON;
+		delitem 6380,2; //Mora_Coin
+		delitem .@item,1;
+		switch(.@enchant_type) {
+		case 1:
+			set .@i, rand(1,1487);
+			if (.@i <= 1024) {
+				// Basic combinations
+				// (raw: .@i increments by 16, 4 repeats)
+				setarray .@enchant_slot2[0],4711,4720,4721,4740; //Inteligence2,Dexterity1,Dexterity2,Vitality1
+				setarray .@enchant_slot3[0],.@sp,4799,4766,4788; //[sp],HP500,Atk2,Mdef6
+				setarray .@enchants[2],
+					.@enchant_slot2[rand(getarraysize(.@enchant_slot2))],
+					.@enchant_slot3[rand(getarraysize(.@enchant_slot3))];
+			}
+			else if (.@i <= 1040) setarray .@enchants[2],.@sp,.@sp; //[sp] [sp]
+			else if (.@i <= 1487) {
+				mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+				mes "บางครั้งสิ่งต่างๆก็ไม่ได้ผลตามทีคุณต้องการ ฉันหวังว่าครั้งต่อไปจะดีขึ้นสำหรับคุณ จนถึงตอนนี้ลาก่อน";
+				close;
+			}
+			break;
+		case 2:
+			set .@i, rand(1,1487);
+			if (.@i <= 1024) {
+				// Basic combinations
+				// (raw: .@i increments by 16)
+				setarray .@enchant_slot1[0],4710,4711,4720,4721; //Inteligence1,Inteligence2,Dexterity1,Dexterity2
+				setarray .@enchant_slot2[0],4711,4720,4721,4740; //Inteligence2,Dexterity1,Dexterity2,Vitality1
+				setarray .@enchant_slot3[0],4764,4799,4766,4788; //Critical5,HP500,Atk2,Mdef6
+				setarray .@enchants[1],
+					.@enchant_slot1[rand(getarraysize(.@enchant_slot1))],
+					.@enchant_slot2[rand(getarraysize(.@enchant_slot2))],
+					.@enchant_slot3[rand(getarraysize(.@enchant_slot3))];
+			}
+			else if (.@i <= 1026) setarray .@enchants[1],4761,4761,4761; //Matk2 Matk2 Matk2
+			else if (.@i <= 1028) setarray .@enchants[1],4712,4713,4713; //Inteligence3 Inteligence4 Inteligence4
+			else if (.@i <= 1030) setarray .@enchants[1],4712,4761,4761; //Inteligence3 Matk2 Matk2
+			else if (.@i <= 1032) setarray .@enchants[1],4712,4713,4761; //Inteligence3 Inteligence4 Matk2
+			else if (.@i <= 1034) setarray .@enchants[1],4722,4723,4723; //Dexterity3 Dexterity4 Dexterity4
+			else if (.@i <= 1036) setarray .@enchants[1],4722,4703,4703; //Dexterity3 Strength4 Strength4
+			else if (.@i <= 1038) setarray .@enchants[1],4722,4767,4767; //Dexterity3 Atk3 Atk3
+			else if (.@i <= 1040) setarray .@enchants[1],4767,4767,4767; //Atk3 Atk3 Atk3
+			else if (.@i <= 1487) {
+				mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+				mes "บางครั้งสิ่งต่างๆก็ไม่ได้ผลตามทีคุณต้องการ ฉันหวังว่าครั้งต่อไปจะดีขึ้นสำหรับคุณ จนถึงตอนนี้ลาก่อน";
+				close;
+			}
+			break;
+		case 3:
+			set .@i, rand(1,2852);
+			if (.@i <= 1984) {
+				// Basic combinations
+				// (raw: .@i increments by 31, 4 repeats)
+				setarray .@enchant_slot2[0],4720,4740,4741,4801; //Dexterity1,Vitality1,Vitality2,SP100
+				setarray .@enchant_slot3[0],4710,4711,4721,4760; //Inteligence1,Inteligence2,Dexterity2,Matk1
+				setarray .@enchants[2],
+					.@enchant_slot2[rand(getarraysize(.@enchant_slot2))],
+					.@enchant_slot3[rand(getarraysize(.@enchant_slot3))];
+			}
+			else if (.@i <= 1986) setarray .@enchants[2],4761,4761; //Matk2 Matk2
+			else if (.@i <= 1988) setarray .@enchants[2],4761,4723; //Matk2 Dexterity4
+			else if (.@i <= 1990) setarray .@enchants[2],4761,4714; //Matk2 Inteligence5
+			else if (.@i <= 1992) setarray .@enchants[2],4714,4714; //Inteligence5 Inteligence5
+			else if (.@i <= 1994) setarray .@enchants[2],4714,4723; //Inteligence5 Dexterity4
+			else if (.@i <= 1996) setarray .@enchants[2],4723,4723; //Dexterity4 Dexterity4
+			else if (.@i <= 2852) {
+				mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+				mes "บางครั้งสิ่งต่างๆก็ไม่ได้ผลตามทีคุณต้องการ ฉันหวังว่าครั้งต่อไปจะดีขึ้นสำหรับคุณ จนถึงตอนนี้ลาก่อน";
+				close;
+			}
+			break;
+		case 4:
+			set .@i, rand(1,2852);
+			if (.@i <= 1984) {
+				// Basic combinations
+				// (raw: .@i increments by 31, 4 repeats)
+				setarray .@enchant_slot2[0],4720,4740,4741,4701; //Dexterity1,Vitality1,Vitality2,Strength2
+				setarray .@enchant_slot3[0],4700,4701,4721,4767; //Strength1,Strength2,Dexterity2,Atk3
+				setarray .@enchants[2],
+					.@enchant_slot2[rand(getarraysize(.@enchant_slot2))],
+					.@enchant_slot3[rand(getarraysize(.@enchant_slot3))];
+			}
+			else if (.@i <= 1986) setarray .@enchants[2],4767,4767; //Atk3 Atk3
+			else if (.@i <= 1988) setarray .@enchants[2],4767,4723; //Atk3 Dexterity4
+			else if (.@i <= 1990) setarray .@enchants[2],4767,4704; //Atk3 Strength5
+			else if (.@i <= 1992) setarray .@enchants[2],4704,4704; //Strength5 Strength5
+			else if (.@i <= 1994) setarray .@enchants[2],4704,4723; //Strength5 Dexterity4
+			else if (.@i <= 1996) setarray .@enchants[2],4723,4723; //Dexterity4 Dexterity4
+			else if (.@i <= 2852) {
+				mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+				mes "บางครั้งสิ่งต่างๆก็ไม่ได้ผลตามทีคุณต้องการ ฉันหวังว่าครั้งต่อไปจะดีขึ้นสำหรับคุณ จนถึงตอนนี้ลาก่อน";
+				close;
+			}
+			break;
+		}
+		getitem2 .@item,1,1,0,0,0,.@enchants[1],.@enchants[2],.@enchants[3];
+		mes "[เพิ่มออฟชั่น Mora Arch Bishops]";
+		mes "การเสริมกำลังทำได้ดี,โชคดี";
+		close;
+	}
+end;
+//oninit:
+//waitingroom "เพิ่มออฟชั่น Mora Arch Bishops",0;
+//end;
+}
+

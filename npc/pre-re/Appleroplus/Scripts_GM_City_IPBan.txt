@@ -1,0 +1,46 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,165,197,4	script	 จัดการระบบ GM#GMCheck02	864,{
+
+    if(getgmlevel()<90) goto L_lvl; 
+    mes "[IP Ban]";
+    mes "คุณอยากจะทำอะไร?";
+    menu "^FF0000•^000000 แบนไอพี",L_yes,"^FF0000•^000000 ยกเลิกแบนไอพี",L_remove,"^FF0000•^000000 ยกเลิก",L_no;
+    
+L_yes:    
+    input .@ipbannumber$;
+    mes "แบนไอพีนี้มีเหตุผลอะไรโปรดระบุ";
+    next;
+    input .@ipbanreason$;
+    query_sql "INSERT INTO ipbanlist (list,btime,rtime,reason) VALUES ('"+.@ipbannumber$+"','"+gettime(7)+"-"+gettime(6)+"-"+gettime(5)+" "+gettime(3)+":"+gettime(2)+":"+gettime(1)+"','2099-01-01 00:00:00','"+.@ipbanreason$+"')";
+    mes "[IP Ban]";    
+    mes "ทำการแบนไอพีดังกล่าวเรียบร้อยแล้ว";    
+    close;
+    
+L_remove:
+    input .@ipbannumber$;
+    query_sql "DELETE FROM `ipbanlist` WHERE `list` = '"+.@ipbannumber$+"'";
+    mes "ยกเลิกแบนไอพีดังกล่าวเรียบร้อยแล้ว";    
+    close;
+
+L_no:
+    mes "[IP Ban]";    
+    mes "บาย";
+    close;
+
+L_lvl:
+    mes "[IP Ban]";    
+    mes "คุณไม่สามารถเข้าถึง NPC นี้ได้!";
+    close;
+}

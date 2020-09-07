@@ -1,0 +1,252 @@
+
+// ================================================= NPC  Shop ============================================
+// Head Gear
+-	shop	QQ_Hat_TRO	-1,2284:-1,5074:-1,5086:-1,5174:-1,2214:-1,2296:-1,5016:-1,5034:-1,5040:-1,5052:-1,5057:-1,5065:-1,5076:-1,5110:-1,5169:-1,5024:-1,5028:-1,5036:-1,5048:-1,5080:-1,5081:-1,5107:-1,5175:-1,5243:-1,2273:-1,5038:-1,5058:-1,5082:-1,5091:-1,2283:-1,5068:-1,5018:-1,5047:-1,5061:-1,5170:-1,5021:-1,5063:-1,5001:-1,5025:-1,5041:-1,5070:-1,5094:-1,5176:-1,5071:-1,5069:-1,5084:-1,2278:-1,5027:-1,5031:-1,5045:-1,5073:-1,5117:-1,5173:-1,5177:-1,2281:-1,5004:-1,5043:-1,2293:-1,5012:-1,5023:-1,5060:-1,5033:-1,5039:-1,5083:-1,5109:-1,2272:-1,2280:-1,5029:-1,5032:-1,5049:-1,5062:-1,5067:-1,5064:-1,5078:-1,5059:-1,5077:-1,5171:-1,2292:-1,5050:-1,5115:-1,5079:-1,5121:-1
+
+// Famer V.1
+-	shop	QQ_Famerv1	-1,18589:-1
+-	shop	QQ_Famerv2	-1,19149:-1
+-	shop	QQ_Famerv3	-1,18711:-1
+
+// Ex Soctume
+-	shop	QQ_Excostume	-1,40001:-1,40002:-1,40003:-1,40004:-1,40005:-1,40006:-1,40007:-1,40008:-1,40001:-9,40010:-1,40011:-1,40012:-1,40013:-1,40014:-1,40015:-1,40016:-1,40017:-1,40018:-1,40019:-1,40020:-1,40021:-1,40022:-1,40023:-1,40024:-1,40025:-1,40026:-1
+
+// Ex_China
+-	shop	QQ_China	-1,5609:-1
+
+// Ex_Poring
+-	shop	QQ_Poring	-1,2667:1200,2860:1200,2892:1200,2663:1200,2781:1200,2854:1200
+
+// =============================================== Item List ===============================================
+// =============== >> Buy << ===================
+function	script	QQ_Buy	{
+if(@bought_nameid == 5528) {	setarray @itemuse[0], 2289,908;				setarray @itemusemany[0], 1,500;				set@zenyuse,3000000;				}
+// HAT TRO
+else if(@bought_nameid==2284){	setarray@itemuse[0],923;								setarray@itemusemany[0],20;						}
+else if(@bought_nameid==5074){	setarray@itemuse[0],2254,2286;					setarray@itemusemany[0],1,1;						}
+else if(@bought_nameid==5086){	setarray@itemuse[0],1095,2288;					setarray@itemusemany[0],3000,1;					}
+else if(@bought_nameid==5174){	setarray@itemuse[0],954,975,733,7116;			setarray@itemusemany[0],300,1,5,50;				}
+else if(@bought_nameid==2214){	setarray@itemuse[0],949,706,722,2213;								setarray@itemusemany[0],100,1,1,1;								}
+else if(@bought_nameid==2296){	setarray@itemuse[0],2243,999;											setarray@itemusemany[0],1,100;									}
+else if(@bought_nameid==5016){	setarray@itemuse[0],1030;												setarray@itemusemany[0],10;										}
+else if(@bought_nameid==5034){	setarray@itemuse[0],2233,746;											setarray@itemusemany[0],1,20;										}
+else if(@bought_nameid==5040){	setarray@itemuse[0],7047;												setarray@itemusemany[0],100;										}
+else if(@bought_nameid==5052){	setarray@itemuse[0],2211,978,7003;									setarray@itemusemany[0],1,1,300;									}
+else if(@bought_nameid==5057){	setarray@itemuse[0],2213,983,914;									setarray@itemusemany[0],1,1,200;									}
+else if(@bought_nameid==5065){	setarray@itemuse[0],624,959,544,1023,938,7030;					setarray@itemusemany[0],1,300,50,1,100,1;					}
+else if(@bought_nameid==5076){	setarray@itemuse[0],2226,7038;										setarray@itemusemany[0],1,500;									}
+else if(@bought_nameid==5110){	setarray@itemuse[0],526,7270,941,10004;							setarray@itemusemany[0],2,1,1,1;									}
+else if(@bought_nameid==5169){	setarray@itemuse[0],706,7201,7200,1049,1059,1054,1024;		setarray@itemusemany[0],1,500,10,20,500,2,100;				}
+else if(@bought_nameid==5024){	setarray@itemuse[0],529,530,539,999,538;		setarray@itemusemany[0],10,5,20,10,15;			}
+else if(@bought_nameid==5028){	setarray@itemuse[0],2279,7035,526;				setarray@itemusemany[0],1,50,100;					}
+else if(@bought_nameid==5036){	setarray@itemuse[0],2608,7069;					setarray@itemusemany[0],1,500;						}
+else if(@bought_nameid==5048){	setarray@itemuse[0],5041,999;						setarray@itemusemany[0],1,10;							}
+else if(@bought_nameid==5080){	setarray@itemuse[0],10006,714,969;				setarray@itemusemany[0],1,1,3;						}
+else if(@bought_nameid==5081){	setarray@itemuse[0],2249,714,969;				setarray@itemusemany[0],1,1,3;						}
+else if(@bought_nameid==5107){	setarray@itemuse[0],519,7031,548,539;			setarray@itemusemany[0],50,50,50,50;				}
+else if(@bought_nameid==5175){	setarray@itemuse[0],7111,938,983;				setarray@itemusemany[0],100,99,1;					}
+else if(@bought_nameid==5243){	setarray@itemuse[0],7107,5001;					setarray@itemusemany[0],1000,1;						}
+else if(@bought_nameid==2273){	setarray@itemuse[0],2275,998,733;				setarray@itemusemany[0],1,50,1;						}
+else if(@bought_nameid==5038){	setarray@itemuse[0],1038,7048;					setarray@itemusemany[0],600,40;						}
+else if(@bought_nameid==5058){	setarray@itemuse[0],2233,983,7206,7030;		setarray@itemusemany[0],1,1,300,1;					}
+else if(@bought_nameid==5082){	setarray@itemuse[0],921;								setarray@itemusemany[0],300;							}
+else if(@bought_nameid==5091){	setarray@itemuse[0],10016,714,969;				setarray@itemusemany[0],1,1,3;						}
+else if(@bought_nameid==2283){	setarray@itemuse[0],724,5001,949;				setarray@itemusemany[0],1,1,200;					}
+else if(@bought_nameid==5068){	setarray@itemuse[0],2286,2255;					setarray@itemusemany[0],1,1;						}
+else if(@bought_nameid==5018){	setarray@itemuse[0],2274,916;					setarray@itemusemany[0],1,300;					}
+else if(@bought_nameid==5047){	setarray@itemuse[0],2271,975;					setarray@itemusemany[0],1,1;						}
+else if(@bought_nameid==5061){	setarray@itemuse[0],2269,999;					setarray@itemusemany[0],1,10;						}
+else if(@bought_nameid==5170){	setarray@itemuse[0],5172,7063,982;			setarray@itemusemany[0],1,100,1;					}
+else if(@bought_nameid==5021){	setarray@itemuse[0],2233,969,999,949,938;			setarray@itemusemany[0],1,1,20,80,800;			}
+else if(@bought_nameid==5063){	setarray@itemuse[0],970,930;							setarray@itemusemany[0],1,500;						}
+else if(@bought_nameid==5001){	setarray@itemuse[0],999,984,970,1003;						setarray@itemusemany[0],40,1,1,1;					}
+else if(@bought_nameid==5025){	setarray@itemuse[0],2229,2254,7036;							setarray@itemusemany[0],1,1,5;						}
+else if(@bought_nameid==5041){	setarray@itemuse[0],7013;										setarray@itemusemany[0],1200;						}
+else if(@bought_nameid==5070){	setarray@itemuse[0],7216,7097,2211,982;					setarray@itemusemany[0],300,300,1,1;				}
+else if(@bought_nameid==5094){	setarray@itemuse[0],968,1124,931,2299;						setarray@itemusemany[0],100,1,1000,1;				}
+else if(@bought_nameid==5176){	setarray@itemuse[0],706,7201,7200,7015,952,1028;		setarray@itemusemany[0],1,500,10,20,100,100;	}
+else if(@bought_nameid==5071){	setarray@itemuse[0],5010,5049,7101;				setarray@itemusemany[0],1,1,10;					}
+else if(@bought_nameid==5069){	setarray@itemuse[0],1022;							setarray@itemusemany[0],999;						}
+else if(@bought_nameid==5084){	setarray@itemuse[0],1026,7065,945,7030;		setarray@itemusemany[0],1000,100,10,1;		}
+else if(@bought_nameid==2278){	setarray@itemuse[0],705,909,914;								setarray@itemusemany[0],10,10,10;					}
+else if(@bought_nameid==5027){	setarray@itemuse[0],2252,1036,7001,4052;					setarray@itemusemany[0],1,400,50,1;					}
+else if(@bought_nameid==5031){	setarray@itemuse[0],5009,5028,747,999;						setarray@itemusemany[0],1,1,1,25;					}
+else if(@bought_nameid==5045){	setarray@itemuse[0],2252,1054,943;							setarray@itemusemany[0],1,450,1200;				}
+else if(@bought_nameid==5073){	setarray@itemuse[0],2285;										setarray@itemusemany[0],1;								}
+else if(@bought_nameid==5117){	setarray@itemuse[0],731,748,982;								setarray@itemusemany[0],10,2,1;						}
+else if(@bought_nameid==5173){	setarray@itemuse[0],954,983,733,2221;						setarray@itemusemany[0],300,1,1,1;					}
+else if(@bought_nameid==5177){	setarray@itemuse[0],706,7201,7200,1048,1053,980;		setarray@itemusemany[0],1,500,10,500,2,1;		}
+else if(@bought_nameid==2281){	setarray@itemuse[0],998,707;					setarray@itemusemany[0],20,1;						}
+else if(@bought_nameid==5004){	setarray@itemuse[0],701;							setarray@itemusemany[0],5;							}
+else if(@bought_nameid==5043){	setarray@itemuse[0],2281,1048;				setarray@itemusemany[0],1,50;						}
+else if(@bought_nameid==2293){	setarray@itemuse[0],1049;						setarray@itemusemany[0],4;						}
+else if(@bought_nameid==5012){	setarray@itemuse[0],710,703,704,708;		setarray@itemusemany[0],1,1,1,1;				}
+else if(@bought_nameid==5023){	setarray@itemuse[0],1059,907,978;			setarray@itemusemany[0],150,100,1;			}
+else if(@bought_nameid==5060){	setarray@itemuse[0],2236,7151,7111;			setarray@itemusemany[0],1,100,100;			}
+else if(@bought_nameid==5033){	setarray@itemuse[0],1036,2213,7065,7012;		setarray@itemusemany[0],20,1,300,200;			}
+else if(@bought_nameid==5039){	setarray@itemuse[0],7030,978,5015;				setarray@itemusemany[0],50,1,1;					}
+else if(@bought_nameid==5083){	setarray@itemuse[0],2244,2209,10007;			setarray@itemusemany[0],1,1,1;					}
+else if(@bought_nameid==5109){	setarray@itemuse[0],10015,10007,975,5032;	setarray@itemusemany[0],1,1,1,1;					}
+else if(@bought_nameid==2272){	setarray@itemuse[0],1019,983;						setarray@itemusemany[0],50,1;						}
+else if(@bought_nameid==2280){	setarray@itemuse[0],1019;							setarray@itemusemany[0],120;						}
+else if(@bought_nameid==5029){	setarray@itemuse[0],7068,7033,1015;				setarray@itemusemany[0],300,850,1;				}
+else if(@bought_nameid==5032){	setarray@itemuse[0],1059,2221,2227,7063;		setarray@itemusemany[0],250,1,1,600;			}
+else if(@bought_nameid==5049){	setarray@itemuse[0],1099;							setarray@itemusemany[0],1500;					}
+else if(@bought_nameid==5062){	setarray@itemuse[0],2280,7197,7150;				setarray@itemusemany[0],1,300,300;				}
+else if(@bought_nameid==5064){	setarray@itemuse[0],945,7030;						setarray@itemusemany[0],600,1;					}
+else if(@bought_nameid==5067){	setarray@itemuse[0],5062,952,1907;				setarray@itemusemany[0],1,50,1;					}
+else if(@bought_nameid==5078){	setarray@itemuse[0],5033,5064;					setarray@itemusemany[0],1,1;						}
+else if(@bought_nameid==5059){	setarray@itemuse[0],5030,7213,7217,7161;		setarray@itemusemany[0],1,100,100,100;		}
+else if(@bought_nameid==5077){	setarray@itemuse[0],2278,975;						setarray@itemusemany[0],1,1;						}
+else if(@bought_nameid==5171){	setarray@itemuse[0],4219,4114,4177,4259,4212,4073,4112,4081,4251,4166,7511,7563;	setarray@itemusemany[0],1,1,1,1,1,1,1,1,1,1,1000,1000;		}
+else if(@bought_nameid==2292){	setarray@itemuse[0],999;					setarray@itemusemany[0],50;						}
+else if(@bought_nameid==5050){	setarray@itemuse[0],5037,7064;		setarray@itemusemany[0],1,500;					}
+else if(@bought_nameid==5115){	setarray@itemuse[0],983,7267,749;	setarray@itemusemany[0],1,999,1;					}
+else if(@bought_nameid==5079){	setarray@itemuse[0],2294,7220;		setarray@itemusemany[0],1,400;					}
+else if(@bought_nameid==5121){	setarray@itemuse[0],7263,660,7099,7315;			setarray@itemusemany[0],1,1,30,369;					}
+
+// Costume TRO,MVP
+else if(@bought_nameid==40001){	setarray@itemuse[0],2229,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40002){	setarray@itemuse[0],2280,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40003){	setarray@itemuse[0],2285,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40004){	setarray@itemuse[0],2289,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40005){	setarray@itemuse[0],5017,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40006){	setarray@itemuse[0],2214,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40007){	setarray@itemuse[0],2251,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40008){	setarray@itemuse[0],2287,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40009){	setarray@itemuse[0],2245,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40010){	setarray@itemuse[0],2248,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40011){	setarray@itemuse[0],2247,999;	setarray@itemusemany[0],1,100;	set@zenyuse,100000; set @broken,20; }
+else if(@bought_nameid==40012){	setarray@itemuse[0],2234,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40013){	setarray@itemuse[0],2235,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40014){	setarray@itemuse[0],2249,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40015){	setarray@itemuse[0],2254,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40016){	setarray@itemuse[0],2255,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40017){	setarray@itemuse[0],2256,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40018){	setarray@itemuse[0],2258,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40019){	setarray@itemuse[0],5002,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40020){	setarray@itemuse[0],5007,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40021){	setarray@itemuse[0],5016,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40022){	setarray@itemuse[0],5019,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40023){	setarray@itemuse[0],5022,671;	setarray@itemusemany[0],1,20;	set@zenyuse,100000000; set @broken,95; }
+else if(@bought_nameid==40024){	setarray@itemuse[0],2246,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40025){	setarray@itemuse[0],5008,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+else if(@bought_nameid==40026){	setarray@itemuse[0],2268,671;	setarray@itemusemany[0],1,100;	set@zenyuse,5000000; set @broken,40; }
+return;
+}
+
+-	script	TRO_Shop	-1,{
+set $@tr$,"[ Quest Shop ]";
+mes $@tr$;
+mes "สวัสดีค่ะ คุณ ^FF0000 "+strcharinfo(0)+" ^000000 ";
+mes "ต้องการแลกเควสไหนคะ ?";
+next;
+switch(select("^339900->^000000 เควสหมวก [ TRO ]:^FF0000->^000000 ยกเลิก")) {
+case 1: callfunc "Shop_QQ","QQ_Hat_TRO",1;
+case 2: end;
+}
+OnBuyItem:
+callfunc "C_ItemBuy";
+end;
+OnInit:
+waitingroom "Quest Server", 0;
+end;
+}
+
+// ============================================ Function Run Shop ===========================================
+function	script	Shop_QQ	{	npcshopattach getarg(0),1;	close2;	cutin "",255;	callshop getarg(0),getarg(1);	end;	}
+
+// ============================================ Function Check Item ==========================================
+function	script	C_ItemBuy	{
+for (set .@g,0; .@g < getarraysize(@bought_nameid); set .@g,.@g+1) {
+	sleep2 1;
+	set @bought_nameid,@bought_nameid[.@g];
+	deletearray @itemuse[0],getarraysize(@itemuse);
+	deletearray @itemusemany[0],getarraysize(@itemusemany);
+	set @broken,0;	set @zenyuse, 0;
+	callfunc "QQ_Buy";
+		if(@itemuse[0] <= 0)	goto check;	
+			set .@r,0;	set .@up,0;	set @itemgetmany,0;
+			for( set .@r,0; .@r < getarraysize(@itemuse); set .@r,.@r+1 ) {
+				if(.@up >= getarraysize(@itemuse)) break;
+				set .@itemup[.@up], countitem(@itemuse[.@up])/@itemusemany[.@up];
+				if(.@up == 0) set @itemgetmany,.@itemup[.@up];
+				if(@itemgetmany > .@itemup[.@up]) set @itemgetmany,.@itemup[.@up];
+				set .@up,.@up+1;
+				continue;
+			}
+
+check:	
+	//mes "===================================";
+		if(@itemuse[0] <= 0){
+			if (0 == getitemslots( @bought_nameid[.@g])){	mes "ในขณะนี้ "+getitemname(@bought_nameid[.@g])+" ไม่มี Quest ให้แลก";	}
+			if (1 <= getitemslots( @bought_nameid[.@g])){	mes "ในขณะนี้ "+getitemname(@bought_nameid[.@g])+" ["+getitemslots( @bought_nameid[.@g])+"] ไม่มี Quest ให้แลก";	}
+		}
+		else if (@itemgetmany == 0){
+			if (0 == getitemslots( @bought_nameid[.@g])){	mes "Item ที่ใช้แลก "+getitemname(@bought_nameid[.@g])+" จำนวน "+@bought_quantity[.@g]+" ea";	}
+			if (1 <= getitemslots( @bought_nameid[.@g])){	mes "Item ที่ใช้แลก "+getitemname(@bought_nameid[.@g])+" ["+getitemslots( @bought_nameid[.@g])+"] จำนวน "+@bought_quantity[.@g]+" ea";	}
+			set .@d,0;
+			for( set .@i,0; .@i < getarraysize(@itemuse); set .@i,.@i+1 ) {
+				if(.@d >= getarraysize(@itemuse)) break;
+				if (0 == getitemslots( @itemuse[.@d])){	mes " "+(.@d+1)+"> "+getitemname(@itemuse[.@d])+" จำนวน "+@itemusemany[.@d]*@bought_quantity[.@g]+" ea";	}
+				if (1 <= getitemslots( @itemuse[.@d])){	mes " "+(.@d+1)+"> "+getitemname(@itemuse[.@d])+" ["+getitemslots( @itemuse[.@d])+"] จำนวน "+@itemusemany[.@d]*@bought_quantity[.@g]+" ea";	}
+				set .@d,.@d+1;
+				continue;
+			}
+			if(@broken != 0) {	set .@failmake,100-@broken;	mes " --> มีโอกาสเสียหาย  "+.@failmake+" % ";	}
+			if(@zenyuse != 0) {	mes	"และใช้เงินจำนวน  "+ @zenyuse*@bought_quantity[.@g] +" Zeny";	}
+		}
+		else if (@bought_quantity[.@g] > @itemgetmany){
+			mes "จาก Item ที่ท่านมี ท่านสามารถแลก "+getitemname(@bought_nameid[.@g])+" ได้ไม่เกิน  "+@itemgetmany+" ea ";
+		}
+		else if (Zeny < (@zenyuse*@bought_quantity[.@g])){	
+			if (@bought_quantity[.@g] == 1)	mes "เงินที่ท่านเตรียมมามีไม่พอ ต้องใช้เงินจำนวน  "+@zenyuse+" Zeny ในการแลก "+getitemname(@bought_nameid[.@g])+"";
+			else if (@bought_quantity[.@g] >= 2)	mes "เงินที่ท่านเตรียมมามีไม่พอ ต้องใช้เงินจำนวน  "+(@zenyuse*@bought_quantity[.@g])+" Zeny ในการแลก "+getitemname(@bought_nameid[.@g])+" จำนวน "+@bought_quantity[.@g]+" ea";
+		}
+		else if ((@bought_quantity[.@g] <= @itemgetmany) && (Zeny >= (@zenyuse*@bought_quantity[.@g]))){
+			set .@r,0;	set .@up,0;
+			for( set .@r,0; .@r < getarraysize(@itemuse); set .@r,.@r+1 ) {
+				if(.@up >= getarraysize(@itemuse)) break;
+				delitem @itemuse[.@up],@itemusemany[.@up]*@bought_quantity[.@g];
+				mes "-> "+getitemname(@itemuse[.@up])+" ได้ถูกนำไปใช้จำนวน "+(@itemusemany[.@up]*@bought_quantity[.@g])+" ea";
+				set .@up,.@up+1;
+				continue;
+			}
+			if(@zenyuse != 0) {	
+				set Zeny,Zeny-(@zenyuse*@bought_quantity[.@g]);
+				mes "-> เงินได้ถูกนำไปใช้จำนวน "+(@zenyuse*@bought_quantity[.@g])+" zeny";
+				next;
+			}
+			if(@broken != 0) {	
+				set .@RTget,rand(1,100);
+				if(@broken < .@RTget) {
+					progressbar "ffff00",1;
+					specialeffect 32;
+					mes "Gang Gang Gang  Boommmm !!";
+					mes "การเจาะรู "+getitemname(@bought_nameid[.@g])+" ["+getitemslots( @bought_nameid[.@g])+"] ล้มเหลว เสียใจด้วย !!";
+					set @bought_quantity[.@g],0;
+				}
+				if(@broken >= .@RTget) {
+					progressbar "ffff00",1;
+					specialeffect 83;
+					mes "Gang Gang Gang  Gang !!";
+					mes "การเจาะรู "+getitemname(@bought_nameid[.@g])+" ["+getitemslots( @bought_nameid[.@g])+"] เสร็จสมบูรณ์  !!";
+					announce "ผู้เล่น "+strcharinfo(0)+" ได้ทำการแลกไอเทมคอสตูม "+getitemname(@bought_nameid[.@g])+" สำเร็จ",0;
+				}
+			} 
+			if(@broken == 0) {
+				emotion 33;
+			}
+			getitem @bought_nameid[.@g],@bought_quantity[.@g];
+		}
+}
+//mes "===================================";
+deletearray @bought_nameid[0],getarraysize(@bought_nameid);
+deletearray @bought_quantity[0],getarraysize(@bought_quantity);
+deletearray @itemuse[0],getarraysize(@itemuse);
+deletearray @itemusemany[0],getarraysize(@itemusemany);
+set @broken,0;	set @zenyuse, 0;
+end;
+}
+// ============================================= NPC Add Map =============================================
+morocc,165,133,4	duplicate(TRO_Shop)	Quest Server#01	857

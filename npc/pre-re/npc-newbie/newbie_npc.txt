@@ -1,0 +1,49 @@
+new_1-2,99,28,4	script	Newbie Service	417,{
+if((class == 4218)) goto nojob;
+mes "[ Newbie Service ]";
+mes "สวัสดีเจ้าคือผู้เล่นใหม่สินะ..!!";
+mes "มีอะไรให้ข้าช่วยมั้ยล่ะ..?";
+next;
+menu 
+"^339900->^000000 ข้าต้องการเข้าสู่เซิฟเวอร์",nb01,
+"^FF0000->^000000 ยกเลิก",nb02;
+
+nb01:
+getitem 569,200;
+getitem 12323,500;
+getitem 12324,10;
+getitem 1243,1;
+getitem 2112,1;
+getitem 2510,1;
+getitem 2414,1;
+//getitem 5055,1;
+getitem 65024,1;
+getitem 2352,1;
+getitem 7059,15;
+getitem 7060,15;
+getitem 61045,3;
+//getitem 61046,3;
+equip 1243;
+equip 2112;
+equip 2510;
+equip 2414;
+//equip 5055;
+//equip 59606;
+equip 2352;
+savepoint "new_1-3",95,27;
+warp "new_1-3",95,27;
+end;
+
+nb02:
+end;
+
+nojob:
+mes "[ Newbie Service ]";
+mes "ขออภัย! อาชีพ ^FF0000Doram^000000 ยังไม่สามารถเข้าร่วมเซิฟเวอร์";
+mes "ได้ในขณะนี้ โปรดติดตามภายหลัง ขอบคุณค่ะ.";
+close;
+
+OnInit:
+waitingroom "ยินดีต้อนรับทุกท่าน", 0;
+end;
+}

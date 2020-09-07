@@ -1,0 +1,17 @@
+-	script	Healnewbie	-1,{
+mes "[ Buff Support ]";
+mes "สวัสดีจ้า ท่านคือ ^FF0000"+strcharinfo(0)+",^000000";
+mes "มีอะไรให้ข้าช่วยอย่างนั้นหรือ ?";
+next;
+menu 
+"^339900->^000000 รับบัพฟรี Heal & AB Lv.5",he01;
+
+he01:
+mes "[ Buff Support ]";
+mes "ท่านจะได้รับบัพ ";
+mes "Heal AB Lv.5 นาน 15 นาที";
+callfunc "freebuff";
+end;
+}
+
+//new_1-3,89,33,5	duplicate(Healnewbie)	Buff Support#newbie1	703

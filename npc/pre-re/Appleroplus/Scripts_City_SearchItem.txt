@@ -1,0 +1,27 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	SearchItem	-1,{
+
+emotion 18;
+dispbottom "เปิดใช้งานระบบ ค้นหา Item เรียบร้อยแล้ว ";
+dispbottom "เวลาจะหาของ ให้พิมชื่อ Item ให้ถูกต้อง เช่น Fly Wing แล้วกด Search";
+dispbottom "เมื่อเจอ Item ที่ต้องการสามารถกดซื้อได้ทันที";
+searchstores 255,1;
+end;
+//OnInit:
+//waitingroom "ค้นหาไอเทมในร้านค้า",0;
+//end;
+}
+
+prontera,171,223,4	duplicate(SearchItem)	ค้นหาไอเทมในร้านค้า#01	740

@@ -1,0 +1,22 @@
+-	script	gvglimit	-1,{
+OnInit:
+	setmapflag "aldeg_cas02",mf_loadevent;
+	setmapflag "payg_cas04",mf_loadevent;
+	setmapflag "payg_cas03",mf_loadevent;
+	setmapflag "gefg_cas04",mf_loadevent;
+	setmapflag "prtg_cas02",mf_loadevent;
+	end;
+
+OnPCLoadMapEvent:
+	.@map$ = strcharinfo(3);
+	if ( getmapflag( .@map$,mf_gvg_castle ) ) {
+		if ( getmapguildusers( .@map$, getcharid(2) ) > 26 ) {
+			mes "[ Guild War]";
+			mes "กิลด์ท่านมีสมาชิกเกินจำนวนจำกัด";
+			mes "ข้าจะส่งท่านกลับไปยังจุดเซฟ";
+			close2;
+			warp "SavePoint",0,0;
+		}
+	}
+	end;
+}

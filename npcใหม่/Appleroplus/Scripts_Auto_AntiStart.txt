@@ -1,0 +1,25 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Auto_AntiStart	-1,{
+OnPCLoginEvent:
+if (getgmlevel() > 90) end;
+for( set .@i,13; .@i <=18; set .@i,.@i + 1 )
+if( readparam(.@i) > 130 )
+ set .@OverStat,.@OverStat + 1;
+if( .@OverStat ){
+atcommand "@jail "+strcharinfo(0);
+announce "[ระบบ] : ขณะนี้ ผู้เล่น [ "+strcharinfo(0)+" ] พยายามปรับเปลี่ยนโกงค่าสเตตัสตัวละครสูงกว่าค่าปกติ ถูกส่งเข้าคุกเรียบร้อยแล้ว สมน้ำหน้า!!!",0,0xFF0000;
+}
+end;
+}

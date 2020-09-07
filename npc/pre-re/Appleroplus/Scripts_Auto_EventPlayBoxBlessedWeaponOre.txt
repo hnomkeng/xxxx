@@ -1,0 +1,79 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+-	script	Scripts_Auto_EventPlayBoxBlessedWeaponOre	-1,{
+OnClock0035:
+OnClock0135:
+OnClock0235:
+OnClock0335:
+OnClock0435:
+OnClock0535:
+OnClock0635:
+OnClock0735:
+OnClock0835:
+OnClock0935:
+OnClock1035:
+OnClock1135:
+OnClock1235:
+OnClock1335:
+OnClock1435:
+OnClock1535:
+OnClock1635:
+OnClock1735:
+OnClock1835:
+OnClock1935:
+OnClock2035:
+OnClock2135:
+OnClock2235:
+OnClock2335:
+set $@PB_Count2,0;
+announce "[กิจกรรมกล่องหรรษา] : ขณะนี้ กล่องหรรษา ได้เกิดขึ้นที่เมืองหลวง จำนวน 20 ตัว มีเวลาในการกำจัด 5 นาที !! เมื่อกำจัด มีโอกาศที่จะได้รับ Blessed Weapon Ore 1 ea. 20 %",0;
+monster "prontera",0,0,"กล่องหรรษา",22223,20,"Scripts_Auto_EventPlayBoxBlessedWeaponOre::OnBox2";
+initnpctimer;
+end;
+
+OnBox2:
+set $@PB_Count2,$@PB_Count2+1;
+announce "[กิจกรรมกล่องหรรษา] : กล่องหรรษา [ "+$@PB_Count2+"/20 ] ถูกพบโดยคุณ [ "+strcharinfo(0)+" ] ชั้งสายตาดีจริงจริง!!!",0;
+set .@raterditem,rand(1,100);
+if (.@raterditem < 5)
+{
+getitem 6438,1;
+soundeffect "rareitemshop.wav",0;
+announce "[กิจกรรมกล่องหรรษา] : ยินดีด้วย คุณ [ "+strcharinfo(0)+" ] โชคดีจริงๆ ที่สังหาร กล่องหรรษา ได้รับ Blessed Weapon Ore 1 ea.",0,0xFF3399;
+}
+end;
+
+OnTimer60000:
+if($@PB_Count2==30){ stopnpctimer; set $@PB_Count2,0; }
+announce "[กิจกรรมกล่องหรรษา] : มีเวลาในการกำจัดอีก 4 นาที",0;
+end;
+OnTimer120000:
+if($@PB_Count2==30){ stopnpctimer; set $@PB_Count2,0; }
+announce "[กิจกรรมกล่องหรรษา] : มีเวลาในการกำจัดอีก 3 นาที",0;
+end;
+OnTimer180000:
+if($@PB_Count2==30){ stopnpctimer; set $@PB_Count2,0; }
+announce "[กิจกรรมกล่องหรรษา] : มีเวลาในการกำจัดอีก 2 นาที",0;
+end;
+OnTimer240000:
+if($@PB_Count2==30){ stopnpctimer; set $@PB_Count2,0; }
+announce "[กิจกรรมกล่องหรรษา] : มีเวลาในการกำจัดอีก 1 นาที",0;
+end;
+OnTimer300000:
+announce "[กิจกรรมกล่องหรรษา] : หมดเวลากิจกรรมแล้ว",0;
+stopnpctimer;
+set $@PB_Count2,0;
+killmonsterall "prontera";
+end;
+}

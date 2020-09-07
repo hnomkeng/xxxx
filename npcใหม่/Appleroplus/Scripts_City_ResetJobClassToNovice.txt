@@ -1,0 +1,46 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+prontera,165,208,4	script	กลับเป็นไป Novice	642,{
+if(class == 0) goto O_No;
+if(class != 0) goto O_Menu;
+O_Menu:
+mes "สวัสดีเจ้าต้องการกลับไปเป็น Novice อีกครั้งหรือไม่";
+mes "^FF0000โปรดระวังเมื่อกดใช้ ตัวละครของคุณจะกลับไปเป็น Novice^000000";
+next;
+menu "^FF0000•^000000 ไม่ต้องการ",no,"^FF0000•^000000 ข้าต้องการ",yes;
+yes:
+mes "กำลังดำเนินการ......";
+sleep2 2000;
+jobchange 0;
+atcommand "@lvup -185";
+atcommand "@joblvup -70";
+resetstatus;
+resetskill;
+atcommand "@skpoint -500";
+specialeffect2(411);
+next;
+mes "เจ้าได้สิ่งที่เจ้าต้องการแล้ว...";
+close;
+
+no:
+close;
+
+O_No:
+mes "เจ้าเป็น Novice อยู่แล้วหนิ...";
+close;
+end;
+//OnInit: 
+//waitingroom "กลับเป็นไป Novice",0; 
+//end; 
+}

@@ -1,0 +1,267 @@
+
+zonevs_1	mapflag	gvg
+zonevs_1	mapflag	nomemo
+zonevs_1	mapflag	noteleport
+zonevs_1	mapflag	nosave	SavePoint
+zonevs_1	mapflag	nobranch
+zonevs_1	mapflag	nopenalty
+zonevs_1	mapflag	nowarpto
+zonevs_1	mapflag	noreturn
+zonevs_1	mapflag	partylock
+zonevs_1	mapflag	notrade
+
+zonevs_2	mapflag	gvg
+zonevs_2	mapflag	nomemo
+zonevs_2	mapflag	noteleport
+zonevs_2	mapflag	nosave	SavePoint
+zonevs_2	mapflag	nobranch
+zonevs_2	mapflag	nopenalty
+zonevs_2	mapflag	nowarpto
+zonevs_2	mapflag	noreturn
+zonevs_2	mapflag	partylock
+zonevs_2	mapflag	notrade
+
+zonevs_3	mapflag	gvg
+zonevs_3	mapflag	nomemo
+zonevs_3	mapflag	noteleport
+zonevs_3	mapflag	nosave	SavePoint
+zonevs_3	mapflag	nobranch
+zonevs_3	mapflag	nopenalty
+zonevs_3	mapflag	nowarpto
+zonevs_3	mapflag	noreturn
+zonevs_3	mapflag	partylock
+zonevs_3	mapflag	notrade
+
+zonevs_4	mapflag	gvg
+zonevs_4	mapflag	nomemo
+zonevs_4	mapflag	noteleport
+zonevs_4	mapflag	nosave	SavePoint
+zonevs_4	mapflag	nobranch
+zonevs_4	mapflag	nopenalty
+zonevs_4	mapflag	nowarpto
+zonevs_4	mapflag	noreturn
+zonevs_4	mapflag	partylock
+zonevs_4	mapflag	notrade
+
+-	script	ZoneKillScore	-1,{
+	OnPCDieEvent:
+	OnPCLogoutEvent:
+		set .@map$, strcharinfo(3);
+		if (compare(.@map$, "zonevs_")) {
+			set .@gid, getcharid(2);
+			set .@room, atoi(charat(.@map$, 7));
+			switch(.@room) {
+			case 1: set .@zone$, "Zone 3-3"; break;
+			case 2: set .@zone$, "Zone 7-7"; break;
+			case 3: set .@zone$, "Zone 16-16"; break;
+			case 4: set .@zone$, "Zone 24-24"; break;
+			}
+			if (.@room >= 1 && .@room <= 4) {
+				if (.@gid == 0) {
+					warp "SavePoint", 0, 0;
+				} else if (.@gid == getd("$@ZONEVSGUILD1"+.@room)) {
+					setd "$@ZONEVSGUILD1S"+.@room, getd("$@ZONEVSGUILD1S"+.@room) - 1;
+					if (getd("$@ZONEVSGUILD1S"+.@room) < 1) {
+						announce ""+.@zone$+" : กิลด์ "+getguildname(getd("$@ZONEVSGUILD2"+.@room))+" ชนะ !", bc_all;
+					} else {
+						announce ""+.@zone$+" : กิลด์ "+getguildname(getd("$@ZONEVSGUILD1"+.@room))+" เหลือเพียง "+getd("$@ZONEVSGUILD1S"+.@room)+" คน", bc_all;
+					}
+				} else if (.@gid == getd("$@ZONEVSGUILD2"+.@room)) {
+					setd "$@ZONEVSGUILD2S"+.@room, getd("$@ZONEVSGUILD2S"+.@room) - 1;
+					if (getd("$@ZONEVSGUILD2S"+.@room) < 1) {
+						announce ""+.@zone$+" : กิลด์ "+getguildname(getd("$@ZONEVSGUILD1"+.@room))+" ชนะ !", bc_all;
+					} else {
+						announce ""+.@zone$+" : กิลด์ "+getguildname(getd("$@ZONEVSGUILD2"+.@room))+" เหลือเพียง "+getd("$@ZONEVSGUILD2S"+.@room)+" คน", bc_all;
+					}
+				}
+			}
+		}
+}
+
+-	script	ZoneCheckPlayers	-1,{
+	OnTouch:
+		set .@room, strnpcinfo(2);
+		switch(.@room) {
+		case 1: set .@zone, 3; break;
+		case 2: set .@zone, 7; break;
+		case 3: set .@zone, 16; break;
+		case 4: set .@zone, 24; break;
+		}
+		if (getmapguildusers("zonevs_"+.@room, getcharid(2)) > .@zone) {
+			announce "Zone "+.@zone+"-"+.@zone+" : ผู้เล่น "+strcharinfo(0)+" ถูกเตะออกจากแผนที่แข่งโซน เนื่องจากผู้เล่นในกิลด์มากเกินไป", bc_all;
+			warp "SavePoint", 0, 0;
+		}
+}
+
+-	script	ZoneCheckerBuffer	-1,{
+	OnTouch:
+		sc_end SC_BENEDICTIO;
+		sc_end SC_BENEDICTIO;
+		sc_end SC_POEMBRAGI;
+		sc_end SC_SERVICE4U;
+		sc_end SC_APPLEIDUN;
+		sc_end SC_DONTFORGETME;
+		sc_end SC_ASSASSINCROSS;
+		sc_end SC_ASSUMPTIO;
+		end;
+}
+
+zonevs_1,8,50,0	duplicate(ZoneCheckPlayers)	ZONEVS1_1#1	-1,2,2
+zonevs_1,92,50,0	duplicate(ZoneCheckPlayers)	ZONEVS1_2#1	-1,2,2
+zonevs_2,8,50,0	duplicate(ZoneCheckPlayers)	ZONEVS2_1#2	-1,2,2
+zonevs_2,92,50,0	duplicate(ZoneCheckPlayers)	ZONEVS2_2#2	-1,2,2
+zonevs_3,8,50,0	duplicate(ZoneCheckPlayers)	ZONEVS3_1#3	-1,2,2
+zonevs_3,92,50,0	duplicate(ZoneCheckPlayers)	ZONEVS3_2#3	-1,2,2
+zonevs_4,8,50,0	duplicate(ZoneCheckPlayers)	ZONEVS4_1#4	-1,2,2
+zonevs_4,92,50,0	duplicate(ZoneCheckPlayers)	ZONEVS4_2#4	-1,2,2
+
+function	script	ZoneByEddga	{
+	if (getgmlevel() < 99) return;
+	set .@room, getarg(0);
+	set .@map$, "zonevs_"+.@room;
+	switch(.@room) {
+	case 1: set .@zone$, "3-3"; break;
+	case 2: set .@zone$, "7-7"; break;
+	case 3: set .@zone$, "16-16"; break;
+	case 4: set .@zone$, "24-24"; break;
+	}
+	while (.@room != 0) {
+		mes "[ Zone Custom ]";
+		mes "การตั้งค่าของ : Zone "+.@zone$+"";
+		if (.@room == 1) {
+			set .@name$, "กิลด์";
+			if (getd("$@ZONEVSGUILD1"+.@room) == 0)
+				mes "กิลด์ 1 : ว่าง";
+			else
+				mes "กิลด์ 1 : "+getguildname(getd("$@ZONEVSGUILD1"+.@room))+"";
+			if (getd("$@ZONEVSGUILD2"+.@room) == 0)
+				mes "กิลด์ 2 : ว่าง";
+			else
+				mes "กิลด์ 2 : "+getguildname(getd("$@ZONEVSGUILD2"+.@room))+"";
+		} else {
+			set .@name$, "กิลด์";
+			mes "กิลด์ทีม 1 : "+getguildname(getd("$@ZONEVSGUILD1"+.@room))+"";
+			mes "กิลด์ทีม 2 : "+getguildname(getd("$@ZONEVSGUILD2"+.@room))+"";
+		}
+		mes " ";
+		mes " ";
+		mes "^FF0000**เปิดเสากั้น ก่อนเรียกกิลด์น่ะ**^000000";
+		next;
+		switch(select("- เปิดเสากั้น:- ปิดเสากั้น:- เรียก"+.@name$+" 1:- เรียก"+.@name$+" 2:- ล้างสนาม:- ตั้ง"+.@name$+" 1:- ตั้ง"+.@name$+" 2:- เสร็จสิ้น")){
+			case 1:
+				monster .@map$, 24, 53, "#ZONE", 1905, 1;
+				monster .@map$, 24, 52, "#ZONE", 1905, 1;
+				monster .@map$, 24, 51, "#ZONE", 1905, 1;
+				monster .@map$, 24, 50, "#ZONE", 1905, 1;
+				monster .@map$, 24, 49, "#ZONE", 1905, 1;
+				monster .@map$, 24, 48, "#ZONE", 1905, 1;
+				monster .@map$, 24, 47, "#ZONE", 1905, 1;
+				monster .@map$, 24, 46, "#ZONE", 1905, 1;
+				monster .@map$, 25, 53, "#ZONE", 1905, 1;
+				monster .@map$, 25, 52, "#ZONE", 1905, 1;
+				monster .@map$, 25, 51, "#ZONE", 1905, 1;
+				monster .@map$, 25, 50, "#ZONE", 1905, 1;
+				monster .@map$, 25, 49, "#ZONE", 1905, 1;
+				monster .@map$, 25, 48, "#ZONE", 1905, 1;
+				monster .@map$, 25, 47, "#ZONE", 1905, 1;
+				monster .@map$, 25, 46, "#ZONE", 1905, 1;
+				monster .@map$, 74, 53, "#ZONE", 1905, 1;
+				monster .@map$, 74, 52, "#ZONE", 1905, 1;
+				monster .@map$, 74, 51, "#ZONE", 1905, 1;
+				monster .@map$, 74, 50, "#ZONE", 1905, 1;
+				monster .@map$, 74, 49, "#ZONE", 1905, 1;
+				monster .@map$, 74, 48, "#ZONE", 1905, 1;
+				monster .@map$, 74, 47, "#ZONE", 1905, 1;
+				monster .@map$, 74, 46, "#ZONE", 1905, 1;
+				monster .@map$, 75, 53, "#ZONE", 1905, 1;
+				monster .@map$, 75, 52, "#ZONE", 1905, 1;
+				monster .@map$, 75, 51, "#ZONE", 1905, 1;
+				monster .@map$, 75, 50, "#ZONE", 1905, 1;
+				monster .@map$, 75, 49, "#ZONE", 1905, 1;
+				monster .@map$, 75, 48, "#ZONE", 1905, 1;
+				monster .@map$, 75, 47, "#ZONE", 1905, 1;
+				monster .@map$, 75, 46, "#ZONE", 1905, 1;
+				setcell .@map$, 23, 53, 26, 46, CELL_WALKABLE, 0;
+				setcell .@map$, 23, 53, 26, 46, CELL_SHOOTABLE, 0;
+				setcell .@map$, 73, 53, 76, 46, CELL_WALKABLE, 0;
+				setcell .@map$, 73, 53, 76, 46, CELL_SHOOTABLE, 0;
+				announce "Zone "+.@zone$+" : เปิดเสากั้น !", bc_all;
+				break;
+			case 2:
+				close2;
+				for (set .@i, 0; .@i < 5; set .@i, .@i + 1) {
+					set .@count, 5 - .@i;
+					announce "Zone "+.@zone$+" : ปิดเสากั้น ใน "+.@count+" วินาที !", bc_all;
+					sleep2 1000;
+				}
+				announce "Zone "+.@zone$+" : ปิดเสากั้นแล้ว ลุยโลด !", bc_all;
+				killmonsterall .@map$;
+				monster .@map$, 46, 72, "#ZONE", 1905, 1;
+				monster .@map$, 47, 72, "#ZONE", 1905, 1;
+				monster .@map$, 48, 72, "#ZONE", 1905, 1;
+				monster .@map$, 49, 72, "#ZONE", 1905, 1;
+				monster .@map$, 50, 72, "#ZONE", 1905, 1;
+				monster .@map$, 51, 72, "#ZONE", 1905, 1;
+				monster .@map$, 52, 72, "#ZONE", 1905, 1;
+				monster .@map$, 53, 72, "#ZONE", 1905, 1;
+				monster .@map$, 46, 27, "#ZONE", 1905, 1;
+				monster .@map$, 47, 27, "#ZONE", 1905, 1;
+				monster .@map$, 48, 27, "#ZONE", 1905, 1;
+				monster .@map$, 49, 27, "#ZONE", 1905, 1;
+				monster .@map$, 50, 27, "#ZONE", 1905, 1;
+				monster .@map$, 51, 27, "#ZONE", 1905, 1;
+				monster .@map$, 52, 27, "#ZONE", 1905, 1;
+				monster .@map$, 53, 27, "#ZONE", 1905, 1;
+				setcell .@map$, 37, 69, 62, 69, CELL_WALKABLE, 0;
+				setcell .@map$, 37, 69, 62, 69, CELL_SHOOTABLE, 0;
+				setcell .@map$, 37, 31, 62, 31, CELL_WALKABLE, 0;
+				setcell .@map$, 37, 31, 62, 31, CELL_SHOOTABLE, 0;
+				setcell .@map$, 23, 53, 26, 46, CELL_WALKABLE, 1;
+				setcell .@map$, 23, 53, 26, 46, CELL_SHOOTABLE, 1;
+				setcell .@map$, 73, 53, 76, 46, CELL_WALKABLE, 1;
+				setcell .@map$, 73, 53, 76, 46, CELL_SHOOTABLE, 1;
+				setd "$@ZONEVSGUILD1S"+.@room, getmapguildusers("zonevs_"+.@room, getd("$@ZONEVSGUILD1"+.@room));
+				setd "$@ZONEVSGUILD2S"+.@room, getmapguildusers("zonevs_"+.@room, getd("$@ZONEVSGUILD2"+.@room));
+				return;
+			case 3:
+				mes "[ Zone Custom ]";
+				mes "เรียกกิลด์ ทีม1 : "+getguildname(getd("$@ZONEVSGUILD1"+.@room))+"";
+				mes "^FF0000เรียบร้อย^000000";
+				next;
+				warpguild .@map$, 8, 50, getd("$@ZONEVSGUILD1"+.@room);
+				break;
+			case 4:
+				mes "[ Zone Custom ]";
+				mes "เรียกกิลด์ ทีม2 : "+getguildname(getd("$@ZONEVSGUILD2"+.@room))+"";
+				mes "^FF0000เรียบร้อย^000000";
+				next;
+				warpguild .@map$, 92, 50, getd("$@ZONEVSGUILD2"+.@room);
+				break;
+			case 5:
+				announce "Zone "+.@zone$+" : สนามถูกรีเซ็ต !", bc_all;
+				maprespawnguildid "zonevs_"+.@room, getcharid(2), 2;
+				break;
+			case 6:
+				mes "[ Zone Custom ]";
+				mes "การตั้งค่าของ : Zone "+.@zone$+"";
+				mes "กรุณาใส่"+.@name$+"ทีม 1";
+				mes "^FF0000ใส่เป็นไอดีกิลด์ เด๋วค้นหาเอง^000000";
+				next;
+				input .@guild;
+				setd "$@ZONEVSGUILD1"+.@room, .@guild;
+				break;
+			case 7:
+				mes "[ Zone Custom ]";
+				mes "การตั้งค่าของ : Zone "+.@zone$+"";
+				mes "กรุณาใส่"+.@name$+"ทีม 2";
+				mes "^FF0000ใส่เป็นไอดีกิลด์ เด๋วค้นหาเอง^000000";
+				next;
+				input .@guild;
+				setd "$@ZONEVSGUILD2"+.@room, .@guild;
+				break;
+			case 8:
+				close;
+		}
+	}
+	return;
+}

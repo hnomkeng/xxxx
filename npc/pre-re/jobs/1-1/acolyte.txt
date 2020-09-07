@@ -1,0 +1,41 @@
+// -- # Ragnarok Online EP 4.0 BY Kelberwitz Blade's
+// -- # Acolyte Job Change
+// -- # =============================================
+
+prt_church,184,41,4	script	Cleric#Aco01	60,{
+		mes "[ Cleric ]";
+		mes "อ่า, ข้ารู้สึกได้ถึงความพรากเพียรของเจ้า";
+		mes " ประสบการณ์ที่ผ่านมาคงได้สอนอะไรๆ หลายๆ อย่างให้เจ้าแล้วใช่มั้ย";
+		next;
+		menu
+		"ข้า..อยากเป็น Acolyte",jobex;
+
+jobex:
+if (BaseJob != Novice) {
+			mes "[ Cleric ]";
+			mes "ข้าเสียใจด้วย..ท่านไม่ใช่ Novice";
+			close;
+		}
+if(JobLevel != 10) {
+				mes "[ Cleric ]";
+				mes "เอิ่มมมมม...";
+				mes "เจ้าต้องมี Job Lv.10 ก่อนนะนะ.";
+				next;
+				mes "[  Cleric ]";
+				mes "ไว้พบกันใหม่นะ";
+				close;
+			}
+if (getskilllv("NV_BASIC") < 9) {
+				mes "[ Cleric ]";
+				mes "เอิ่มมมมม...";
+				mes "เจ้าควรจะเรียนรู้ Basic Skills ทั้งหมดก่อน.";
+				next;
+				mes "[ Cleric ]";
+				mes "ไว้พบกันใหม่";
+				close;
+			}
+mes "[ Cleric ]";
+mes "ยินดีด้วย ท่านได้เป็น Acolyte แล้ว";
+jobchange 4;
+end;
+}

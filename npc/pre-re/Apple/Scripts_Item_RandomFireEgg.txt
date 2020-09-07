@@ -1,0 +1,49 @@
+//==============================================
+//==============================================
+//==============================================
+// - Script By : แม่มดน้อย จอมป่วน
+// - Script City : Thailand 
+// - Script Support Server : rAthena & Hercules
+// Contacts
+// Facebook https://www.facebook.com/appleroplus2
+// Gmail appleroplus@gmail.com
+// Skype appleroplus@hotmail.com
+//==============================================
+//==============================================
+//==============================================
+function	script	RandomFireEgg	{
+setarray .OTH_ITEMLIST[0],19672,19674,19678,19683,19686,19687,19688,19697,19701,19704,19745,19756,19757,19779,19800,19803,19812,19857,19894,19946,19952,19956,19976,19983,19998,20008,20016,20022,20031,20065,20098,20128;
+setarray .COSN_ITEMLIST[0],19682,19706,19711,19726,19755,19768,19770,19778,19810,19824,19916,19930,20040,50251,20481;
+setarray .RARE_ITEMLIST[0],19723,19934,31178,50011,50206,50208,50212,20249;
+setarray .min_amount,1;
+setarray .max_amount,1;
+ 
+    set .rand, rand(0,100);
+    switch(.rand){
+        case 1:
+            set .Random, rand( getarraysize( .RARE_ITEMLIST ) );
+            getitem .RARE_ITEMLIST[ .Random ], 1;
+            announce "ผู้เล่น ["+strcharinfo(0)+"] ได้ทำการเปิด Fire Egg : ได้รับ "+getitemname(.RARE_ITEMLIST[ .Random ])+" ea.!!!",bc_all,0xCC00CC;
+        break;
+       
+       
+        case 2:
+            set .Random, rand( getarraysize( .COSN_ITEMLIST ) );
+            getitem .COSN_ITEMLIST[ .Random ], 1;
+            announce "ผู้เล่น ["+strcharinfo(0)+"] ได้ทำการเปิด Fire Egg : ได้รับ "+getitemname(.COSN_ITEMLIST[ .Random ])+" ea.!!",bc_all,0xFFCC33F;
+        break;
+       
+        default:
+            set .@amount,rand( .min_amount[.@random],.max_amount[.@random] );
+            set .Random, rand( getarraysize( .OTH_ITEMLIST ) );
+        if ( .OTH_ITEMLIST[ .Random ] == 0 || .OTH_ITEMLIST[ .Random ] == 0 ) {
+            getitem .OTH_ITEMLIST[ .Random ], 1;
+			dispbottom "คุณ ["+strcharinfo(0)+"] ได้ทำการเปิด Fire Egg : ได้รับ "+getitemname(.OTH_ITEMLIST[ .Random ])+" ea.";
+            } else {
+            getitem .OTH_ITEMLIST[ .Random ], .@amount;
+			dispbottom "คุณ ["+strcharinfo(0)+"] ได้ทำการเปิด Fire Egg : ได้รับ "+getitemname(.OTH_ITEMLIST[ .Random ])+" จำนวน "+.@amount+" ea.";
+        }
+        break;
+    }
+ 
+}

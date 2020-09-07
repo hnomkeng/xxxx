@@ -1,0 +1,42 @@
+// -- # Ragnarok Online EP 4.0 BY Kelberwitz Blade's
+// -- # ARCHER Job Change
+// -- # =============================================
+
+payon_in02,64,71,4	script	Archer Guildsman#archer	85,{
+mes "[ Archer Guildsman ]";
+		mes "อ่า, ข้ารู้สึกได้ถึงความพรากเพียรของเจ้า";
+		mes " ประสบการณ์ที่ผ่านมาคงได้สอนอะไรๆ หลายๆ อย่างให้เจ้าแล้วใช่มั้ย";
+		next;
+		menu
+		"ข้า..อยากเป็น Archer",jobex;
+
+jobex:
+if (BaseJob != Novice) {
+			mes "[ Archer Guildsman ]";
+			mes "ข้าเสียใจด้วย..ท่านไม่ใช่ Novice";
+			close;
+		}
+if(JobLevel != 10) {
+				mes "[ Archer Guildsman ]";
+				mes "เอิ่มมมมม...";
+				mes "เจ้าต้องมี Job Lv.10 ก่อนนะนะ.";
+				next;
+				mes "[  Archer Guildsman ]";
+				mes "ไว้พบกันใหม่นะ";
+				close;
+			}
+if (getskilllv("NV_BASIC") < 9) {
+				mes "[ Archer Guildsman ]";
+				mes "เอิ่มมมมม...";
+				mes "เจ้าควรจะเรียนรู้ Basic Skills ทั้งหมดก่อน.";
+				next;
+				mes "[ Archer Guildsman ]";
+				mes "ไว้พบกันใหม่";
+				close;
+			}
+mes "[ Archer Guildsman ]";
+mes "ยินดีด้วย ท่านได้เป็น Archer แล้ว";
+jobchange 3;
+end;
+}
+
